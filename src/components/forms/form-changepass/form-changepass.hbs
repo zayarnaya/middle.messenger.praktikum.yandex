@@ -1,0 +1,14 @@
+<div class="profile-wrapper">
+    {{> change-avatar}}
+</div>
+<form class="change-signin form">
+    <legend> 
+        <h3>Поменять пароль</h3>
+    </legend>
+    <div class="form-changeprofile__form-wrapper form col">
+        {{#each input.change_signin}} {{> input-row}} {{/each}}
+    </div>
+    <div class="form-changeprofile__submit-wrapper col center-center">
+        <div class="button">{{> submit-button button.changeSubmit}}</div>
+    </div>
+</form>
