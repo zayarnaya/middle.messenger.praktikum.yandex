@@ -3,6 +3,13 @@
     "npm": "8.4.0",
     "node": "v16.16.0"
   },
+  "targets": {
+    "default": {
+      "engines": {
+        "browsers": ">= 50%"
+      }
+    }
+  },
   "staticFiles": {
     "staticPath": [
       "files/"
@@ -11,10 +18,12 @@
   "name": "messenger_v",
   "version": "1.0.0",
   "description": "Messenger by Veronika Zayarnaya",
-  "main": "index.js",
+  
+  "source": "src/index.html",
+
   "scripts": {
     "dev": "parcel src/index.html",
-    "build": "parcel dist index.html --public-url"
+    "build": "parcel build src/index.html"
   },
   "keywords": [],
   "author": "",
