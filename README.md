@@ -14,6 +14,8 @@
 
 Express: npm run start
 
+Netlify: https://grand-vacherin-ee2965.netlify.app/
+
 
 
 Проект первого спринта "Мессенджер".
