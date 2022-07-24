@@ -2,13 +2,13 @@ const fragment = document.createDocumentFragment();
 const elemMain = document.createElement("main");
 const elemDiv = document.createElement("div");
 
+elemMain.classList.add("main-wrapper");
+elemDiv.classList.add("messenger-wrapper");
+
 export function layout_main() {
   elemMain.appendChild(elemDiv);
   fragment.appendChild(elemMain);
   document.body.appendChild(fragment);
-  document.querySelector("main").classList.add("main-wrapper");
-  document.querySelector("div").classList.add("messenger-wrapper");
-
 
   let theList = document.createElement('div');
   theList.innerHTML = `
