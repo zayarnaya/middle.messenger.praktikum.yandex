@@ -1,5 +1,4 @@
-export const data = 
-{
+export const data = {
     input: {
         login: {
             login: {
@@ -12,12 +11,12 @@ export const data =
                     maxLength: "16",
                 },
             },
-        
+
             password: {
                 name: "password",
                 type: "password",
                 label: "Пароль",
-                required: true,  
+                required: true,
             },
         },
 
@@ -59,7 +58,7 @@ export const data =
                 label: "Почта",
                 required: true,
                 attributes: {
-                    pattern: "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i"
+                    pattern: "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i",
                 },
             },
 
@@ -78,10 +77,16 @@ export const data =
                 type: "password",
                 label: "Пароль",
                 required: true,
-                attributes: {
+                attributes: {},
+            },
 
-                }
-            },            
+            password_check: {
+                name: "password_check",
+                type: "password",
+                label: "Пароль еще раз",
+                required: true,
+                attributes: {},
+            }
         },
 
         change_signin: {
@@ -90,15 +95,13 @@ export const data =
                 type: "password",
                 label: "Введите старый пароль",
                 required: true,
+            },
 
-            }, 
-            
             newPassword: {
                 name: "newPassword",
                 type: "password",
                 label: "Введите новый пароль",
                 required: true,
-
             },
 
             newPassword2: {
@@ -106,7 +109,6 @@ export const data =
                 type: "password",
                 label: "Повторите новый пароль",
                 required: true,
-
             },
         },
 
@@ -150,7 +152,7 @@ export const data =
                 required: false,
                 value: "leepace@lee.org",
                 attributes: {
-                    1: 'pattern="/^\S+@\S+$/"'
+                    1: 'pattern="/^S+@S+$/"',
                 },
             },
 
@@ -161,10 +163,9 @@ export const data =
                 required: false,
                 value: "+7-916-123-4567",
                 attributes: {
-                    1: 'pattern="/^((8|+7)[- ]?)?((?\d{3})?[- ]?)?[\d- ]{7,10}$/"'
+                    1: 'pattern="/^((8|+7)[- ]?)?((?d{3})?[- ]?)?[d- ]{7,10}$/"',
                 },
             },
-
         },
 
         getNewPass: {
@@ -178,15 +179,13 @@ export const data =
                     maxLength: "16",
                 },
             },
-        }
-
+        },
     },
 
     button: {
         loginSubmit: {
             name: "submit",
             label: "Войти",
-    
         },
 
         signinSubmit: {
@@ -202,7 +201,7 @@ export const data =
         forgotpassSubmit: {
             name: "submit",
             label: "Отправить",
-        }
+        },
     },
 
     profile_char: {
@@ -241,8 +240,6 @@ export const data =
             id: "phone",
             value: "+7-916-123-4567",
         },
-
-
     },
 
     avatar: {
@@ -279,7 +276,6 @@ export const data =
             timestamp: "11:54",
             unread: "3",
         },
-
     },
 
     user: {
@@ -289,75 +285,69 @@ export const data =
                 id: "login",
                 value: "leeepfrog",
             },
-    
+
             display_name: {
                 name: "Имя в чате",
                 id: "display_name",
                 value: "Punxsutawney Phil",
             },
-    
+
             first_name: {
                 name: "Имя",
                 id: "first_name",
                 value: "Lee",
             },
-    
+
             second_name: {
                 name: "Фамилия",
                 id: "second_name",
                 value: "Pace",
             },
-    
+
             email: {
                 name: "Почта",
                 id: "email",
                 value: "leepace@lee.org",
             },
-    
+
             phone: {
                 name: "Телефон",
                 id: "phone",
                 value: "+7-916-123-4567",
             },
-
-
-    
-    
         },
 
         link: "#myprofile",
 
         avatar: "https://www.fillmurray.com/g/100/100",
-
     },
 
     users: {
         1: {
-   
             display_name: {
                 name: "Имя в чате",
                 id: "display_name",
                 value: "Торин",
             },
-    
+
             first_name: {
                 name: "Имя",
                 id: "first_name",
                 value: "Thorin",
             },
-    
+
             second_name: {
                 name: "Фамилия",
                 id: "second_name",
                 value: "Oakenshield",
             },
-    
+
             email: {
                 name: "Почта",
                 id: "email",
                 value: "thorin@moriah.orc",
             },
-    
+
             phone: {
                 name: "Телефон",
                 id: "phone",
@@ -366,31 +356,30 @@ export const data =
         },
 
         2: {
-   
             display_name: {
                 name: "Имя в чате",
                 id: "display_name",
                 value: "Бильбо",
             },
-    
+
             first_name: {
                 name: "Имя",
                 id: "first_name",
                 value: "Bilbo",
             },
-    
+
             second_name: {
                 name: "Фамилия",
                 id: "second_name",
                 value: "Baggins",
             },
-    
+
             email: {
                 name: "Почта",
                 id: "email",
                 value: "bilbo@sheer.hob",
             },
-    
+
             phone: {
                 name: "Телефон",
                 id: "phone",
@@ -399,38 +388,36 @@ export const data =
         },
 
         3: {
-   
             display_name: {
                 name: "Имя в чате",
                 id: "display_name",
                 value: "Саурон",
             },
-    
+
             first_name: {
                 name: "Имя",
                 id: "first_name",
                 value: "Sauron",
             },
-    
+
             second_name: {
                 name: "Фамилия",
                 id: "second_name",
                 value: "",
             },
-    
+
             email: {
                 name: "Почта",
                 id: "email",
                 value: "sauron@hobbits-suck.orc",
             },
-    
+
             phone: {
                 name: "Телефон",
                 id: "phone",
                 value: "+7-800-666-6666",
             },
         },
-
     },
 
     errors: {
@@ -452,11 +439,7 @@ export const data =
             legend: {
                 h3_message: "Вход",
                 message: 'или <a href="signin.html">регистрация</a>',
-            } 
-        }
-    }
-
-
-
-
-}
+            },
+        },
+    },
+};

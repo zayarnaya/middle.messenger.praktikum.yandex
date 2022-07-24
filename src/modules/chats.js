@@ -1,23 +1,18 @@
-import {data} from "./../data.js";
+import { data } from "./../data.js";
 
-
-import {layout_chats} from "./../layouts/chats/chat-static/chat-static.js";
+import { layout_chats } from "./../layouts/chats/chat-static/chat-static.js";
 import chatList from "./../components/chatlist/chat-list/chat-list.hbs";
 import chatMain from "./../components/chat-main/chat-main.hbs";
-
-
-
 import chatlist_profile from "./../components/chatlist/chatlist_userprofile/chatlist-userprofile.hbs";
 import chatlist_item from "./../components/chatlist/chatlist-item/chatlist-item.hbs";
 
-const Handlebars = require('handlebars');
+const Handlebars = require("handlebars");
 
-Handlebars.registerPartial('chatlist-profile', chatlist_profile);
-Handlebars.registerPartial('chatlist-item', chatlist_item);
+Handlebars.registerPartial("chatlist-profile", chatlist_profile);
+Handlebars.registerPartial("chatlist-item", chatlist_item);
 
-export function chatPage(){
-    console.log('0');
-    layout_chats();
-    document.querySelector('.chat-list').innerHTML = chatList(data);
-    document.querySelector('.chat-main').innerHTML = chatMain(data);
+export function chatPage() {
+  layout_chats();
+  document.querySelector(".chat-list").innerHTML = chatList(data);
+  document.querySelector(".chat-main").innerHTML = chatMain(data);
 }

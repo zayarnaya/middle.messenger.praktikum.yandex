@@ -1,4 +1,4 @@
 export function removeError(message) {
-    message.textContent = '';
-    message.classList.toggle('active');
+  message.textContent = "";
+  message.classList.toggle("active");
 }

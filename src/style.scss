@@ -48,11 +48,19 @@ h3 {
 }
 
 .width-510 {
-    width: $s-wide;
+    width: $s-wide !important;
+}
+
+.width-100 {
+    width: 100% !important;
 }
 
 .height-510 {
     height: 510px;
+}
+
+.form {
+    padding: 20px 0;
 }
 
 input[type="text"],
@@ -437,6 +445,8 @@ button {
     background-size: contain;
 }
 
+
+
 .chat-main__message-button {
     display: flex;
     background-color: $color-links;
@@ -532,6 +542,12 @@ legend {
 .form .row {
     justify-content: flex-end;
     align-items: flex-end;
+    color: #999;
+}
+
+.form .col {
+    justify-content: flex-end;
+    align-items: flex-start;
     color: #999;
 }
 
@@ -754,7 +770,14 @@ input:not(:placeholder-shown):invalid {
     opacity: 1;
   }
 
+  .input-explain {
+    width: 80%;
+    margin: 20px 0;
+  }
 
+.color-red {
+    color: red;
 
+}
 
 
