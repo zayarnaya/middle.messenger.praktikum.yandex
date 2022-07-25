@@ -5,6 +5,7 @@ import formGetNewPass from "./../components/forms/form-forgotpass/form-forgotpas
 
 import button from "./../components/buttons/button-submit/button-submit.hbs";
 import input from "./../components/input/input-field.hbs";
+import "./../components/forms/form-forgotpass/form-forgotpass.scss";
 
 const Handlebars = require("handlebars");
 

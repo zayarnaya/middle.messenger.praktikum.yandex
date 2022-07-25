@@ -11,6 +11,10 @@ export function assignAttr(formname) {
     case "login":
       prefix = data.input.login;
       break;
+
+    case "changeprofile":
+      prefix = data.input.change_profile;
+      break;
   }
 
   let attrs = Object.entries(prefix);

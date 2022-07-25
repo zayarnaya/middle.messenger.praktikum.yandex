@@ -5,6 +5,7 @@ import chatList from "./../components/chatlist/chat-list/chat-list.hbs";
 import chatMain from "./../components/chat-main/chat-main.hbs";
 import chatlist_profile from "./../components/chatlist/chatlist_userprofile/chatlist-userprofile.hbs";
 import chatlist_item from "./../components/chatlist/chatlist-item/chatlist-item.hbs";
+import "./../components/chat-main/chat-main.scss";
 
 const Handlebars = require("handlebars");
 

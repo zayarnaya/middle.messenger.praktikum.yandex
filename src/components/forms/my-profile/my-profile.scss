@@ -1,0 +1,67 @@
+@import "./../../../variables";
+
+.profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: $s-wide;
+    padding: 20px 0;
+}
+
+.profile__avatar {
+    display: flex;
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile__name {
+    color: #1E1E1E;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.profile__main-info,
+.profile__chars {
+    display: flex;
+    flex-direction: column;
+    width: 510px;
+}
+
+.profile__char {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px dotted #EAEAEA;
+    padding: 10px;
+    width: 490px;
+}
+
+.profile__char-name {
+    display: flex;
+    justify-content: flex-start;    
+}
+
+.profile__char-value {
+    display: flex;
+    justify-content: flex-end;
+    color: #999;    
+}
+
+.profile__change-links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.profile__change-links a {
+    color: $color-links;
+    text-decoration: none;
+    padding: 10px;
+}

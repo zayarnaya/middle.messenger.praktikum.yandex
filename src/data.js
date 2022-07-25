@@ -57,9 +57,6 @@ export const data = {
                 type: "email",
                 label: "Почта",
                 required: true,
-                attributes: {
-                    pattern: "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i",
-                },
             },
 
             phone: {
@@ -119,6 +116,10 @@ export const data = {
                 label: "Логин",
                 required: false,
                 value: "leeepfrog",
+                attributes: {
+                    pattern: "[a-zA-Z]{1,20}",
+                    maxLength: "16",
+                },
             },
 
             display_name: {
@@ -151,9 +152,6 @@ export const data = {
                 label: "Почта",
                 required: false,
                 value: "leepace@lee.org",
-                attributes: {
-                    1: 'pattern="/^S+@S+$/"',
-                },
             },
 
             phone: {
@@ -161,9 +159,9 @@ export const data = {
                 type: "tel",
                 label: "Телефон",
                 required: false,
-                value: "+7-916-123-4567",
+                value: "9161234567",
                 attributes: {
-                    1: 'pattern="/^((8|+7)[- ]?)?((?d{3})?[- ]?)?[d- ]{7,10}$/"',
+                    pattern: "[0-9]{10}",
                 },
             },
         },

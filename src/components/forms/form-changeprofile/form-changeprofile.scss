@@ -1,0 +1,11 @@
+.form-changeprofile {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-changeprofile__form-wrapper {
+    height: 145px;
+}

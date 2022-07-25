@@ -1,0 +1,25 @@
+.change-signin {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.change-signin.form {
+    height: 340px;
+}
+
+.change-signin input {
+    width: 330px;
+    text-align: left;
+}
+
+.change-signin .row {
+    width: 100%;
+    padding: 10px;
+}
+
+.change-signin__form-wrapper {
+    height: 510px;
+}

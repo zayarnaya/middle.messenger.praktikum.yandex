@@ -1,11 +1,12 @@
 import { data } from "./../data.js";
 
-import { layout_wideForm } from "./../layouts/wide-form/wide-form.js";
+import { layout_wideForm } from "../layouts/wide-form/wide-form.js";
 import changePass from "./../components/forms/form-changepass/form-changepass.hbs";
 
 import change_avatar from "./../components/avatars/change-avatar/change-avatar.hbs";
 import input from "./../components/input/input-field.hbs";
 import button from "./../components/buttons/button-submit/button-submit.hbs";
+import "./../components/forms/form-changepass/form-changepass.scss";
 
 const Handlebars = require("handlebars");
 

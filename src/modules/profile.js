@@ -1,9 +1,10 @@
 import { data } from "./../data.js";
 
-import { layout_wideForm } from "./../layouts/wide-form/wide-form.js";
+import { layout_wideForm } from "../layouts/wide-form/wide-form.js";
 import myProfile from "./../components/forms/my-profile/my-profile.hbs";
 import profile_avatar from "./../components/avatars/profile_avatar/profile-avatar.hbs";
 import profile_char from "./../components/profile-chars/profile-char/profile-char.hbs";
+import "./../components/forms/my-profile/my-profile.scss";
 
 const Handlebars = require("handlebars");
 

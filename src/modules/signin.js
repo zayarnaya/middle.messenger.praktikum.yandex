@@ -5,6 +5,7 @@ import formSignin from "./../components/forms/form-signin/form-signin.hbs";
 
 import button from "./../components/buttons/button-submit/button-submit.hbs";
 import input from "./../components/input/input-field.hbs";
+import "./../components/forms/form-signin/form-signin.scss";
 
 const Handlebars = require("handlebars");
 

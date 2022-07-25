@@ -1,18 +1,16 @@
     <form class="form-signin form size-s narrow-form col" novalidate method="post">
-        
         <legend> 
-            <h3>Регистрация</h3> 
-    
+            <h3>Регистрация</h3>     
         </legend>
         <div class="form-signin__form-wrapper col">
-            {{#each input.signin}} {{> input-row}} {{/each}}
-    
-    </div>
-    
-    <div class="form-signin__submit-wrapper col center-center">
-    <div class="button">{{> submit-button button.signinSubmit}}</div>
-    <a href="#login">Войти</a>
-    </div>
-    
-    
+            {{#each input.signin}} {{> input-row}} {{/each}}    
+        </div>    
+        <div class="form-signin__submit-wrapper col center-center">
+            <div class="button submit-button">
+                {{> submit-button button.signinSubmit}}
+            </div>
+            <div class="center-center width-100">
+                <a href="#login">Войти</a>
+            </div>
+        </div>   
     </form>
