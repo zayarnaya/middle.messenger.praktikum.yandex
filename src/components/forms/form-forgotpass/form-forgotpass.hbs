@@ -1,10 +1,10 @@
-<form class="forgot-password form size-xs col center-center" method="post">
+<form class="forgot-password form narrow-form size-xs col center-center" method="post">
     <legend>
-        <h3>Восстановление пароля</h3> 
+        <h3>Восстановление пароля</h3>
     </legend>
     {{#each input.getNewPass}} {{> input-row}} {{/each}}
     <div class="row input-explain">
         Мы вышлем ссылку для смены пароля на почту, которую вы указали при регистрации
     </div>
-            {{> submit-button button.forgotpassSubmit}}
+    {{> submit-button button.forgotpassSubmit}}
 </form>

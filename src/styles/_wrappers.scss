@@ -1,4 +1,3 @@
-
 .main-wrapper {
     display: flex;
     width: 100%;
@@ -29,16 +28,10 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    _margin-top: calc((100vh - 460px));
-    box-shadow: 0px 0px 5px 0px #999;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 1216px;
 }
 
 @media screen and (max-width: 1019px) {
     .messenger-wrapper {
         width: 100%;
-
     }
 }

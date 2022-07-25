@@ -6,7 +6,7 @@
 
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     box-sizing: border-box;
     font-size: 13px;
     font-weight: 500;
@@ -45,8 +45,7 @@ h3 {
 }
 
 .chat-main__message-button,
-#link-to-chats
- {
+#link-to-chats {
     display: flex;
     background-color: $color-links;
     background-image: url("files/arrow-right-solid.png");
@@ -57,7 +56,6 @@ h3 {
     border-radius: 50%;
     width: 28px;
     height: 28px;
-
 }
 
 .a-red {
@@ -70,5 +68,4 @@ h3 {
 
 .color-red {
     color: red;
-
 }

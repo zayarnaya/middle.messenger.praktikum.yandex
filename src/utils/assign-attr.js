@@ -3,6 +3,7 @@ import { data } from "./../data.js";
 
 export function assignAttr(formname) {
   let prefix;
+
   switch (formname) {
     case "signin":
       prefix = data.input.signin;
@@ -15,7 +16,7 @@ export function assignAttr(formname) {
     case "changeprofile":
       prefix = data.input.change_profile;
       break;
-  }
+  };
 
   let attrs = Object.entries(prefix);
   attrs.forEach((element) => seekAttributes(element));

@@ -35,7 +35,6 @@ legend {
     max-width: 80%;
     margin-left: 15px;
     text-align: end;
-
 }
 
 .narrow-form input {
@@ -90,15 +89,13 @@ button {
 .errormessage {
     display: flex;
     flex-direction: row;
-
-    justify-content: flex-start; 
+    justify-content: flex-start;
     font-size: 10px;
     line-height: 10px;
     height: 10px;
     color: red;
-
     box-sizing: border-box;
-  }
+}
 
 .narrow-form .errormessage {
     width: 200px;
@@ -106,6 +103,8 @@ button {
 
 .narrow-form {
     padding: 20px;
+    box-shadow: 0px 0px 5px 0px #999;
+    border-radius: 12px;
 }
 
 
@@ -154,4 +153,3 @@ form .submit-button {
     margin: 0;
     padding: 0;
 }
-

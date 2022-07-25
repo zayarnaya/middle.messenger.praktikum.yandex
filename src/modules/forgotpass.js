@@ -1,3 +1,4 @@
+import Handlebars from "handlebars";
 import { data } from "./../data.js";
 
 import { layout_narrowForm } from "./../layouts/narrow-form/narrow-form.js";
@@ -6,8 +7,6 @@ import formGetNewPass from "./../components/forms/form-forgotpass/form-forgotpas
 import button from "./../components/buttons/button-submit/button-submit.hbs";
 import input from "./../components/input/input-field.hbs";
 import "./../components/forms/form-forgotpass/form-forgotpass.scss";
-
-const Handlebars = require("handlebars");
 
 Handlebars.registerPartial("submit-button", button);
 Handlebars.registerPartial("input-row", input);

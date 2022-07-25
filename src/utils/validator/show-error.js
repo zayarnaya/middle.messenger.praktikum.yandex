@@ -19,9 +19,11 @@ export function showError(field, message) {
       case "password":
         message.textContent = "Введите пароль";
         break;
-    }
+    };
+
   } else if (field.validity.tooLong) {
     message.textContent = `Не более ${field.maxLength} знаков`;
+
   } else if (field.validity.patternMismatch) {
     switch (field.id) {
       case "login":
@@ -31,9 +33,10 @@ export function showError(field, message) {
         message.textContent = "Введите номер телефона - 10 цифр";
         break;
     }
+
   } else if (field.validity.typeMismatch) {
     message.textContent = "Введите корректный email";
-  }
+  };
 
   message.classList.toggle("active");
 }

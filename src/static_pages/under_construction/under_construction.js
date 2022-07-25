@@ -1,5 +1,4 @@
-export function underConstruction(){
-
-    document.querySelector('main').textContent = "Страница в разработке";
-
+export function underConstruction() {
+    document.querySelector(".messenger-wrapper").textContent =
+        "Страница в разработке";
 }

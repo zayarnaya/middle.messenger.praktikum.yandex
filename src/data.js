@@ -115,7 +115,7 @@ export const data = {
                 type: "text",
                 label: "Логин",
                 required: false,
-                value: "leeepfrog",
+                value: "phil",
                 attributes: {
                     pattern: "[a-zA-Z]{1,20}",
                     maxLength: "16",
@@ -127,7 +127,7 @@ export const data = {
                 type: "text",
                 label: "Имя в чате",
                 required: false,
-                value: "Lee Pace",
+                value: "Punxsutawney Phil",
             },
 
             first_name: {
@@ -135,7 +135,7 @@ export const data = {
                 type: "text",
                 label: "Имя",
                 required: false,
-                value: "Lee",
+                value: "Phil",
             },
 
             second_name: {
@@ -143,7 +143,7 @@ export const data = {
                 type: "text",
                 label: "Фамилия",
                 required: false,
-                value: "Pace",
+                value: "Punxsutawney",
             },
 
             email: {
@@ -151,7 +151,7 @@ export const data = {
                 type: "email",
                 label: "Почта",
                 required: false,
-                value: "leepace@lee.org",
+                value: "phil@Punxsutawney.org",
             },
 
             phone: {
@@ -206,31 +206,31 @@ export const data = {
         login: {
             name: "Логин",
             id: "login",
-            value: "leeepfrog",
+            value: "phil",
         },
 
         display_name: {
             name: "Имя в чате",
             id: "display_name",
-            value: "Lee Pace",
+            value: "Punxsutawney Phil",
         },
 
         first_name: {
             name: "Имя",
             id: "first_name",
-            value: "Lee",
+            value: "Phil",
         },
 
         second_name: {
             name: "Фамилия",
             id: "second_name",
-            value: "Pace",
+            value: "Punxsutawney",
         },
 
         email: {
             name: "Почта",
             id: "email",
-            value: "leepace@lee.org",
+            value: "Phil@Punxsutawney.org",
         },
 
         phone: {
@@ -243,7 +243,7 @@ export const data = {
     avatar: {
         profile: {
             image: "files/lee.jpg",
-            display_name: "Lee Pace",
+            display_name: "Punxsutawney Phil",
         },
     },
 
@@ -281,7 +281,7 @@ export const data = {
             login: {
                 name: "Логин",
                 id: "login",
-                value: "leeepfrog",
+                value: "phil",
             },
 
             display_name: {
@@ -293,19 +293,19 @@ export const data = {
             first_name: {
                 name: "Имя",
                 id: "first_name",
-                value: "Lee",
+                value: "Phil",
             },
 
             second_name: {
                 name: "Фамилия",
                 id: "second_name",
-                value: "Pace",
+                value: "Punxsutawney",
             },
 
             email: {
                 name: "Почта",
                 id: "email",
-                value: "leepace@lee.org",
+                value: "Phil@Punxsutawney.org",
             },
 
             phone: {
