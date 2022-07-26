@@ -1,0 +1,25 @@
+.change-pass {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.change-pass.form {
+    height: 340px;
+}
+
+.change-pass input {
+    width: 330px;
+    text-align: left;
+}
+
+.change-pass .row {
+    width: 100%;
+    padding: 10px;
+}
+
+.change-pass__form-wrapper {
+    height: 510px;
+}

@@ -1,0 +1,20 @@
+.profile__change-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    height: 130px;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    position: absolute;
+    z-index: 1010;
+    border-radius: 50%;
+}
+
+.profile__change-avatar:hover {
+    display: flex;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}

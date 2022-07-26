@@ -1,0 +1,75 @@
+@import "variables";
+@import "./styles/forms";
+@import "./styles/width";
+@import "./styles/wrappers";
+
+
+
+body {
+    font-family: "Open Sans", sans-serif;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-weight: 500;
+    color: $color-messages;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+
+button {
+    cursor: pointer;
+    background-color: $color-links;
+    border: 0;
+}
+
+
+.center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-border {
+    border: 0;
+    box-shadow: none !important;
+}
+
+.chat-main__message-button,
+#link-to-chats {
+    display: flex;
+    background-color: $color-links;
+    background-image: url("files/arrow-right-solid.png");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    border: 0;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+}
+
+.a-image {
+    text-decoration: none;
+}
+
+.color-red {
+    color: red !important;
+}

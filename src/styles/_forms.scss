@@ -1,0 +1,81 @@
+.form.size-s {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    width: 340px;
+    box-sizing: border-box;
+}
+
+legend {
+    text-align: center;
+}
+
+.form .row {
+    justify-content: flex-end;
+    align-items: flex-end;
+    color: #999;
+}
+
+.form .col {
+    justify-content: flex-end;
+    align-items: flex-start;
+    color: #999;
+}
+
+.form {
+    padding: 20px 0;
+}
+
+.narrow-form .errormessage {
+    width: 200px;
+}
+
+.narrow-form {
+    padding: 20px;
+    box-shadow: 0px 0px 5px 0px #999;
+    border-radius: 12px;
+}
+
+
+input:not(:placeholder-shown):invalid {
+    border-bottom: 1px dotted red;
+}
+
+form a {
+    font-size: 11px;
+    color: $color-links;
+    text-decoration: none;
+}
+
+form h3 {
+    margin: 5px;
+}
+
+.change-pass label,
+.form-changeprofile label {
+    color: #1E1E1E;
+}
+
+.width-wide input {
+    width: 395px;
+    color: #999999;
+}
+
+.width-wide .errormessage {
+    width: 395px;
+}
+
+.change-pass__form-wrapper,
+.form-changeprofile__form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.change-pass__form-wrapper .profile-wrapper {
+    margin: 0;
+    padding: 0;
+}

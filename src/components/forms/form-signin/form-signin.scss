@@ -1,0 +1,31 @@
+.form-signin {
+    height: 615px;
+    padding-top: 40px !important;
+}
+
+.form-signin .row {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-signin .input-row {
+    width: 350px;
+}
+
+.form-signin input {
+    width: 280px;
+    margin: 0;
+    display: flex;
+    flex-shrink: 0;
+    box-sizing: content-box;
+    text-align: left;
+}
+
+
+.form-signin__form-wrapper {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
