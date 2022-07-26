@@ -1,10 +1,10 @@
 Проект первого спринта "Мессенджер"
+=======
+Pull-request https://github.com/zayarnaya/middle.messenger.praktikum.yandex/pull/1
 
 Макет в фигме https://www.figma.com/file/OrsT50kYteyyJFHShrcAYz/Chat?node-id=0%3A1
 
 Сборка Parcel: npm run dev
-
-Билд Parcel: npm run build
 
 Express: npm run start
 
@@ -34,5 +34,3 @@ Netlify: https://grand-vacherin-ee2965.netlify.app/
 В качестве шаблонизатора использован handlebars.
 
 В качестве дизайна использовались дефолтные макеты, в процессе дорабатывались и будут еще дорабатываться.
-
-
