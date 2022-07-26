@@ -12,27 +12,6 @@ legend {
     text-align: center;
 }
 
-/*
-.form input {
-    -webkit-appearance: none;
-    appearance: none;
-    outline: none !important;
-    background-color: rgba(255, 255, 255, 0);
-    border: 0;
-    border-radius: 0;
-    border-bottom: 1px solid $color-links;
-    max-width: 80%;
-    margin-left: 15px;
-    text-align: end;
-}
-*/
-/*
-.narrow-form input {
-    width: 200px;
-}
-*/
-
-
 .form .row {
     justify-content: flex-end;
     align-items: flex-end;
@@ -48,41 +27,6 @@ legend {
 .form {
     padding: 20px 0;
 }
-/*
-.profile__change-avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 130px;
-    height: 130px;
-    background-color: rgba(0, 0, 0, 0);
-    color: rgba(0, 0, 0, 0);
-    cursor: pointer;
-    position: absolute;
-    z-index: 1010;
-    border-radius: 50%;
-}
-
-.profile__change-avatar:hover {
-    display: flex;
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-}
-*/
-
-/*
-.errormessage {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    font-size: 10px;
-    line-height: 10px;
-    height: 10px;
-    color: red;
-    box-sizing: border-box;
-}
-*/
 
 .narrow-form .errormessage {
     width: 200px;
@@ -109,7 +53,7 @@ form h3 {
     margin: 5px;
 }
 
-.change-signin label,
+.change-pass label,
 .form-changeprofile label {
     color: #1E1E1E;
 }
@@ -123,7 +67,7 @@ form h3 {
     width: 395px;
 }
 
-.change-signin__form-wrapper,
+.change-pass__form-wrapper,
 .form-changeprofile__form-wrapper {
     display: flex;
     flex-direction: column;
@@ -131,7 +75,7 @@ form h3 {
 }
 
 
-.change-signin__form-wrapper .profile-wrapper {
+.change-pass__form-wrapper .profile-wrapper {
     margin: 0;
     padding: 0;
 }

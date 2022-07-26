@@ -6,9 +6,7 @@
         </legend>
         <div class="form-changeprofile__form-wrapper form col width-100">
             {{#each input.change_profile}} {{> input-row}} {{/each}}
-        </div>
-        <div class="form-changeprofile__submit-wrapper col center-center">
-            <div class="button">{{> submit-button button.changeSubmit}}</div>
-        </div>
+        </div>        
+        {{> submit-button button.changeSubmit}}
     </form>
 </div>

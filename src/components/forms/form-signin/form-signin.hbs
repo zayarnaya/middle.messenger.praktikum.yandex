@@ -5,10 +5,8 @@
     <div class="form-signin__form-wrapper col">
         {{#each input.signin}} {{> input-row}} {{/each}}
     </div>
-    <div class="form-signin__submit-wrapper col center-center">
-        <div class="button submit-button">
-            {{> submit-button button.signinSubmit}}
-        </div>
+    <div class="col center-center">
+        {{> submit-button button.signinSubmit}}
         <div class="center-center width-100">
             <a href="#login">Войти</a>
         </div>
