@@ -4,6 +4,8 @@
 
 Сборка Parcel: npm run dev
 
+Билд Parcel: npm run build
+
 Express: npm run start
 
 Netlify: https://grand-vacherin-ee2965.netlify.app/

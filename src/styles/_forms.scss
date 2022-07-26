@@ -12,18 +12,7 @@ legend {
     text-align: center;
 }
 
-
-
-.form .submit-button {
-    border-radius: 12px;
-    width: 280px;
-    height: 37px;
-    color: #fff;
-    font-weight: bolder;
-}
-
-
-
+/*
 .form input {
     -webkit-appearance: none;
     appearance: none;
@@ -36,10 +25,12 @@ legend {
     margin-left: 15px;
     text-align: end;
 }
-
+*/
+/*
 .narrow-form input {
     width: 200px;
 }
+*/
 
 
 .form .row {
@@ -57,14 +48,7 @@ legend {
 .form {
     padding: 20px 0;
 }
-
-
-button {
-    cursor: pointer;
-    background-color: $color-links;
-    border: 0;
-}
-
+/*
 .profile__change-avatar {
     display: flex;
     justify-content: center;
@@ -85,7 +69,9 @@ button {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
 }
+*/
 
+/*
 .errormessage {
     display: flex;
     flex-direction: row;
@@ -96,6 +82,7 @@ button {
     color: red;
     box-sizing: border-box;
 }
+*/
 
 .narrow-form .errormessage {
     width: 200px;
@@ -121,11 +108,6 @@ form a {
 form h3 {
     margin: 5px;
 }
-
-form .submit-button {
-    margin-bottom: 10px;
-}
-
 
 .change-signin label,
 .form-changeprofile label {

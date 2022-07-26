@@ -1,0 +1,30 @@
+
+@import './../../variables';
+
+.form input {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none !important;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid $color-links;
+    max-width: 80%;
+    margin-left: 15px;
+    text-align: end;
+}
+
+.narrow-form input {
+    width: 200px;
+}
+
+.errormessage {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-size: 10px;
+    line-height: 10px;
+    height: 10px;
+    color: red;
+    box-sizing: border-box;
+}

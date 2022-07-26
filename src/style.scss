@@ -33,6 +33,14 @@ h3 {
     flex-direction: column;
 }
 
+
+button {
+    cursor: pointer;
+    background-color: $color-links;
+    border: 0;
+}
+
+
 .center-center {
     display: flex;
     justify-content: center;
@@ -58,14 +66,10 @@ h3 {
     height: 28px;
 }
 
-.a-red {
-    color: red !important;
-}
-
 .a-image {
     text-decoration: none;
 }
 
 .color-red {
-    color: red;
+    color: red !important;
 }
