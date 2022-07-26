@@ -22,9 +22,9 @@
   "source": "src/index.html",
 
   "scripts": {
-    "dev": "parcel src/index.html",
+    "dev": "parcel src/index.html --port 3000",
     "build": "parcel build src/index.html --no-cache",
-    "start": "node server.js --port 3000"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
