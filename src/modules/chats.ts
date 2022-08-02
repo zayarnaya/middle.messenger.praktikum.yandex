@@ -1,7 +1,7 @@
 import Handlebars from "handlebars";
-import { data } from "./../data.js";
+import { data } from "../data";
 
-import { layout_chats } from "./../layouts/chats/chat-static/chat-static.js";
+import { layout_chats } from "../layouts/chats/chat-static/chat-static.js";
 import chatList from "./../components/chatlist/chat-list/chat-list.hbs";
 import chatMain from "./../components/chat-main/chat-main.hbs";
 import chatlist_profile from "./../components/chatlist/chatlist_userprofile/chatlist-userprofile.hbs";

@@ -1,5 +1,5 @@
-import { data } from "./../../data.js";
-import template from "./../error.hbs";
+import { data } from "../../data.js";
+import template from "../error.hbs";
 import "./../error.scss";
 
 export function error404() {

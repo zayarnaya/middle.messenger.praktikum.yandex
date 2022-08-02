@@ -8,7 +8,6 @@ export function checkInput(elem) {
 
     let thisId = elem.id;
     let errorMessage = document.querySelector(`#${thisId} + span.errormessage`);
-    
     if (!elem.validity.valid) {
         showError(elem, errorMessage);
     } else if (elem.validity.valid) {

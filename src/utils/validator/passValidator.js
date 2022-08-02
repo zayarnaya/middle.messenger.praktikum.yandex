@@ -1,4 +1,4 @@
-import { checkPass } from "./check-pass.js";
+import { checkPass } from "./_check-pass.js";
 
 export function passValidator(formname) {
   let pass;

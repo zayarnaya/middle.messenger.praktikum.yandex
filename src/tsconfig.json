@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+    "outDir": "./dist",
+    "allowJs": true,
+    "target": "es2016",
+    "declaration": false,
+    "module": "commonjs",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": false,
+    "esModuleInterop": true,
+    "types": ["handlebars"],
+    "allowSyntheticDefaultImports": true,
+    //"strictFunctionTypes": false
+   },
+   "include": ["./src/**/*/"],
+   "exclude": [
+    "node_modules", 
+    ".vscode"
+   ]
+} 

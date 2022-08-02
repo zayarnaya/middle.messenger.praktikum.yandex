@@ -1,8 +1,8 @@
 import { seekAttributes } from "./seek-attr.js";
-import { data } from "./../data";
+import { data } from "../_data";
 
-export function assignAttr(formname) {
-  let prefix;
+export function assignAttr(formname: string) {
+  let prefix; //тут какой тип?
 
   switch (formname) {
     case "signin":
