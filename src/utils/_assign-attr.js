@@ -1,5 +1,5 @@
 import { seekAttributes } from "./seek-attr.js";
-import { data } from "./../data";
+import { data } from "../data";
 
 export function assignAttr(formname) {
   let prefix;

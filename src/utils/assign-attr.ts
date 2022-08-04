@@ -1,5 +1,5 @@
-import { seekAttributes } from "./seek-attr.js";
-import { data } from "../_data";
+import { seekAttributes } from "./seek-attr";
+import { data } from "../data";
 
 export function assignAttr(formname: string) {
   let prefix; //тут какой тип?

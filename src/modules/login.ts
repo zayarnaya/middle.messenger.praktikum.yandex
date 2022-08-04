@@ -3,6 +3,7 @@
 import { data } from "../data";
 
 import { layout_narrowForm } from "../layouts/narrow-form/narrow-form.js";
+import { getData } from "../utils/form-actions/get-data";
 import formLogin from "./../components/forms/form-login/form-login.hbs";
 //import formLogin = require("./../components/forms/form-login/form-login.hbs");
 //import buttonSubmit from "../components/buttons/button-submit/index";
@@ -28,4 +29,11 @@ export function loginPage() {
   //console.log(typeof inputRow, '222');
   //console.log(typeof buttonSubmit, '333');
   document.querySelector(".form-wrapper").innerHTML = formLogin(data);
+
+  /*
+  document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    alert("uh-oh");
+  });
+  */
 }

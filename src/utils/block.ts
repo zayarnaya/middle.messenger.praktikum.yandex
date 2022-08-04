@@ -98,7 +98,6 @@ _render() {
   // Используйте шаблонизатор из npm или напишите свой безопасный
   // Нужно не в строку компилировать (или делать это правильно),
   // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-  console.log(this._element);
   if(this._element) {this._element.innerHTML = block;}
   //this._element = document.createElement('button');
 }

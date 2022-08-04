@@ -20,25 +20,32 @@ import { error500 } from "./../static_pages/page500/index";
 
 //import { validatorAll } from "./../utils/validator/validator.js";
 import { validatorAll } from "./../utils/validator/validator";
-import { assignAttr } from "./assign-attr.js";
+//import { assignAttr } from "./assign-attr.js";
+import { assignAttr } from "./assign-attr";
 import { passValidator } from "./validator/passValidator.js";
 import { underConstruction } from "../static_pages/under_construction/under_construction.js";
 
 import { chatPage } from "../modules/chats";
-import { loginPage } from "../modules/login";
+//import { loginPage } from "../modules/login";
 
-//import { loginForm } from "./../components/forms/form-login/form-login";
+import { loginForm } from "./../components/forms/form-login/form-login";
 //import { btn } from "./../components/forms/form-login/form-login";
 //import { inp } from "./../components/forms/form-login/form-login";
 
 import { ProfilePage } from "../modules/profile";
 import { changeProfilePage } from "../modules/changeprofile";
 import { changePassPage } from "../modules/changepass";
-import { signinPage } from "../modules/signin";
+//import { signinPage } from "../modules/signin";
+import { signinForm } from "../components/forms/form-signin/form-signin";
 import { forgotPassPage } from "../modules/forgotpass";
+//import { getData } from "./form-actions/get-data";
+import { addSubmitListener } from "./form-actions/send-request";
+
+const wrap = document.querySelector("messenger-wrapper");
 
 function render(query, block) {
     const root = document.querySelector(query);
+    root.textContent = "";
     root.appendChild(block.getContent());
         block.dispatchComponentDidMount();
     return root;
@@ -70,10 +77,11 @@ export function changeRender() {
             break;
 
         case "#signin":
-            signinPage();
-            assignAttr("signin");
-            validatorAll();
-            passValidator("signin");
+            //signinPage();
+            //assignAttr("signin");
+            //validatorAll();
+            //passValidator("signin");
+            render(".messenger-wrapper", signinForm);
             break;
 
         case "#forgotpass":
@@ -82,14 +90,22 @@ export function changeRender() {
 
         case "#login":
             //console.log('login', typeof loginForm);
-            //render(".messenger-wrapper", loginForm);
-            loginPage();
-            //assignAttr("login");
-            //validatorAll();
+            render(".messenger-wrapper", loginForm);
+            addSubmitListener();
+            /*
+            document.querySelector("form").addEventListener("submit", function (event) {
+                event.preventDefault();
+                getData();
+              });
+              */
+            //loginPage();
+            assignAttr("login");
+            validatorAll();
             break;
 
         case "#logout":
-            loginPage();
+            //loginPage();
+            render(".messenger-wrapper", loginForm);
             break;
 
         case "#500": //через класс
@@ -98,7 +114,7 @@ export function changeRender() {
             break;
 
         case "#404": //через класс
-            console.log(typeof block);
+
             //error404();
             //error404;
             render(".messenger-wrapper", error404);

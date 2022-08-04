@@ -7,8 +7,9 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 label: "Логин",
                 required: true,
                 attributes: {
-                    pattern: "[a-zA-Z]{1,20}",
-                    maxLength: "16",
+                    pattern: "^[a-zA-Z+\\d*\-*\_*]{3,20}$",
+                    maxLength: "20",
+                    minLength: "3",
                 },
             },
 
@@ -17,6 +18,11 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 type: "password",
                 label: "Пароль",
                 required: true,
+                attributes: {
+
+                    maxLength: "40",
+                    minLength: "8",
+                }
             },
         },
 
@@ -28,7 +34,8 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 required: true,
                 attributes: {
                     pattern: "[a-zA-Z]{1,20}",
-                    maxLength: "16",
+                    maxLength: "20",
+                    minLength: "3",
                 },
             },
 
@@ -38,7 +45,7 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 label: "Имя",
                 required: true,
                 attributes: {
-                    maxLength: "50",
+
                 },
             },
 
@@ -48,7 +55,7 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 label: "Фамилия",
                 required: true,
                 attributes: {
-                    maxLength: "50",
+
                 },
             },
 
@@ -66,6 +73,8 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 required: true,
                 attributes: {
                     pattern: "[0-9]{10}",
+                    maxLength: "15",
+                    minLength: "10",
                 },
             },
 
@@ -74,7 +83,10 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 type: "password",
                 label: "Пароль",
                 required: true,
-                attributes: {},
+                attributes: {
+                    maxLength: "40",
+                    minLength: "8",
+                },
             },
 
             password_check: {
@@ -82,7 +94,10 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 type: "password",
                 label: "Пароль еще раз",
                 required: true,
-                attributes: {},
+                attributes: {
+                    maxLength: "40",
+                    minLength: "8",
+                },
             }
         },
 
