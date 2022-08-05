@@ -25,7 +25,8 @@ import { assignAttr } from "./assign-attr";
 import { passValidator } from "./validator/passValidator.js";
 import { underConstruction } from "../static_pages/under_construction/under_construction.js";
 
-import { chatPage } from "../modules/chats";
+//import { chatPage } from "../modules/chats";
+
 //import { loginPage } from "../modules/login";
 
 import { loginForm } from "./../components/forms/form-login/form-login";
@@ -54,11 +55,12 @@ function render(query, block) {
 export function changeRender() {
     switch (document.location.hash) {
         case "#chats":
-            chatPage();
-            document.getElementById("mini-menu")
-            .addEventListener("click", function () {
-                document.getElementById("open-menu").classList.toggle("hidden");
-            });
+            underConstruction();
+            //chatPage();
+            //document.getElementById("mini-menu")
+            //.addEventListener("click", function () {
+            //    document.getElementById("open-menu").classList.toggle("hidden");
+            //});
             break;
 
         case "#myprofile":
@@ -125,7 +127,7 @@ export function changeRender() {
             break;
 
         default:
-            loginPage();
+            render(".messenger-wrapper", loginForm);
             assignAttr("login");
             validatorAll();
             break;
