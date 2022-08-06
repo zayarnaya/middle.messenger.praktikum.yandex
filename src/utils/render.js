@@ -38,12 +38,16 @@ import { changeProfilePage } from "../modules/changeprofile";
 import { changePassPage } from "../modules/changepass";
 //import { signinPage } from "../modules/signin";
 import { signinForm } from "../components/forms/form-signin/form-signin";
-import { forgotPassPage } from "../modules/forgotpass";
+//import { forgotPassPage } from "../modules/forgotpass";
+import { forgotPassPage } from "../components/forms/form-forgotpass";
 //import { getData } from "./form-actions/get-data";
 import { addSubmitListener } from "./form-actions/send-request";
+import { loggingOut } from "../static_pages/logout";
+import { render } from "./renderDOM";
 
 const wrap = document.querySelector("messenger-wrapper");
 
+/*
 function render(query, block) {
     const root = document.querySelector(query);
     root.textContent = "";
@@ -51,6 +55,7 @@ function render(query, block) {
         block.dispatchComponentDidMount();
     return root;
   }
+  */
 
 export function changeRender() {
     switch (document.location.hash) {
@@ -107,7 +112,8 @@ export function changeRender() {
 
         case "#logout":
             //loginPage();
-            render(".messenger-wrapper", loginForm);
+            //render(".messenger-wrapper", loginForm);
+            loggingOut();
             break;
 
         case "#500": //через класс
@@ -155,6 +161,7 @@ function addList() {
         chats: "Чаты (заглушка)",
         404: "Ошибка 404",
         500: "Ошибка 500",
+        logout: "Разлогинились"
 
     };
 
