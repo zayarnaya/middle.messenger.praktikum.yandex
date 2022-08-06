@@ -44,6 +44,7 @@ import { forgotPassPage } from "../components/forms/form-forgotpass";
 import { addSubmitListener } from "./form-actions/send-request";
 import { loggingOut } from "../static_pages/logout";
 import { render } from "./renderDOM";
+//import "./../components/buttons/button-submit/button-submit.scss";
 
 const wrap = document.querySelector("messenger-wrapper");
 

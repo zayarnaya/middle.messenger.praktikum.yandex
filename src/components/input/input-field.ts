@@ -17,7 +17,7 @@ export class InputField extends Block {
   
     render() {
           // шаблон
-          Handlebars.registerPartial("input-row", inputRow);
+          //Handlebars.registerPartial("input-row", inputRow);
           return inputRow(this.props);
     }
   }

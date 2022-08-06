@@ -13,7 +13,7 @@ import { Block } from "./../../../utils/block";
 export class Button extends Block {//класс экспортировали, а что с ним дальше делать???
     constructor(props) {
           // Создаём враппер дом-элемент button
-      super("button", props);
+      super("div", props);
     }
   
     render() {

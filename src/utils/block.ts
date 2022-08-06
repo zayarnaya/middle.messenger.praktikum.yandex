@@ -14,6 +14,7 @@ _meta: Record<any, any> = {};
 _id = null;
 props = {};
 eventBus;
+children;
 
 /** JSDoc
    * @param {string} tagName
@@ -117,12 +118,14 @@ get element() {
 
 _render() {
   const block = this.render();
+  //this._removeEvents();
   // Этот небезопасный метод для упрощения логики
   // Используйте шаблонизатор из npm или напишите свой безопасный
   // Нужно не в строку компилировать (или делать это правильно),
   // либо сразу в DOM-элементы возвращать из compile DOM-ноду
   if(this._element) {this._element.innerHTML = block;};
   this._addEvents();
+  console.log(this.events);
   //this._element = document.createElement('button');
 }
 
@@ -180,7 +183,7 @@ _makePropsProxy(props) {
 
 _createDocumentElement(tagName) {
   // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-  return document.createElement(tagName);
+  const element = document.createElement(tagName);
   element.setAttribute('data-id', this._id);
   return element;
 }
@@ -206,7 +209,7 @@ compile(template, props) {
 }
 
 show() {
-  this.getContent().style.display = "block";
+  this.getContent().style.display = "flex";
 }
 
 hide() {

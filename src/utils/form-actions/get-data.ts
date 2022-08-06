@@ -6,17 +6,20 @@ export function sendRequest() {
 
 export function getData() {
 
-    let message: string = document.querySelector(".submit-message").textContent;
+    let message: HTMLElement = document.querySelector(".submit-message") as HTMLElement;
     switch(location.hash) {
         case "#login" :
-            message = "Успешно! Сейчас загрузим чаты";
+            message.textContent = "Успешно! Сейчас загрузим чаты";
             break;
         case "#signin" :
-            message = "Вы успешно зарегистрировались, переходим на страницу входа";
+            message.textContent = "Вы успешно зарегистрировались, переходим на страницу входа";
             break;
         case "#changepass" :
-            message = "Вы поменяли пароль";
-            break;        
+            message.textContent = "Вы поменяли пароль";
+            break;    
+        case "#forgotpass" :
+            message.textContent = "Пароль будет отправлен на вашу почту";
+            break;  
                    
     }
 
@@ -35,7 +38,7 @@ export function getData() {
     };
 
     console.log(result);
-/*
+
     setTimeout(function() {
 
         switch(location.hash) {
@@ -48,9 +51,12 @@ export function getData() {
             case "#changepass" :
                 location.hash = "#myprofile";
                 break;
+            case "#forgotpass" :
+                location.hash = "#login";
+                break;
                 
         }
         
-    }, 3000)*/
+    }, 3000)
 
 }
