@@ -1,3 +1,3 @@
-declare function formGetNewPass (context: any, options?: any): string;
+declare function formGetNewPass (context?: any, options?: any): string;
 
 export = formGetNewPass; 
