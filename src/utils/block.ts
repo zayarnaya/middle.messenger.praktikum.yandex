@@ -15,6 +15,8 @@ _id = null;
 props = {};
 eventBus;
 children;
+withInternalID = false;
+events;
 
 /** JSDoc
    * @param {string} tagName
@@ -23,7 +25,7 @@ children;
    * @returns {void}
    */
 
-constructor(tagName: string = "div", propsAndChildren: Record<string, any> = {}) {
+constructor(tagName: string = "div", propsAndChildren: Record<string, any> = {}, withInternalID?: boolean) {
   const { children, props } = this._getChildren(propsAndChildren);
   this.children = children;
 
@@ -36,6 +38,7 @@ constructor(tagName: string = "div", propsAndChildren: Record<string, any> = {})
   this._id = makeUUID();
 
   this.props = this._makePropsProxy({ ...props, __id: this._id });
+  this.withInternalID = withInternalID;
 
   this.eventBus = () => eventBus;
 
@@ -78,6 +81,9 @@ init() {
 
 _componentDidMount() {
   this.componentDidMount();
+  Object.values(this.children).forEach(child => {
+    child.dispatchComponentDidMount();
+});
   this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   this.eventBus().emit(Block.EVENTS.FLOW_CDU);
 }
@@ -117,16 +123,33 @@ get element() {
 }
 
 _render() {
+  console.log("RENDER", this);
+  const block = this.render(); // render теперь возвращает DocumentFragment
+
+        this._removeEvents();
+        this._element.innerHTML = ''; // удаляем предыдущее содержимое
+
+      this._element.appendChild(block);
+console.log(this.events, "EVENTS");
+      this._addEvents();
+      
+
+  /*
   const block = this.render();
+  //console.log(this, 'render this');
   //this._removeEvents();
   // Этот небезопасный метод для упрощения логики
   // Используйте шаблонизатор из npm или напишите свой безопасный
   // Нужно не в строку компилировать (или делать это правильно),
   // либо сразу в DOM-элементы возвращать из compile DOM-ноду
+  //console.log(this._element, "THIS ELEMENT");
+  //console.log(this.render(), "THIS RENDER");
+  this._removeEvents();
   if(this._element) {this._element.innerHTML = block;};
   this._addEvents();
-  console.log(this.events);
+  //console.log(this.events);
   //this._element = document.createElement('button');
+  */
 }
 
 // Может переопределять пользователь, необязательно трогать
@@ -139,7 +162,9 @@ getContent() {
 _addEvents() {
   const {events = {}} = this.props;
 
+
   Object.keys(events).forEach(eventName => {
+    console.log(this._element, "КУДА ВЕШАТЬ ИВЕНТЫ");
     this._element.addEventListener(eventName, events[eventName]);
   });
 }
@@ -152,7 +177,7 @@ _removeEvents() {
   });
 }
 
-_makePropsProxy(props) {
+_makePropsProxy(propsAndChildren) {
   // Можно и так передать this
   // Такой способ больше не применяется с приходом ES6+
   
@@ -161,7 +186,7 @@ _makePropsProxy(props) {
   return props;
   */
   
-  let theProxy = new Proxy(props, {
+  let theProxy = new Proxy(propsAndChildren, {
     get(target, prop) {
         const value = target[prop];
         return typeof value === "function" ? value.bind(target) : value;
@@ -184,6 +209,7 @@ _makePropsProxy(props) {
 _createDocumentElement(tagName) {
   // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
   const element = document.createElement(tagName);
+  if(this.withInternalID) {element.setAttribute('data-id', this._id);};
   element.setAttribute('data-id', this._id);
   return element;
 }
@@ -192,18 +218,22 @@ compile(template, props) {
   const propsAndStubs = { ...props };
 
   Object.entries(this.children).forEach(([key, child]) => {
+
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+
   });
 
   const fragment = this._createDocumentElement('template');
 
-        fragment.innerHTML = Templator.compile(template, propsAndStubs);
+        fragment.innerHTML = template(propsAndStubs);
 
         Object.values(this.children).forEach(child => {
-            const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+            const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
             
             stub.replaceWith(child.getContent());
         });
+
+
 
         return fragment.content;     
 }

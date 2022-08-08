@@ -1,47 +1,43 @@
-export function inputError(field: HTMLInputElement) {
+export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
 
   let message: HTMLElement = document.querySelector(`#${field.id} + span.errormessage`) as HTMLElement;
   const patterns: Record<string, string> = {
-    login: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$", //работает
+    login: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
     /*
-    "[a-zA-Z+\d\-\_]{3,20}"
-    "\w{2,19}[a-zA-Z]*[\-]?"
-    "^[[a-zA-Z]+\\d?\\-?\\_?]{3,20}$"
-    /u - надо ли?
-    "^[\\d\\w\\-]?\\w+[\\d\\w\\-]?{3,20}$"
     от 3 до 20 символов, латиница, может содержать цифры, 
     но не состоять из них, без пробелов, без спецсимволов 
     (допустимы дефис и нижнее подчёркивание)
     */
-    first_name: "^([A-ZА-ЯЁ]+)[a-zA-ZА-Яа-яЁё\\-]*$", //интересно это как общность или как последовательнсоть
+    first_name: "^([A-ZА-ЯЁ]+)[a-zA-ZА-Яа-яЁё\\-]*$",
     second_name: "^([A-ZА-ЯЁ]+)[a-zA-ZА-Яа-яЁё\\-]*$",
     /*
     латиница или кириллица, первая буква должна быть заглавной, 
     без пробелов и без цифр, нет спецсимволов (допустим только дефис).
     */
-    email: /*"^\w+@\w+\.\w+",*/ "^[a-ZA-Z\\d\\-\\_\\.]+@\\w+\\.\\w+$",
+    email: "^[\\w\\d]+@\\w+\\.\\w+",
     /*
     латиница, может включать цифры и спецсимволы вроде дефиса, 
     обязательно должна быть «собака» (@) и точка после неё, 
     но перед точкой обязательно должны быть буквы.
     */
-    phone: "^\\+?\\d{10, 15}$",
+    phone: "^\\+?\\d{10,15}$",
     /*
     от 10 до 15 символов, состоит из цифр, может начинается с плюса.
     */
-    password: "^([\\S]*[A-ZА-ЯЁ]{1,}[\\S]*[\\d]{1,}[\\S]*)|([\\S]*[\\d]{1,}[\\S]*[A-ZА-ЯЁ]{1,}[\\S]*){8,40}$", //не работает
+    password: "^(?=.*[A-Z])(?=.*\\d).{8,40}$", 
     /*
-    "^[A-ZА-ЯЁ+\\d+\\S]{8,40}$"
-    "^(\\S*[A-ZА-ЯЁ]+\\S*\\d+\\S*|\\S*\\d+\\S*[A-ZА-ЯЁ]+\\S*){8,40}$"
     от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.
     */
-    message: ".*"//не должно быть пустым
+    message: ".*"
+    /*
+    Не должно быть пустым
+    */
+
   };
 
   let pattern: RegExp = new RegExp(patterns[field.name]);
-  //console.log(pattern.test(field.value), pattern, field.value, field.name);//ПОЧЕМУ-то только один раз или не один но не каждый раз
-  
-  if (field.value == "") {
+
+  if (checkEmpty && field.value == "") {
     switch (field.id) {
       case "login":
         message.textContent = "Введите логин";
@@ -93,14 +89,10 @@ export function inputError(field: HTMLInputElement) {
   } else if (field.validity.tooShort) {
     message.textContent = `Не менее ${field.minLength} знаков`;
     return false;
-  
+
   } else if (field.validity.valid && pattern.test(field.value)) {
     message.textContent = "";
     return true;
   }
 
-  }
-
-
-
-///написать отдельную проверку по регуляркам
+}

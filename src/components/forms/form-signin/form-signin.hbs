@@ -3,6 +3,31 @@
         <h3>Регистрация</h3>
     </legend>
     <div class="form-signin__form-wrapper col">
+        <div class="input-list">{{{input0}}}
+            {{{input1}}}
+            {{{input2}}}
+            {{{input3}}}
+            {{{input4}}}
+            {{{input5}}}
+            {{{input6}}}
+
+        </div>
+    </div>
+    <div class="submit-message"></div>
+    <div class="col center-center">
+        <div class="submit">{{{button}}}</div>
+        <div class="center-center width-100">
+            <a href="#login">Войти</a>
+        </div>
+    </div>
+</form>
+
+<!--
+<form class="form-signin form size-s narrow-form col" novalidate method="post">
+    <legend>
+        <h3>Регистрация</h3>
+    </legend>
+    <div class="form-signin__form-wrapper col">
         {{#each input.signin}} {{> input-row}} {{/each}}
     </div>
     <div class="submit-message"></div>
@@ -13,3 +38,4 @@
         </div>
     </div>
 </form>
+-->

@@ -10,10 +10,12 @@ export function checkPass(pass: HTMLInputElement, pass2: HTMLInputElement) {
 
       errorMessage.textContent = "Пароли не совпадают";
       errorMessage.classList.toggle("active");
+      return false;
   } else if (pass.value == pass2.value) {
       pass.classList.remove("color-red");
       pass2.classList.remove("color-red");
       
       removeError(errorMessage);
+      return true;
   };
 }

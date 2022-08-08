@@ -4,17 +4,17 @@ import { inputError } from "./input-error";
 
 export function validatorAll() {
   let form = document.querySelector("form");
-  if(!form) {return};
+  if (!form) { return };
   let inputs = Array.from(document.getElementsByTagName("input"));
-  if(!inputs) {return};
+  if (!inputs) { return };
 
   //inputs.forEach((element) => element.addEventListener("focus", checkInput));//а будет ли работать с this?
   //inputs.forEach((element) => element.addEventListener("blur", checkInput));
-  inputs.forEach((element) => element.addEventListener("blur", function() {
-    inputError(element);
+  inputs.forEach((element) => element.addEventListener("blur", function () {
+    inputError(element, true);
   }));
-  inputs.forEach((element) => element.addEventListener("focus", function() {
-    inputError(element);
+  inputs.forEach((element) => element.addEventListener("focus", function () {
+    inputError(element, false);
   }));
   form.addEventListener("submit", function (event) {
     event.preventDefault();

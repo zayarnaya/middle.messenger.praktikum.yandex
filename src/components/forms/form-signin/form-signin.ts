@@ -1,3 +1,28 @@
+import { data } from "../../../data";
+import { Block } from "../../../utils/block";
+import { Button } from "../../buttons/button-submit/button";
+import { InputField } from "../../input/input-field";
+import formSignin from "./form-signin.hbs";
+
+import "./form-signin.scss";
+
+
+export class signinFormAll extends Block {
+    constructor(propsAndChildren) {
+        super("div", propsAndChildren);
+        //this.events = propsAndChildren.events;
+    }
+
+    render() {
+
+        //return this.compile(formSignin, this.children);
+        return this.compile(formSignin, {});
+    }
+}
+
+
+
+/*
 const Handlebars = require("handlebars");
 import { data } from "../../../data";
 import formSignin from "./form-signin.hbs";
@@ -14,5 +39,4 @@ export const inp = Handlebars.registerPartial("input-row", inputRow);
 
 //работает
 export const signinForm = new Form(data, formSignin(data));
-
-
+*/

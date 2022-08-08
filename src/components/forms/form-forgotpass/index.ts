@@ -11,7 +11,7 @@ import { submitError } from "../../../utils/validator/submit-error";
 import "./form-forgotpass.scss";
 
 export function forgotPassPage() {
-    console.log('000');
+
     const events = {
         events: {
         submit: event => {

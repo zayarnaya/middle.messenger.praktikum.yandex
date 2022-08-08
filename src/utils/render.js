@@ -10,26 +10,26 @@ import { forgotPassPage } from "../modules/forgotpass.js";
 //import { error404 } from "./../static_pages/page404/page404.js";
 //import { error404 } from "./../static_pages/page404/page404";
 
-import { error404 } from "./../static_pages/page404/index";
+//import { error404 } from "./../static_pages/page404/index";
 
 
 //import { error500 } from "./../static_pages/page500/page500.js";
 //import { error500 } from "./../static_pages/page500/page500";
 
-import { error500 } from "./../static_pages/page500/index";
+//import { error500 } from "./../static_pages/page500/index";
 
 //import { validatorAll } from "./../utils/validator/validator.js";
 import { validatorAll } from "./../utils/validator/validator";
 //import { assignAttr } from "./assign-attr.js";
 import { assignAttr } from "./assign-attr";
-import { passValidator } from "./validator/passValidator.js";
+import { passValidator } from "./validator/passValidator";
 import { underConstruction } from "../static_pages/under_construction/under_construction.js";
 
 //import { chatPage } from "../modules/chats";
 
 //import { loginPage } from "../modules/login";
 
-import { loginForm } from "./../components/forms/form-login/form-login";
+//import { loginForm } from "./../components/forms/form-login/form-login";
 //import { btn } from "./../components/forms/form-login/form-login";
 //import { inp } from "./../components/forms/form-login/form-login";
 
@@ -37,14 +37,15 @@ import { ProfilePage } from "../modules/profile";
 import { changeProfilePage } from "../modules/changeprofile";
 import { changePassPage } from "../modules/changepass";
 //import { signinPage } from "../modules/signin";
-import { signinForm } from "../components/forms/form-signin/form-signin";
+import { signinForm } from "../components/forms/form-signin/";
 //import { forgotPassPage } from "../modules/forgotpass";
-import { forgotPassPage } from "../components/forms/form-forgotpass";
+//import { forgotPassPage } from "../components/forms/form-forgotpass";
 //import { getData } from "./form-actions/get-data";
 import { addSubmitListener } from "./form-actions/send-request";
-import { loggingOut } from "../static_pages/logout";
+//import { loggingOut } from "../static_pages/logout";
 import { render } from "./renderDOM";
 //import "./../components/buttons/button-submit/button-submit.scss";
+//import { signinForm } from "../components/forms/form-signin/form-signin";
 
 const wrap = document.querySelector("messenger-wrapper");
 
@@ -60,7 +61,7 @@ function render(query, block) {
 
 export function changeRender() {
     switch (document.location.hash) {
-        case "#chats":
+        /*case "#chats":
             underConstruction();
             //chatPage();
             //document.getElementById("mini-menu")
@@ -82,19 +83,24 @@ export function changeRender() {
         case "#changepass":
             changePassPage();
             passValidator("change_signin");
-            break;
+            break;*/
 
         case "#signin":
             //signinPage();
             //assignAttr("signin");
             //validatorAll();
             //passValidator("signin");
-            render(".messenger-wrapper", signinForm);
+            //render(".messenger-wrapper", signinForm);
+            signinForm();
+            //assignAttr("signin");
+            //validatorAll();
+            //passValidator("signin");
             break;
-
+            /*
         case "#forgotpass":
             forgotPassPage();
             break;
+
 
         case "#login":
             //console.log('login', typeof loginForm);
@@ -105,7 +111,7 @@ export function changeRender() {
                 event.preventDefault();
                 getData();
               });
-              */
+              *//*
             //loginPage();
             assignAttr("login");
             validatorAll();
@@ -115,8 +121,8 @@ export function changeRender() {
             //loginPage();
             //render(".messenger-wrapper", loginForm);
             loggingOut();
-            break;
-
+            break;*/
+/*
         case "#500": //через класс
             //error500();
             render(".messenger-wrapper", error500);
@@ -132,7 +138,7 @@ export function changeRender() {
         case "#no": //лучше ее потом вообще убрать
             underConstruction();
             break;
-
+*/
         default:
             render(".messenger-wrapper", loginForm);
             assignAttr("login");

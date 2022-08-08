@@ -5,7 +5,7 @@ export function sendRequest() {
 }
 
 export function getData() {
-
+console.log("GETDATA");
     let message: HTMLElement = document.querySelector(".submit-message") as HTMLElement;
     switch(location.hash) {
         case "#login" :

@@ -1,4 +1,4 @@
-export const data: Record<string, number | string | boolean | null | undefined | object> = {
+export const data: Record<string, any> = {
     input: {
         login: {
             login: {
@@ -7,7 +7,7 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 label: "Логин",
                 required: true,
                 attributes: {
-                    pattern: "^[a-zA-Z+\\d*\-*\_*]{3,20}$",
+                    pattern: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
                     maxLength: "20",
                     minLength: "3",
                 },
@@ -33,7 +33,7 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 label: "Логин",
                 required: true,
                 attributes: {
-                    pattern: "[a-zA-Z]{1,20}",
+                    pattern: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
                     maxLength: "20",
                     minLength: "3",
                 },
@@ -72,7 +72,7 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 label: "Телефон",
                 required: true,
                 attributes: {
-                    pattern: "[0-9]{10}",
+                    pattern: "^\\+?\\d{10,15}$",
                     maxLength: "15",
                     minLength: "10",
                 },
@@ -132,8 +132,9 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 required: false,
                 value: "phil",
                 attributes: {
-                    pattern: "[a-zA-Z]{1,20}",
-                    maxLength: "16",
+                    pattern: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
+                    maxLength: "20",
+                    minLength: "3",
                 },
             },
 
@@ -176,7 +177,7 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 required: false,
                 value: "9161234567",
                 attributes: {
-                    pattern: "[0-9]{10}",
+                    pattern: "^\\+?\\d{10,15}$",
                 },
             },
         },
@@ -188,33 +189,53 @@ export const data: Record<string, number | string | boolean | null | undefined |
                 label: "Логин",
                 required: true,
                 attributes: {
-                    pattern: "[a-zA-Z]{1,20}",
+                    pattern: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
                     maxLength: "16",
                 },
             },
         },
+
+        search: {
+            name: "search",
+            type: "search",
+            label: "Поиск",
+            required: false,
+            attributes: {
+                placeholder: "Поиск",
+            },
+        }
     },
 
     button: {
         loginSubmit: {
             name: "submit",
             label: "Войти",
+            class: "submit-button",
         },
 
         signinSubmit: {
             name: "submit",
             label: "Создать аккаунт",
+            class: "submit-button",
         },
 
         changeSubmit: {
             name: "submit",
             label: "Сохранить",
+            class: "submit-button",
         },
 
         forgotpassSubmit: {
             name: "submit",
             label: "Отправить",
+            class: "submit-button",
         },
+
+        searchSubmit: {
+            name: "submit",
+            label: "",
+            class: "chat-list__searchform-button",
+        }
     },
 
     profile_char: {

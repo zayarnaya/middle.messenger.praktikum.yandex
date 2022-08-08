@@ -13,13 +13,14 @@ import { Block } from "./../../../utils/block";
 export class Button extends Block {//класс экспортировали, а что с ним дальше делать???
     constructor(props) {
           // Создаём враппер дом-элемент button
-      super("div", props);
+      super("div", props, true);
     }
   
     render() {
           // шаблон
           Handlebars.registerPartial("submit-button", buttonSubmit);
-          return buttonSubmit(this.props);
+          //return buttonSubmit(this.props);
+          return this.compile(buttonSubmit, this.props);
     }
   }
   
