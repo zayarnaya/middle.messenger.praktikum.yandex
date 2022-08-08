@@ -12,7 +12,7 @@ export class Error extends Block {
   }
 
   render() {
-    return error(this.props);
+    return this.compile(error, this.props);
   }
 }
 

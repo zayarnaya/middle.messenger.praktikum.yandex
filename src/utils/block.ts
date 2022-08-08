@@ -216,6 +216,7 @@ _createDocumentElement(tagName) {
 
 compile(template, props) {
   const propsAndStubs = { ...props };
+  console.log("COMPILE");
 
   Object.entries(this.children).forEach(([key, child]) => {
 
@@ -229,7 +230,7 @@ compile(template, props) {
 
         Object.values(this.children).forEach(child => {
             const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-            
+            console.log(stub, "STUB");
             stub.replaceWith(child.getContent());
         });
 

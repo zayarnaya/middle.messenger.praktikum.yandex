@@ -8,26 +8,25 @@ export function submitError() {
     let truecounts: number = 0;
     let pass: HTMLInputElement;
     let pass2: HTMLInputElement;
-    if (document.querySelectorAll("input[type='password']").length > 1) {
+    let passEven: boolean = false;
+    if (document.querySelectorAll("input[type='password']").length === 2) {
         pass = document.querySelectorAll("input[type='password']")[0] as HTMLInputElement;
         pass2 = document.querySelectorAll("input[type='password']")[1] as HTMLInputElement;
-        console.log(pass, pass2, "ПАРОЛИ");
+        if (checkPass(pass, pass2)) passEven = true;
+
+    } else if (document.querySelectorAll("input[type='password']").length != 2) {
+        passEven = true;
     }
     console.log(document.querySelectorAll("input[type='password']"), "ПОЛЯ ПАРОЛИ");
     for (let input of inputs) {
-        console.log(inputError(input));
-
         if (inputError(input)) {
+            truecounts += 1;
+        } else if (input.id == "avatar") {
             truecounts += 1;
         }
     }
 
-    console.log(truecounts, inputs.length);
-    console.log(truecounts === inputs.length);
-    console.log(truecounts < inputs.length);
-    console.log(checkPass(pass, pass2));
-
-    if (truecounts === inputs.length && checkPass(pass, pass2)) {
+    if (truecounts === inputs.length && passEven) {
         console.log("ВЕРНО")
         getData();
     } else if (truecounts < inputs.length || !checkPass(pass, pass2)) {

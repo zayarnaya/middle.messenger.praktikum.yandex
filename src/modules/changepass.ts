@@ -2,7 +2,7 @@
 const Handlebars = require("handlebars");
 import { data } from "../data";
 
-import { layout_wideForm } from "../layouts/wide-form/wide-form.js";
+import { layout_wideForm } from "../layouts/wide-form/wide-form";
 import changePass from "./../components/forms/form-changepass/form-changepass.hbs";
 import changeAvatar from "../components/avatars/change-avatar/index";
 import inputRow from "../components/input/index";

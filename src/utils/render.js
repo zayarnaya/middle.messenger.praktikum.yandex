@@ -10,11 +10,11 @@ import { forgotPassPage } from "../modules/forgotpass.js";
 //import { error404 } from "./../static_pages/page404/page404.js";
 //import { error404 } from "./../static_pages/page404/page404";
 
-//import { error404 } from "./../static_pages/page404/index";
+import { error404 } from "./../static_pages/page404/index";
 
 
 //import { error500 } from "./../static_pages/page500/page500.js";
-//import { error500 } from "./../static_pages/page500/page500";
+import { error500 } from "./../static_pages/page500/index";
 
 //import { error500 } from "./../static_pages/page500/index";
 
@@ -33,11 +33,15 @@ import { underConstruction } from "../static_pages/under_construction/under_cons
 //import { btn } from "./../components/forms/form-login/form-login";
 //import { inp } from "./../components/forms/form-login/form-login";
 
-import { ProfilePage } from "../modules/profile";
-import { changeProfilePage } from "../modules/changeprofile";
-import { changePassPage } from "../modules/changepass";
+import { ProfilePage } from "../components/forms/my-profile";
+//import { changeProfilePage } from "../modules/changeprofile";
+import { changeProfilePage } from "../components/forms/form-changeprofile";
+import { changePassPage } from "../components/forms/form-changepass";
 //import { signinPage } from "../modules/signin";
 import { signinForm } from "../components/forms/form-signin/";
+import { loginForm } from "../components/forms/form-login";
+import { forgotPassPage } from "../components/forms/form-forgotpass";
+import { loggingOut } from "../static_pages/logout";
 //import { forgotPassPage } from "../modules/forgotpass";
 //import { forgotPassPage } from "../components/forms/form-forgotpass";
 //import { getData } from "./form-actions/get-data";
@@ -69,6 +73,7 @@ export function changeRender() {
             //    document.getElementById("open-menu").classList.toggle("hidden");
             //});
             break;
+            */
 
         case "#myprofile":
             ProfilePage();
@@ -76,65 +81,41 @@ export function changeRender() {
 
         case "#changeprofile":
             changeProfilePage();
-            assignAttr("changeprofile");
-            validatorAll();
             break;
+            
 
         case "#changepass":
             changePassPage();
-            passValidator("change_signin");
-            break;*/
+            
+            break;
 
         case "#signin":
-            //signinPage();
-            //assignAttr("signin");
-            //validatorAll();
-            //passValidator("signin");
-            //render(".messenger-wrapper", signinForm);
             signinForm();
-            //assignAttr("signin");
-            //validatorAll();
-            //passValidator("signin");
             break;
-            /*
+            
         case "#forgotpass":
             forgotPassPage();
-            break;
+            break; 
 
 
         case "#login":
-            //console.log('login', typeof loginForm);
-            render(".messenger-wrapper", loginForm);
-            addSubmitListener();
-            /*
-            document.querySelector("form").addEventListener("submit", function (event) {
-                event.preventDefault();
-                getData();
-              });
-              *//*
-            //loginPage();
-            assignAttr("login");
-            validatorAll();
+            loginForm();
             break;
+  
 
         case "#logout":
-            //loginPage();
-            //render(".messenger-wrapper", loginForm);
             loggingOut();
-            break;*/
+            break;
+
+        case "#500": 
+            error500();
+            break;
+            
+
+        case "#404": 
+            error404();
+            break;
 /*
-        case "#500": //через класс
-            //error500();
-            render(".messenger-wrapper", error500);
-            break;
-
-        case "#404": //через класс
-
-            //error404();
-            //error404;
-            render(".messenger-wrapper", error404);
-            break;
-
         case "#no": //лучше ее потом вообще убрать
             underConstruction();
             break;

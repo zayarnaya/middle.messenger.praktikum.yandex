@@ -8,8 +8,6 @@ export function validatorAll() {
   let inputs = Array.from(document.getElementsByTagName("input"));
   if (!inputs) { return };
 
-  //inputs.forEach((element) => element.addEventListener("focus", checkInput));//а будет ли работать с this?
-  //inputs.forEach((element) => element.addEventListener("blur", checkInput));
   inputs.forEach((element) => element.addEventListener("blur", function () {
     inputError(element, true);
   }));

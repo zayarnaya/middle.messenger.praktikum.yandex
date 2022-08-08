@@ -1,12 +1,14 @@
 <div class="profile-wrapper">
-    {{> change-avatar}}
+    {{{avatar}}}
     <form class="change-pass form">
         <legend>
         </legend>
         <div class="form-changeprofile__form-wrapper form col width-100">
-            {{#each input.change_signin}} {{> input-row}} {{/each}}
+            {{{input0}}}
+            {{{input1}}}
+            {{{input2}}}
         </div>
         <div class="submit-message"></div>
-        {{> submit-button button.changeSubmit}}
+        {{{button}}}
     </form>
 </div>

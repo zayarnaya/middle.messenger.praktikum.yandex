@@ -12,35 +12,14 @@ import "./form-forgotpass.scss";
 
 export function forgotPassPage() {
 
-    const events = {
-        events: {
-        submit: event => {
-            event.preventDefault();
-            console.log(event);
-            submitError();
-
-          },
-        }
-    };
-    const form = new formForgotPass(events);
+    const form = new formForgotPass({
+        input: new InputField(data.input.getNewPass.login),
+        button: new Button(data.button.forgotpassSubmit)
+    });
     render(".messenger-wrapper", form);
-
-    console.log(data.input.getNewPass.login);
-    const input = new InputField(data.input.getNewPass.login);
-    render(".input-list", input);
-
-
-
-    const props = data.button.forgotpassSubmit;
-    //Object.assign(props, events);
-    //console.log(props);
-
-    const button = new Button(props);
-    render(".submit", button);
-    //console.log(document.querySelector(".submit-button"));
-
-    //document.querySelector("form").addEventListener("submit", )
-
-
+    document.querySelector("form").addEventListener("submit", function(e) {
+        e.preventDefault();
+        getData();
+    })
 }
 

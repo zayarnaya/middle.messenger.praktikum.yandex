@@ -1,6 +1,8 @@
 export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
-
+  console.log("ПРОВЕРКА");
   let message: HTMLElement = document.querySelector(`#${field.id} + span.errormessage`) as HTMLElement;
+  console.log(message);
+  console.log(field.id);
   const patterns: Record<string, string> = {
     login: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
     /*
@@ -24,7 +26,9 @@ export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
     /*
     от 10 до 15 символов, состоит из цифр, может начинается с плюса.
     */
-    password: "^(?=.*[A-Z])(?=.*\\d).{8,40}$", 
+    password: "^(?=.*[A-Z])(?=.*\\d).{8,40}$",
+    newPassword: "^(?=.*[A-Z])(?=.*\\d).{8,40}$",
+    
     /*
     от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.
     */
@@ -55,11 +59,15 @@ export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
         message.textContent = "Введите номер телефона (10 цифр)";
         break;
       case "password":
+      case "oldPassword":
+      case "newPassword":
+      case "newPassword2":
+        console.log("EMPTY");
         message.textContent = "Введите пароль";
         break;
     };
     return false;
-
+    console.log(field, pattern);
   } else if (!pattern.test(field.value)) {
     switch (field.id) {
       case "login":
@@ -78,6 +86,10 @@ export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
         message.textContent = "Введите номер телефона (10-15 цифр)";
         break;
       case "password":
+      case "oldPassword":
+      case "newPassword":
+      case "newPassword2":
+        console.log(field, pattern);
         message.textContent = "От 8 до 40 символов, минимум 1 заглавная буква и 1 цифра";
         break;
     };
@@ -90,7 +102,8 @@ export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
     message.textContent = `Не менее ${field.minLength} знаков`;
     return false;
 
-  } else if (field.validity.valid && pattern.test(field.value)) {
+  } else if (field.validity.valid && pattern.test(field.value) && field.id != "avatar") {
+    console.log(message, "MESSAGE");
     message.textContent = "";
     return true;
   }

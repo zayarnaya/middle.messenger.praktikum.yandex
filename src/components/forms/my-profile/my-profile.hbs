@@ -1,9 +1,14 @@
 <div class="profile-wrapper">
     <div class="profile__main-info center-center">
-        {{> profile_avatar}}
+        {{{avatar}}}
     </div>
     <div class="profile__chars col">
-        {{#each user.profile}} {{> profile-char}} {{/each}}
+        {{{char0}}}
+        {{{char1}}}
+        {{{char2}}}
+        {{{char3}}}
+        {{{char4}}}
+        {{{char5}}}
     </div>
     <div class="profile__change-links">
         <a href="#changeprofile">Изменить данные</a>

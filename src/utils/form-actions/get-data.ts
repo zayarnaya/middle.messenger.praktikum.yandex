@@ -15,7 +15,7 @@ console.log("GETDATA");
             message.textContent = "Вы успешно зарегистрировались, переходим на страницу входа";
             break;
         case "#changepass" :
-            message.textContent = "Вы поменяли пароль";
+            message.textContent = "Вы поменяли пароль. Возвращаемся в профиль";
             break;    
         case "#forgotpass" :
             message.textContent = "Пароль будет отправлен на вашу почту";
