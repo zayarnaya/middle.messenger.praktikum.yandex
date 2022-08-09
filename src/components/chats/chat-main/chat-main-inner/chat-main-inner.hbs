@@ -1,33 +1,10 @@
-<div class="chat-main__inner">
+
     <div class="chat-main__date">
-        12 июля
+        {{{date}}}
     </div>
     <ul class="chat-main__daily-messages">
-        <li>
-            <div class="chat-main__message message-incoming">
-                <div class="chat-main__message-wrap message-left">
-                    <p>Какой чудесный день!</p>
-                    <p>Какой чудесный пень!</p>
-                    <p>Какой чудесный я!<br />
-                        И песенка моя!</p>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="chat-main__message message-outgoing">
-                <div class="chat-main__message-wrap message-right">
-                    Да ты шо
-                </div>
-            </div>
-        </li>
+        {{{incoming}}}
+        {{{outgoing}}}
     </ul>
-</div>
-<div class="chat-main__message-field">
-    <div class="chat-main__hr"></div>
-    <form class="chat-main__message-form">
-        <label for="message-field__file" title="Выберите файл"></label>
-        <input type="file" id="message-field__file" title="Выберите файл" />
-        <input type="text" name="message" placeholder="Сообщение" />
-        <button type="submit" class="chat-main__message-button"></button>
-    </form>
-</div>
+
+

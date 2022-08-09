@@ -8,7 +8,7 @@ import "./input-field.scss";
 
 export class InputField extends Block {
     constructor(props) {
-      super("div", props, true);
+      super("div", props, false);
       this.events = {
         blur: function() {
 

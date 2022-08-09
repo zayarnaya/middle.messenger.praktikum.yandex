@@ -1,3 +1,3 @@
-declare function chatListLayout (context: JSON, options?: any): string;
+declare function chatListLayout (context?: JSON, options?: any): string;
 
 export = chatListLayout; 

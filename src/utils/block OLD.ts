@@ -14,9 +14,9 @@ _meta: Record<any, any> = {};
 _id = null;
 props = {};
 eventBus;
-children: Record<string, Block>;
+children;
 withInternalID = false;
-events: Record<string, any>;
+events;
 eventTarget: string;
 
 /** JSDoc
@@ -26,15 +26,14 @@ eventTarget: string;
    * @returns {void}
    */
 
-constructor(tagName: string = "div", propsAndChildren: Record<string, any> = {}, withInternalID?: boolean, classname?: string) {
+constructor(tagName: string = "div", propsAndChildren: Record<string, any> = {}, withInternalID?: boolean) {
   const { children, props } = this._getChildren(propsAndChildren);
   this.children = children;
 
   const eventBus = new EventBus();
   this._meta = {
     tagName,
-    props,
-    classname
+    props
   };
 
   this._id = makeUUID();
@@ -73,11 +72,7 @@ _registerEvents(eventBus) {
 
 _createResources() {
   const { tagName } = this._meta;
-  const { classname } = this._meta;
   this._element = this._createDocumentElement(tagName);
-  if(classname) {
-    this._element.classList.add(classname);
-  }
 }
 
 init() {
@@ -121,16 +116,7 @@ setProps = nextProps => {
     return;
   }
 
-  const { children, props } = this._getChildren(nextProps);
-
-  if(Object.entries(children),length) {
-    Object.assign(this.children, children);
-  };
-
-  if(Object.entries(props),length) {
-    Object.assign(this.props, props);
-  };
-
+  Object.assign(this.props, nextProps);
 };
 
 get element() {
@@ -140,7 +126,7 @@ get element() {
 _render() {
   console.log("RENDER", this);
   const block = this.render(); // render теперь возвращает DocumentFragment
- console.log(block, "BLOCK");
+
         this._removeEvents();
         if(typeof block == "string") {
           if(this._element) {this._element.innerHTML = block;};
@@ -148,8 +134,36 @@ _render() {
           this._element.innerHTML = ''; 
           this._element.appendChild(block);
         }
-      this._addEvents();     
+        // удаляем предыдущее содержимое
+console.log(typeof block, "ТИП БЛОКА");
+
+console.log(this.events, "EVENTS");
+console.log(this._element, "ELEMENT");
+if(this.eventTarget) {
+  console.log(this._element.querySelector(this.eventTarget), "TARGET");
+  //this._element.querySelector(this.eventTarget)._addEvents();
+  
+}
+      this._addEvents();
       
+      
+
+  /*
+  const block = this.render();
+  //console.log(this, 'render this');
+  //this._removeEvents();
+  // Этот небезопасный метод для упрощения логики
+  // Используйте шаблонизатор из npm или напишите свой безопасный
+  // Нужно не в строку компилировать (или делать это правильно),
+  // либо сразу в DOM-элементы возвращать из compile DOM-ноду
+  //console.log(this._element, "THIS ELEMENT");
+  //console.log(this.render(), "THIS RENDER");
+  this._removeEvents();
+  if(this._element) {this._element.innerHTML = block;};
+  this._addEvents();
+  //console.log(this.events);
+  //this._element = document.createElement('button');
+  */
 }
 
 // Может переопределять пользователь, необязательно трогать
@@ -160,31 +174,45 @@ getContent() {
 }
 
 _addEvents() {
-  
+  //const {events = {}} = this.props;
+  //const events = this.events;
+  console.log(this, "THIS");
+  console.log(this.events, "THIS.EVENTS FROM ADDEVENTS");
+  console.log(this.props, "THIS PROPS");
+  console.log(this._element.querySelector(this.eventTarget), "TARGET FROM ADDEVENTS");
+
   if(this.events && this.eventTarget) {
     Object.keys(this.events).forEach(eventName => {
-
+      console.log(this._element, "КУДА ВЕШАТЬ ИВЕНТЫ");
       this._element.querySelector(this.eventTarget).addEventListener(eventName, this.events[eventName]);
     });
   };
 
+  /*
+    Object.keys(this.events).forEach(eventName => {
+    console.log(this._element, "КУДА ВЕШАТЬ ИВЕНТЫ");
+    this._element.addEventListener(eventName, this.events[eventName]);
+  });
+  */
 }
 
 _removeEvents() {
   const {events = {}} = this.props;
-  if(events) {
-    Object.keys(events).forEach(eventName => {
-      this._element.removeEventListener(eventName, events[eventName]);
-    });
-  } else if(!events) {
-    return;
-  }
 
-
+  Object.keys(events).forEach(eventName => {
+    this._element.removeEventListener(eventName, events[eventName]);
+  });
 }
 
 _makePropsProxy(propsAndChildren) {
-
+  // Можно и так передать this
+  // Такой способ больше не применяется с приходом ES6+
+  
+  const self = this;
+/*
+  return props;
+  */
+  
   let theProxy = new Proxy(propsAndChildren, {
     get(target, prop) {
         const value = target[prop];
@@ -193,7 +221,7 @@ _makePropsProxy(propsAndChildren) {
     
     set(target, prop, value) {
       target[prop] = value;
-      this.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
+      self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
       return true;
     },
     
@@ -208,7 +236,7 @@ _makePropsProxy(propsAndChildren) {
 _createDocumentElement(tagName) {
   // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
   const element = document.createElement(tagName);
-  if(this.withInternalID) {element.setAttribute('data-id', this._id);}; 
+  if(this.withInternalID) {element.setAttribute('data-id', this._id);};
   //element.setAttribute('data-id', this._id);
   return element;
 }
@@ -216,30 +244,21 @@ _createDocumentElement(tagName) {
 compile(template, props) {
   const propsAndStubs = { ...props };
   console.log("COMPILE");
-  console.log(this.children, "CHILDREN");
 
   Object.entries(this.children).forEach(([key, child]) => {
 
-      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
-      console.log(propsAndStubs, "ЭТИ ЧОРТОВЫ ДИВЫ");
-      console.log(child.getContent(), "В ЦИКЛЕ");
+      propsAndStubs[key] = `<div data-id="${child._id}"></div>`
 
   });
 
   const fragment = this._createDocumentElement('template');
 
         fragment.innerHTML = template(propsAndStubs);
-        console.log(fragment.innerHTML, "HTML");
-        
 
         Object.values(this.children).forEach(child => {
             const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-            const content = child.getContent() as Node;
             console.log(stub, "STUB");
-            console.log(child, "CHILD");
             stub.replaceWith(child.getContent());
-            
-            console.log(stub, "ПОСЛЕ ЗАМЕНЫ");
         });
 
 

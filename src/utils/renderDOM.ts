@@ -4,7 +4,7 @@ export function render(query: string, block) {
 
       // Можно завязаться на реализации вашего класса Block
     root.appendChild(block.getContent());
-  
+  console.log(typeof block, "ТИП БЛОКА В РЕНДЕРЕ В СТРАНИЦУ");
       block.dispatchComponentDidMount();
   
     return root;

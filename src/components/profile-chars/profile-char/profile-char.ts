@@ -7,7 +7,7 @@ import "./profile-char.scss";
 export class profChar extends Block {
     constructor(props) {
 
-      super("div", props, true);
+      super("div", props, false);
     }
   
     render() {

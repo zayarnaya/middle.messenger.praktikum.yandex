@@ -7,7 +7,7 @@ import "./change-avatar.scss";
 export class avatarChange extends Block {
     constructor(props) {
 
-      super("div", props, true);
+      super("div", props, false);
     }
   
     render() {

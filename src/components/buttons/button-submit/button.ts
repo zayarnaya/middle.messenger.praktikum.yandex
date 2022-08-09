@@ -2,13 +2,13 @@
 import "./button-submit.scss";
 
 import buttonSubmit from "./button-submit.hbs";
-import { Block } from "./../../../utils/block";
+import { Block } from "../../../utils/block";
 
 
 export class Button extends Block {
     constructor(props) {
 
-      super("div", props, true);
+      super("div", props, false);
     }
   
     render() {

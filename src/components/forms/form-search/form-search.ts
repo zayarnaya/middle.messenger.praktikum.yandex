@@ -5,6 +5,6 @@ import { data } from "../../../data";
 
 export class searchForm extends Form {
     render() {
-        return formSearch(data.input.search);
+        return this.compile(formSearch, {});
   }
 }

@@ -1,17 +1,7 @@
-<nav class="chat-list__menu">
-    <div class="chat-list__profile">
-        {{> chatlist-profile user}}
-    </div>
-    <div class="chat-list__search">
-        <form class="chat-list__searchform">
-            <input type="search" placeholder="Поиск"> 
-            <button type="submit" class="chat-list__searchform-button"></button>
-        </form>
-    </div>
-    <div class="chat-list__hr"></div>
-</nav>
+{{{chatlistmenu}}}
 <div class="chat-list__list">
     <ul class="chat-list__list_unmarked">
-        {{#each chats}} {{> chatlist-item}} {{/each}}
+
     </ul>
 </div>
+

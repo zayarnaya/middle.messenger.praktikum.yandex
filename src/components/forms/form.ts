@@ -7,9 +7,9 @@ import { submitError } from "../../utils/validator/submit-error";
 export class Form extends Block {
 
 
-    constructor(formname, props,) {
+    constructor(formname, props, classname?: string) {
 
-        super("div",props, false);
+        super("div",props, false, classname);
         this.events = {
           submit: function(e: Event) {
             e.preventDefault();

@@ -7,7 +7,7 @@ import "./profile-avatar.scss";
 export class profAvatar extends Block {
     constructor(props) {
 
-      super("div", props, true);
+      super("div", props, false);
     }
   
     render() {

@@ -1,79 +1,44 @@
 
-/*import { chatPage } from "../modules/chats.js";
-import { loginPage } from "../modules/login.js";
-import { ProfilePage } from "../modules/profile.js";
-import { changeProfilePage } from "../modules/changeprofile.js";
-import { changePassPage } from "../modules/changepass.js";
-import { signinPage } from "../modules/signin.js";
-import { forgotPassPage } from "../modules/forgotpass.js";
-*/
-//import { error404 } from "./../static_pages/page404/page404.js";
-//import { error404 } from "./../static_pages/page404/page404";
-
-import { error404 } from "./../static_pages/page404/index";
-
-
-//import { error500 } from "./../static_pages/page500/page500.js";
-import { error500 } from "./../static_pages/page500/index";
-
-//import { error500 } from "./../static_pages/page500/index";
-
-//import { validatorAll } from "./../utils/validator/validator.js";
-import { validatorAll } from "./../utils/validator/validator";
-//import { assignAttr } from "./assign-attr.js";
+import { error404 } from "../static_pages/page404/index";
+import { error500 } from "../static_pages/page500/index";
+import { validatorAll } from "./validator/validator";
 import { assignAttr } from "./assign-attr";
 import { passValidator } from "./validator/passValidator";
 import { underConstruction } from "../static_pages/under_construction/under_construction.js";
 
-//import { chatPage } from "../modules/chats";
-
-//import { loginPage } from "../modules/login";
-
-//import { loginForm } from "./../components/forms/form-login/form-login";
-//import { btn } from "./../components/forms/form-login/form-login";
-//import { inp } from "./../components/forms/form-login/form-login";
-
 import { ProfilePage } from "../components/forms/my-profile";
-//import { changeProfilePage } from "../modules/changeprofile";
 import { changeProfilePage } from "../components/forms/form-changeprofile";
 import { changePassPage } from "../components/forms/form-changepass";
-//import { signinPage } from "../modules/signin";
-import { signinForm } from "../components/forms/form-signin/";
+import { signinForm } from "../components/forms/form-signin";
 import { loginForm } from "../components/forms/form-login";
 import { forgotPassPage } from "../components/forms/form-forgotpass";
 import { loggingOut } from "../static_pages/logout";
-//import { forgotPassPage } from "../modules/forgotpass";
-//import { forgotPassPage } from "../components/forms/form-forgotpass";
-//import { getData } from "./form-actions/get-data";
+
 import { addSubmitListener } from "./form-actions/send-request";
-//import { loggingOut } from "../static_pages/logout";
+
 import { render } from "./renderDOM";
-//import "./../components/buttons/button-submit/button-submit.scss";
-//import { signinForm } from "../components/forms/form-signin/form-signin";
+import { chatListOuter } from "../components/chats/chat-list";
+import { buildChatLeftPanel } from "../components/chats/chat-list/menu";
+import { buildLeftPanel } from "../components/chats/chat-list/chat-list";
 
 const wrap = document.querySelector("messenger-wrapper");
 
-/*
-function render(query, block) {
-    const root = document.querySelector(query);
-    root.textContent = "";
-    root.appendChild(block.getContent());
-        block.dispatchComponentDidMount();
-    return root;
-  }
-  */
+
 
 export function changeRender() {
     switch (document.location.hash) {
-        /*case "#chats":
-            underConstruction();
+        case "#chats":
+            //underConstruction();
             //chatPage();
             //document.getElementById("mini-menu")
             //.addEventListener("click", function () {
             //    document.getElementById("open-menu").classList.toggle("hidden");
             //});
+            //chatListOuter();
+            //buildChatLeftPanel();
+            buildLeftPanel();
             break;
-            */
+            
 
         case "#myprofile":
             ProfilePage();
