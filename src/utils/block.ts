@@ -17,6 +17,7 @@ eventBus;
 children;
 withInternalID = false;
 events;
+eventTarget: string;
 
 /** JSDoc
    * @param {string} tagName
@@ -127,11 +128,24 @@ _render() {
   const block = this.render(); // render теперь возвращает DocumentFragment
 
         this._removeEvents();
-        this._element.innerHTML = ''; // удаляем предыдущее содержимое
+        if(typeof block == "string") {
+          if(this._element) {this._element.innerHTML = block;};
+        } else {
+          this._element.innerHTML = ''; 
+          this._element.appendChild(block);
+        }
+        // удаляем предыдущее содержимое
+console.log(typeof block, "ТИП БЛОКА");
 
-      this._element.appendChild(block);
 console.log(this.events, "EVENTS");
+console.log(this._element, "ELEMENT");
+if(this.eventTarget) {
+  console.log(this._element.querySelector(this.eventTarget), "TARGET");
+  //this._element.querySelector(this.eventTarget)._addEvents();
+  
+}
       this._addEvents();
+      
       
 
   /*
@@ -160,13 +174,26 @@ getContent() {
 }
 
 _addEvents() {
-  const {events = {}} = this.props;
+  //const {events = {}} = this.props;
+  //const events = this.events;
+  console.log(this, "THIS");
+  console.log(this.events, "THIS.EVENTS FROM ADDEVENTS");
+  console.log(this.props, "THIS PROPS");
+  console.log(this._element.querySelector(this.eventTarget), "TARGET FROM ADDEVENTS");
 
+  if(this.events && this.eventTarget) {
+    Object.keys(this.events).forEach(eventName => {
+      console.log(this._element, "КУДА ВЕШАТЬ ИВЕНТЫ");
+      this._element.querySelector(this.eventTarget).addEventListener(eventName, this.events[eventName]);
+    });
+  };
 
-  Object.keys(events).forEach(eventName => {
+  /*
+    Object.keys(this.events).forEach(eventName => {
     console.log(this._element, "КУДА ВЕШАТЬ ИВЕНТЫ");
-    this._element.addEventListener(eventName, events[eventName]);
+    this._element.addEventListener(eventName, this.events[eventName]);
   });
+  */
 }
 
 _removeEvents() {

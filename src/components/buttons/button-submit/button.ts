@@ -12,7 +12,8 @@ export class Button extends Block {
     }
   
     render() {
-          return this.compile(buttonSubmit, this.props);
+          //return this.compile(buttonSubmit, this.props);
+          return buttonSubmit(this.props);
     }
   }
   

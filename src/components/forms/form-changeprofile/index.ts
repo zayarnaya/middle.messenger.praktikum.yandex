@@ -32,5 +32,5 @@ export function changeProfilePage() {
     layout_wideForm();
     const form = new ChangeUserProfile(theChildren);
     render(".wrapper-all-center", form);
-    validatorAll();
+    //validatorAll();
 }

@@ -7,6 +7,8 @@ import "./form-login.scss";
 import { render } from "../../../utils/renderDOM";
 import { validatorAll } from "../../../utils/validator/validator";
 import { passValidator } from "../../../utils/validator/passValidator";
+import { Form } from "../form";
+import formLogin from "./form-login.hbs";
 
 
 export function loginForm() {
@@ -27,6 +29,6 @@ export function loginForm() {
 
     const form = new loginFormAll(theChildren);
     render(".messenger-wrapper", form);
-    validatorAll();
+
 
 }

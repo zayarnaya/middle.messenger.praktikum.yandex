@@ -28,7 +28,7 @@ export function signinForm() {
 
     const form = new signinFormAll(theChildren);
     render(".messenger-wrapper", form);
-    validatorAll();
+
     passValidator("signin");
 
 }

@@ -17,9 +17,6 @@ export function forgotPassPage() {
         button: new Button(data.button.forgotpassSubmit)
     });
     render(".messenger-wrapper", form);
-    document.querySelector("form").addEventListener("submit", function(e) {
-        e.preventDefault();
-        getData();
-    })
+
 }
 
