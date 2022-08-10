@@ -1,10 +1,11 @@
 .chats-wrapper {
   display: flex;
-  height: 720px;
+  height: 716px;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   overflow: hidden;
+  box-shadow: 0px 0px 3px lightgrey;
 }
 
 .chats-wrapper {
@@ -147,10 +148,17 @@
     justify-content: flex-start;
     height: 70px;
     overflow: hidden;
+    cursor: pointer;
 
     padding: 10px;
     margin: 0 0 2px 0;
   }
+
+  .chat-list-item.highlight {
+    background-color: #fff;
+    box-shadow: 0px 0px 2px lightgray;
+  }
+
 
   .chat-list-item__main-info {
     display: flex;
@@ -210,18 +218,23 @@
     flex-direction: column;
     justify-content: space-between;
     height: 720px;
+    width: 100%;
+
   }
 
   .chat-main__inner {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    margin-left: 60px;
-    margin-right: 40px;
-    width: auto;
+    justify-content: flex-end;
+    padding-left: 60px;
+    padding-right: 40px;
+    width: 100%;
+    height: 560px;
 
-    height: 320px;
+
+    overflow-x: hidden;
     overflow-y: auto;
+    box-sizing: border-box;
   }
 
   .chat-main__menu {
@@ -259,6 +272,8 @@
   .chat-main__daily-messages {
     list-style-type: none;
     padding-left: 5px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .chat-main__message {
@@ -268,9 +283,9 @@
   }
 
   .chat-main__message-wrap {
-    width: fit-content;
+    display: flex;
     border-radius: 5px;
-    max-width: 400px;
+    width: 100%;
     padding: 5px;
   }
 
@@ -286,13 +301,6 @@
     align-items: flex-end;
   }
 
-  .message-left {
-    background-color: #f8f8f8;
-  }
-
-  .message-right {
-    background-color: #e4edfd;
-  }
 
   .chat-main__hr {
     width: 700px;
@@ -388,5 +396,9 @@
     font-size: 12px;
     cursor: pointer;
     margin: 10px;
+  }
+
+  .input-row label {
+    display: none;
   }
 }

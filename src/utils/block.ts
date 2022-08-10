@@ -226,7 +226,7 @@ compile(template, props) {
 
   });
 
-  const fragment = this._createDocumentElement('template');
+  const fragment: HTMLTemplateElement = this._createDocumentElement('template');
 
         fragment.innerHTML = template(propsAndStubs);
         console.log(fragment.innerHTML, "HTML");
@@ -234,12 +234,7 @@ compile(template, props) {
 
         Object.values(this.children).forEach(child => {
             const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-            const content = child.getContent() as Node;
-            console.log(stub, "STUB");
-            console.log(child, "CHILD");
             stub.replaceWith(child.getContent());
-            
-            console.log(stub, "ПОСЛЕ ЗАМЕНЫ");
         });
 
 

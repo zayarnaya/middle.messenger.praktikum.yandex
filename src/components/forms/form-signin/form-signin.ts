@@ -12,6 +12,7 @@ export class signinFormAll extends Form {
     }
 
     render() {
+        console.log(formSignin, "ФУНКЦИЯ");
 
         return this.compile(formSignin, {});
     }

@@ -6,6 +6,7 @@ export const data: Record<string, any> = {
                 type: "text",
                 label: "Логин",
                 required: true,
+                placeholder: " ",
                 attributes: {
                     pattern: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
                     maxLength: "20",
@@ -18,6 +19,7 @@ export const data: Record<string, any> = {
                 type: "password",
                 label: "Пароль",
                 required: true,
+                placeholder: " ",
                 attributes: {
 
                     maxLength: "40",
@@ -32,6 +34,7 @@ export const data: Record<string, any> = {
                 type: "text",
                 label: "Логин",
                 required: true,
+                placeholder: " ",
                 attributes: {
                     pattern: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
                     maxLength: "20",
@@ -44,6 +47,7 @@ export const data: Record<string, any> = {
                 type: "text",
                 label: "Имя",
                 required: true,
+                placeholder: " ",
                 attributes: {
 
                 },
@@ -54,6 +58,7 @@ export const data: Record<string, any> = {
                 type: "text",
                 label: "Фамилия",
                 required: true,
+                placeholder: " ",
                 attributes: {
 
                 },
@@ -64,6 +69,7 @@ export const data: Record<string, any> = {
                 type: "email",
                 label: "Почта",
                 required: true,
+                placeholder: " ",
             },
 
             phone: {
@@ -71,6 +77,7 @@ export const data: Record<string, any> = {
                 type: "tel",
                 label: "Телефон",
                 required: true,
+                placeholder: " ",
                 attributes: {
                     pattern: "^\\+?\\d{10,15}$",
                     maxLength: "15",
@@ -83,6 +90,7 @@ export const data: Record<string, any> = {
                 type: "password",
                 label: "Пароль",
                 required: true,
+                placeholder: " ",
                 attributes: {
                     maxLength: "40",
                     minLength: "8",
@@ -94,6 +102,7 @@ export const data: Record<string, any> = {
                 type: "password",
                 label: "Пароль еще раз",
                 required: true,
+                placeholder: " ",
                 attributes: {
                     maxLength: "40",
                     minLength: "8",
@@ -107,6 +116,7 @@ export const data: Record<string, any> = {
                 type: "password",
                 label: "Введите старый пароль",
                 required: true,
+                placeholder: " ",
             },
 
             newPassword: {
@@ -114,6 +124,7 @@ export const data: Record<string, any> = {
                 type: "password",
                 label: "Введите новый пароль",
                 required: true,
+                placeholder: " ",
             },
 
             newPassword2: {
@@ -121,6 +132,7 @@ export const data: Record<string, any> = {
                 type: "password",
                 label: "Повторите новый пароль",
                 required: true,
+                placeholder: " ",
             },
         },
 
@@ -188,6 +200,7 @@ export const data: Record<string, any> = {
                 type: "text",
                 label: "Логин",
                 required: true,
+                placeholder: " ",
                 attributes: {
                     pattern: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
                     maxLength: "16",
@@ -200,6 +213,7 @@ export const data: Record<string, any> = {
             type: "search",
             label: "Поиск",
             required: false,
+            placeholder: "Поиск",
             attributes: {
                 placeholder: "Поиск",
             },

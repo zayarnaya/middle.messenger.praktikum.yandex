@@ -1,3 +1,4 @@
+import Handlebars from "handlebars";
 import { searchForm } from "../../forms/form-search/form-search";
 import { data } from "../../../data";
 import { ChatListLeftPanel } from "./chat-list-layout/chat-list-layout";
@@ -8,7 +9,10 @@ import { layout_chats } from "../../../layouts/chats/chat-static/chat-static";
 import { InputField } from "../../input/input-field";
 import { Button } from "../../buttons/button-submit/button";
 import { buildRightPanel } from "../chat-main/chat-main";
+import { ChatListItem } from "./chatlist-item/chatlist-item";
+import { Chat } from "../chat";
 import "./../../../style.scss";
+
 
 
 export function buildLeftPanel() {
@@ -38,5 +42,38 @@ export function buildLeftPanel() {
 layout_chats();
 render(".chat-list", panel);
 buildRightPanel();
+    const chats = Object.values(data.chats);
+    const theChildren: ChatListItem[]  = {};
     
+    for (let i = 0; i < chats.length; i++) {
+        let key = `chat${i}`;
+        let val = chats[i];
+        let obj = { [key]: new ChatListItem(val) };
+
+
+        Object.assign(theChildren, obj);
+
+    }
+
+    let chatListTemplate = ``;
+
+    Object.values(theChildren).forEach(child => {
+        console.log(child._id);
+        chatListTemplate += `<div data-id="${child._id}"></div>`;
+    })
+    console.log(chatListTemplate, "TEMPLATE");
+    let tmpl = Handlebars.compile(chatListTemplate);
+    class List extends Chat {
+        constructor(children) {
+            super("ul", children, "chat-list__list_unmarked");
+            this.props = children;
+        }
+
+        render() {
+            return this.compile(tmpl, this.props);
+        }
+    };
+
+    let list = new List(theChildren);
+    render(".chat-list__list", list);
 }

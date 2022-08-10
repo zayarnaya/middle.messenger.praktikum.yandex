@@ -8,6 +8,10 @@ import { ChatsInnerField } from "./chat-main-inner/chat-main-inner";
 
 import { data } from "../../../data";
 import { render } from "../../../utils/renderDOM";
+import { InputField } from "../../input/input-field";
+
+//import "./chat-message/chat-message-in/chat-message-in.scss";
+//import "./chat-message/chat-message-out/chat-message-out.scss";
 
 
 
@@ -63,8 +67,15 @@ export function buildRightPanel() {
 
     });
 
+    const input = new InputField ({
+        type: "text",
+        name: "message",
+        placeholder: "Сообщение"
+    })
+
     const form = new FormMessage ({
-        button: button
+        button: button,
+        input: input
     }, "chat-main__message-field");
 
 

@@ -62,8 +62,10 @@ export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
       case "oldPassword":
       case "newPassword":
       case "newPassword2":
-        console.log("EMPTY");
         message.textContent = "Введите пароль";
+        break;
+      case "message":
+        message.textContent = "Сообщение не должно быть пустым";
         break;
     };
     return false;
