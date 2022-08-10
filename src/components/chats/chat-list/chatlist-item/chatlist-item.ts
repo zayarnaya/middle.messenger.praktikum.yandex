@@ -2,7 +2,7 @@ import { Chat } from "../../chat";
 import chatListItem from "./chatlist-item.hbs";
 
 export class ChatListItem extends Chat {
-    constructor(propsAndChildren) {
+    constructor(propsAndChildren: Object) {
         super("li", propsAndChildren);
         this.props = propsAndChildren;
         this.events = {

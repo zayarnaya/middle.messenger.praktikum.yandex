@@ -4,9 +4,6 @@ import { data } from "../../../data";
 import { profAvatar } from "../../avatars/profile_avatar/profile-avatar";
 import { profChar } from "../../profile-chars/profile-char/profile-char";
 import { layout_wideForm } from "../../../layouts/wide-form/wide-form";
-import myProfile from "./my-profile.hbs";
-
-
 import "./my-profile.scss";
 
 

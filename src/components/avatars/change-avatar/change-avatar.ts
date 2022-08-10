@@ -5,8 +5,7 @@ import "./change-avatar.scss";
 
 
 export class avatarChange extends Block {
-    constructor(props) {
-
+    constructor(props: Record<string, any>) {
       super("div", props, false);
     }
   

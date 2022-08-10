@@ -1,12 +1,8 @@
 import { formForgotPass } from "./form-forgotpass";
 import { Button } from "../../buttons/button-submit/button";
-
 import { InputField } from "../../input/input-field";
-
 import { data } from "../../../data";
-import { getData } from "../../../utils/form-actions/get-data";
 import { render } from "../../../utils/renderDOM";
-import { submitError } from "../../../utils/validator/submit-error";
 
 import "./form-forgotpass.scss";
 

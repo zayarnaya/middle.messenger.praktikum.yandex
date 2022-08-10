@@ -2,11 +2,11 @@ import { Form } from "../form";
 import sendMessageForm from "./form-message.hbs";
 
 export class FormMessage extends Form {
-    constructor(props, classname?: string) {
+    constructor(props: Record<string, any>, classname?: string) {
         super("sendmessage", props, classname);
         this.props = props;
         this.events = {
-            submit: function(e) {
+            submit: function(e: Event) {
                 e.preventDefault();
                 let input: HTMLInputElement = document.getElementById("message") as HTMLInputElement;
                 let errormessage: HTMLElement = document.querySelector("#message + span.errormessage");

@@ -6,14 +6,12 @@ import { Block } from "../../../utils/block";
 
 
 export class Button extends Block {
-    constructor(props) {
+  constructor(props: Record<string, any>) {
 
-      super("div", props, false);
-    }
-  
-    render() {
-          //return this.compile(buttonSubmit, this.props);
-          return buttonSubmit(this.props);
-    }
+    super("div", props, false);
   }
-  
+
+  render() {
+    return buttonSubmit(this.props);
+  }
+}

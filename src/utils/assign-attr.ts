@@ -2,7 +2,7 @@ import { seekAttributes } from "./seek-attr";
 import { data } from "../data";
 
 export function assignAttr(formname: string) {
-  let prefix; //тут какой тип?
+  let prefix: Record<string, any>;
 
   switch (formname) {
     case "signin":

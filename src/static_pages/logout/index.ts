@@ -9,12 +9,9 @@ export function loggingOut() {
         linkMessage: "страницу входа..."
     });
 
-    console.log(logout.props);
-
     render(".messenger-wrapper", logout);
 
-    
-    setTimeout(() => {
+        setTimeout(() => {
         location.href="#login";
       }, 3000); 
       

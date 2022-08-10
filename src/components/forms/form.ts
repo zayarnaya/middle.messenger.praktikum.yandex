@@ -1,15 +1,11 @@
 import { Block } from "../../utils/block";
-import { getData } from "../../utils/form-actions/get-data";
-import { signinForm } from "./form-signin";
-import formLogin from "./form-login/form-login.hbs";
 import { submitError } from "../../utils/validator/submit-error";
 
 export class Form extends Block {
 
 
-    constructor(formname, props, classname?: string) {
-
-        super("div",props, false, classname);
+    constructor(formname: string, props: Object, tag?: string, classname?: string) {
+        super(tag, props, false, classname);
         this.events = {
           submit: function(e: Event) {
             e.preventDefault();

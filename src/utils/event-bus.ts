@@ -4,7 +4,7 @@ export class EventBus {
     this.listeners = {};
   }
 
-  on(event: string, callback) { //на колбек тоже нужен тип
+  on(event: string, callback) { 
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -12,7 +12,7 @@ export class EventBus {
     this.listeners[event].push(callback);
   }
 
-  off(event, callback) {
+  off(event: string, callback) {
 		if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }

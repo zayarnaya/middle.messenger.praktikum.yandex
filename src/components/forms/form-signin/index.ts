@@ -2,11 +2,9 @@
 import { Button } from "../../buttons/button-submit/button";
 import { InputField } from "../../input/input-field";
 import { data } from "../../../data";
-
 import { signinFormAll } from "./form-signin";
 import "./form-signin.scss";
 import { render } from "../../../utils/renderDOM";
-import { validatorAll } from "../../../utils/validator/validator";
 import { passValidator } from "../../../utils/validator/passValidator";
 
 

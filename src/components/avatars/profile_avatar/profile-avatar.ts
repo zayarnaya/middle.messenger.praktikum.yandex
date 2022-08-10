@@ -5,13 +5,12 @@ import "./profile-avatar.scss";
 
 
 export class profAvatar extends Block {
-    constructor(props) {
+    constructor(props: Record<string, any>) {
 
       super("div", props, false);
     }
   
     render() {
-      console.log("AVATAR RENDER");
           return this.compile(profileAvatar, this.props);
     }
   }

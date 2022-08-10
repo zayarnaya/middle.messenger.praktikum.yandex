@@ -2,7 +2,7 @@ import { inputError } from "./input-error";
 import { getData } from "../form-actions/get-data";
 import { checkPass } from "./check-pass";
 
-export function submitError() {
+export function submitError(): void {
     let inputs = Array.from(document.getElementsByTagName("input"));
     let submitMessage: HTMLElement = document.querySelector(".submit-message");
     let truecounts: number = 0;
@@ -17,7 +17,7 @@ export function submitError() {
     } else if (document.querySelectorAll("input[type='password']").length != 2) {
         passEven = true;
     }
-    console.log(document.querySelectorAll("input[type='password']"), "ПОЛЯ ПАРОЛИ");
+    
     for (let input of inputs) {
         if (inputError(input)) {
             truecounts += 1;
@@ -27,7 +27,6 @@ export function submitError() {
     }
 
     if (truecounts === inputs.length && passEven) {
-        console.log("ВЕРНО")
         getData();
     } else if (truecounts < inputs.length || !checkPass(pass, pass2)) {
         submitMessage.textContent = "Заполните все нужные поля";

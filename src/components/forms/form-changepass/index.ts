@@ -6,7 +6,6 @@ import { avatarChange } from "../../avatars/change-avatar/change-avatar";
 import { passValidator } from "../../../utils/validator/passValidator";
 import { layout_wideForm } from "../../../layouts/wide-form/wide-form";
 import { render } from "../../../utils/renderDOM";
-import { validatorAll } from "../../../utils/validator/validator";
 
 
 export function changePassPage() {
@@ -25,10 +24,10 @@ export function changePassPage() {
 
     Object.assign(theChildren, { avatar: new avatarChange(data) });
     Object.assign(theChildren, { button: new Button(data.button.changeSubmit) });
-    console.log(theChildren);
+
     layout_wideForm();
     const form = new formChangePass(theChildren);
     render(".wrapper-all-center", form);
     passValidator("change_signin");
-    validatorAll();
+
 }

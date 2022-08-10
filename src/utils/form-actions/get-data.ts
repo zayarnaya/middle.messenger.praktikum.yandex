@@ -1,26 +1,20 @@
-//import { HTTPTransport } from "../http-transport";
+export function getData(): void {
 
-export function sendRequest() {
-
-}
-
-export function getData() {
-console.log("GETDATA");
     let message: HTMLElement = document.querySelector(".submit-message") as HTMLElement;
-    switch(location.hash) {
-        case "#login" :
+    switch (location.hash) {
+        case "#login":
             message.textContent = "Успешно! Сейчас загрузим чаты";
             break;
-        case "#signin" :
+        case "#signin":
             message.textContent = "Вы успешно зарегистрировались, переходим на страницу входа";
             break;
-        case "#changepass" :
+        case "#changepass":
             message.textContent = "Вы поменяли пароль. Возвращаемся в профиль";
-            break;    
-        case "#forgotpass" :
+            break;
+        case "#forgotpass":
             message.textContent = "Пароль будет отправлен на вашу почту";
-            break;  
-                   
+            break;
+
     }
 
     let inputs = Array.from(document.getElementsByTagName("input"));
@@ -39,24 +33,24 @@ console.log("GETDATA");
 
     console.log(result);
 
-    setTimeout(function() {
+    setTimeout(function () {
 
-        switch(location.hash) {
-            case "#login" :
+        switch (location.hash) {
+            case "#login":
                 location.hash = "#chats";
                 break;
-            case "#signin" :
+            case "#signin":
                 location.hash = "#login";
                 break;
-            case "#changepass" :
+            case "#changepass":
                 location.hash = "#myprofile";
                 break;
-            case "#forgotpass" :
+            case "#forgotpass":
                 location.hash = "#login";
                 break;
-                
+
         }
-        
+
     }, 3000)
 
 }

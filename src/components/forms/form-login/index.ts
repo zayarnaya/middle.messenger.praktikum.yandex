@@ -5,15 +5,11 @@ import { data } from "../../../data";
 import { loginFormAll } from "./form-login";
 import "./form-login.scss";
 import { render } from "../../../utils/renderDOM";
-import { validatorAll } from "../../../utils/validator/validator";
-import { passValidator } from "../../../utils/validator/passValidator";
-import { Form } from "../form";
-import formLogin from "./form-login.hbs";
 
 
 export function loginForm() {
     let inputs = Object.values(data.input.login);
-    let theChildren = {};
+    let theChildren: Object = {};
     //let keys = [];
     for (let i = 0; i < inputs.length; i++) {
         let key = `input${i}`;
@@ -29,6 +25,4 @@ export function loginForm() {
 
     const form = new loginFormAll(theChildren);
     render(".messenger-wrapper", form);
-
-
 }

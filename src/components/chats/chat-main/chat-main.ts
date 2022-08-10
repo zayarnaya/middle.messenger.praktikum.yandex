@@ -10,10 +10,6 @@ import { data } from "../../../data";
 import { render } from "../../../utils/renderDOM";
 import { InputField } from "../../input/input-field";
 
-//import "./chat-message/chat-message-in/chat-message-in.scss";
-//import "./chat-message/chat-message-out/chat-message-out.scss";
-
-
 
 export function buildRightPanel() {
 
@@ -21,17 +17,6 @@ export function buildRightPanel() {
         chatavatar: data.chats[1].avatar,
         chatname: data.chats[1].name
     }, "chat-main__menu");
-
-    console.log(menu.props, "MENU PROPS");
-/*
-    const messageIncoming = new ChatMessage({
-
-
-    }, "in");
-
-    const messageOutgoing = new ChatMessage({
-
-    }, "out");*/
 
     const messageIncoming = new ChatMessageIn({
         avatar: data.chats[1].avatar,
@@ -67,13 +52,13 @@ export function buildRightPanel() {
 
     });
 
-    const input = new InputField ({
+    const input = new InputField({
         type: "text",
         name: "message",
         placeholder: "Сообщение"
     })
 
-    const form = new FormMessage ({
+    const form = new FormMessage({
         button: button,
         input: input
     }, "chat-main__message-field");
@@ -88,7 +73,7 @@ export function buildRightPanel() {
     }, "chat-main");
 
     render(".chat-main-wrapper", panel);
-    document.querySelector("#mini-menu").addEventListener("click", function() {
+    document.querySelector("#mini-menu").addEventListener("click", function () {
         document.querySelector("#open-menu").classList.toggle("hidden");
     })
 }

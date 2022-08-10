@@ -25,26 +25,26 @@ export function buildLeftPanel() {
     const button = new Button({
         class: "chat-list__searchform-button"
     });
-    const search = new searchForm ("search", {
+    const search = new searchForm("search", {
         input: input,
         button: button
     });
-    const menu = new ChatListMenu("div", {
+    const menu = new ChatListMenu("nav", {
         chatuserprofile: profile,
         formsearch: search
-    });
+    }, "chat-list__menu");
     const panel = new ChatListLeftPanel("div", {
         chatlistmenu: menu
 
-    });
+    }, "chat-list");
 
 
-layout_chats();
-render(".chat-list", panel);
-buildRightPanel();
+    layout_chats();
+    render(".chat-list-wrapper", panel);
+    buildRightPanel();
     const chats = Object.values(data.chats);
-    const theChildren: ChatListItem[]  = {};
-    
+    const theChildren: Record<string, ChatListItem> = {};
+
     for (let i = 0; i < chats.length; i++) {
         let key = `chat${i}`;
         let val = chats[i];
@@ -58,13 +58,13 @@ buildRightPanel();
     let chatListTemplate = ``;
 
     Object.values(theChildren).forEach(child => {
-        console.log(child._id);
+
         chatListTemplate += `<div data-id="${child._id}"></div>`;
     })
-    console.log(chatListTemplate, "TEMPLATE");
+
     let tmpl = Handlebars.compile(chatListTemplate);
     class List extends Chat {
-        constructor(children) {
+        constructor(children: Object) {
             super("ul", children, "chat-list__list_unmarked");
             this.props = children;
         }

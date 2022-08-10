@@ -1,10 +1,6 @@
 import { data } from "../../data";
-import error from "../error.hbs";
-
 import "./../error.scss";
-import { Block } from "../../utils/block";
-import { EventBus } from "../../utils/event-bus";
-import { Error } from "..";
+import { Error } from "../error";
 import { render } from "../../utils/renderDOM";
 
 export function error500() {

@@ -1,11 +1,7 @@
 
 import { error404 } from "../static_pages/page404/index";
 import { error500 } from "../static_pages/page500/index";
-import { validatorAll } from "./validator/validator";
-import { assignAttr } from "./assign-attr";
-import { passValidator } from "./validator/passValidator";
 import { underConstruction } from "../static_pages/under_construction/under_construction.js";
-
 import { ProfilePage } from "../components/forms/my-profile";
 import { changeProfilePage } from "../components/forms/form-changeprofile";
 import { changePassPage } from "../components/forms/form-changepass";
@@ -13,29 +9,16 @@ import { signinForm } from "../components/forms/form-signin";
 import { loginForm } from "../components/forms/form-login";
 import { forgotPassPage } from "../components/forms/form-forgotpass";
 import { loggingOut } from "../static_pages/logout";
-
-import { addSubmitListener } from "./form-actions/send-request";
-
-import { render } from "./renderDOM";
-import { chatListOuter } from "../components/chats/chat-list";
-import { buildChatLeftPanel } from "../components/chats/chat-list/menu";
 import { buildLeftPanel } from "../components/chats/chat-list/chat-list";
 
-const wrap = document.querySelector("messenger-wrapper");
 
-
-
-export function changeRender() {
+export function changeRender(): void {
     switch (document.location.hash) {
+        case "": 
+            loginForm();
+            break;
+
         case "#chats":
-            //underConstruction();
-            //chatPage();
-            //document.getElementById("mini-menu")
-            //.addEventListener("click", function () {
-            //    document.getElementById("open-menu").classList.toggle("hidden");
-            //});
-            //chatListOuter();
-            //buildChatLeftPanel();
             buildLeftPanel();
             break;
             
@@ -80,15 +63,13 @@ export function changeRender() {
         case "#404": 
             error404();
             break;
-/*
-        case "#no": //лучше ее потом вообще убрать
+
+        case "#no": 
             underConstruction();
             break;
-*/
+
         default:
-            render(".messenger-wrapper", loginForm);
-            assignAttr("login");
-            validatorAll();
+            error404();
             break;
     };
 
@@ -99,12 +80,12 @@ export function changeRender() {
 
 }
 
-function addList() {
-    let fragment = document.createDocumentFragment();
-    let theList = document.createElement("div");
+function addList(): void {
+    let fragment: DocumentFragment = document.createDocumentFragment();
+    let theList: HTMLElement = document.createElement("div");
     theList.id = "theList";
-    let list = document.createElement("ul");
-    const listed = {
+    let list: HTMLElement = document.createElement("ul");
+    const listed: Record<string, string> = {
         login: "Логин",
         forgotpass: "Забыли пароль", 
         signin: "Регистрация",

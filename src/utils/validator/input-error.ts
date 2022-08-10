@@ -1,8 +1,5 @@
 export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
-  console.log("ПРОВЕРКА");
   let message: HTMLElement = document.querySelector(`#${field.id} + span.errormessage`) as HTMLElement;
-  console.log(message);
-  console.log(field.id);
   const patterns: Record<string, string> = {
     login: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
     /*
@@ -28,7 +25,7 @@ export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
     */
     password: "^(?=.*[A-Z])(?=.*\\d).{8,40}$",
     newPassword: "^(?=.*[A-Z])(?=.*\\d).{8,40}$",
-    
+
     /*
     от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.
     */
@@ -69,7 +66,7 @@ export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
         break;
     };
     return false;
-    console.log(field, pattern);
+
   } else if (!pattern.test(field.value)) {
     switch (field.id) {
       case "login":
@@ -91,7 +88,6 @@ export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
       case "oldPassword":
       case "newPassword":
       case "newPassword2":
-        console.log(field, pattern);
         message.textContent = "От 8 до 40 символов, минимум 1 заглавная буква и 1 цифра";
         break;
     };
@@ -105,7 +101,6 @@ export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
     return false;
 
   } else if (field.validity.valid && pattern.test(field.value) && field.id != "avatar") {
-    console.log(message, "MESSAGE");
     message.textContent = "";
     return true;
   }

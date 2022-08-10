@@ -5,11 +5,7 @@ import { avatarChange } from "../../avatars/change-avatar/change-avatar";
 import { InputField } from "../../input/input-field";
 import { Button } from "../../buttons/button-submit/button";
 import { layout_wideForm } from "../../../layouts/wide-form/wide-form";
-import changeProfile from "./form-changeprofile.hbs";
-
-
 import "./form-changeprofile.scss";
-import { validatorAll } from "../../../utils/validator/validator";
 
 
 export function changeProfilePage() {
@@ -32,5 +28,5 @@ export function changeProfilePage() {
     layout_wideForm();
     const form = new ChangeUserProfile(theChildren);
     render(".wrapper-all-center", form);
-    //validatorAll();
+
 }
