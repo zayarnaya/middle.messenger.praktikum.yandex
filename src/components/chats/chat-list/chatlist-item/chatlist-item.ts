@@ -7,15 +7,17 @@ export class ChatListItem extends Chat {
         this.props = propsAndChildren;
         this.events = {
             click: function() {
+                let active = document.querySelector(".highlight");
                 
-                if(this.classList.contains("highlight")) {
+                if(this == active) {
                     return;
-                } else if(document.querySelector(".highlight")) { 
 
-                    document.querySelector(".highlight").classList.remove
+                } else if(active) { 
+                    active.classList.remove
                     ("highlight");
-                    this.classList.add("highlight");   
-                } else if (!document.querySelector(".highlight")) {
+                    this.classList.add("highlight");  
+                     
+                } else if (!active) {
                     this.classList.add("highlight");
                 }
                              

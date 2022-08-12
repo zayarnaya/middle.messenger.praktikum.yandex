@@ -3,6 +3,7 @@ import { Button } from "../../buttons/button-submit/button";
 import { InputField } from "../../input/input-field";
 import { data } from "../../../data";
 import { loginFormAll } from "./form-login";
+import { MultiList } from "../../multi-list/multi-list";
 import "./form-login.scss";
 import { render } from "../../../utils/renderDOM";
 
@@ -10,19 +11,16 @@ import { render } from "../../../utils/renderDOM";
 export function loginForm() {
     let inputs = Object.values(data.input.login);
     let theChildren: Object = {};
-    //let keys = [];
+
     for (let i = 0; i < inputs.length; i++) {
         let key = `input${i}`;
         let val = inputs[i];
-        let obj = { [key]: new InputField(val) };
-
-
-        Object.assign(theChildren, obj);
-
+        theChildren[key] = new InputField(val);
     }
 
-    Object.assign(theChildren, { button: new Button(data.button.loginSubmit) });
-
-    const form = new loginFormAll(theChildren);
+    const form = new loginFormAll({
+        button: new Button(data.button.loginSubmit),
+        inputList: new MultiList(theChildren, "div", "")
+    });
     render(".messenger-wrapper", form);
 }

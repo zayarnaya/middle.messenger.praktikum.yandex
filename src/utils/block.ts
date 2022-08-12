@@ -149,6 +149,7 @@ export class Block {
     }
     this._addEvents();
 
+
   }
 
   // Может переопределять пользователь, необязательно трогать
@@ -160,7 +161,7 @@ export class Block {
 
   _addEvents() {
 
-    if (this.events && this.eventTarget) {
+    if (!!this.events && !!this.eventTarget) {
       Object.keys(this.events).forEach(eventName => {
 
         this._element.querySelector(this.eventTarget).addEventListener(eventName, this.events[eventName]);

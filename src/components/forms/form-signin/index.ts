@@ -1,8 +1,8 @@
-
 import { Button } from "../../buttons/button-submit/button";
 import { InputField } from "../../input/input-field";
 import { data } from "../../../data";
 import { signinFormAll } from "./form-signin";
+import { MultiList } from "../../multi-list/multi-list";
 import "./form-signin.scss";
 import { render } from "../../../utils/renderDOM";
 import { passValidator } from "../../../utils/validator/passValidator";
@@ -11,20 +11,17 @@ import { passValidator } from "../../../utils/validator/passValidator";
 export function signinForm() {
     let inputs = Object.values(data.input.signin);
     let theChildren = {};
-    //let keys = [];
+
     for (let i = 0; i < inputs.length; i++) {
         let key = `input${i}`;
         let val = inputs[i];
-        let obj = { [key]: new InputField(val) };
-
-
-        Object.assign(theChildren, obj);
-
+        theChildren[key] = new InputField(val);
     }
 
-    Object.assign(theChildren, { button: new Button(data.button.signinSubmit) });
-
-    const form = new signinFormAll(theChildren);
+    const form = new signinFormAll({
+        button: new Button(data.button.signinSubmit),
+        inputList: new MultiList(theChildren, "div", "input-list")
+    });
     render(".messenger-wrapper", form);
 
     passValidator("signin");

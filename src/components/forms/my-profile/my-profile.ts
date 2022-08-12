@@ -1,10 +1,8 @@
-import { Form } from "../form";
+import { Block } from "../../../utils/block";
 import myProfile from "./my-profile.hbs";
-
 import "./my-profile.scss";
 
-
-export class myUserProfile extends Form {
+export class myUserProfile extends Block {
     constructor(propsAndChildren: Record<string, any>) {
         super("div", propsAndChildren);
     }

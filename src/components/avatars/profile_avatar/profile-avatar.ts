@@ -1,10 +1,8 @@
-
 import { Block } from "../../../utils/block";
 import profileAvatar from "./profile-avatar.hbs";
 import "./profile-avatar.scss";
 
-
-export class profAvatar extends Block {
+export class ProfAvatar extends Block {
     constructor(props: Record<string, any>) {
 
       super("div", props, false);
@@ -14,4 +12,4 @@ export class profAvatar extends Block {
           return this.compile(profileAvatar, this.props);
     }
   }
-  
+

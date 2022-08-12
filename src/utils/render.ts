@@ -2,14 +2,14 @@
 import { error404 } from "../static_pages/page404/index";
 import { error500 } from "../static_pages/page500/index";
 import { underConstruction } from "../static_pages/under_construction/under_construction.js";
-import { ProfilePage } from "../components/forms/my-profile";
+import { profilePage } from "../components/forms/my-profile";
 import { changeProfilePage } from "../components/forms/form-changeprofile";
 import { changePassPage } from "../components/forms/form-changepass";
 import { signinForm } from "../components/forms/form-signin";
 import { loginForm } from "../components/forms/form-login";
 import { forgotPassPage } from "../components/forms/form-forgotpass";
 import { loggingOut } from "../static_pages/logout";
-import { buildLeftPanel } from "../components/chats/chat-list/chat-list";
+import { chatsPage } from "../components/chats";
 
 
 export function changeRender(): void {
@@ -19,12 +19,12 @@ export function changeRender(): void {
             break;
 
         case "#chats":
-            buildLeftPanel();
+            chatsPage();
             break;
             
 
         case "#myprofile":
-            ProfilePage();
+            profilePage();
             break;
 
         case "#changeprofile":

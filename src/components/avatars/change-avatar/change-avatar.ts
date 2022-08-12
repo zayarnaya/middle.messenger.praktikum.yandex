@@ -4,7 +4,7 @@ import changeAvatar from "./change-avatar.hbs";
 import "./change-avatar.scss";
 
 
-export class avatarChange extends Block {
+export class AvatarChange extends Block {
     constructor(props: Record<string, any>) {
       super("div", props, false);
     }

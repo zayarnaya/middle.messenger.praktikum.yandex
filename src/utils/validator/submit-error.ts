@@ -1,8 +1,8 @@
-import { inputError } from "./input-error";
+import { inputValidation } from "./input-validation";
 import { getData } from "../form-actions/get-data";
 import { checkPass } from "./check-pass";
 
-export function submitError(): void {
+export function submitValidation(): void {
     let inputs = Array.from(document.getElementsByTagName("input"));
     let submitMessage: HTMLElement = document.querySelector(".submit-message");
     let truecounts: number = 0;
@@ -19,7 +19,7 @@ export function submitError(): void {
     }
     
     for (let input of inputs) {
-        if (inputError(input)) {
+        if (inputValidation(input)) {
             truecounts += 1;
         } else if (input.id == "avatar") {
             truecounts += 1;

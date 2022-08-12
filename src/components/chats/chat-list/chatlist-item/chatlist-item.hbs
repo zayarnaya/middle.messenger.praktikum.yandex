@@ -1,6 +1,6 @@
 <div class="chat-list-item">
     <div class="chat-list-item__avatar">
-        <a href={{profile}} class="a-image"><img src={{avatar}}></a>
+        <a href={{profile}} class="a-image"><img src={{avatar}} alt="{{name}}" title="{{name}}" ></a>
     </div>
     <div class="chat-list-item__main-info">
         <div class="chat-list-item__user-name">
@@ -12,7 +12,7 @@
     </div>
     <div class="chat-list-item__less-info">
         <div class="chat-list-item__timestamp">
-            {{timestamp}}
+            <time>{{timestamp}}</time>
         </div>
         <div class="chat-list-item__unread-messages">
             {{unread}}

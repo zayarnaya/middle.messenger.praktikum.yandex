@@ -6,10 +6,10 @@ import "./form-changepass.scss";
 
 export class formChangePass extends Block {
     constructor(propsAndChildren: Object) {
-        super("div", propsAndChildren);
+        super("div", propsAndChildren);        
     }
 
     render() {
-        return this.compile(changePass, {});
+         return this.compile(changePass, {});
     }
 }

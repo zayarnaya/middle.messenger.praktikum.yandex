@@ -1,41 +1,7 @@
-export function inputError(field: HTMLInputElement, checkEmpty?: boolean) {
+import { patterns } from "../../consts";
+
+export function inputValidation(field: HTMLInputElement, checkEmpty?: boolean) {
   let message: HTMLElement = document.querySelector(`#${field.id} + span.errormessage`) as HTMLElement;
-  const patterns: Record<string, string> = {
-    login: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
-    /*
-    от 3 до 20 символов, латиница, может содержать цифры, 
-    но не состоять из них, без пробелов, без спецсимволов 
-    (допустимы дефис и нижнее подчёркивание)
-    */
-    first_name: "^([A-ZА-ЯЁ]+)[a-zA-ZА-Яа-яЁё\\-]*$",
-    second_name: "^([A-ZА-ЯЁ]+)[a-zA-ZА-Яа-яЁё\\-]*$",
-    /*
-    латиница или кириллица, первая буква должна быть заглавной, 
-    без пробелов и без цифр, нет спецсимволов (допустим только дефис).
-    */
-    email: "^[\\w\\d]+@\\w+\\.\\w+",
-    /*
-    латиница, может включать цифры и спецсимволы вроде дефиса, 
-    обязательно должна быть «собака» (@) и точка после неё, 
-    но перед точкой обязательно должны быть буквы.
-    */
-    phone: "^\\+?\\d{10,15}$",
-    /*
-    от 10 до 15 символов, состоит из цифр, может начинается с плюса.
-    */
-    password: "^(?=.*[A-Z])(?=.*\\d).{8,40}$",
-    newPassword: "^(?=.*[A-Z])(?=.*\\d).{8,40}$",
-
-    /*
-    от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.
-    */
-    message: ".*"
-    /*
-    Не должно быть пустым
-    */
-
-  };
-
   let pattern: RegExp = new RegExp(patterns[field.name]);
 
   if (checkEmpty && field.value == "") {
