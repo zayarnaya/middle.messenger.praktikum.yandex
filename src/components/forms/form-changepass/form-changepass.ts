@@ -1,15 +1,16 @@
 import { Block } from "../../../utils/block";
 import changePass from "./form-changepass.hbs";
+import { formChangePassProps } from "../../../types";
 
 import "./form-changepass.scss";
 
 
-export class formChangePass extends Block {
-    constructor(propsAndChildren: Object) {
-        super("div", propsAndChildren);        
+export class formChangePass extends Block<formChangePassProps> {
+    public constructor(propsAndChildren: formChangePassProps) {
+        super("div", propsAndChildren);
     }
 
-    render() {
-         return this.compile(changePass, {});
+    public render() {
+        return this.compile(changePass, {});
     }
 }

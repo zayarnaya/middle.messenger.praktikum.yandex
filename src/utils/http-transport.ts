@@ -1,5 +1,5 @@
 import { data } from "../data";
-import { Methods, Options } from "./../consts";
+import { Methods, Options } from "./../types";
 import { queryStringify } from "./query-stringify";
 
 export class HTTPTransport {

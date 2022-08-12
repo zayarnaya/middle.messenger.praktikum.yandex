@@ -2,14 +2,14 @@
 import { Block } from "../../../utils/block";
 import changeAvatar from "./change-avatar.hbs";
 import "./change-avatar.scss";
+import { AvatarProps } from "../../../types";
 
-
-export class AvatarChange extends Block {
-    constructor(props: Record<string, any>) {
+export class AvatarChange extends Block<AvatarProps> {
+  public constructor(props: AvatarProps) {
       super("div", props, false);
     }
   
-    render() {
+  public render() {
           return this.compile(changeAvatar, this.props);
     }
   }

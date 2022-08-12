@@ -1,12 +1,13 @@
-import { Chat } from "../../chat";
+import { Block } from "../../../../utils/block";
 import chatListMenu from "./chat-list-menu.hbs";
+import { ChatListMenuProps } from "../../../../types";
 
-export class ChatListMenu extends Chat {
-    constructor(tag: string, props: Record<string, any>, classname?: string) {
-        super(tag, props, classname);
+export class ChatListMenu extends Block<ChatListMenuProps> {
+    public constructor(tag: string, props: ChatListMenuProps, classname?: string) {
+        super(tag, props, false, classname);
     }
 
-    render() {
+    public render() {
         return this.compile(chatListMenu, {});
     }
 }

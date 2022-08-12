@@ -1,14 +1,13 @@
-import { Chat } from "../../chat";
+import { Block } from "../../../../utils/block";
 import userProfile from "./chatlist-userprofile.hbs";
+import { ChatlistUserprofileProps } from "../../../../types";
 
-export class ChatlistUserprofile extends Chat {
-    constructor(tag:string, props: Object, classname?: string) {
-        super(tag, props, classname);
-        this.props = props;
-        
+export class ChatlistUserprofile extends Block<ChatlistUserprofileProps> {
+    public constructor(tag:string, props: ChatlistUserprofileProps, classname?: string) {
+        super(tag, props, false, classname);       
     }
 
-    render() {
+    public render() {
         return this.compile(userProfile, this.props);
     }
 }

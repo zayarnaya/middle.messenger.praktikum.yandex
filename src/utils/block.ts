@@ -1,23 +1,29 @@
 import { EventBus } from "./event-bus";
-import { v4 as makeUUID } from 'uuid'
+import { v4 as makeUUID } from 'uuid';
 
-export class Block {
-  static EVENTS = {
+
+export class Block<Props extends {}>  {
+  public static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
     FLOW_RENDER: "flow:render",
     FLOW_CDU: "flow:component-did-update"
   };
 
-  _element = null;
-  _meta: Record<any, any> = {};
-  _id = null;
-  props = {};
-  eventBus;
-  children: Record<string, Block>;
-  withInternalID = false;
-  events: Record<string, any>;
-  eventTarget: string;
+  private _element = null;
+  private _meta: Record<any, any> = {};
+  public _id = null;
+  public props: Props;
+  public eventBus: Function;
+  public children: any;
+  public withInternalID: boolean = false;
+  public events: {
+    submit?: CallableFunction,
+    focus?: CallableFunction,
+    blur?: CallableFunction,
+    click?: CallableFunction 
+  };
+  public eventTarget: string;
 
   /** JSDoc
      * @param {string} tagName
@@ -26,7 +32,7 @@ export class Block {
      * @returns {void}
      */
 
-  constructor(tagName: string = "div", propsAndChildren: Record<string, any> = {}, withInternalID?: boolean, classname?: string) {
+  public constructor(tagName: string = "div", propsAndChildren: Record<string, any> = {}, withInternalID?: boolean, classname?: string) {
     const { children, props } = this._getChildren(propsAndChildren);
     this.children = children;
 
@@ -48,7 +54,7 @@ export class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _getChildren(propsAndChildren) {
+  private _getChildren(propsAndChildren) {
     const children = {};
     const props = {};
 
@@ -64,28 +70,30 @@ export class Block {
   }
 
 
-  _registerEvents(eventBus) {
+  private _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
 
-  _createResources() {
+  private _createResources() {
     const { tagName } = this._meta;
     const { classname } = this._meta;
     this._element = this._createDocumentElement(tagName);
     if (classname) {
-      this._element.classList.add(classname);
+      classname.split(" ").forEach( name => 
+      this._element.classList.add(name)
+      )
     }
   }
 
-  init() {
+  public init() {
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  _componentDidMount() {
+  private _componentDidMount() {
     this.componentDidMount();
     Object.values(this.children).forEach(child => {
       child.dispatchComponentDidMount();
@@ -95,13 +103,13 @@ export class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidMount(oldProps?) { }
+  public componentDidMount(oldProps?) { }
 
-  dispatchComponentDidMount() {
+  public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidUpdate(oldProps, newProps) {
+  private _componentDidUpdate(oldProps, newProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
 
     if (!response) {
@@ -111,12 +119,11 @@ export class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  // Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps, newProps) {
+  public componentDidUpdate(oldProps, newProps) {
     return true;
   }
 
-  setProps = nextProps => {
+  public setProps = nextProps => {
     if (!nextProps) {
       return;
     }
@@ -137,7 +144,7 @@ export class Block {
     return this._element;
   }
 
-  _render() {
+  private _render() {
 
     const block = this.render();
     this._removeEvents();
@@ -152,14 +159,13 @@ export class Block {
 
   }
 
-  // Может переопределять пользователь, необязательно трогать
-  render() { }
+  public abstract render(): void
 
-  getContent() {
+  public getContent() {
     return this.element;
   }
 
-  _addEvents() {
+  private _addEvents() {
 
     if (!!this.events && !!this.eventTarget) {
       Object.keys(this.events).forEach(eventName => {
@@ -170,7 +176,7 @@ export class Block {
 
   }
 
-  _removeEvents() {
+  private _removeEvents() {
     const { events = {} } = this.props;
     if (events) {
       Object.keys(events).forEach(eventName => {
@@ -183,7 +189,7 @@ export class Block {
 
   }
 
-  _makePropsProxy(propsAndChildren) {
+  private _makePropsProxy(propsAndChildren) {
 
     let theProxy = new Proxy(propsAndChildren, {
       get(target, prop) {
@@ -205,22 +211,20 @@ export class Block {
     return theProxy;
   }
 
-  _createDocumentElement(tagName) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-    const element = document.createElement(tagName);
+  private _createDocumentElement(tagName: string) {
+        const element = document.createElement(tagName);
     if (this.withInternalID) { element.setAttribute('data-id', this._id); };
-    //element.setAttribute('data-id', this._id);
     return element;
   }
 
-  compile(template, props) {
+  public compile(template, props) {
     const propsAndStubs = { ...props };
 
     Object.entries(this.children).forEach(([key, child]) => {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
     });
 
-    const fragment: HTMLTemplateElement = this._createDocumentElement('template');
+    const fragment: HTMLTemplateElement = this._createDocumentElement('template') as HTMLTemplateElement;
 
     fragment.innerHTML = template(propsAndStubs);
     Object.values(this.children).forEach(child => {
@@ -233,11 +237,11 @@ export class Block {
     return fragment.content;
   }
 
-  show() {
+  public show() {
     this.getContent().style.display = "flex";
   }
 
-  hide() {
+  public hide() {
     this.getContent().style.display = "none";
   }
 }

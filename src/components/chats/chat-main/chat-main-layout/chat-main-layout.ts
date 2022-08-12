@@ -1,13 +1,13 @@
-import { Chat } from "../../chat";
+import { Block } from "../../../../utils/block";
 import chatMainLayout from "./chat-main-layout.hbs";
+import { ChatRightPanelLayoutProps } from "../../../../types";
 
-export class ChatRightPanelLayout extends Chat {
-    constructor(tag: string, props: Object, classname?: string) {
-        super(tag, props, classname);
-        this.props = props;
+export class ChatRightPanelLayout extends Block<ChatRightPanelLayoutProps> {
+    public constructor(tag: string, props:ChatRightPanelLayoutProps, classname?: string) {
+        super(tag, props, false, classname);
     }
 
-    render() {
+    public render() {
         return this.compile(chatMainLayout, this.props);
     }
 }

@@ -1,17 +1,15 @@
-
 import "./button-submit.scss";
-
 import buttonSubmit from "./button-submit.hbs";
 import { Block } from "../../../utils/block";
+import { ButtonProps } from "../../../types";
 
-
-export class Button extends Block {
-  constructor(props: Record<string, any>) {
+export class Button extends Block<ButtonProps> {
+  public constructor(props: ButtonProps) {
 
     super("div", props, false);
   }
 
-  render() {
+  public render() {
     return buttonSubmit(this.props);
   }
 }

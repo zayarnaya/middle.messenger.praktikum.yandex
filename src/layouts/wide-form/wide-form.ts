@@ -1,7 +1,7 @@
 import wideForm from "./wide-form.hbs";
 import "./wide-form.scss";
 
-export function layout_wideForm() {
+export function layoutWideForm() {
   document.querySelector(".messenger-wrapper").innerHTML = wideForm();
 
   document.getElementById("link-to-chats").addEventListener("click",

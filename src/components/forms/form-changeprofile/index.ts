@@ -5,7 +5,7 @@ import { AvatarChange } from "../../avatars/change-avatar/change-avatar";
 import { InputField } from "../../input/input-field";
 import { Button } from "../../buttons/button-submit/button";
 import { MultiList } from "../../multi-list/multi-list";
-import { layout_wideForm } from "../../../layouts/wide-form/wide-form";
+import { layoutWideForm } from "../../../layouts/wide-form/wide-form";
 import "./form-changeprofile.scss";
 
 
@@ -19,7 +19,7 @@ export function changeProfilePage() {
         theChildren[key] = new InputField(val);
     }
 
-    layout_wideForm();
+    layoutWideForm();
     const form = new ChangeUserProfile({
         avatar: new AvatarChange(data),
         button: new Button(data.button.changeSubmit),

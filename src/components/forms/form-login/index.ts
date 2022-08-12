@@ -20,7 +20,7 @@ export function loginForm() {
 
     const form = new loginFormAll({
         button: new Button(data.button.loginSubmit),
-        inputList: new MultiList(theChildren, "div", "")
+        inputList: new MultiList(theChildren, "div", "form-login__form-wrapper form col")
     });
     render(".messenger-wrapper", form);
 }

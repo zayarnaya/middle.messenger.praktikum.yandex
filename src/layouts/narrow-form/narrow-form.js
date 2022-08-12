@@ -1,5 +1,5 @@
 import template from "./narrow-form.hbs";
 
-export function layout_narrowForm() {
+export function layoutNarrowForm() {
   document.querySelector(".messenger-wrapper").innerHTML = template();
 }

@@ -2,7 +2,7 @@ import { ChatRightPanelLayout } from "./chat-main-layout/chat-main-layout";
 import { Button } from "../../buttons/button-submit/button";
 import { FormMessage } from "../../forms/form-message/form-message";
 import { ChatsMenu } from "./chat-main-menu/chat-main-menu";
-import { ChatMessageIn } from "./chat-message/chat-message-in/chat-message";
+import { ChatMessageIn } from "./chat-message/chat-message-in/chat-message-in";
 import { ChatMessageOut } from "./chat-message/chat-message-out/chat-message-out";
 import { ChatsInnerField } from "./chat-main-inner/chat-main-inner";
 import { data } from "../../../data";
@@ -29,9 +29,7 @@ export function buildRightPanel() {
                 <p>Какой чудесный я!<br />
                     И песенка моя!</p>`,
                 time: "11:56",
-                name: data.chats[1].name,
-                address: "in"
-        
+                name: data.chats[1].name,        
             }),
 
             outgoing: new ChatMessageOut({
@@ -39,7 +37,6 @@ export function buildRightPanel() {
                 message: `<p>Невероятно.</p>`,
                 time: "12:06",
                 name: data.user.profile.display_name.value,
-                address: "out"
             })
 
         }, "chat-main__inner"),
@@ -47,8 +44,7 @@ export function buildRightPanel() {
         messagefield: new FormMessage({
             button: new Button({
                 type: "submit",
-                class: "chat-main__message-button"
-        
+                class: "chat-main__message-button"        
             }),
             input: new InputField({
                         type: "text",

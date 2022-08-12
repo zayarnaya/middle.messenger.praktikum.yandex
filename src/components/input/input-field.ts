@@ -1,9 +1,11 @@
 import { Block } from "../../utils/block";
 import inputRow from "./input-field.hbs";
 import { inputValidation } from "../../utils/validator/input-validation";
+import { InputFieldProps } from "../../types";
 import "./input-field.scss";
-export class InputField extends Block {
-  constructor(props) {
+
+export class InputField extends Block<InputFieldProps> {
+  public constructor(props: InputFieldProps) {
     super("div", props, false);
     this.events = {
       blur: function () {
@@ -18,8 +20,7 @@ export class InputField extends Block {
     this.eventTarget = "input";
   }
 
-  render() {
-
+  public render() {
     return inputRow(this.props, this.events);
   }
 }

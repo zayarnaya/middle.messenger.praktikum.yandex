@@ -20,7 +20,7 @@ export function signinForm() {
 
     const form = new signinFormAll({
         button: new Button(data.button.signinSubmit),
-        inputList: new MultiList(theChildren, "div", "input-list")
+        inputList: new MultiList(theChildren, "div", "form-signin__form-wrapper col")
     });
     render(".messenger-wrapper", form);
 

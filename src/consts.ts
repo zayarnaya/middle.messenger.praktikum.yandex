@@ -1,18 +1,3 @@
-export enum Methods {
-    GET = 'GET',
-    POST = 'POST',
-    PUT = 'PUT',
-    PATCH = 'PATCH',
-    DELETE = 'DELETE'
-};
-
-export type Options = {
-    headers: any;
-    method: Methods;
-    data?: any;
-    timeout: number;
-};
-
 export const patterns: Record<string, string> = {
     login: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
     /*

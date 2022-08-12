@@ -7,11 +7,6 @@ export const data: Record<string, any> = {
                 label: "Логин",
                 required: true,
                 placeholder: " ",
-                attributes: {
-                    pattern: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
-                    maxLength: "20",
-                    minLength: "3",
-                },
             },
 
             password: {
@@ -20,11 +15,6 @@ export const data: Record<string, any> = {
                 label: "Пароль",
                 required: true,
                 placeholder: " ",
-                attributes: {
-
-                    maxLength: "40",
-                    minLength: "8",
-                }
             },
         },
 
@@ -35,11 +25,6 @@ export const data: Record<string, any> = {
                 label: "Логин",
                 required: true,
                 placeholder: " ",
-                attributes: {
-                    pattern: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
-                    maxLength: "20",
-                    minLength: "3",
-                },
             },
 
             first_name: {
@@ -48,9 +33,6 @@ export const data: Record<string, any> = {
                 label: "Имя",
                 required: true,
                 placeholder: " ",
-                attributes: {
-
-                },
             },
 
             second_name: {
@@ -59,9 +41,6 @@ export const data: Record<string, any> = {
                 label: "Фамилия",
                 required: true,
                 placeholder: " ",
-                attributes: {
-
-                },
             },
 
             email: {
@@ -78,11 +57,6 @@ export const data: Record<string, any> = {
                 label: "Телефон",
                 required: true,
                 placeholder: " ",
-                attributes: {
-                    pattern: "^\\+?\\d{10,15}$",
-                    maxLength: "15",
-                    minLength: "10",
-                },
             },
 
             password: {
@@ -91,10 +65,6 @@ export const data: Record<string, any> = {
                 label: "Пароль",
                 required: true,
                 placeholder: " ",
-                attributes: {
-                    maxLength: "40",
-                    minLength: "8",
-                },
             },
 
             password_check: {
@@ -103,10 +73,6 @@ export const data: Record<string, any> = {
                 label: "Пароль еще раз",
                 required: true,
                 placeholder: " ",
-                attributes: {
-                    maxLength: "40",
-                    minLength: "8",
-                },
             }
         },
 
@@ -143,11 +109,6 @@ export const data: Record<string, any> = {
                 label: "Логин",
                 required: false,
                 value: "phil",
-                attributes: {
-                    pattern: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
-                    maxLength: "20",
-                    minLength: "3",
-                },
             },
 
             display_name: {
@@ -188,9 +149,6 @@ export const data: Record<string, any> = {
                 label: "Телефон",
                 required: false,
                 value: "9161234567",
-                attributes: {
-                    pattern: "^\\+?\\d{10,15}$",
-                },
             },
         },
 
@@ -201,10 +159,6 @@ export const data: Record<string, any> = {
                 label: "Логин",
                 required: true,
                 placeholder: " ",
-                attributes: {
-                    pattern: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
-                    maxLength: "16",
-                },
             },
         },
 
@@ -302,7 +256,7 @@ export const data: Record<string, any> = {
             name: "Торин",
             profile: "profile.html",
             avatar: "https://www.fillmurray.com/110/110",
-            last_message: "Hey Thranduil! Long time no see!",
+            lastMessage: "Hey Thranduil! Long time no see!",
             timestamp: "06:12",
             unread: "2",
         },
@@ -311,7 +265,7 @@ export const data: Record<string, any> = {
             name: "Бильбо",
             profile: "profile.html",
             avatar: "https://www.fillmurray.com/100/100",
-            last_message: "Hey Thranduil! Miss those barrels already?",
+            lastMessage: "Hey Thranduil! Miss those barrels already?",
             timestamp: "10:00",
             unread: "1",
         },
@@ -320,7 +274,7 @@ export const data: Record<string, any> = {
             name: "Саурон",
             profile: "profile.html",
             avatar: "https://www.fillmurray.com/60/60",
-            last_message: "Отдайте кольцо...",
+            lastMessage: "Отдайте кольцо...",
             timestamp: "11:54",
             unread: "3",
         },
