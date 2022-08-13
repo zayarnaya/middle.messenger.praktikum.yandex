@@ -1,16 +1,14 @@
-
 import logoutPage from "./logout.hbs";
-
 import { Block } from "../../utils/block";
+import { LogoutProps } from "../../types";
 
-export default class Logout extends Block {
-  constructor(props: Record<string, any>) {
-
+export default class Logout extends Block<LogoutProps, Logout> {
+  public constructor(props:LogoutProps) {
     super("div", props);
   }
   
 
-  render() {
+  public render() {
         return this.compile(logoutPage, this.props);
   }
 } 

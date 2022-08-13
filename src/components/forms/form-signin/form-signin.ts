@@ -1,14 +1,15 @@
 import formSignin from "./form-signin.hbs";
 import "./form-signin.scss";
 import { Form } from "../form";
+import { FormProps } from "../../../types";
 
 
 export class signinFormAll extends Form {
-    constructor(propsAndChildren: Record<string, any>) {
+    public constructor(propsAndChildren: FormProps) {
         super("div", propsAndChildren);
     }
 
-    render() {
+    public render() {
         return this.compile(formSignin, {});
     }
 }

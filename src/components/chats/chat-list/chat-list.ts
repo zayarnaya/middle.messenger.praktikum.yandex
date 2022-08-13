@@ -44,7 +44,7 @@ export function buildLeftPanel() {
                 link: data.user.link
             }, "chat-list__profile"),
 
-            formsearch: new SearchForm("search", {
+            formsearch: new SearchForm({
                 input: new InputField({
                     type: "search",
                     placeholder: "Поиск"

@@ -5,12 +5,12 @@ import { formChangePassProps } from "../../../types";
 import "./form-changepass.scss";
 
 
-export class formChangePass extends Block<formChangePassProps> {
+export class formChangePass extends Block<formChangePassProps, formChangePass> {
     public constructor(propsAndChildren: formChangePassProps) {
         super("div", propsAndChildren);
     }
 
     public render() {
-        return this.compile(changePass, {});
+        return this.compile(changePass, this.props);
     }
 }

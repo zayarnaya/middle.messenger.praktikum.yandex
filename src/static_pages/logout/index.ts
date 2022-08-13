@@ -11,8 +11,7 @@ export function loggingOut() {
 
     render(".messenger-wrapper", logout);
 
-        setTimeout(() => {
-        location.href="#login";
-      }, 3000); 
-      
+    setTimeout(() => {
+        location.href = "#login";
+    }, 3000);
 }

@@ -10,6 +10,10 @@ import { ChatsInnerField } from "./components/chats/chat-main/chat-main-inner/ch
 import { FormMessage } from "./components/forms/form-message/form-message";
 import { InputField } from "./components/input/input-field";
 import { AvatarChange } from "./components/avatars/change-avatar/change-avatar";
+import { ProfAvatar } from "./components/avatars/profile_avatar/profile-avatar";
+import { ProfChar } from "./components/profile-chars/profile-char/profile-char";
+import { ChatListItem } from "./components/chats/chat-list/chatlist-item/chatlist-item";
+import { Block } from "./utils/block";
 
 export enum Methods {
     GET = 'GET',
@@ -19,11 +23,24 @@ export enum Methods {
     DELETE = 'DELETE'
 };
 
+export enum MultiChildren {
+    InputField,
+    ProfChar,
+    ChatListItem
+};
+
 export type Options = {
     headers: any;
     method: Methods;
     data?: any;
     timeout: number;
+};
+
+export type Events = {
+    submit?: CallableFunction,
+    focus?: CallableFunction,
+    blur?: CallableFunction,
+    click?: CallableFunction 
 };
 
 export type AvatarProps = {
@@ -58,6 +75,14 @@ export type ChatMessageProps = {
     message: string | HTMLElement,
     time: string
 };
+
+export type ErrorProps = {
+    error_num: string | number,
+    message: string,
+    link_label: string
+};
+
+export type MultiListProps = {};
 
 export type ChatListMenuProps = {
     chatuserprofile: ChatlistUserprofile,
@@ -107,5 +132,41 @@ export type formChangePassProps = {
     button: Button
 };
 
+export type FormProps = {
+    avatar?: AvatarChange | ProfAvatar,
+    inputList?: MultiList,
+    button?: Button,
+    input?: InputField
+};
 
+export type MyUserProfileProps = {
+    avatar: ProfAvatar,
+    charList: MultiList
+};
 
+export type LogoutProps = {
+    classname: string,
+    message: string,
+    linkMessage: string,
+    link: string
+};
+
+export type AllProps = LogoutProps & 
+                        AvatarProps & 
+                        ButtonProps & 
+                        InputFieldProps & 
+                        ProfCharProps & 
+                        ChatMessageProps & 
+                        ErrorProps & 
+                        MultiListProps & 
+                        ChatListMenuProps & 
+                        ChatListLeftPanelProps & 
+                        ChatlistUserprofileProps & 
+                        ChatListItemProps & 
+                        ChatsInnerFieldProps & 
+                        ChatRightPanelLayoutProps & 
+                        ChatsMenuProps & 
+                        formChangePassProps & 
+                        FormProps & 
+                        MyUserProfileProps
+;

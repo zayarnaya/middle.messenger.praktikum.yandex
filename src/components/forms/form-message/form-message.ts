@@ -1,30 +1,31 @@
 import { Form } from "../form";
+import { FormProps } from "../../../types";
 import sendMessageForm from "./form-message.hbs";
 
 export class FormMessage extends Form {
-    constructor(props: Record<string, any>, classname?: string) {
+    public constructor(props: FormProps, classname?: string) {
         super("sendmessage", props, classname);
-        this.props = props;
+
         this.events = {
-            submit: function(e: Event) {
+            submit: function (e: Event) {
                 e.preventDefault();
                 let input: HTMLInputElement = document.getElementById("message") as HTMLInputElement;
-                let errormessage: HTMLElement = document.querySelector("#message + span.errormessage");
-                if(!input.value) {
-                    errormessage.textContent = "Сообщение не должно быть пустым!";
+                let errorMessage: HTMLElement = document.querySelector("#message + span.errormessage");
+                if (!input.value) {
+                    errorMessage.textContent = "Сообщение не должно быть пустым!";
                     return;
                 }
-                let result: Record<string, string> = {message: input.value};
+                let result: Record<string, string> = { message: input.value };
 
                 console.log(result);
                 input.value = "";
-                errormessage.textContent = " ";
+                errorMessage.textContent = " ";
             }
         }
 
     }
 
-    render() {
+    public render() {
         return this.compile(sendMessageForm, {})
     }
 

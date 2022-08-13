@@ -2,7 +2,7 @@ import { Block } from "../../../../utils/block";
 import userProfile from "./chatlist-userprofile.hbs";
 import { ChatlistUserprofileProps } from "../../../../types";
 
-export class ChatlistUserprofile extends Block<ChatlistUserprofileProps> {
+export class ChatlistUserprofile extends Block<ChatlistUserprofileProps, ChatlistUserprofile> {
     public constructor(tag:string, props: ChatlistUserprofileProps, classname?: string) {
         super(tag, props, false, classname);       
     }

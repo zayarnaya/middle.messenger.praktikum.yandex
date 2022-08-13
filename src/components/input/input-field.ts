@@ -4,19 +4,19 @@ import { inputValidation } from "../../utils/validator/input-validation";
 import { InputFieldProps } from "../../types";
 import "./input-field.scss";
 
-export class InputField extends Block<InputFieldProps> {
+export class InputField extends Block<InputFieldProps, InputField> {
   public constructor(props: InputFieldProps) {
     super("div", props, false);
     this.events = {
       blur: function () {
-
         inputValidation(this, true);
       },
-      focus: function () {
 
+      focus: function () {
         inputValidation(this, false);
       },
     };
+
     this.eventTarget = "input";
   }
 

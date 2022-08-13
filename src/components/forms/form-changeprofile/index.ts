@@ -21,7 +21,9 @@ export function changeProfilePage() {
 
     layoutWideForm();
     const form = new ChangeUserProfile({
-        avatar: new AvatarChange(data),
+        avatar: new AvatarChange({
+            avatar: data.user.avatar
+        }),
         button: new Button(data.button.changeSubmit),
         inputList: new MultiList(theChildren, "div", "")
     });

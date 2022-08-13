@@ -1,13 +1,14 @@
 import { Form } from "../form";
+import { FormProps } from "../../../types";
 import changeProfile from "./form-changeprofile.hbs";
 import "./form-changeprofile.scss";
 
 export class ChangeUserProfile extends Form {
-    constructor(propsAndChildren: Record<string, any>) {
+    public constructor(propsAndChildren: FormProps) {
         super("div", propsAndChildren);
     }
 
-    render() {
+    public render() {
         return this.compile(changeProfile, {});
     }
 }

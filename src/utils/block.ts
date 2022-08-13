@@ -1,8 +1,9 @@
 import { EventBus } from "./event-bus";
 import { v4 as makeUUID } from 'uuid';
+import { Events } from "../types";
 
 
-export class Block<Props extends {}>  {
+export class Block<Props extends {}, Children extends Block<Props, Children>>  {
   public static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -15,14 +16,9 @@ export class Block<Props extends {}>  {
   public _id = null;
   public props: Props;
   public eventBus: Function;
-  public children: any;
+  public children: Children | {};
   public withInternalID: boolean = false;
-  public events: {
-    submit?: CallableFunction,
-    focus?: CallableFunction,
-    blur?: CallableFunction,
-    click?: CallableFunction 
-  };
+  public events: Events;
   public eventTarget: string;
 
   /** JSDoc
@@ -82,8 +78,8 @@ export class Block<Props extends {}>  {
     const { classname } = this._meta;
     this._element = this._createDocumentElement(tagName);
     if (classname) {
-      classname.split(" ").forEach( name => 
-      this._element.classList.add(name)
+      classname.split(" ").forEach(name =>
+        this._element.classList.add(name)
       )
     }
   }
@@ -115,7 +111,6 @@ export class Block<Props extends {}>  {
     if (!response) {
       return;
     }
-    //this._render();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
@@ -159,7 +154,9 @@ export class Block<Props extends {}>  {
 
   }
 
-  public abstract render(): void
+  public render(): void {
+
+  }
 
   public getContent() {
     return this.element;
@@ -185,8 +182,6 @@ export class Block<Props extends {}>  {
     } else if (!events) {
       return;
     }
-
-
   }
 
   private _makePropsProxy(propsAndChildren) {
@@ -212,12 +207,12 @@ export class Block<Props extends {}>  {
   }
 
   private _createDocumentElement(tagName: string) {
-        const element = document.createElement(tagName);
-    if (this.withInternalID) { element.setAttribute('data-id', this._id); };
+    const element: HTMLElement = document.createElement(tagName);
+    if (!!this.withInternalID) { element.setAttribute('data-id', this._id); };
     return element;
   }
 
-  public compile(template, props) {
+  public compile(template: Function, props: Props) {
     const propsAndStubs = { ...props };
 
     Object.entries(this.children).forEach(([key, child]) => {
