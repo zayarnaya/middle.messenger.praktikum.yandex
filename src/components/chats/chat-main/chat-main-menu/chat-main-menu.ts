@@ -3,18 +3,18 @@ import chatMainMenu from "./chat-main-menu.hbs";
 import { ChatsMenuProps } from "../../../../types";
 
 export class ChatsMenu extends Block<ChatsMenuProps, ChatsMenu> {
-    public constructor(props: ChatsMenuProps, classname?: string) {
-        super("nav", props, false, classname);
-        this.events = {
-            click: function () {
-                document.querySelector("#open-menu").classList.toggle("hidden");
-            }
-        };
+  public constructor(props: ChatsMenuProps, classname?: string) {
+    super("nav", props, false, classname);
+    this.events = {
+      click: function () {
+        document.querySelector("#open-menu").classList.toggle("hidden");
+      },
+    };
 
-        this.eventTarget = "#mini-menu";
-    }
+    this.eventTarget = "#mini-menu";
+  }
 
-    public render() {
-        return this.compile(chatMainMenu, this.props);
-    }
+  public render() {
+    return this.compile(chatMainMenu, this.props);
+  }
 }

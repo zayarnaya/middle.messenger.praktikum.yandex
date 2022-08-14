@@ -4,11 +4,11 @@ import { ChatMessageProps } from "../../../../../types";
 import "./chat-message-in.scss";
 
 export class ChatMessageIn extends Block<ChatMessageProps, ChatMessageIn> {
-    public constructor(props: ChatMessageProps, classname?: string) {
-        super("li", props, false, classname);
-    }
+  public constructor(props: ChatMessageProps, classname?: string) {
+    super("li", props, false, classname);
+  }
 
-    public render() {
-        return this.compile(chatMessageIn, this.props);
-    }
+  public render() {
+    return this.compile(chatMessageIn, this.props);
+  }
 }

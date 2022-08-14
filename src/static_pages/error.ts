@@ -5,7 +5,7 @@ import { ErrorProps } from "../types";
 
 export class Error extends Block<ErrorProps, Error> {
   public constructor(props: ErrorProps) {
-    super ("div", props);    
+    super("div", props, false, "error center-center");
   }
 
   public render() {

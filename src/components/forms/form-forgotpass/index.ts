@@ -7,12 +7,10 @@ import { render } from "../../../utils/renderDOM";
 import "./form-forgotpass.scss";
 
 export function forgotPassPage() {
-
-    const form = new formForgotPass({
-        input: new InputField(data.input.getNewPass.login),
-        button: new Button(data.button.forgotpassSubmit)
-    });
-    render(".messenger-wrapper", form);
-
+  const form = new formForgotPass({
+    input: new InputField(data.input.getNewPass.login),
+    button: new Button(data.button.forgotpassSubmit),
+  });
+  
+  render(".messenger-wrapper", form);
 }
-

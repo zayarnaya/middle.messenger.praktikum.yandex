@@ -4,12 +4,11 @@ import { FormProps } from "../../../types";
 import "./form-login.scss";
 
 export class loginFormAll extends Form {
-    public constructor(propsAndChildren: FormProps) {
-        super("div", propsAndChildren);
+  public constructor(propsAndChildren: FormProps) {
+    super(propsAndChildren, "div");
+  }
 
-    }
-
-    public render() {
-        return this.compile(formLogin, {});
-    }
+  public render() {
+    return this.compile(formLogin, {});
+  }
 }

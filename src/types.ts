@@ -13,160 +13,139 @@ import { AvatarChange } from "./components/avatars/change-avatar/change-avatar";
 import { ProfAvatar } from "./components/avatars/profile_avatar/profile-avatar";
 import { ProfChar } from "./components/profile-chars/profile-char/profile-char";
 import { ChatListItem } from "./components/chats/chat-list/chatlist-item/chatlist-item";
-import { Block } from "./utils/block";
 
 export enum Methods {
-    GET = 'GET',
-    POST = 'POST',
-    PUT = 'PUT',
-    PATCH = 'PATCH',
-    DELETE = 'DELETE'
-};
-
-export enum MultiChildren {
-    InputField,
-    ProfChar,
-    ChatListItem
-};
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  PATCH = "PATCH",
+  DELETE = "DELETE",
+}
 
 export type Options = {
-    headers: any;
-    method: Methods;
-    data?: any;
-    timeout: number;
+  headers: any;
+  method: Methods;
+  data?: any;
+  timeout: number;
 };
 
 export type Events = {
-    submit?: CallableFunction,
-    focus?: CallableFunction,
-    blur?: CallableFunction,
-    click?: CallableFunction 
+  submit?: CallableFunction;
+  focus?: CallableFunction;
+  blur?: CallableFunction;
+  click?: CallableFunction;
 };
 
 export type AvatarProps = {
-    avatar: string,
-    name?: string 
+  avatar: string;
+  name?: string;
 };
 
 export type ButtonProps = {
-    name?: string,
-    label?: string,
-    class?: string,
-    type?: string
+  name?: string;
+  label?: string;
+  class?: string;
+  type?: string;
 };
 
 export type InputFieldProps = {
-    name?: string,
-    type?: string,
-    label?: string,
-    required?: boolean,
-    placeholder?: string,
+  name?: string;
+  type?: string;
+  label?: string;
+  required?: boolean;
+  placeholder?: string;
+  checkPass?: boolean;
 };
 
 export type ProfCharProps = {
-    name: string,
-    id: string,
-    value:  string
+  name: string;
+  id: string;
+  value: string;
 };
 
 export type ChatMessageProps = {
-    avatar: string,
-    name: string,
-    message: string | HTMLElement,
-    time: string
+  avatar: string;
+  name: string;
+  message: string | HTMLElement;
+  time: string;
 };
 
 export type ErrorProps = {
-    error_num: string | number,
-    message: string,
-    link_label: string
+  error_num: string | number;
+  message: string;
+  link_label: string;
 };
 
-export type MultiListProps = {};
+export type MultiListProps = Record<
+  string,
+  InputField | ProfChar | ChatListItem
+>;
 
 export type ChatListMenuProps = {
-    chatuserprofile: ChatlistUserprofile,
-    formsearch: SearchForm
+  chatuserprofile: ChatlistUserprofile;
+  formsearch: SearchForm;
 };
 
 export type ChatListLeftPanelProps = {
-    chatListMenu: ChatListMenu,
-    chatList: MultiList
+  chatListMenu: ChatListMenu;
+  chatList: MultiList;
 };
 
 export type ChatlistUserprofileProps = {
-    avatar: string,
-    name: string,
-    link: URL
+  avatar: string;
+  name: string;
+  link: URL;
 };
 
 export type ChatListItemProps = {
-    profile: URL,
-    avatar: string,
-    name: string,
-    lastMessage: string | HTMLElement,
-    timestamp: string,
-    unread: number
+  profile: URL;
+  avatar: string;
+  name: string;
+  lastMessage: string | HTMLElement;
+  timestamp: string;
+  unread: number;
 };
 
 export type ChatsInnerFieldProps = {
-    date: string,
-    incoming: ChatMessageIn,
-    outgoing: ChatMessageOut
+  date: string;
+  incoming: ChatMessageIn;
+  outgoing: ChatMessageOut;
 };
 
 export type ChatRightPanelLayoutProps = {
-    mainmenu: ChatsMenu,
-    maininner: ChatsInnerField,
-    messagefield: FormMessage
+  mainmenu: ChatsMenu;
+  maininner: ChatsInnerField;
+  messagefield: FormMessage;
 };
 
 export type ChatsMenuProps = {
-    chatavatar: string,
-    chatname: string
+  chatavatar: string;
+  chatname: string;
 };
 
 export type formChangePassProps = {
-    avatar: AvatarChange,
-    inputList: MultiList,
-    button: Button
+  avatar: AvatarChange;
+  inputList: MultiList;
+  button: Button;
 };
 
 export type FormProps = {
-    avatar?: AvatarChange | ProfAvatar,
-    inputList?: MultiList,
-    button?: Button,
-    input?: InputField
+  avatar?: AvatarChange | ProfAvatar;
+  inputList?: MultiList;
+  button?: Button;
+  input?: InputField;
 };
 
 export type MyUserProfileProps = {
-    avatar: ProfAvatar,
-    charList: MultiList
+  avatar: ProfAvatar;
+  charList: MultiList;
 };
 
 export type LogoutProps = {
-    classname: string,
-    message: string,
-    linkMessage: string,
-    link: string
+  classname: string;
+  message: string;
+  linkMessage: string;
+  link: string;
 };
 
-export type AllProps = LogoutProps & 
-                        AvatarProps & 
-                        ButtonProps & 
-                        InputFieldProps & 
-                        ProfCharProps & 
-                        ChatMessageProps & 
-                        ErrorProps & 
-                        MultiListProps & 
-                        ChatListMenuProps & 
-                        ChatListLeftPanelProps & 
-                        ChatlistUserprofileProps & 
-                        ChatListItemProps & 
-                        ChatsInnerFieldProps & 
-                        ChatRightPanelLayoutProps & 
-                        ChatsMenuProps & 
-                        formChangePassProps & 
-                        FormProps & 
-                        MyUserProfileProps
-;
+export type Validity = "true" | "empty" | "wrong" | "noMatch";

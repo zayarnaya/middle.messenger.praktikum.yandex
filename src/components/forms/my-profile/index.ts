@@ -8,28 +8,23 @@ import { MultiList } from "../../multi-list/multi-list";
 import "./my-profile.scss";
 import { ProfCharProps } from "../../../types";
 
-
 export function profilePage() {
-    let chars: ProfCharProps[] = Object.values(data.profile_char);
-    let theChildren = {};
+  let chars: ProfCharProps[] = Object.values(data.profile_char);
+  let theChildren = {};
 
-    for (let i = 0; i < chars.length; i++) {
-        let key = `char${i}`;
-        let val = chars[i];
-        theChildren[key] = new ProfChar({
-            name: val.name,
-            id: val.id,
-            value:  val.value
-        });
-    }
+  for (let i = 0; i < chars.length; i++) {
+    let key = `char${i}`;
+    let val = chars[i];
+    theChildren[key] = new ProfChar(val);
+  }
 
-    layoutWideForm();
-    const form = new MyUserProfile({
-        avatar: new ProfAvatar({
-            avatar: data.user.avatar,
-            name: data.user.profile.display_name.value
-        }),
-        charList: new MultiList(theChildren, "div", "profile__chars col")
-    });
-    render(".wrapper-all-center", form);
+  layoutWideForm();
+  const form = new MyUserProfile({
+    avatar: new ProfAvatar({
+      avatar: data.user.avatar,
+      name: data.user.profile.display_name.value,
+    }),
+    charList: new MultiList(theChildren, "div", "profile__chars col"),
+  });
+  render(".wrapper-all-center", form);
 }

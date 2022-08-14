@@ -4,7 +4,7 @@ export class EventBus {
     this.listeners = {};
   }
 
-  public on(event: string, callback) { 
+  public on(event: string, callback: Function) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -12,22 +12,22 @@ export class EventBus {
     this.listeners[event].push(callback);
   }
 
-  public off(event: string, callback) {
-		if (!this.listeners[event]) {
+  public off(event: string, callback: Function) {
+    if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
 
     this.listeners[event] = this.listeners[event].filter(
-      listener => listener !== callback
+      (listener) => listener !== callback
     );
   }
 
-	public emit(event: string, ...args) {
+  public emit(event: string, ...args) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
-    
-    this.listeners[event].forEach(function(listener) {
+
+    this.listeners[event].forEach(function (listener) {
       listener(...args);
     });
   }

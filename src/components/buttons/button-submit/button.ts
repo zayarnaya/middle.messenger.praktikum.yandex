@@ -5,7 +5,6 @@ import { ButtonProps } from "../../../types";
 
 export class Button extends Block<ButtonProps, Button> {
   public constructor(props: ButtonProps) {
-
     super("div", props, false);
   }
 

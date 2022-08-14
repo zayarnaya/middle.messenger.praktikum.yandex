@@ -21,7 +21,7 @@
     ]
   },
   "name": "messenger_v",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Messenger by Veronika Zayarnaya",
   "source": "src/index.html",
   "scripts": {

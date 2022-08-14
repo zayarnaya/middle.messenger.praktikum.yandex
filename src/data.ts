@@ -73,6 +73,7 @@ export const data: Record<string, any> = {
                 label: "Пароль еще раз",
                 required: true,
                 placeholder: " ",
+                checkPass: true,
             }
         },
 
@@ -99,6 +100,7 @@ export const data: Record<string, any> = {
                 label: "Повторите новый пароль",
                 required: true,
                 placeholder: " ",
+                checkPass: true,
             },
         },
 

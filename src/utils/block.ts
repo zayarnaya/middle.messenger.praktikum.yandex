@@ -1,14 +1,13 @@
 import { EventBus } from "./event-bus";
-import { v4 as makeUUID } from 'uuid';
+import { v4 as makeUUID } from "uuid";
 import { Events } from "../types";
 
-
-export class Block<Props extends {}, Children extends Block<Props, Children>>  {
+export class Block<Props extends {}, Children extends Block<Props, Children>> {
   public static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
     FLOW_RENDER: "flow:render",
-    FLOW_CDU: "flow:component-did-update"
+    FLOW_CDU: "flow:component-did-update",
   };
 
   private _element = null;
@@ -22,13 +21,18 @@ export class Block<Props extends {}, Children extends Block<Props, Children>>  {
   public eventTarget: string;
 
   /** JSDoc
-     * @param {string} tagName
-     * @param {Object} props
-     *
-     * @returns {void}
-     */
+   * @param {string} tagName
+   * @param {Object} props
+   *
+   * @returns {void}
+   */
 
-  public constructor(tagName: string = "div", propsAndChildren: Record<string, any> = {}, withInternalID?: boolean, classname?: string) {
+  public constructor(
+    tagName: string = "div",
+    propsAndChildren: Props,
+    withInternalID?: boolean,
+    classname?: string
+  ) {
     const { children, props } = this._getChildren(propsAndChildren);
     this.children = children;
 
@@ -36,7 +40,7 @@ export class Block<Props extends {}, Children extends Block<Props, Children>>  {
     this._meta = {
       tagName,
       props,
-      classname
+      classname,
     };
 
     this._id = makeUUID();
@@ -50,7 +54,7 @@ export class Block<Props extends {}, Children extends Block<Props, Children>>  {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  private _getChildren(propsAndChildren) {
+  private _getChildren(propsAndChildren: Props) {
     const children = {};
     const props = {};
 
@@ -65,7 +69,6 @@ export class Block<Props extends {}, Children extends Block<Props, Children>>  {
     return { children, props };
   }
 
-
   private _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -78,9 +81,7 @@ export class Block<Props extends {}, Children extends Block<Props, Children>>  {
     const { classname } = this._meta;
     this._element = this._createDocumentElement(tagName);
     if (classname) {
-      classname.split(" ").forEach(name =>
-        this._element.classList.add(name)
-      )
+      classname.split(" ").forEach((name) => this._element.classList.add(name));
     }
   }
 
@@ -91,14 +92,13 @@ export class Block<Props extends {}, Children extends Block<Props, Children>>  {
 
   private _componentDidMount() {
     this.componentDidMount();
-    Object.values(this.children).forEach(child => {
+    Object.values(this.children).forEach((child) => {
       child.dispatchComponentDidMount();
     });
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   }
 
-  // Может переопределять пользователь, необязательно трогать
   public componentDidMount(oldProps?) { }
 
   public dispatchComponentDidMount() {
@@ -118,21 +118,20 @@ export class Block<Props extends {}, Children extends Block<Props, Children>>  {
     return true;
   }
 
-  public setProps = nextProps => {
+  public setProps = (nextProps) => {
     if (!nextProps) {
       return;
     }
 
     const { children, props } = this._getChildren(nextProps);
 
-    if (Object.entries(children), length) {
+    if (!!(Object.entries(children).length)) {
       Object.assign(this.children, children);
-    };
+    }
 
-    if (Object.entries(props), length) {
+    if (!!(Object.entries(props).length)) {
       Object.assign(this.props, props);
-    };
-
+    }
   };
 
   get element() {
@@ -140,52 +139,48 @@ export class Block<Props extends {}, Children extends Block<Props, Children>>  {
   }
 
   private _render() {
-
     const block = this.render();
     this._removeEvents();
     if (typeof block == "string") {
-      if (this._element) { this._element.innerHTML = block; };
+      if (this._element) {
+        this._element.innerHTML = block;
+      }
     } else {
-      this._element.innerHTML = '';
+      this._element.innerHTML = "";
       this._element.appendChild(block);
     }
     this._addEvents();
-
-
   }
 
-  public render(): void {
-
-  }
+  public render(): void { }
 
   public getContent() {
     return this.element;
   }
 
   private _addEvents() {
-
     if (!!this.events && !!this.eventTarget) {
-      Object.keys(this.events).forEach(eventName => {
-
-        this._element.querySelector(this.eventTarget).addEventListener(eventName, this.events[eventName]);
+      Object.keys(this.events).forEach((eventName) => {
+        this._element
+          .querySelector(this.eventTarget)
+          .addEventListener(eventName, this.events[eventName]);
       });
-    };
-
+    }
   }
 
   private _removeEvents() {
-    const { events = {} } = this.props;
-    if (events) {
-      Object.keys(events).forEach(eventName => {
-        this._element.removeEventListener(eventName, events[eventName]);
+    if (this.events) {
+      Object.keys(this.events).forEach((eventName) => {
+        this._element.removeEventListener(eventName, this.events[eventName]);
       });
-    } else if (!events) {
+    } else if (!this.events) {
       return;
     }
   }
 
   private _makePropsProxy(propsAndChildren) {
 
+    const self = this;
     let theProxy = new Proxy(propsAndChildren, {
       get(target, prop) {
         const value = target[prop];
@@ -194,13 +189,13 @@ export class Block<Props extends {}, Children extends Block<Props, Children>>  {
 
       set(target, prop, value) {
         target[prop] = value;
-        this.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
         return true;
       },
 
       deleteProperty() {
         throw new Error("Нет доступа");
-      }
+      },
     });
 
     return theProxy;
@@ -208,7 +203,9 @@ export class Block<Props extends {}, Children extends Block<Props, Children>>  {
 
   private _createDocumentElement(tagName: string) {
     const element: HTMLElement = document.createElement(tagName);
-    if (!!this.withInternalID) { element.setAttribute('data-id', this._id); };
+    if (!!this.withInternalID) {
+      element.setAttribute("data-id", this._id);
+    }
     return element;
   }
 
@@ -219,15 +216,15 @@ export class Block<Props extends {}, Children extends Block<Props, Children>>  {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
     });
 
-    const fragment: HTMLTemplateElement = this._createDocumentElement('template') as HTMLTemplateElement;
+    const fragment: HTMLTemplateElement = this._createDocumentElement(
+      "template"
+    ) as HTMLTemplateElement;
 
     fragment.innerHTML = template(propsAndStubs);
-    Object.values(this.children).forEach(child => {
+    Object.values(this.children).forEach((child) => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
       stub.replaceWith(child.getContent());
     });
-
-
 
     return fragment.content;
   }

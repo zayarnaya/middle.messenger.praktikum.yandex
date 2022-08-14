@@ -3,12 +3,11 @@ import { Block } from "../../utils/block";
 import { LogoutProps } from "../../types";
 
 export default class Logout extends Block<LogoutProps, Logout> {
-  public constructor(props:LogoutProps) {
+  public constructor(props: LogoutProps) {
     super("div", props);
   }
-  
 
   public render() {
-        return this.compile(logoutPage, this.props);
+    return this.compile(logoutPage, this.props);
   }
-} 
+}

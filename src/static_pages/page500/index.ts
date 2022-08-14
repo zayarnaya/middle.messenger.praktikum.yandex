@@ -4,6 +4,6 @@ import { Error } from "../error";
 import { render } from "../../utils/renderDOM";
 
 export function error500() {
- const error = new Error(data.errors[500]);
- render(".messenger-wrapper", error);
+  const error = new Error(data.errors[500]);
+  render(".messenger-wrapper", error);
 }

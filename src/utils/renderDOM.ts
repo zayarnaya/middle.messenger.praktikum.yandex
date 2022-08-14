@@ -6,4 +6,4 @@ export function render(query: string, block) {
   block.dispatchComponentDidMount();
 
   return root;
-} 
+}
