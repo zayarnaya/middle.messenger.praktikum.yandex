@@ -39,6 +39,9 @@ export class Form extends Block<FormProps, Form> {
               submitMessage.textContent =
                 "Пароль будет отправлен на вашу почту";
               break;
+            default:
+              submitMessage.textContent = "Успешно! Сейчас загрузим чаты";
+              break;
           }
           getData();
         }

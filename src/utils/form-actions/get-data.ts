@@ -31,6 +31,9 @@ export function getData(): void {
       case "#forgotpass":
         location.hash = "#login";
         break;
+      default:
+        location.hash = "#chats";
+        break;
     }
   }, 3000);
 }
