@@ -1,4 +1,7 @@
+
 Проект "Мессенджер": второй спринт, вторая версия
+
+Pull-request https://github.com/zayarnaya/middle.messenger.praktikum.yandex/pull/2
 
 Учтены замечания ревьюера:
 - максимально (в соответствии с моими умственными способностями) конкретно описаны типы данных;
@@ -13,8 +16,6 @@
 Макет в фигме https://www.figma.com/file/OrsT50kYteyyJFHShrcAYz/Chat?node-id=0%3A1
 
 Сборка Parcel: npm run dev
-
-Билд Parcel: npm run build
 
 Express: npm run start
 
@@ -54,5 +55,3 @@ Netlify: https://grand-vacherin-ee2965.netlify.app/
 Конфигурационный файл TS настроен в соответствии с требованиями, плюс добавлены флаги и библиотеки, с которыми он меньше ругается.
 
 В качестве дизайна использовались дефолтные макеты, в процессе дорабатывались и будут еще дорабатываться.
-
-
