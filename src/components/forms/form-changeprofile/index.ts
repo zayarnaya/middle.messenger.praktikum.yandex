@@ -13,11 +13,10 @@ export function changeProfilePage() {
   let inputs: HTMLInputElement[] = Object.values(data.input.change_profile);
   let theChildren: MultiListProps = {};
 
-  for (let i = 0; i < inputs.length; i++) {
-    let key = `input${i}`;
-    let val = inputs[i];
-    theChildren[key] = new InputField(val);
-  }
+  theChildren = inputs.reduce((theChildren, item, i) => {
+    theChildren[`input${i}`] = new InputField(item);
+      return theChildren;
+   }, {});
 
   layoutWideForm();
   const form = new ChangeUserProfile({

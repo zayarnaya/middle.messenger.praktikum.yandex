@@ -1,4 +1,4 @@
-export const patterns: Record<string, string> = {
+export const PATTERNS: Record<string, string> = {
     login: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
     /*
     от 3 до 20 символов, латиница, может содержать цифры, 

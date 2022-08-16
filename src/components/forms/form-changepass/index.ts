@@ -13,11 +13,10 @@ export function changePassPage() {
 
   let inputsList = {};
 
-  for (let i = 0; i < inputs.length; i++) {
-    let key = `input${i}`;
-    let val = inputs[i];
-    inputsList[key] = new InputField(val);
-  }
+  inputsList = inputs.reduce((inputsList, item, i) => {
+    inputsList[`input${i}`] = new InputField(item);
+      return inputsList;
+   }, {});
 
   layoutWideForm();
   const form = new formChangePass({

@@ -26,7 +26,6 @@ export type Options = {
   headers: any;
   method: Methods;
   data?: any;
-  timeout: number;
 };
 
 export type Events = {

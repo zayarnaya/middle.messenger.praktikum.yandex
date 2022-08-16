@@ -8,13 +8,13 @@ export class HTTPTransport {
     options: Options = {
       headers: undefined,
       method: Methods.GET,
-      timeout: 5000,
-    }
+    },
+    timeout: number =  5000,
   ) => {
     return this.request(
       !!data ? `${url}${queryStringify(data)}` : url,
       { ...options, method: Methods.GET },
-      options.timeout
+      timeout
     );
   };
 
@@ -23,13 +23,13 @@ export class HTTPTransport {
     options: Options = {
       headers: { "Content-Type": "application/json" },
       method: Methods.PUT,
-      timeout: 5000,
-    }
+    },
+    timeout: number =  5000,
   ) => {
     return this.request(
       url,
       { ...options, method: Methods.PUT },
-      options.timeout
+      timeout
     );
   };
 
@@ -37,14 +37,14 @@ export class HTTPTransport {
     url: string,
     options: Options = {
       headers: { "Content-Type": "application/json" },
-      method: Methods.POST,
-      timeout: 5000,
-    }
+      method: Methods.POST,      
+    },
+    timeout: number =  5000,
   ) => {
     return this.request(
       url,
       { ...options, method: Methods.POST },
-      options.timeout
+      timeout
     );
   };
 
@@ -53,13 +53,13 @@ export class HTTPTransport {
     options: Options = {
       headers: undefined,
       method: Methods.DELETE,
-      timeout: 5000,
-    }
+    },
+    timeout: number = 5000
   ) => {
     return this.request(
       url,
       { ...options, method: Methods.DELETE },
-      options.timeout
+      timeout
     );
   };
 

@@ -12,11 +12,10 @@ export function profilePage() {
   let chars: ProfCharProps[] = Object.values(data.profile_char);
   let theChildren = {};
 
-  for (let i = 0; i < chars.length; i++) {
-    let key = `char${i}`;
-    let val = chars[i];
-    theChildren[key] = new ProfChar(val);
-  }
+  theChildren = chars.reduce((theChildren, item, i) => {
+    theChildren[`input${i}`] = new ProfChar(item);
+      return theChildren;
+   }, {});
 
   layoutWideForm();
   const form = new MyUserProfile({
