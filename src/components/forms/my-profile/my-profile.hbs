@@ -1,13 +1,9 @@
-<div class="profile-wrapper">
-    <div class="profile__main-info center-center">
-        {{> profile_avatar}}
-    </div>
-    <div class="profile__chars col">
-        {{#each user.profile}} {{> profile-char}} {{/each}}
-    </div>
-    <div class="profile__change-links">
-        <a href="#changeprofile">Изменить данные</a>
-        <a href="#changepass">Изменить пароль</a>
-        <a class="color-red" href="#logout">Выйти</a>
-    </div>
+<div class="profile__main-info center-center">
+  {{{avatar}}}
+</div>
+{{{charList}}}
+<div class="profile__change-links">
+  <a href="#changeprofile">Изменить данные</a>
+  <a href="#changepass">Изменить пароль</a>
+  <a class="color-red" href="#logout">Выйти</a>
 </div>

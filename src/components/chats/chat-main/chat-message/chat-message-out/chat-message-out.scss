@@ -1,0 +1,85 @@
+@import "./../../../../../variables";
+
+.message-outgoing {
+
+    .chat-main__avatar {
+        display: flex;
+        width: 34px;
+        height: 34px;
+        border: 1px solid $color-lightgray;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .chat-main__message-plus-avatar {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        align-items: flex-end;
+        max-width: 50%;
+    }
+
+    .chat-main__message-out {
+        display: flex;
+        flex-direction: column;
+        background-color: $color-messages-out-back;
+        border: 2px solid $color-messages-out-back;
+        border-radius: 20px;
+        padding: 10px;
+        color: $color-darkgray;
+    }
+
+    .message-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    .timestamp {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        font-size: 9px;
+        color: $color-midgray;
+    }
+
+
+    .got-out {
+        width: 5px;
+        height: 3px;
+        border-radius: 1px;
+        border-left: 2px solid $color-midgray;
+        border-bottom: 2px solid $color-midgray;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+
+    .got-out.color-blue {
+        border-left: 2px solid $color-links;
+        border-bottom: 2px solid $color-links;
+    }
+
+    .got-resp {
+        width: 6px;
+        height: 3px;
+        border-radius: 1px;
+
+        border-bottom: 2px solid $color-midgray;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+
+    }
+
+    .got-resp.color-blue {
+        border-bottom: 2px solid $color-links;
+    }
+}

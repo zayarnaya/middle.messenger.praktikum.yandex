@@ -1,5 +1,6 @@
-Проект второго спринта "Мессенджер"
-=======
+
+Проект "Мессенджер": второй спринт, вторая версия
+
 Pull-request https://github.com/zayarnaya/middle.messenger.praktikum.yandex/pull/2
 
 Учтены замечания ревьюера:

@@ -2,6 +2,7 @@
 @import "./styles/forms";
 @import "./styles/width";
 @import "./styles/wrappers";
+@import "./styles/chat";
 
 
 
@@ -72,4 +73,8 @@ button {
 
 .color-red {
     color: red !important;
+}
+
+.color-blue {
+    color: #3369F3 !important;
 }
