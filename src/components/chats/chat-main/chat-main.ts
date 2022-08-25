@@ -8,8 +8,23 @@ import { ChatsInnerField } from "./chat-main-inner/chat-main-inner";
 import { data } from "../../../data";
 import { render } from "../../../utils/renderDOM";
 import { InputField } from "../../input/input-field";
+import { userSearchModal } from "./chat-main-modals/search";
+import { createChatModal } from "./chat-main-modals/create";
+import { loadChat } from "../../../utils/gotoChat";
+import { HTTPTransport } from "../../../utils/http-transport";
 
-export function buildRightPanel() {
+export function buildRightPanel(id?: number) {
+
+  let loc = document.location.pathname;
+  let chatID: number;
+  if(loc.includes("chats")) {
+    chatID = Number(loc.slice(loc.indexOf("chats") + 6));
+    console.log(chatID, "CHATID");
+    loadChat(chatID);
+  }
+
+
+
   const panel = new ChatRightPanelLayout(
     "div",
     {
@@ -65,4 +80,17 @@ export function buildRightPanel() {
   );
 
   render(".chat-main-wrapper", panel);
+  document.getElementById("call-to-chat")?.addEventListener("click", userSearchModal);
+  document.getElementById("new-chat")?.addEventListener("click", createChatModal);
+  document.getElementById("logout")?.addEventListener("click", () => {
+    let http = new HTTPTransport;
+    http.post("https://ya-praktikum.tech/api/v2/auth/logout", {})
+    .then(response => {
+      if(response.status == 200) {
+        document.location.pathname = "/logout";
+      } else if (response.status != 200) {
+        console.log(response, "Что-ТО НЕ ТАК");
+      }
+    })
+  })
 }

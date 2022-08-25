@@ -22,10 +22,19 @@ export enum Methods {
   DELETE = "DELETE",
 }
 
+export type Indexed<T = unknown> = {
+  [key in string]: T;
+};
+
+export type PlainObject<T = unknown> = {
+  [k in string]: T;
+};
+
 export type Options = {
-  headers: any;
-  method: Methods;
   data?: any;
+  timeout?: number | undefined;
+  headers?: any;
+  method?: Methods | undefined;
 };
 
 export type Events = {
@@ -33,6 +42,7 @@ export type Events = {
   focus?: CallableFunction;
   blur?: CallableFunction;
   click?: CallableFunction;
+  hashchange?: CallableFunction;
 };
 
 export type AvatarProps = {
@@ -87,7 +97,7 @@ export type ChatListMenuProps = {
 
 export type ChatListLeftPanelProps = {
   chatListMenu: ChatListMenu;
-  chatList: MultiList;
+  chatList: MultiList | ChatListItem;
 };
 
 export type ChatlistUserprofileProps = {
@@ -97,12 +107,14 @@ export type ChatlistUserprofileProps = {
 };
 
 export type ChatListItemProps = {
-  profile: URL;
-  avatar: string;
-  name: string;
-  lastMessage: string | HTMLElement;
-  timestamp: string;
-  unread: number;
+  profile?: string;
+  avatar?: string;
+  name?: string;
+  lastMessage?: string | HTMLElement;
+  timestamp?: string;
+  unread?: number;
+  title?: string;
+  chatID?: number;
 };
 
 export type ChatsInnerFieldProps = {

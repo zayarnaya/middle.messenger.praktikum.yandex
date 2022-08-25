@@ -1,5 +1,6 @@
 export function render(query: string, block) {
-  const root = document.querySelector(query);
+  //console.log(query, block, "RENDER ARGS");
+  const root: HTMLElement = document.querySelector(query) as HTMLElement;
   root.textContent = "";
 
   root.appendChild(block.getContent());

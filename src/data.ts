@@ -321,7 +321,7 @@ export const data: Record<string, any> = {
             },
         },
 
-        link: "#myprofile",
+        link: "/profile",
 
         avatar: "https://www.fillmurray.com/g/100/100",
     },

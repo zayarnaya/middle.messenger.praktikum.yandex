@@ -10,13 +10,14 @@ export class MultiList extends Block<MultiListProps, MultiList> {
 
   public render() {
     let vals = [];
+    console.log(this.children, "CHILDREN");
     Object.values(this.children).forEach((child) => {
       vals.push(child._id);
     });
-
+    
     return this.compile(
       Handlebars.compile(multiList({ vals: vals })),
-      this.props
+      {}
     );
   }
 }

@@ -7,6 +7,6 @@ export function layoutWideForm() {
   document
     .getElementById("link-to-chats")
     .addEventListener("click", function () {
-      document.location.hash = "#chats";
+      document.location.pathname = "/messenger";
     });
 }

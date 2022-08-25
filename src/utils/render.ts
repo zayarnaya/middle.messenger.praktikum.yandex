@@ -9,6 +9,47 @@ import { loginForm } from "../components/forms/form-login";
 import { forgotPassPage } from "../components/forms/form-forgotpass";
 import { loggingOut } from "../static_pages/logout";
 import { chatsPage } from "../components/chats";
+import { Router } from "./router";
+import { router } from "../consts";
+
+
+export function pageRouter() {
+  let loc = document.location.pathname;
+  let data = null;
+  if(loc.includes("chats")) {
+    data = loc.slice(loc.indexOf("chats") + 6);
+    console.log(data, "DATA");
+  }
+  let chatID: number | null = !!data
+  ? Number(data)
+  : null;
+  
+  // let userID: number = !!data
+  // ? data.userID
+  // : null;
+
+  console.log(chatID);
+
+router.use("/", loginForm)
+.use("/sign-up", signinForm)
+.use("/settings", changeProfilePage)
+.use("/chats", chatsPage)
+.use(`/chats/${chatID}`, chatsPage)
+.use("/profile", profilePage)
+.use("/changepass", changePassPage)
+.use("/forgotpass", forgotPassPage)
+.use("/logout", loggingOut)
+.use("/login", loginForm)
+
+    // Запускаем роутер
+    .start();
+
+    if (!document.getElementById("theList")) {
+      addList();
+    }
+
+    
+}
 
 export function changeRender(): void {
   switch (document.location.hash) {
@@ -76,22 +117,22 @@ function addList(): void {
   let theList: HTMLElement = document.createElement("div");
   theList.id = "theList";
   let list: HTMLElement = document.createElement("ul");
-  const listed: Record<string, string> = {
-    login: "Логин",
-    forgotpass: "Забыли пароль",
-    signin: "Регистрация",
-    myprofile: "Профиль",
-    changeprofile: "Изменить данные профиля",
-    changepass: "Изменить пароль",
-    chats: "Чаты (декоративная страница без действий)",
+  const listed = {
+    "sign-up": "Регистрация",
+    "forgotpass": "Забыли пароль",
+    "login": "Логин",
+    "profile": "Профиль",
+    "settings": "Настройки профиля",
+    "changepass": "Изменить пароль",
+    "chats": "Чаты (декоративная страница без действий)",
     404: "Ошибка 404",
     500: "Ошибка 500",
-    logout: "Разлогинились",
+    "logout": "Разлогинились",
   };
 
   for (let i = 0; i < Object.keys(listed).length; i++) {
     let a = document.createElement("a");
-    a.setAttribute("href", `#${Object.keys(listed)[i]}`);
+    a.setAttribute("href", `/${Object.keys(listed)[i]}`);
     a.text = Object.values(listed)[i];
 
     let li = document.createElement("li");

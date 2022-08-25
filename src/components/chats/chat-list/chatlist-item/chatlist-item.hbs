@@ -1,4 +1,4 @@
-<div class="chat-list-item">
+<div class="chat-list-item" id={{chatID}}>
   <div class="chat-list-item__avatar">
     <a href={{profile}} class="a-image"><img
         src={{avatar}}
@@ -8,7 +8,7 @@
   </div>
   <div class="chat-list-item__main-info">
     <div class="chat-list-item__user-name">
-      {{name}}
+      {{name}} {{#if title}} в {{title}} {{/if}}
     </div>
     <div class="chat-list-item__last-message">
       <p>{{lastMessage}}</p>

@@ -10,9 +10,9 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
     FLOW_CDU: "flow:component-did-update",
   };
 
-  private _element = null;
+  private _element: HTMLElement;
   private _meta: Record<any, any> = {};
-  public _id = null;
+  public _id: string;
   public props: Props;
   public eventBus: Function;
   public children: Children | {};
@@ -46,7 +46,7 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
     this._id = makeUUID();
 
     this.props = this._makePropsProxy({ ...props, __id: this._id });
-    this.withInternalID = withInternalID;
+    this.withInternalID = withInternalID ? withInternalID : false;
 
     this.eventBus = () => eventBus;
 
@@ -55,16 +55,19 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
   }
 
   private _getChildren(propsAndChildren: Props) {
-    const children = {};
-    const props = {};
+    const children: Record<string, typeof this.children> = {};
+    const props: Record<string, any> = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
+
       if (value instanceof Block) {
         children[key] = value;
       } else {
         props[key] = value;
       }
     });
+
+    //console.log({ children, props }, "ИЗ ГЕТЧИЛДРЕН");
 
     return { children, props };
   }
@@ -80,8 +83,10 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
     const { tagName } = this._meta;
     const { classname } = this._meta;
     this._element = this._createDocumentElement(tagName);
-    if (classname) {
-      classname.split(" ").forEach((name) => this._element.classList.add(name));
+    if (!!classname) {
+      classname.split(" ").forEach((name: string) => {
+        if (!!this._element) this._element.classList.add(name);
+      });
     }
   }
 
@@ -99,7 +104,7 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
     this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   }
 
-  public componentDidMount(oldProps?) { }
+  public componentDidMount(oldProps?) {}
 
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -122,16 +127,20 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
     if (!nextProps) {
       return;
     }
+    //console.log(nextProps, "NEXT PROPS SETPROPS");
 
     const { children, props } = this._getChildren(nextProps);
+    //console.log({ children, props }, "ИЗ СЕТПРОПС");
 
-    if (!!(Object.entries(children).length)) {
+    if (!!Object.entries(children).length) {
       Object.assign(this.children, children);
     }
 
-    if (!!(Object.entries(props).length)) {
+    if (!!Object.entries(props).length) {
       Object.assign(this.props, props);
     }
+
+    //console.log(this.children, "CHILDREN ИЗ СЕТПРОПС");
   };
 
   get element() {
@@ -139,20 +148,22 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
   }
 
   private _render() {
-    const block = this.render();
+    const block = this.render() as Node;
     this._removeEvents();
     if (typeof block == "string") {
-      if (this._element) {
+      if (!!this._element) {
         this._element.innerHTML = block;
       }
     } else {
-      this._element.innerHTML = "";
-      this._element.appendChild(block);
+      if (!!this._element) {
+        this._element.innerHTML = "";
+        this._element.appendChild(block);
+      }
     }
     this._addEvents();
   }
 
-  public render(): void { }
+  public render(): any {}
 
   public getContent() {
     return this.element;
@@ -160,26 +171,47 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
 
   private _addEvents() {
     if (!!this.events && !!this.eventTarget) {
+      let elem: HTMLElement;
+      Object.entries(this.events).forEach((entry) => {
+        if (!!this._element) {
+          elem = this._element.querySelector(this.eventTarget) as HTMLElement;
+        }
+        elem.addEventListener(
+          entry[0] as keyof ElementEventMap,
+          entry[1] as EventListenerOrEventListenerObject
+        );
+      });
+    }
+    /*
+    if (!!this._element && !!this.events && !!this.eventTarget) {
       Object.keys(this.events).forEach((eventName) => {
         this._element
           .querySelector(this.eventTarget)
           .addEventListener(eventName, this.events[eventName]);
+
       });
-    }
+    }*/
   }
 
   private _removeEvents() {
-    if (this.events) {
-      Object.keys(this.events).forEach((eventName) => {
-        this._element.removeEventListener(eventName, this.events[eventName]);
+    if (!!this.events) {
+      let elem: HTMLElement;
+      Object.entries(this.events).forEach((entry) => {
+        if (!!this._element) {
+          elem = this._element.querySelector(this.eventTarget) as HTMLElement;
+        }
+        elem.removeEventListener(
+          entry[0] as keyof ElementEventMap,
+          entry[1] as EventListenerOrEventListenerObject
+        );
       });
+      
     } else if (!this.events) {
       return;
     }
   }
 
   private _makePropsProxy(propsAndChildren) {
-
     const self = this;
     let theProxy = new Proxy(propsAndChildren, {
       get(target, prop) {
@@ -210,7 +242,7 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
   }
 
   public compile(template: Function, props: Props) {
-    const propsAndStubs = { ...props };
+    const propsAndStubs: Record<string, Props> = { ...props } as Record<string, Props>;
 
     Object.entries(this.children).forEach(([key, child]) => {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
@@ -223,7 +255,7 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
     fragment.innerHTML = template(propsAndStubs);
     Object.values(this.children).forEach((child) => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-      stub.replaceWith(child.getContent());
+      if(!!stub) stub.replaceWith(child.getContent());
     });
 
     return fragment.content;

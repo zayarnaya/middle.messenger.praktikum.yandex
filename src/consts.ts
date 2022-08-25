@@ -1,3 +1,6 @@
+import { HTTPTransport } from "./utils/http-transport";
+import { Router } from "./utils/router";
+
 export const PATTERNS: Record<string, string> = {
     login: "^[\\d\\w\\-]*[a-zA-Z]+[\\d\\w\\-]*$",
     /*
@@ -32,4 +35,10 @@ export const PATTERNS: Record<string, string> = {
     Не должно быть пустым
     */
 
-  };
+  }
+
+  export const apiPrefix = "https://ya-praktikum.tech/api/v2";
+
+  export const chatAPIInstance = new HTTPTransport;
+
+  export const router = new Router(".messenger-wrapper");

@@ -19,10 +19,12 @@ export class Form extends Block<FormProps, Form> {
         e.preventDefault();
         this.isValid = this.checkInputsValidity(this.inputs);
         let submitMessage: HTMLElement =
-          document.querySelector(".submit-message");
+          document.querySelector(".submit-message") as HTMLElement;
         if (!this.isValid) {
           submitMessage.textContent = "Заполните все нужные поля";
         } else if (!!this.isValid) {
+          submitMessage.textContent = "Успешно!";
+          /*
           switch (location.hash) {
             case "#login":
               submitMessage.textContent = "Успешно! Сейчас загрузим чаты";
@@ -42,8 +44,8 @@ export class Form extends Block<FormProps, Form> {
             default:
               submitMessage.textContent = "Успешно! Сейчас загрузим чаты";
               break;
-          }
-          getData();
+          }*/
+          //getData();
         }
       },
     };
@@ -77,5 +79,6 @@ export class Form extends Block<FormProps, Form> {
     } else if (!result.includes(false)) {
       return true;
     }
+    return false; //надо проверить все ли правильно
   }
 }

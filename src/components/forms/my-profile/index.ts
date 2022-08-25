@@ -7,9 +7,64 @@ import { layoutWideForm } from "../../../layouts/wide-form/wide-form";
 import { MultiList } from "../../multi-list/multi-list";
 import "./my-profile.scss";
 import { ProfCharProps } from "../../../types";
+import { UserProfileController } from "../../../utils/controllers/userProfileController";
+import { UniversalController } from "../../../utils/controllers/universal";
+import store from "../../../utils/store";
+import { StoreEvents } from "../../../utils/store";
 
 export function profilePage() {
+  //const getProfData = new UniversalController;
+  //getProfData.getUser();
+  //console.log(getProfData.getUser(), "ДОЛЖНО БЫ ПРИЙТИ");
+
+
+  //const getProfileData = new UserProfileController;
+  //"https://www.fillmurray.com/g/100/100" аватар по умолчанию
+
+  //let profData = getProfileData.profile();
   let chars: ProfCharProps[] = Object.values(data.profile_char);
+  //console.log(getProfileData.login);
+  //if(!!getProfileData.isLoaded){console.log("ЗАГРУЗИЛОСЯ", getProfileData.login);}
+  /*
+  let chars: ProfCharProps[] = Object.values({
+    login: {
+      name: "Логин",
+      id: "login",
+      value: getProfileData.login,
+  },
+
+  display_name: {
+      name: "Имя в чате",
+      id: "display_name",
+      value: getProfileData.display_name,
+  },
+
+  first_name: {
+      name: "Имя",
+      id: "first_name",
+      value: getProfileData.first_name,
+  },
+
+  second_name: {
+      name: "Фамилия",
+      id: "second_name",
+      value: getProfileData.second_name,
+  },
+
+  email: {
+      name: "Почта",
+      id: "email",
+      value: getProfileData.email,
+  },
+
+  phone: {
+      name: "Телефон",
+      id: "phone",
+      value: getProfileData.phone,
+  },
+  });
+  */
+  
   let theChildren = {};
 
   theChildren = chars.reduce((theChildren, item, i) => {
@@ -17,6 +72,7 @@ export function profilePage() {
       return theChildren;
    }, {});
 
+   
   layoutWideForm();
   const form = new MyUserProfile({
     avatar: new ProfAvatar({
@@ -25,5 +81,6 @@ export function profilePage() {
     }),
     charList: new MultiList(theChildren, "div", "profile__chars col"),
   });
+  
   render(".wrapper-all-center", form);
 }
