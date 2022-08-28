@@ -10,9 +10,44 @@ import "./form-changeprofile.scss";
 import { MultiListProps } from "../../../types";
 import { FormChangeAvatar } from "../form-changeavatar/form-changeavatar";
 import { ImageAvatar } from "../../avatars/img-avatar/img-avatar";
+import store from "../../../utils/store";
+import { UserAuthController } from "../../../utils/controllers/userAuthController";
 
 export function changeProfilePage() {
-  let inputs: HTMLInputElement[] = Object.values(data.input.change_profile);
+  let controller = new UserAuthController;
+  let userDetails = {};
+  // controller.getUser()
+  // .then(response => {
+  //   if(response.status == 200) {
+  //     let adata = JSON.parse(response.response);
+  //     Object.entries(adata).forEach(entry => {
+  //       userDetails[entry[0]] = entry[1];
+  //       localStorage.setItem(`user_${entry[0]}`, entry[1]);
+  //     });
+
+
+  //   } else {
+  //     console.log(response);
+  //   }
+  // })
+  let inputDummy = data.input.change_profile;
+  Object.entries(inputDummy).forEach(entry => {
+    let newvalue = localStorage.getItem(`user_${entry[0]}`);
+    if(entry[0] == "display_name" && newvalue == "null") {
+      let name = localStorage.getItem("user_first_name");
+      let surname = localStorage.getItem("user_second_name");
+      newvalue = `${name} ${surname}`;
+    }
+    console.log(newvalue, typeof newvalue);
+    entry[1].value = newvalue;
+  });
+
+  console.log(inputDummy);
+  console.log(userDetails);
+  //console.log(localStorage.getItem("user_first_name"), "ИНТЕРЕСНО ЧТО ЕСТЬ В ЛОКАЛ");
+
+  //let inputs: HTMLInputElement[] = Object.values(data.input.change_profile);
+  let inputs: HTMLInputElement[] = Object.values(inputDummy);
   let theChildren: MultiListProps = {};
 
   theChildren = inputs.reduce((theChildren, item, i) => {
@@ -48,4 +83,6 @@ export function changeProfilePage() {
   //render(".wrapper-all-center", form);
   render(".form__placeholder", form);
   render(".avatar__placeholder", avatar);
+
+  
 }

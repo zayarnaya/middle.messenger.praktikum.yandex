@@ -12,7 +12,9 @@ chatavatar
     */
 
     public async change(data: FormData) {
-        request.put(APIurls.CHANGEAVATAR, {data: data})
+        request.put(APIurls.CHANGEAVATAR, {
+            headers: "Content-Type: form/multipart",
+            data: data})
         .then(response => {
         if(response.status == 200) {
             //store.set("chat", data);

@@ -26,6 +26,12 @@ export function pageRouter() {
   check.getUser()
   .then(response => {
     if(response.status == 200) {
+      let adata = JSON.parse(response.response);
+      Object.entries(adata).forEach(entry => {
+
+        localStorage.setItem(`user_${entry[0]}`, entry[1]);
+      });
+      
       console.log("ГЕТЮЗЕР ПРОШЕЛ");
       console.log(response);
       if (loc == "/") {

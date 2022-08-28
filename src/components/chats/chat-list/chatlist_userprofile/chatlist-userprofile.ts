@@ -21,7 +21,6 @@ export class ChatlistUserprofile extends Block<
   .then(response => {
     if(response.status == 200) {
     let adata = JSON.parse(response.response);
-    //console.log(adata, "ДЖЕЙСОН");
     store.set("user", adata);
     } else {
       console.log(response.status, response.response);
@@ -46,20 +45,7 @@ export class ChatlistUserprofile extends Block<
       avatar: avatar,
       name: name
     });
-    //console.log("СТОР ОБНОВИЛСЯ");
-    //console.log(store.getState());
-    //console.log(this.props, "PROPS");
-    //this.children.avatar.setProps({name: this.props.user.first_name});
-    //let fields = this.children.charList.children;
-    //Object.values(fields).forEach(value => {
-      //console.log(value.props);
-      //console.log(value.props.value, "ПРОПСЫ ИНПУТОВ");
-      //console.log(value.props.id, "НАЗВАНИЯ");
-      //let id = value.props.id;
-      //let newval = this.props.user[`${id}`];
-      //console.log(this.props.user[`${id}`]);
-      //console.log(newval);
-      //value.setProps({value: newval});
+
     });
 
     

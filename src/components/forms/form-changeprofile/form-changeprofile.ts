@@ -2,6 +2,8 @@ import { Form } from "../form";
 import { FormProps } from "../../../types";
 import changeProfile from "./form-changeprofile.hbs";
 import "./form-changeprofile.scss";
+import { UserProfileController } from "../../../utils/controllers/userProfileController";
+import store from "../../../utils/store";
 
 export class ChangeUserProfile extends Form {
   public constructor(propsAndChildren: FormProps) {
@@ -9,19 +11,41 @@ export class ChangeUserProfile extends Form {
     Object.values(propsAndChildren.inputList.children).forEach((child) => {
       child.isValid = "true";
     });
-    console.log(propsAndChildren, "FILE VALID");
+
     this.events = {
       submit: (e: Event) => {
         e.preventDefault();
         const form: HTMLFormElement = document.querySelector("form.form-changeprofile") as HTMLFormElement;
-        let formdata = new FormData(form);
-        let inputFile: HTMLInputElement = document.querySelector("input#avatar") as HTMLInputElement;
-        if(!!inputFile.files[0]) {
-          formdata.append("file", inputFile.files[0]);
-        }
+        const inputs: NodeList = form.querySelectorAll("input") as NodeList;
+        console.log(form.querySelectorAll("input"));
+        let submitData: {
+          first_name: string,
+          second_name: string,
+          display_name: string,
+          login: string,
+          email: string,
+          phone: string
+        } = {};
+        inputs.forEach(input => {
+          let name = input.attributes.id.value;
+          let val = input.value;
+          submitData[name] = val;
+        });
+        console.log(JSON.stringify(submitData));
+        const submitChange = new UserProfileController;
+        submitChange.changeProfile(JSON.stringify(submitData))
+        .then(response => {
+          if(response.status == 200) {
+            let adata = JSON.parse(response.response);
+            store.set("user", adata);
+            Object.entries(adata).forEach(entry => {
 
-        console.log(formdata.get("file"));
-        //console.log(form.querySelectorAll("input"));
+              localStorage.setItem(`user_${entry[0]}`, entry[1]);
+            });
+          } else {
+            console.log(response.status, response.response);
+          }
+        });
 
       }
     };
