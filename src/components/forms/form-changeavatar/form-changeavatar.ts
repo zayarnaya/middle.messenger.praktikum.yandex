@@ -21,10 +21,9 @@ export class FormChangeAvatar extends Form {
                 let formdata = new FormData(form);
                 let input: HTMLInputElement = document.querySelector("input#avatar") as HTMLInputElement;
                 formdata.append("avatar", input.files[0]);
-                //console.log(formdata.has("file"));
+ 
                 //let file = formdata.get("file");
-                //console.log(file);
-                //console.log((input.files[0]));
+
                 const submitChange = new AvatarController;
                 submitChange.change(formdata);
             }
