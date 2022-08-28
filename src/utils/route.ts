@@ -38,8 +38,8 @@ export class Route {
         return isEqual(pathname, this._pathname);
     }
 
-    render() {
-
+    renderIt() {
+console.log("ROUTE RENDER");
         if (!this._block) {
             //this._block = new this._blockClass(); //////переписать под наше
 

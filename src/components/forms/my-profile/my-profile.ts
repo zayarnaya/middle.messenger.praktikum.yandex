@@ -3,13 +3,22 @@ import myProfile from "./my-profile.hbs";
 import { MyUserProfileProps } from "../../../types";
 import "./my-profile.scss";
 import store, { StoreEvents } from "../../../utils/store";
-import { UniversalController } from "../../../utils/controllers/universal";
+import { UserAuthController } from "../../../utils/controllers/userAuthController";
 
 export class MyUserProfile extends Block<MyUserProfileProps, MyUserProfile> {
   public constructor(propsAndChildren: MyUserProfileProps) {
     super("div", propsAndChildren, false, "profile-wrapper");
-    let getuser = new UniversalController;
-    let user = getuser.getUser();
+    let getuser = new UserAuthController;
+    let user = getuser.getUser()
+            .then(response => {
+            if(response.status == 200) {
+            let adata = JSON.parse(response.response);
+            console.log(adata, "ДЖЕЙСОН");
+            store.set("user", adata);
+            } else {
+              console.log(response.status, response.response);
+            }
+          });
     //console.log(this.children);
     store.on(StoreEvents.Updated, () => {
       // вызываем обновление компонента, передав данные из хранилища

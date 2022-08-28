@@ -13,6 +13,8 @@ import { AvatarChange } from "./components/avatars/change-avatar/change-avatar";
 import { ProfAvatar } from "./components/avatars/profile_avatar/profile-avatar";
 import { ProfChar } from "./components/profile-chars/profile-char/profile-char";
 import { ChatListItem } from "./components/chats/chat-list/chatlist-item/chatlist-item";
+import { MenuItem } from "./components/chats/chat-main/chat-main-menu/menu-items/menu-item";
+import { AvatarChangeImg } from "./components/avatars/change-avatar/avatar-img/avatar-img";
 
 export enum Methods {
   GET = "GET",
@@ -20,6 +22,24 @@ export enum Methods {
   PUT = "PUT",
   PATCH = "PATCH",
   DELETE = "DELETE",
+}
+
+export enum APIurls {
+  BASE = "https://ya-praktikum.tech/api/v2",
+  LOGIN = "https://ya-praktikum.tech/api/v2/auth/signin",
+  SIGNUP = "https://ya-praktikum.tech/api/v2/auth/signup",
+  GETUSER = "https://ya-praktikum.tech/api/v2/auth/user",
+  GETUSERBYID = "https://ya-praktikum.tech/api/v2/user/",
+  LOGOUT = "https://ya-praktikum.tech/api/v2/auth/logout",
+  CHATS = "https://ya-praktikum.tech/api/v2/chats",
+  CREATECHAT = "https://ya-praktikum.tech/api/v2/chats",
+  CHATAVATAR = "https://ya-praktikum.tech/api/v2/chats/avatar",
+  CHATUSERS = "https://ya-praktikum.tech/api/v2/chats/users",
+  GETTOKEN = "https://ya-praktikum.tech/api/v2/chats/token/",
+  CHANGEPROFILE = "https://ya-praktikum.tech/api/v2/user/profile",
+  CHANGEAVATAR = "https://ya-praktikum.tech/api/v2/user/profile/avatar",
+  SEEKUSER = "https://ya-praktikum.tech/api/v2/user/search",
+
 }
 
 export type Indexed<T = unknown> = {
@@ -50,6 +70,18 @@ export type AvatarProps = {
   name?: string;
 };
 
+export type ChangeAvatarProps = {
+  avatar: AvatarChangeImg;
+  input?: InputField;
+  button?: Button;
+};
+
+export type AvatarImgProps = {
+  avatar: string;
+  events?: Events;
+  eventTarget?: string;
+};
+
 export type ButtonProps = {
   name?: string;
   label?: string;
@@ -64,6 +96,7 @@ export type InputFieldProps = {
   required?: boolean;
   placeholder?: string;
   checkPass?: boolean;
+  accept?: string;
 };
 
 export type ProfCharProps = {
@@ -87,7 +120,7 @@ export type ErrorProps = {
 
 export type MultiListProps = Record<
   string,
-  InputField | ProfChar | ChatListItem
+  InputField | ProfChar | ChatListItem | MenuItem
 >;
 
 export type ChatListMenuProps = {
@@ -125,13 +158,28 @@ export type ChatsInnerFieldProps = {
 
 export type ChatRightPanelLayoutProps = {
   mainmenu: ChatsMenu;
-  maininner: ChatsInnerField;
+  maininner?: ChatsInnerField;
   messagefield: FormMessage;
+};
+
+export type ChatsModalProps = {
+  input?: InputField;
+  button?: Button;
 };
 
 export type ChatsMenuProps = {
   chatavatar: string;
   chatname: string;
+  chatMenu: MultiList;
+  actionsMenu: MultiList;
+};
+
+export type MenuItemProps = {
+  text: string;
+  id: string;
+  classname?: string;
+  link?: string;
+  events?: Events;
 };
 
 export type formChangePassProps = {
@@ -141,7 +189,8 @@ export type formChangePassProps = {
 };
 
 export type FormProps = {
-  avatar?: AvatarChange | ProfAvatar;
+  avatar?: AvatarChange | ProfAvatar | AvatarChangeImg;
+  avatarForm?: AvatarChange;
   inputList?: MultiList;
   button?: Button;
   input?: InputField;

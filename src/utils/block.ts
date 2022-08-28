@@ -195,6 +195,7 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
 
   private _removeEvents() {
     if (!!this.events) {
+      //console.log(this.events, "EVENTS");
       let elem: HTMLElement;
       Object.entries(this.events).forEach((entry) => {
         if (!!this._element) {

@@ -8,21 +8,39 @@ import { InputField } from "../../input/input-field";
 import { Button } from "../../buttons/button-submit/button";
 import { ChatListItem } from "./chatlist-item/chatlist-item";
 import { MultiList } from "../../multi-list/multi-list";
-import { ChatListItemProps, MultiListProps } from "../../../types";
+import { APIurls, ChatListItemProps, MultiListProps } from "../../../types";
 import "./../../../style.scss";
-import { UniversalController } from "../../../utils/controllers/universal";
+import { UniversalController } from "../../../utils/controllers/userAuthController";
 import store, { StoreEvents } from "../../../utils/store";
 import { ChatController } from "../../../utils/controllers/chatController";
 import { isEmpty } from "../../../utils/minor-functions/isEmpty";
 import { Block } from "../../../utils/block";
+import { ChatsController } from "../../../utils/controllers/chatsController";
+import { HTTPTransport } from "../../../utils/http-transport";
 
 export function buildLeftPanel() {
   //const chats: ChatListItemProps[] = Object.values(data.chats);
   //const theChildren: Record<string, ChatListItem> = {};
   //const ids = [];
 
-  const getChats = new ChatController;
-  const chats = getChats.getChats(0, 10);
+  //const getChats = new ChatController;
+  //const chats = getChats.getChats(0, 10);
+  const getChats = new ChatsController;
+  getChats.getChats(0, 10)
+          .then(response => {
+            if(response.status == 200) {
+            let adata = JSON.parse(response.response);
+            console.log(adata, "ДЖЕЙСОН чаты");
+            store.set("chatlist", adata);
+            console.log(response.response, response.status, "ЧАТЛИЧТ");
+            } else {
+              console.log(response.response, response.status);
+            }
+          });
+
+  // const getc = new HTTPTransport;
+  // getc.get(APIurls.CHATS, {})
+  // .then(response => console.log(response));
 
   /*
   for (let i = 0; i < chats.length; i++) {
@@ -69,10 +87,7 @@ export function buildLeftPanel() {
       //chatList: "Пока чатов нет"
       //chatList: new MultiList({0: new ChatListItem({})}, "ul", "chat-list__list_unmarked")
       chatList: new ChatListItem({
-        name: "test",
-        unread: 0,
-        title: "обратно тест",
-        chatID: 0,
+
       })
     },
     "chat-list"

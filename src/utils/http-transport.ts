@@ -11,6 +11,7 @@ export class HTTPTransport {
   };
 
   put = (url: string, options: Options) => {
+    console.log("PUT");
     return this.request(
       url,
       {
@@ -106,9 +107,10 @@ export class HTTPTransport {
   
     */
 
-  request = (url: string, options: Options, timeout: number = 5000) => {
+  request = (url: string, options: Options, timeout: number = 1000) => {
     //console.log("REQUEST");
     const { headers = {}, method, data } = options;
+    //console.log(options, "OPTIONS");
     return new Promise((resolve, reject) => {
       if (!method) {
         reject("no method!");

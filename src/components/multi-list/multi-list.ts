@@ -10,7 +10,7 @@ export class MultiList extends Block<MultiListProps, MultiList> {
 
   public render() {
     let vals = [];
-    console.log(this.children, "CHILDREN");
+    //console.log(this.children, "CHILDREN");
     Object.values(this.children).forEach((child) => {
       vals.push(child._id);
     });

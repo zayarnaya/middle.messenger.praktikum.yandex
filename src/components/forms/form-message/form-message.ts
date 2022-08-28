@@ -1,6 +1,8 @@
 import { Form } from "../form";
 import { FormProps } from "../../../types";
 import sendMessageForm from "./form-message.hbs";
+import { sendMessage } from "../../../utils/gotoChat";
+import store from "../../../utils/store";
 
 export class FormMessage extends Form {
   public constructor(props: FormProps, classname?: string) {
@@ -20,11 +22,18 @@ export class FormMessage extends Form {
           errorMessage.textContent = "Сообщение не должно быть пустым!";
           return;
         }
-        let result: Record<string, string> = { message: input.value };
+        //let result: Record<string, string> = { message: input.value };
+        let message = input.value;
 
-        console.log(result);
+        //console.log(result);
         input.value = "";
         errorMessage.textContent = " ";
+        console.log( store.getState(), "STATTE");
+        let chatID = store.getState().chat.id;
+        let userID = store.getState().user.id;
+        let token = store.getState().chat.token;
+
+        sendMessage(chatID, userID, token, message);
       },
     };
   }

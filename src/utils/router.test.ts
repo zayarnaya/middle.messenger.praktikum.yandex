@@ -1,4 +1,10 @@
+const assert = require('assert');
+
+import { Router } from "./router";
+
 import { Route } from "./route";
+
+
 
 
 export class Router {
@@ -51,14 +57,14 @@ export class Router {
             this._currentRoute.leave();
         }
         this._currentRoute = route;
-        //route.renderIt(route, pathname);// тут наверное нужен другой рендер? хотя вроде нет. Надо посмотреть что с аргументами
-        route.renderIt();
+        route.render(route, pathname);// тут наверное нужен другой рендер? хотя вроде нет. Надо посмотреть что с аргументами
+
     }
 
     go(pathname: string) {
         console.log(pathname);
-        // if(!!this._currentRoute) {
-        // this._currentRoute.leave();}
+        if(!!this._currentRoute) {
+        this._currentRoute.leave();}
         this.history.pushState({}, "", pathname);
         this._onRoute(pathname);
     }

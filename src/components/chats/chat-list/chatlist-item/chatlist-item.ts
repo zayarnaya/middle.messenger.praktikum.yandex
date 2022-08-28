@@ -9,6 +9,7 @@ import { pageRouter } from "../../../../utils/render";
 export class ChatListItem extends Block<ChatListItemProps, ChatListItem> {
   public constructor(propsAndChildren: ChatListItemProps) {
     super("li", propsAndChildren);
+    if(!!propsAndChildren.chatID){
     this.events = {
       click: function () {
         console.log(this);
@@ -26,9 +27,8 @@ export class ChatListItem extends Block<ChatListItemProps, ChatListItem> {
           //router.go(`/chats/${id}`);
           //router.use(`/chats/${id}`, chatsPage());
           //store.set("chats", `/chats/${id}`);
-          pageRouter ({
-            chatID: id
-          });
+          router.go(`/chats/${id}`);
+
           
         } else if (!active) {
           this.classList.add("highlight");
@@ -37,14 +37,13 @@ export class ChatListItem extends Block<ChatListItemProps, ChatListItem> {
           //router.go(`/chats/${id}`);
           //router.use(`/chats/${id}`, chatsPage());
           //store.set("chats", `/chats/${id}`);
-          pageRouter ({
-            chatID: id
-          });
+          router.go(`/chats/${id}`);
         }
       },
     };
     this.eventTarget = ".chat-list-item";
-    console.log(this.events, "EVENTSSSSSSSSSSS");
+  }
+
   }
 
   public render() {

@@ -7,10 +7,7 @@ import { layoutWideForm } from "../../../layouts/wide-form/wide-form";
 import { MultiList } from "../../multi-list/multi-list";
 import "./my-profile.scss";
 import { ProfCharProps } from "../../../types";
-import { UserProfileController } from "../../../utils/controllers/userProfileController";
-import { UniversalController } from "../../../utils/controllers/universal";
-import store from "../../../utils/store";
-import { StoreEvents } from "../../../utils/store";
+
 
 export function profilePage() {
   //const getProfData = new UniversalController;

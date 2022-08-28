@@ -1,3 +1,4 @@
+import { ChatsModalProps } from "../../../../../types";
 import { SearchAPI } from "../../../../../utils/api/search-api";
 import { Block } from "../../../../../utils/block";
 import { ChatSettingsController } from "../../../../../utils/controllers/chatSettingsController";
@@ -6,8 +7,8 @@ import chatMainModalCreate from "./chat-main-modal-create.hbs";
 
 
 
-export class ChatsCreateChat extends Block<ChatsMenuProps, ChatsCreateChat> {
-  public constructor(props: ChatsMenuProps, classname?: string) {
+export class ChatsCreateChat extends Block<ChatsModalProps, ChatsCreateChat> {
+  public constructor(props: ChatsModalProps, classname?: string) {
     super("div", props, false, classname = "modal");
     this.events = {
       submit: function (e: Event) {
@@ -22,8 +23,14 @@ export class ChatsCreateChat extends Block<ChatsMenuProps, ChatsCreateChat> {
         const seek = new ChatSettingsController;
         seek.create(requestData)
         .then(response => {
-          const resultField = document.getElementById("result");
+          if( response.status == 200) {
+          const resultField = document.getElementById("result") as HTMLElement;
+          resultField.textContent = "Чат успешно создан! " + response.response;
           console.log(response.response, response.status);
+          } else {
+            console.log("ЧТО_ТО НЕ ТАК");
+            console.log(response.response, response.status);
+          }
 
           /*
           const names: string[] = [];

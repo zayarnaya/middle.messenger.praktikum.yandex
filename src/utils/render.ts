@@ -10,25 +10,74 @@ import { forgotPassPage } from "../components/forms/form-forgotpass";
 import { loggingOut } from "../static_pages/logout";
 import { chatsPage } from "../components/chats";
 import { Router } from "./router";
-import { router } from "../consts";
+import { chatIDfromLocation, router } from "../consts";
+import { isAuth } from "./isAuth";
+import { HTTPTransport } from "./http-transport";
+import { APIurls } from "../types";
+import { UserAuthController } from "./controllers/userAuthController";
 
 
 export function pageRouter() {
+  //console.log(isAuth());
   let loc = document.location.pathname;
-  let data = null;
-  if(loc.includes("chats")) {
-    data = loc.slice(loc.indexOf("chats") + 6);
-    console.log(data, "DATA");
+  //const check = new HTTPTransport;
+  //check.get(APIurls.GETUSER, {})
+  const check = new UserAuthController;
+  check.getUser()
+  .then(response => {
+    if(response.status == 200) {
+      console.log("ГЕТЮЗЕР ПРОШЕЛ");
+      console.log(response);
+      if (loc == "/") {
+        router.go("/chats");
+      }
+      
+  } else if (response.status != 200) {
+      console.log(response.status, response.response);
+      console.log("НЕ ЗАЛОГИНЕНЫ ИЛИ РАЗЛОГИНИЛИСЬ");
+      if(loc != "/") {
+            document.querySelector(".messenger-wrapper").textContent = 
+            "Ой! Что-то разлогинились, перебрасываем на страницу входа";
+            setTimeout(() => router.go("/"), 2000);
+      }
+
+      
+  } else if (!response) {
+      console.log("ГЕТЮЗЕР НЕ ПОЛУЧИЛ ОТВЕТА");
+      //return false;
   }
-  let chatID: number | null = !!data
-  ? Number(data)
-  : null;
+});
+
   
+  //let loc = document.location.pathname;
+  // let data = null;
+  // if(loc.includes("chats")) {
+  //   data = loc.slice(loc.indexOf("chats") + 6);
+  //   console.log(data, "DATA");
+  // }
+  // let chatID: number | null = !!data
+  // ? Number(data)
+  // : null;
+  let chatID = chatIDfromLocation();
+
   // let userID: number = !!data
   // ? data.userID
   // : null;
 
-  console.log(chatID);
+  //console.log(chatID);
+  // if(!!isAuth() && loc == "/") {
+  //   router.go("/chats");
+  // } else if (!isAuth() && loc == "/") {
+  //   console.log("НЕ ЗАЛОГИНЕНЫ");
+  // } else if (!isAuth() && loc != "/") {
+  //   document.querySelector(".messenger-wrapper").textContent = 
+  //   "Ой! Что-то разлогинились, перебрасываем на страницу входа";
+  //   setTimeout(() => router.go("/"), 3000);
+  // }
+
+  if (!document.getElementById("theList")) {
+    addList();
+  }
 
 router.use("/", loginForm)
 .use("/sign-up", signinForm)
@@ -44,9 +93,7 @@ router.use("/", loginForm)
     // Запускаем роутер
     .start();
 
-    if (!document.getElementById("theList")) {
-      addList();
-    }
+
 
     
 }

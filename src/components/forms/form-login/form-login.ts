@@ -2,9 +2,10 @@ import formLogin from "./form-login.hbs";
 import { Form } from "../form";
 import { FormProps } from "../../../types";
 import "./form-login.scss";
-import { LoginController } from "../../../utils/controllers/loginController";
+//import { LoginController } from "../../../utils/controllers/loginController";
 import { HTTPTransport } from "../../../utils/http-transport";
-import { LoginAPI } from "../../../utils/api/login-api";
+import { UserAuthController } from "../../../utils/controllers/userAuthController";
+//import { LoginAPI } from "../../../utils/api/login-api";
 
 
 export class loginFormAll extends Form {
@@ -20,7 +21,8 @@ export class loginFormAll extends Form {
           submitMessage.textContent = "Заполните все нужные поля";
         } else if (!!this.isValid) {
           submitMessage.textContent = "Успешно!";
-          const log = new LoginController;
+          //const log = new LoginController;
+          const login = new UserAuthController;
           const form: HTMLFormElement = document.querySelector(".form-login") as HTMLFormElement;
           const formData = new FormData(form);
           let data = {};
@@ -28,11 +30,15 @@ export class loginFormAll extends Form {
             data[key] = value;
           });
           const json = JSON.stringify(data);
-          const API = new LoginAPI;
+          //const API = new LoginAPI;
+
+
           //API.request(json);
           //.then(response => console.log(response.status, response.responseText, "RESPONSE"));
 
-          log.login(json); //работает, надо потом разобраться с типами
+          //log.login(json); //работает, надо потом разобраться с типами
+
+          login.login(json);
           /*
           const HTTP = new HTTPTransport;
           HTTP.post("https://ya-praktikum.tech/api/v2/auth/signin", {data: json})

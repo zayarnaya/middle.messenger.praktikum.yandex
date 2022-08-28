@@ -42,3 +42,19 @@ export const PATTERNS: Record<string, string> = {
   export const chatAPIInstance = new HTTPTransport;
 
   export const router = new Router(".messenger-wrapper");
+
+  export const location = document.location.pathname;
+
+  export const chatIDfromLocation = (): number => {
+    let loc = document.location.pathname;
+    let data = null;
+    if(loc.includes("chats")) {
+      data = loc.slice(loc.indexOf("chats") + 6);
+      console.log(data, "DATA");
+    }
+    let chatID: string = !!data
+    ? data
+    : "";
+    return Number(chatID);   
+
+  }

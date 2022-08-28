@@ -2,7 +2,8 @@ import formSignin from "./form-signin.hbs";
 import "./form-signin.scss";
 import { Form } from "../form";
 import { FormProps } from "../../../types";
-import { SigninController } from "../../../utils/controllers/signinController";
+import { UserAuthController } from "../../../utils/controllers/userAuthController";
+//import { SigninController } from "../../../utils/controllers/signinController";
 
 export class signinFormAll extends Form {
   public constructor(propsAndChildren: FormProps) {
@@ -17,7 +18,12 @@ export class signinFormAll extends Form {
           submitMessage.textContent = "Заполните все нужные поля";
         } else if (!!this.isValid) {
           submitMessage.textContent = "Успешно!";
-          const sign = new SigninController;
+
+
+          //const sign = new SigninController;
+          const signUp = new UserAuthController;
+
+
           const form: HTMLFormElement = document.querySelector(".form-signin") as HTMLFormElement;
           const formData = new FormData(form);
           let data = {};
@@ -26,7 +32,8 @@ export class signinFormAll extends Form {
           });
           const json = JSON.stringify(data);
 
-          sign.signin(json); //работает, надо потом разобраться с типами
+          //sign.signin(json); //работает, надо потом разобраться с типами
+          signUp.signUp(json);
           console.log("УШЛО?");
         }
 
