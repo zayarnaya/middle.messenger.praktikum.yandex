@@ -29,7 +29,7 @@ export class HTTPTransport {
       url,
       {
         ...options,
-        headers: { "Content-Type": "multipart/form-data" },
+        //headers: { "Content-Type": "multipart/form-data" },
         method: Methods.PUT,
       },
       10000
