@@ -1,4 +1,4 @@
-import { APIurls } from "../../types";
+import { APIurls, Methods } from "../../types";
 import { HTTPTransport } from "../http-transport";
 
 const request = new HTTPTransport;
@@ -12,9 +12,9 @@ chatavatar
     */
 
     public async change(data: FormData) {
-        request.put(APIurls.CHANGEAVATAR, {
-            headers: "Content-Type: form/multipart",
-            data: data})
+        request.file(APIurls.CHANGEAVATAR, {
+            //headers: "Content-Type: form/multipart",
+            data})
         .then(response => {
         if(response.status == 200) {
             //store.set("chat", data);
@@ -27,6 +27,29 @@ chatavatar
         }
 
         });
+
+        // request.request(APIurls.CHANGEAVATAR, {
+        //     headers: { "Content-Type": "form/multipart" },
+        //     method: Methods.PUT,
+        //     data: new FormData(form),
+        // })
+        // .then(response => console.log(response));
+
+
+        // const xhr = new XMLHttpRequest();
+        // xhr.open("PUT", APIurls.CHANGEAVATAR);
+        // xhr.setRequestHeader("Content-Type", "form/multipart");
+        // xhr.withCredentials = true;
+        // xhr.send(data);
+
+        // xhr.onload = function () {
+        //     console.log(xhr.response);
+        //   };
+
+
+
+        //     
+          
 
     }
 

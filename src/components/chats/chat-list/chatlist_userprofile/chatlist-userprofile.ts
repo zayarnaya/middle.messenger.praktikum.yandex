@@ -3,6 +3,7 @@ import userProfile from "./chatlist-userprofile.hbs";
 import { ChatlistUserprofileProps } from "../../../../types";
 import store, { StoreEvents } from "../../../../utils/store";
 import { UserAuthController } from "../../../../utils/controllers/userAuthController";
+import { defaulAvatar, filePrefix } from "../../../../consts";
 
 export class ChatlistUserprofile extends Block<
   ChatlistUserprofileProps,
@@ -33,9 +34,9 @@ export class ChatlistUserprofile extends Block<
     console.log(!!newProps.user.avatar, "ЕСТЬ ЛИ АВАТАР");
     let avatar: string;
     if(!newProps.user.avatar) {
-      avatar = "https://www.fillmurray.com/g/100/100";
+      avatar = defaulAvatar;
     } else {
-      avatar = newProps.user.avatar;
+      avatar = `${filePrefix}${newProps.user.avatar}`;
     }
 
     let name = newProps.user.display_name

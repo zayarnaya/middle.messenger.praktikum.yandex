@@ -17,18 +17,48 @@ import { MenuItem } from "./chat-main-menu/menu-items/menu-item";
 import { UserAuthController } from "../../../utils/controllers/userAuthController";
 import { MultiListProps } from "../../../types";
 import { MultiList } from "../../multi-list/multi-list";
-import { chatIDfromLocation } from "../../../consts";
+import { chatIDfromLocation, defaultChatAvatar, filePrefix } from "../../../consts";
+import store, { StoreEvents } from "../../../utils/store";
+import { ChatsController } from "../../../utils/controllers/chatsController";
+import { isEmpty } from "../../../utils/minor-functions/isEmpty";
+import { deleteUserModal, modalUserRemove } from "./chat-main-modals/delete-user";
+import { createChatModals } from "./chat-main-modals/delete-user/index copy";
 
 export function buildRightPanel() {
+  console.log("ФУНКЦИЯ ПОШЛА ЗАНОВО")
 
-  // let loc = document.location.pathname;
-  // let chatID: number;
-  // if(loc.includes("chats/")) {
-  //   chatID = Number(loc.slice(loc.indexOf("chats") + 6));
-  //   console.log(chatID, "CHATID");
-  //   loadChat(chatID);
-  // }
-  let chatID = chatIDfromLocation(); //оно тут нужно?
+  const chatID = chatIDfromLocation(); //оно тут нужно?
+  console.log("чат ид");
+
+  const getChats = new ChatsController;
+  getChats.getChats(0, 10)
+          .then(response => {
+            if(response.status == 200) {
+            let adata = JSON.parse(response.response);
+            let bdata = {};
+            adata.forEach(data => {
+              if(data.id == chatID) {
+                Object.assign(bdata, data);
+              }
+            });
+            store.set("thischat", bdata);
+            console.log(response.response, response.status);
+            } else {
+              console.log(response.response, response.status);
+            }
+          });
+
+  
+  store.on(StoreEvents.Updated, () => {
+    let chat = store.getState().thischat;
+    mainmenu.setProps({
+      chatavatar: chat.avatar
+      ? `${filePrefix}${chat.avatar}`
+      : defaultChatAvatar,
+      chatname: chat.title as string,
+    })
+
+     });
 
   const createChat = new MenuItem({
     text: "Создать чат",
@@ -46,6 +76,14 @@ export function buildRightPanel() {
     }
   });
 
+  const deleteUser = new MenuItem({
+    text: "Удалить друга из чата",
+    id: "del-from-chat",
+    events: {
+      click: () => modalUserRemove()
+    }
+  });
+
   const deleteChat = new MenuItem({
     text: "Удалить чат",
     id: "delete-chat",
@@ -55,19 +93,13 @@ export function buildRightPanel() {
     }
   });
 
-  const chatMenuItems: MenuItem[] = [createChat, inviteUser, deleteChat];
+  const chatMenuItems: MenuItem[] = [createChat, inviteUser, deleteUser, deleteChat];
 
   let chatMenuChildren: MultiListProps = {};
 
   chatMenuItems.forEach(function(elem, index) {
     chatMenuChildren[index] = elem;
   })
-
-  // chatMenuChildren = chatMenuItems.reduce((chatMenuChildren, item, i) => {
-  //   chatMenuChildren[i] = item;
-  //     return chatMenuChildren;
-  //  }, {});
-
    
   const logout = new MenuItem({
     text: "Выйти",
@@ -77,15 +109,6 @@ export function buildRightPanel() {
       click: () => {
         let logout = new UserAuthController;
         logout.logOut();
-    //     let http = new HTTPTransport;
-    // http.post("https://ya-praktikum.tech/api/v2/auth/logout", {})
-    // .then(response => {
-    //   if(response.status == 200) {
-    //     document.location.pathname = "/logout";
-    //   } else if (response.status != 200) {
-    //     console.log(response, "Что-ТО НЕ ТАК");
-    //   }
-    // })
       }
     }
   });
@@ -96,60 +119,30 @@ export function buildRightPanel() {
 
   actionsMenuItems.forEach(function(elem, index) {
     actionsMenuChildren[index] = elem;
-  })
+  });
 
-  // actionsMenuChildren = actionsMenuItems.reduce((actionsMenuChildren, item, i) => {
-  //   actionsMenuChildren[i] = item;
-  //     return actionsMenuChildren;
-  //  }, {});
-
-console.log(chatMenuChildren, actionsMenuChildren, "ЬЕНЮ ПОЛЯ");
+  const mainmenu = new ChatsMenu(
+    {
+      chatavatar: "",
+      chatname: "",
+      chatMenu: new MultiList(
+        chatMenuChildren,
+        "ul",
+        ""
+      ),
+      actionsMenu: new MultiList(
+        actionsMenuChildren,
+        "ul",
+        ""
+      )
+    },
+    "chat-main__menu"
+  );
 
   const panel = new ChatRightPanelLayout(
     "div",
     {
-      mainmenu: new ChatsMenu(
-        {
-          chatavatar: data.chats[1].avatar as string,
-          chatname: data.chats[1].name as string,
-          chatMenu: new MultiList(
-            chatMenuChildren,
-            "ul",
-            ""
-          ),
-          actionsMenu: new MultiList(
-            actionsMenuChildren,
-            "ul",
-            ""
-          )
-        },
-        "chat-main__menu"
-      ),
-/*
-      maininner: new ChatsInnerField(
-        "div",
-        {
-          date: "12 мая",
-
-          incoming: new ChatMessageIn({
-            avatar: data.chats[1].avatar,
-            message: `<p>Какой чудесный день!</p>
-                <p>Какой чудесный пень!</p>
-                <p>Какой чудесный я!<br />
-                    И песенка моя!</p>`,
-            time: "11:56",
-            name: data.chats[1].name,
-          }),
-
-          outgoing: new ChatMessageOut({
-            avatar: data.user.avatar,
-            message: `<p>Невероятно.</p>`,
-            time: "12:06",
-            name: data.user.profile.display_name.value,
-          }),
-        },
-        "chat-main__inner"
-      ), */
+      mainmenu: mainmenu,
 
       messagefield: new FormMessage(
         {
@@ -170,31 +163,5 @@ console.log(chatMenuChildren, actionsMenuChildren, "ЬЕНЮ ПОЛЯ");
   );
 
   render(".chat-main-wrapper", panel);
-  // document.getElementById("call-to-chat")?.addEventListener("click", userSearchModal);
-  // document.getElementById("new-chat")?.addEventListener("click", createChatModal);
-  // document.getElementById("logout")?.addEventListener("click", () => {
-  //   let http = new HTTPTransport;
-  //   http.post("https://ya-praktikum.tech/api/v2/auth/logout", {})
-  //   .then(response => {
-  //     if(response.status == 200) {
-  //       document.location.pathname = "/logout";
-  //     } else if (response.status != 200) {
-  //       console.log(response, "Что-ТО НЕ ТАК");
-  //     }
-  //   })
-  // });
-
-  /*
-  let message1 = new ChatMessageOut({
-    avatar: data.user.avatar,
-    message: `<p>Невероятно.</p>`,
-    time: "12:06",
-    name: data.user.profile.display_name.value,
-  });
-
-  console.log(message1.render());
-  let messageList: Node = document.querySelector(".chat-main__inner") as Node;
-  messageList.appendChild(message1.render());
-  */
 
 }

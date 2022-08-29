@@ -43,7 +43,7 @@ export const PATTERNS: Record<string, string> = {
 
   export const router = new Router(".messenger-wrapper");
 
-  export const location = document.location.pathname;
+  export const locationPrefix = document.location.pathname;
 
   export const chatIDfromLocation = (): number => {
     let loc = document.location.pathname;
@@ -58,5 +58,11 @@ export const PATTERNS: Record<string, string> = {
     return Number(chatID);   
 
   }
+
+  export const filePrefix = "https://ya-praktikum.tech/api/v2/resources";
+
+  export const defaulAvatar = "https://ya-praktikum.tech/api/v2/resources/885442f2-9e8d-45f8-899f-40ba391a136a/0ba78315-e102-4a90-bc89-7a5243cf1c22_user-secret-solid-gray.png";
+
+  export const defaultChatAvatar = "https://ya-praktikum.tech/api/v2/resources/6164146d-6a5b-4844-8d38-36bd6b599112/8809d003-c2e2-40b6-b60a-15a2fc114b7b_champagne-glasses-gray.png"
 
 

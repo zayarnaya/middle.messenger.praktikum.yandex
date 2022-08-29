@@ -1,29 +1,26 @@
 {{#if chatID}}
-<div class="chat-list-item" id={{chatID}}>
-  <div class="chat-list-item__avatar">
-    <a href={{profile}} class="a-image"><img
-        src={{avatar}}
-        alt="{{name}}"
-        title="{{name}}"
-      /></a>
-  </div>
-  <div class="chat-list-item__main-info">
-    <div class="chat-list-item__user-name">
-      {{name}} {{#if title}} в {{title}} {{/if}}
+  <div class="chat-list-item" id={{chatID}}>
+    <div class="chat-list-item__avatar">
+      <img src={{avatar}} alt="{{name}}" title="{{name}}" />
     </div>
-    <div class="chat-list-item__last-message">
-      <p>{{lastMessage}}</p>
+    <div class="chat-list-item__main-info">
+      <div class="chat-list-item__user-name">
+        {{name}}
+        {{#if title}} в {{title}} {{/if}}
+      </div>
+      <div class="chat-list-item__last-message">
+        <p>{{lastMessage}}</p>
+      </div>
     </div>
-  </div>
-  <div class="chat-list-item__less-info">
-    <div class="chat-list-item__timestamp">
-      <time>{{timestamp}}</time>
-    </div>
-    <div class="chat-list-item__unread-messages">
-      {{unread}}
+    <div class="chat-list-item__less-info">
+      <div class="chat-list-item__timestamp">
+        <time>{{timestamp}}</time>
+      </div>
+      <div class="chat-list-item__unread-messages">
+        {{unread}}
+      </div>
     </div>
   </div>
-</div>
 {{else}}
-<div class="no-chats">Чатов пока нет</div>
+  <div class="no-chats">Чатов пока нет</div>
 {{/if}}

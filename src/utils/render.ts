@@ -15,6 +15,7 @@ import { isAuth } from "./isAuth";
 import { HTTPTransport } from "./http-transport";
 import { APIurls } from "../types";
 import { UserAuthController } from "./controllers/userAuthController";
+import { checkFile } from "../static_pages/check-file/checkfile";
 
 
 export function pageRouter() {
@@ -95,6 +96,7 @@ router.use("/", loginForm)
 .use("/forgotpass", forgotPassPage)
 .use("/logout", loggingOut)
 .use("/login", loginForm)
+.use("/file", checkFile)
 
     // Запускаем роутер
     .start();

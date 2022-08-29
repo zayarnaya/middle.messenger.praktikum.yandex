@@ -8,7 +8,7 @@ import chatMainModalSearch from "./chat-main-modal-search.hbs";
 
 
 
-export class ChatsUserSearch extends Block<ChatsModalProps, ChatsMenuSearch> {
+export class ChatsUserSearch extends Block<ChatsModalProps, ChatsUserSearch> {
   public constructor(props: ChatsModalProps, classname?: string) {
     super("div", props, false, classname = "modal");
     this.events = {

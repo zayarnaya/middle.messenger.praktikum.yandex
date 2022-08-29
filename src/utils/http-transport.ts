@@ -23,6 +23,19 @@ export class HTTPTransport {
     );
   };
 
+  file = (url: string, options: Options) => {
+    console.log("FILE");
+    return this.request(
+      url,
+      {
+        ...options,
+        headers: { "Content-Type": "multipart/form-data" },
+        method: Methods.PUT,
+      },
+      10000
+    );
+  };
+
   post = (url: string, options: Options) => {
 //console.log("POST");
     return this.request(
@@ -44,71 +57,8 @@ export class HTTPTransport {
     );
   };
 
-  /*
-    get = (
-      url: string,
-      options: Options = {
-        headers: undefined,
-        method: Methods.GET,
-      },
-      timeout: number =  5000,
-    ) => {
-      return this.request(
-        !!data ? `${url}${queryStringify(data)}` : url,
-        { ...options, method: Methods.GET },
-        timeout
-      );
-    };
-  
-    put = (
-      url: string,
-      options: Options = {
-        headers: { "Content-Type": "application/json" },
-        method: Methods.PUT,
-      },
-      timeout: number =  5000,
-    ) => {
-      return this.request(
-        url,
-        { ...options, method: Methods.PUT },
-        timeout
-      );
-    };
-  
-    post = (
-      url: string,
-      options: Options = {
-        headers: { "Content-Type": "application/json" },
-        method: Methods.POST,      
-      },
-      timeout: number =  5000,
-    ) => {
-      return this.request(
-        url,
-        { ...options, method: Methods.POST },
-        timeout
-      );
-    };
-  
-    delete = (
-      url: string,
-      options: Options = {
-        headers: undefined,
-        method: Methods.DELETE,
-      },
-      timeout: number = 5000
-    ) => {
-      return this.request(
-        url,
-        { ...options, method: Methods.DELETE },
-        timeout
-      );
-    };
-  
-    */
-
   request = (url: string, options: Options, timeout: number = 1000) => {
-    //console.log("REQUEST");
+    console.log(options.data);
     const { headers = {}, method, data } = options;
     //console.log(options, "OPTIONS");
     return new Promise((resolve, reject) => {

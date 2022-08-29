@@ -17,14 +17,9 @@ import { isEmpty } from "../../../utils/minor-functions/isEmpty";
 import { Block } from "../../../utils/block";
 import { ChatsController } from "../../../utils/controllers/chatsController";
 import { HTTPTransport } from "../../../utils/http-transport";
+import { defaulAvatar, filePrefix } from "../../../consts";
 
 export function buildLeftPanel() {
-  //const chats: ChatListItemProps[] = Object.values(data.chats);
-  //const theChildren: Record<string, ChatListItem> = {};
-  //const ids = [];
-
-  //const getChats = new ChatController;
-  //const chats = getChats.getChats(0, 10);
   const getChats = new ChatsController;
   getChats.getChats(0, 10)
           .then(response => {
@@ -37,23 +32,6 @@ export function buildLeftPanel() {
               console.log(response.response, response.status);
             }
           });
-
-  // const getc = new HTTPTransport;
-  // getc.get(APIurls.CHATS, {})
-  // .then(response => console.log(response));
-
-  /*
-  for (let i = 0; i < chats.length; i++) {
-    let key = `chat${i}`;
-    let val = chats[i];
-    let child = new ChatListItem(val);
-    let obj = { [key]: child };
-    let id = child._id;
-
-    ids.push(id);
-    Object.assign(theChildren, obj);
-  }
-  */
 
   const panel = new ChatListLeftPanel(
     "div",
@@ -75,6 +53,7 @@ export function buildLeftPanel() {
             input: new InputField({
               type: "search",
               placeholder: "Поиск",
+              name: "search"
             }),
             button: new Button({
               class: "chat-list__searchform-button",
@@ -83,9 +62,6 @@ export function buildLeftPanel() {
         },
         "chat-list__menu"
       ),
-      //chatList: new MultiList(theChildren, "ul", "chat-list__list_unmarked"),
-      //chatList: "Пока чатов нет"
-      //chatList: new MultiList({0: new ChatListItem({})}, "ul", "chat-list__list_unmarked")
       chatList: new ChatListItem({
 
       })
@@ -96,26 +72,26 @@ export function buildLeftPanel() {
   render(".chat-list-wrapper", panel);
 
   store.on(StoreEvents.Updated, () => {
-    // вызываем обновление компонента, передав данные из хранилища
-   setTimeout(() => {
 
+   setTimeout(() => {
     let chats = store.getState().chatlist;
     if(!!isEmpty(chats)) {
       return;
     }
 
-    console.log(chats);
-
     let theChildren: Record<string, ChatListItem> = {};
 
     chats.forEach((chat, index) => {
       if(!isEmpty(chat.last_message)) {
+        let timestamp: string = chat.last_message.time;
       theChildren[index] = new ChatListItem( {
         profile: `/users/${chat.last_message.user.login}`,
-        avatar: chat.avatar,
+        avatar: chat.avatar
+        ? `${filePrefix}${chat.avatar}`
+        : defaulAvatar,
         name: `${chat.last_message.user.first_name} ${chat.last_message.user.second_name}`,
         lastMessage: chat.last_message.content,
-        timestamp: chat.last_message.time,
+        timestamp: timestamp.slice(11, 16),
         unread: chat.unread_count,
         title: chat.title,
         chatID: chat.id
@@ -133,66 +109,6 @@ export function buildLeftPanel() {
     });
     let newList = new MultiList(theChildren, "ul", "chat-list__list_unmarked");
     render(".chat-list__list", newList);
-    
-    /*
-    panel.setProps({
-      //chatList: newList
-      //chatList: "sakjdgh"
-      chatList: new ChatListItem( {
-
-        title: "сирано тест",
-        unread: 20,
-        chatID: 152
-      })
-    });
-    panel.props.chatList = new ChatListItem( {
-
-      title: "сирано тест",
-      unread: 20,
-      chatID: 152
-    });//очень загадочно
-    //console.log(panel.props.chatList);
-    */
-
-
   }, 0);
-  //console.log(newState, "NEW STATE");
-    //console.log(newState, "NEWSTATE");
-    /*
- type ChatListItemProps = {
-    profile: URL;
-    avatar: string;
-    name: string;
-    lastMessage: string | HTMLElement;
-    timestamp: string;
-    unread: number;
-*/
-  
-    /*
-    let avatar = newProps.user.avatar
-    ? newProps.user.avatar
-    : "https://www.fillmurray.com/g/100/100";
-    let name = newProps.user.display_name
-    ? newProps.user.display_name
-    : `${newProps.user.first_name} ${newProps.user.second_name}`;
-    this.setProps({
-      avatar: avatar,
-      name: name
-    });
-    console.log("СТОР ОБНОВИЛСЯ");
-    console.log(store.getState());
-    console.log(this.props, "PROPS");
-    //this.children.avatar.setProps({name: this.props.user.first_name});
-    //let fields = this.children.charList.children;
-    //Object.values(fields).forEach(value => {
-      //console.log(value.props);
-      //console.log(value.props.value, "ПРОПСЫ ИНПУТОВ");
-      //console.log(value.props.id, "НАЗВАНИЯ");
-      //let id = value.props.id;
-      //let newval = this.props.user[`${id}`];
-      //console.log(this.props.user[`${id}`]);
-      //console.log(newval);
-      //value.setProps({value: newval});
-      */
     });
 }

@@ -1,0 +1,71 @@
+
+export class ChatsDeleteUser extends Block<ChatsModalProps, ChatsDeleteUser> {
+  public constructor(props: ChatsModalProps, classname?: string) {
+    super("div", props, false, classname = "modal");
+    
+    this.events = {
+      click: function () {
+        const deleteUser = new ChatsController;
+        const chatID = chatIDfromLocation();
+        let users = [];
+        let usersForDeletion = document.getElementsByClassName("forDeletion");
+        // for (let i = 0; i < usersForDeletion.length;  i++) {
+        //   users.push(usersForDeletion[i].id);
+        // };
+        // console.log(users);
+        // deleteUser.deleteChatUsers({
+        //   users: number[],
+        //   chatId: chatID
+        // })
+
+
+        }        
+      };
+
+    this.eventTarget = "button";
+  }
+
+  public render() {
+    return this.compile(chatMainModalDeleteUser, this.props);
+  }
+}
+
+
+export function deleteUserModal() {
+    const modal = new ChatsDeleteUser({
+        button: new Button({
+            name: "userDelSubmit",
+            label: "Удалить выбранных",
+            type: "submit",
+        })
+    });
+
+
+    render(".modal-place", modal);
+    document.getElementById("close-button").addEventListener("click", function() {document.getElementById("modal-place").textContent = "";});
+    const getUsers = new ChatsController;
+    let id = chatIDfromLocation();
+    getUsers.getChatUsers(id)
+    .then(response => {
+      if(response.status == 200) {
+        let adata = JSON.parse(response.response);
+        let ul = document.createElement('ul');
+        ul.classList.add("forDeletion");
+        adata.forEach(user => {
+          let name: string = user.first_name + " " + user.second_name;
+          let li = document.createElement('li');
+          li.textContent = name;
+          li.setAttribute("id", user.id);
+          li.addEventListener("click", () => this.classList.toggle("forDelete"))
+          ul.append(li);
+        });
+        let fragment = document.createDocumentFragment();
+        fragment.appendChild(ul);
+        render(".userslist", fragment);
+      }
+    });
+
+}
+
+
+

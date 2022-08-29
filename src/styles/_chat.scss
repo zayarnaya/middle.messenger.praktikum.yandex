@@ -56,9 +56,15 @@
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
-    background-image: url("./files/user-secret-solid-gray.png");
-    background-size: cover;
+
   }
+
+  .chat-list__avatar img,
+  .chat-list-item__avatar img,
+  .chat-main__chat-avatar img {
+    width: 100%;
+  }
+
 
   .chat-list__profile-block {
     display: flex;
@@ -403,4 +409,16 @@
   .input-row label {
     display: none;
   }
+
+  .forDelete {
+    background-color: #999999;
+  }
+
+  .forDeletion {
+    list-style-type: none;
+  }
+  .forDeletion .users {
+    cursor: pointer;
+  }
+
 }

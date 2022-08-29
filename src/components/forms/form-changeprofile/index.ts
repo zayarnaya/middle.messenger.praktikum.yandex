@@ -65,7 +65,7 @@ export function changeProfilePage() {
       name: "avatar",
       type: "file",
       label: "загрузите новый аватар",
-      accept: "image/*"
+
     }),
     button: new Button({
       name: "submit-avatar",

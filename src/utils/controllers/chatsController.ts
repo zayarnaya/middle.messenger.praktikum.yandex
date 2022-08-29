@@ -91,41 +91,36 @@ export class ChatsController {
         return request.get(APIurls.CHATS, !!data
             ? {data}
             : data);
-        // let state = {};
-        // request.get(prefix, { 
-        //     headers: undefined,
-        //     method: undefined,
-        //     data: {
-        //         offset: offset,
-        //         limit: limit,
-        //         title: title
-        //     }
-        // })
+
+    }
+
+    public async getChatUsers(chatID: number) {
+        return request.get(`${APIurls.CHATS}/${chatID}/users`, {})
         // .then(response => {
         //     if(response.status == 200) {
-        //     let adata = JSON.parse(response.response);
-        //     //console.log(adata, "ДЖЕЙСОН");
-        //     store.set("chatlist", adata);
-
-        //     /*
-        //     Object.entries(adata).forEach(entry => {
-        //         store.set(entry[0] as string, entry[1]);
-        //     });
-        //     */
-
-        //     //console.log(store.getState(), "УШЛО В СТЕЙТ");
-        //     state = store.getState();
-        //     //console.log(state, "ДОЛЖНО БЫ УЙТИ");
-        //     //return state;
-            
-                        
+        //         console.log("позвали юзера");          
+    
         //     } else if (response.status != 200) {
         //         console.log(response.status, response.response);
         //     }
-        // });
-        //console.log(store.getState(), "ВНИЗУ Ф");
-        //console.log(state, "state внизу фы");
-        //return state;
+    
+        //     });
+
+    }
+
+    public async deleteChatUsers(data: string) {
+        //let adata = JSON.stringify(data);
+        request.delete(APIurls.CHATUSERS, {data: data})
+        .then(response => {
+            if(response.status == 200) {
+                console.log("убрали юзера");          
+    
+            } else if (response.status != 200) {
+                console.log(response.status, response.response);
+            }
+    
+            });
+
     }
 
 
