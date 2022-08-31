@@ -10,12 +10,15 @@ import "./form-changeprofile.scss";
 import { MultiListProps } from "../../../types";
 import { FormChangeAvatar } from "../form-changeavatar/form-changeavatar";
 import { ImageAvatar } from "../../avatars/img-avatar/img-avatar";
-import store from "../../../utils/store";
+import store, { StoreEvents } from "../../../utils/store";
 import { UserAuthController } from "../../../utils/controllers/userAuthController";
+import { defaulAvatar, filePrefix } from "../../../consts";
 
 export function changeProfilePage() {
   let controller = new UserAuthController;
   let userDetails = {};
+  console.log(store.getState(), "СТЕЙТТТТТТТ");
+  
   // controller.getUser()
   // .then(response => {
   //   if(response.status == 200) {
@@ -42,8 +45,22 @@ export function changeProfilePage() {
     entry[1].value = newvalue;
   });
 
-  console.log(inputDummy);
-  console.log(userDetails);
+  let profileAvatar: string;
+  let avatarRaw: string = localStorage.getItem(`user_avatar`)
+  ? localStorage.getItem(`user_avatar`)
+  : "";
+  console.log(localStorage.getItem(`user_avatar`));
+  if(avatarRaw == "null") {
+    profileAvatar = defaulAvatar;
+  } else if (avatarRaw != "null") {
+    profileAvatar = `${filePrefix}${avatarRaw}`
+  } else if(avatarRaw.length == 0) {
+    profileAvatar = defaulAvatar;
+  };
+  console.log(avatarRaw);
+
+  //console.log(inputDummy);
+  //console.log(userDetails);
   //console.log(localStorage.getItem("user_first_name"), "ИНТЕРЕСНО ЧТО ЕСТЬ В ЛОКАЛ");
 
   //let inputs: HTMLInputElement[] = Object.values(data.input.change_profile);
@@ -56,9 +73,10 @@ export function changeProfilePage() {
    }, {});
 
   layoutWideForm();
+
   const avatar = new FormChangeAvatar({
     avatar: new ImageAvatar({
-      avatar: "https://www.fillmurray.com/g/100/100",
+      avatar: profileAvatar,
       name: "Мой аватар"
     }),
     input: new InputField({
@@ -83,6 +101,10 @@ export function changeProfilePage() {
   //render(".wrapper-all-center", form);
   render(".form__placeholder", form);
   render(".avatar__placeholder", avatar);
+
+  // store.on(StoreEvents.Updated, () => {
+  //   avatar.children.avatar.setProps({avatar: `${filePrefix}${localStorage.getItem("user_avatar")}`})
+  // });
 
   
 }

@@ -12,21 +12,21 @@ chatavatar
     */
 
     public async change(data: FormData) {
-        request.file(APIurls.CHANGEAVATAR, {
+        return request.file(APIurls.CHANGEAVATAR, {
             //headers: "Content-Type: form/multipart",
-            data})
-        .then(response => {
-        if(response.status == 200) {
-            //store.set("chat", data);
-            console.log(response);
+            data});
+        // .then(response => {
+        // if(response.status == 200) {
+        //     //store.set("chat", data);
+        //     console.log(response);
 
 
-        } else if (response.status != 200) {
-            console.log(response.status, response.response);
-            console.log(response);
-        }
+        // } else if (response.status != 200) {
+        //     console.log(response.status, response.response);
+        //     console.log(response);
+        // }
 
-        });
+        // });
 
         // request.request(APIurls.CHANGEAVATAR, {
         //     headers: { "Content-Type": "form/multipart" },

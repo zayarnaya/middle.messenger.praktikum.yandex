@@ -127,7 +127,7 @@ export class Block<Props extends {}, Children extends Block<Props, Children>> {
     if (!nextProps) {
       return;
     }
-    //console.log(nextProps, "NEXT PROPS SETPROPS");
+    console.log(nextProps, "NEXT PROPS SETPROPS");
 
     const { children, props } = this._getChildren(nextProps);
     //console.log({ children, props }, "ИЗ СЕТПРОПС");

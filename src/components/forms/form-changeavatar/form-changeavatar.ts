@@ -1,6 +1,8 @@
+import { filePrefix } from "../../../consts";
 import { APIurls, Methods } from "../../../types";
 import { AvatarController } from "../../../utils/controllers/avatarController";
 import { HTTPTransport } from "../../../utils/http-transport";
+import store, { StoreEvents } from "../../../utils/store";
 import { ImageAvatar } from "../../avatars/img-avatar/img-avatar";
 import { Button } from "../../buttons/button-submit/button";
 import { InputField } from "../../input/input-field";
@@ -27,7 +29,18 @@ export class FormChangeAvatar extends Form {
                 console.log(formdata.get("avatar"));
                 //const request = new HTTPTransport;
                 submitChange.change(formdata)
-                .then(response => console.log(response));
+                .then(response => {
+                    if(response.status == 200) {
+                        let adata = JSON.parse(response.response);
+                        store.set("user", adata);
+                        console.log(adata);
+                        localStorage.setItem("user_avatar", adata.avatar as string);
+                        console.log(localStorage.getItem("user_avatar"));
+                    } else {
+                        document.querySelector(".submit-message").textContent = "Ой! Что-то не так! Сервер пишет " + `${response.status} ${response.response}`;
+                        
+                    }
+                });
 
 
         // request.request("https://ya-praktikum.tech/api/v2/user/profile/avatar", {
@@ -78,6 +91,13 @@ export class FormChangeAvatar extends Form {
         };
 
         this.eventTarget = "form.form__changeAvatar";
+
+        store.on(StoreEvents.Updated, () => {
+            console.log(this.children, "STORE ОБНОВИЛСЯ");
+            console.log(store.getState());
+            this.children.avatar.setProps({avatar: `${filePrefix}${store.getState().user.avatar}`})
+            //this.children.avatar.setProps({avatar: `${filePrefix}${localStorage.getItem("user_avatar")}`})
+          });
 
     }
 

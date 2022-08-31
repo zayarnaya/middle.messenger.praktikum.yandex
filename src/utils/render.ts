@@ -15,7 +15,7 @@ import { isAuth } from "./isAuth";
 import { HTTPTransport } from "./http-transport";
 import { APIurls } from "../types";
 import { UserAuthController } from "./controllers/userAuthController";
-import { checkFile } from "../static_pages/check-file/checkfile";
+
 
 
 export function pageRouter() {
@@ -30,7 +30,8 @@ export function pageRouter() {
       let adata = JSON.parse(response.response);
       Object.entries(adata).forEach(entry => {
 
-        localStorage.setItem(`user_${entry[0]}`, entry[1]);
+        localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
+        console.log(`user_${entry[0]}`, entry[1],)
       });
       
       console.log("ГЕТЮЗЕР ПРОШЕЛ");
@@ -96,7 +97,7 @@ router.use("/", loginForm)
 .use("/forgotpass", forgotPassPage)
 .use("/logout", loggingOut)
 .use("/login", loginForm)
-.use("/file", checkFile)
+
 
     // Запускаем роутер
     .start();

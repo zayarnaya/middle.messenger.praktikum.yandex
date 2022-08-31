@@ -15,6 +15,7 @@ import { ProfChar } from "./components/profile-chars/profile-char/profile-char";
 import { ChatListItem } from "./components/chats/chat-list/chatlist-item/chatlist-item";
 import { MenuItem } from "./components/chats/chat-main/chat-main-menu/menu-items/menu-item";
 import { AvatarChangeImg } from "./components/avatars/change-avatar/avatar-img/avatar-img";
+import { ProfileLink } from "./components/forms/my-profile/profile-links/profile-link";
 
 export enum Methods {
   GET = "GET",
@@ -37,6 +38,7 @@ export enum APIurls {
   CHATUSERS = "https://ya-praktikum.tech/api/v2/chats/users",
   GETTOKEN = "https://ya-praktikum.tech/api/v2/chats/token/",
   CHANGEPROFILE = "https://ya-praktikum.tech/api/v2/user/profile",
+  CHANGEPASS = "https://ya-praktikum.tech/api/v2/user/password",
   CHANGEAVATAR = "https://ya-praktikum.tech/api/v2/user/profile/avatar",
   SEEKUSER = "https://ya-praktikum.tech/api/v2/user/search",
 
@@ -163,8 +165,8 @@ export type ChatRightPanelLayoutProps = {
 };
 
 export type ChatsModalProps = {
-  input?: InputField;
-  button?: Button;
+  input?: InputField,
+  button?: Button
 };
 
 export type ChatsMenuProps = {
@@ -176,7 +178,7 @@ export type ChatsMenuProps = {
 
 export type MenuItemProps = {
   text: string;
-  id: string;
+  id?: string;
   classname?: string;
   link?: string;
   events?: Events;
@@ -199,6 +201,9 @@ export type FormProps = {
 export type MyUserProfileProps = {
   avatar: ProfAvatar;
   charList: MultiList;
+  linkChangeProfile: ProfileLink;
+  linkChangePassword: ProfileLink;
+  linkLogout: ProfileLink;
 };
 
 export type LogoutProps = {

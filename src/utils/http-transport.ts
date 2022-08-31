@@ -58,7 +58,7 @@ export class HTTPTransport {
   };
 
   request = (url: string, options: Options, timeout: number = 1000) => {
-    console.log(options.data);
+
     const { headers = {}, method, data } = options;
     //console.log(options, "OPTIONS");
     return new Promise((resolve, reject) => {

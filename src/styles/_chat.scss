@@ -421,4 +421,42 @@
     cursor: pointer;
   }
 
+  .outer-out {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .inner-out {
+    display: flex;
+    max-width: 70%;
+    justify-content: flex-start;
+    background-color: #999;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+
+  }
+
+  .outer-in {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    margin-bottom: 10px;
+
+  }
+
+  .inner-in {
+    display: flex;
+    max-width: 70%;
+    justify-content: flex-end;
+    background-color: lightcyan;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
+
 }

@@ -4,6 +4,7 @@ import { MyUserProfileProps } from "../../../types";
 import "./my-profile.scss";
 import store, { StoreEvents } from "../../../utils/store";
 import { UserAuthController } from "../../../utils/controllers/userAuthController";
+import { defaulAvatar, filePrefix } from "../../../consts";
 
 export class MyUserProfile extends Block<MyUserProfileProps, MyUserProfile> {
   public constructor(propsAndChildren: MyUserProfileProps) {
@@ -25,8 +26,20 @@ export class MyUserProfile extends Block<MyUserProfileProps, MyUserProfile> {
       this.setProps(store.getState());
       //console.log("СТОР ОБНОВИЛСЯ");
       //console.log(store.getState());
-      //console.log(this.props);
-      this.children.avatar.setProps({name: this.props.user.first_name});
+      console.log(this.props, "PROPS");
+      let displayName = this.props.user.display_name;
+      let name: string;
+      if(!displayName || displayName == "null") {
+        name = `${this.props.user.first_name} ${this.props.user.second_name}`;
+      } else {
+        name = displayName;
+      };
+      let propsAvatar = this.props.user.avatar;
+      let avatar: string = propsAvatar
+      ? `${filePrefix}${propsAvatar}`
+      : defaulAvatar;
+      this.children.avatar.setProps({name: name,
+      avatar: avatar});
       let fields = this.children.charList.children;
       Object.values(fields).forEach(value => {
         //console.log(value.props);

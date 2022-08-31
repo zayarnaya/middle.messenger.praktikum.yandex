@@ -23,14 +23,30 @@ import { ChatsController } from "../../../utils/controllers/chatsController";
 import { isEmpty } from "../../../utils/minor-functions/isEmpty";
 import { deleteUserModal, modalUserRemove } from "./chat-main-modals/delete-user";
 import { createChatModals } from "./chat-main-modals/delete-user/index copy";
+import { logOut } from "../../../utils/logout";
 
 export function buildRightPanel() {
+  const getChats = new ChatsController;
   console.log("ФУНКЦИЯ ПОШЛА ЗАНОВО")
 
   const chatID = chatIDfromLocation(); //оно тут нужно?
+
   console.log("чат ид");
 
-  const getChats = new ChatsController;
+  getChats.getChatUsers(chatID)
+  .then(response => {
+    if(response.status == 200) {
+      let adata = JSON.parse(response.response);
+      store.set(`chat${chatID}_users`, adata);
+
+    } else {
+      alert("что-то пошло не так");
+    }
+  });
+
+  loadChat(chatID);
+
+
   getChats.getChats(0, 10)
           .then(response => {
             if(response.status == 200) {
@@ -106,10 +122,7 @@ export function buildRightPanel() {
     id: "logout",
     classname: "color-red",
     events: {
-      click: () => {
-        let logout = new UserAuthController;
-        logout.logOut();
-      }
+      click: () => logOut()
     }
   });
 

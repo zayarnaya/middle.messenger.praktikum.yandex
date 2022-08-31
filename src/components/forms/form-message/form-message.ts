@@ -3,6 +3,7 @@ import { FormProps } from "../../../types";
 import sendMessageForm from "./form-message.hbs";
 import { sendMessage } from "../../../utils/gotoChat";
 import store from "../../../utils/store";
+import { chatIDfromLocation } from "../../../consts";
 
 export class FormMessage extends Form {
   public constructor(props: FormProps, classname?: string) {
@@ -29,7 +30,8 @@ export class FormMessage extends Form {
         input.value = "";
         errorMessage.textContent = " ";
         console.log( store.getState(), "STATTE");
-        let chatID = store.getState().chat.id;
+        //let chatID = store.getState().chat.id;
+        let chatID = chatIDfromLocation();
         let userID = store.getState().user.id;
         let token = store.getState().chat.token;
 

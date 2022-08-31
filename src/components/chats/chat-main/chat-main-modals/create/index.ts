@@ -9,7 +9,7 @@ import { ChatsCreateChat } from "./chat-main-modals-create";
 
 export function createChatModal() {
     const createModal = new ChatsCreateChat ({
-        textInput: new InputField({
+        input: new InputField({
             type: "text",
             placeholder: "Напишите название чата",
             name: "createChatModalInput"

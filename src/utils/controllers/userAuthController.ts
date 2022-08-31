@@ -103,6 +103,9 @@ export class UserAuthController {
         request.post(APIurls.LOGOUT, {})
         .then(response => {
             if(response.status == 200) {
+                localStorage.clear();
+                store.clear();
+                console.log(store.getState(), "СТЕЙТ ПОСЛЕ ЛОГАУТА");
               router.go("/logout");
             } else if (response.status != 200) {
               console.log(response, "Что-ТО НЕ ТАК");

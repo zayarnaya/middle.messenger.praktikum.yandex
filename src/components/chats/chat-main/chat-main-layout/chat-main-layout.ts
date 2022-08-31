@@ -15,25 +15,7 @@ export class ChatRightPanelLayout extends Block<
     classname?: string
   ) {
     super(tag, props, false, classname);
-    /*
-    this.events = {
-      hashchange: function() {
-        if(document.location.pathname.includes("chats")) {
-          let chatIDIndex = document.location.pathname.indexOf("chats") as number;
-          chatIDIndex += 6;
-          let chatID = Number(document.location.pathname.slice(chatIDIndex));
-          if(!!isEmpty(chatID)) {
-            pageRouter();
-          }
-          gotoChat(chatID);
-        } else if (!document.location.pathname.includes("chats")) {
-          pageRouter();
-        }
-      }
-    }
 
-    this.eventTarget = "document";
-    */
   }
 
   public render() {

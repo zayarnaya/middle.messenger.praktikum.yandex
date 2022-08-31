@@ -37,10 +37,11 @@ export class ChangeUserProfile extends Form {
         .then(response => {
           if(response.status == 200) {
             let adata = JSON.parse(response.response);
+            console.log(adata);
             store.set("user", adata);
             Object.entries(adata).forEach(entry => {
 
-              localStorage.setItem(`user_${entry[0]}`, entry[1]);
+              localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
             });
           } else {
             console.log(response.status, response.response);

@@ -8,7 +8,7 @@ import { ChatsUserSearch } from "./chat-main-modals-search";
 
 export function userSearchModal() {
     const searchModal = new ChatsUserSearch ({
-        searchInput: new InputField({
+        input: new InputField({
             type: "search",
             placeholder: "Поиск по логину",
             name: "userSearchModalInput"
