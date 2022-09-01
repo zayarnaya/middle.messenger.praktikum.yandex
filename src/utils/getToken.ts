@@ -19,7 +19,7 @@ export function getToken(id: number) {
         //console.log(adata);
         //console.log(id, "АЙДИ?");
         //getOldMessages(id, adata.token);
-        store.set("chat", {
+        store.set("this_chat", {
                 id: id,
                 token: adata.token
             });

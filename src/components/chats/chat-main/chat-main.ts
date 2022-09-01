@@ -24,43 +24,27 @@ import { isEmpty } from "../../../utils/minor-functions/isEmpty";
 import { deleteUserModal, modalUserRemove } from "./chat-main-modals/delete-user";
 import { createChatModals } from "./chat-main-modals/delete-user/index copy";
 import { logOut } from "../../../utils/logout";
+import { getChatList } from "../../../utils/getChatList";
+import { getChatUsers } from "../../../utils/getChatUsers";
+import { getToken } from "../../../utils/getToken";
+import { getOldMessages } from "../../../utils/getOldMessages";
 
 export function buildRightPanel() {
-  const getChats = new ChatsController;
-  const chatID = chatIDfromLocation(); //оно тут нужно?
+  const chatID = chatIDfromLocation();
+  getChatList();
+  if(document.location.pathname.includes("/chats/")) {
+    getChatUsers(chatID);
+    getToken(chatID);
+  };
+  let oldMsgCounter: number = 0;
 
-  // getChats.getChatUsers(chatID)
-  // .then(response => {
-  //   if(response.status == 200) {
-  //     let adata = JSON.parse(response.response);
-  //     store.set(`chat${chatID}_users`, adata);
-
-  //   } else {
-  //     alert("что-то пошло не так");
-  //   }
-  // });
-
-  //loadChat(chatID);
-  getChats.getChats(0, 10)
-          .then(response => {
-            if(response.status == 200) {
-            let adata = JSON.parse(response.response);
-            let bdata = {};
-            adata.forEach(data => {
-              if(data.id == chatID) {
-                Object.assign(bdata, data);
-              }
-            });
-            store.set("chat", bdata);
-            console.log(response.response, response.status);
-            } else {
-              console.log(response.response, response.status);
-            }
-          });
 
   
   store.on(StoreEvents.Updated, () => {
+    //добавляем название чата и аватарку в меню
+    console.log(store.getState());
     let chat = store.getState().chat;
+    let this_chat = store.getState().this_chat;
     mainmenu.setProps({
       chatavatar: chat.avatar
       ? `${filePrefix}${chat.avatar}`
@@ -68,7 +52,16 @@ export function buildRightPanel() {
       chatname: chat.title as string,
     });
 
-
+    //формируем список старых сообщений
+    if(this_chat.id == chatID && !!this_chat.token) {
+      console.log(oldMsgCounter, "COUNTER");
+      if(oldMsgCounter == 0) {
+        getOldMessages(chatID, this_chat.token);
+        console.log(oldMsgCounter);
+        oldMsgCounter += 1;
+        console.log(oldMsgCounter);
+        }
+    }
 
      });
   

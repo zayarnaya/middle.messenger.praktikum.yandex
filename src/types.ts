@@ -1,5 +1,4 @@
 import { Button } from "./components/buttons/button-submit/button";
-import { SearchForm } from "./components/forms/form-search/form-search";
 import { MultiList } from "./components/multi-list/multi-list";
 import { ChatListMenu } from "./components/chats/chat-list/chat-list-menu/chat-list-menu";
 import { ChatlistUserprofile } from "./components/chats/chat-list/chatlist_userprofile/chatlist-userprofile";
@@ -127,7 +126,6 @@ export type MultiListProps = Record<
 
 export type ChatListMenuProps = {
   chatuserprofile: ChatlistUserprofile;
-  formsearch: SearchForm;
 };
 
 export type ChatListLeftPanelProps = {

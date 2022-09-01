@@ -52,7 +52,9 @@ export class HTTPTransport {
   delete = (url: string, options: Options) => {
     return this.request(
       url,
-      { ...options, method: Methods.DELETE },
+      { ...options, 
+        headers: { "Content-Type": "application/json" },
+        method: Methods.DELETE },
       options.timeout
     );
   };

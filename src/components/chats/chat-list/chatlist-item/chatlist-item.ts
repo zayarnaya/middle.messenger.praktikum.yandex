@@ -1,10 +1,6 @@
 import { Block } from "../../../../utils/block";
 import chatListItem from "./chatlist-item.hbs";
 import { ChatListItemProps } from "../../../../types";
-import { locationPrefix, router } from "../../../../consts";
-import { chatsPage } from "../..";
-import store from "../../../../utils/store";
-import { pageRouter } from "../../../../utils/render";
 
 export class ChatListItem extends Block<ChatListItemProps, ChatListItem> {
   public constructor(propsAndChildren: ChatListItemProps) {
@@ -15,14 +11,13 @@ export class ChatListItem extends Block<ChatListItemProps, ChatListItem> {
           console.log(this);
           let id = this.id;
           let active = document.querySelector(".highlight");
-          
+
           if (this == active) {
             return;
           } else if (!!active) {
             active.classList.remove("highlight");
             this.classList.add("highlight");
             document.location.pathname = `/chats/${id}`;
-
           } else if (!active) {
             this.classList.add("highlight");
             document.location.pathname = `/chats/${id}`;

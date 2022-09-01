@@ -13,12 +13,12 @@ export class ChatsCreateChat extends Block<ChatsModalProps, ChatsCreateChat> {
     this.events = {
       submit: function (e: Event) {
         e.preventDefault();
-        //const form: HTMLFormElement = document.querySelector("#userSearchForm") as HTMLFormElement;
+        
         const input: HTMLInputElement = document.getElementById("createChatModalInput") as HTMLInputElement;
         const inputData = {title: input.value};
         const requestData = JSON.stringify(inputData);
         console.log(requestData);
-        //const searchRequest = new SearchAPI;
+
 
         const seek = new ChatSettingsController;
         seek.create(requestData)
@@ -26,10 +26,8 @@ export class ChatsCreateChat extends Block<ChatsModalProps, ChatsCreateChat> {
           if( response.status == 200) {
           const resultField = document.getElementById("result") as HTMLElement;
           resultField.textContent = "Чат успешно создан! " + response.response;
-          console.log(response.response, response.status);
           } else {
-            console.log("ЧТО_ТО НЕ ТАК");
-            console.log(response.response, response.status);
+            resultField.textContent = "Что-то не получилось! " + response.response;
           }
           
         });

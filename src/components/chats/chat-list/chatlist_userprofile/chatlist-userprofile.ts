@@ -4,6 +4,7 @@ import { ChatlistUserprofileProps } from "../../../../types";
 import store, { StoreEvents } from "../../../../utils/store";
 import { UserAuthController } from "../../../../utils/controllers/userAuthController";
 import { defaulAvatar, filePrefix } from "../../../../consts";
+import { UserProps } from "../../../../APItypes";
 
 export class ChatlistUserprofile extends Block<
   ChatlistUserprofileProps,
@@ -16,40 +17,33 @@ export class ChatlistUserprofile extends Block<
   ) {
     super(tag, props, false, classname);
 
-
-  const getUserInfo = new UserAuthController;
-  const user = getUserInfo.getUser()
-  .then(response => {
-    if(response.status == 200) {
-    let adata = JSON.parse(response.response);
-    store.set("user", adata);
-    } else {
-      console.log(response.status, response.response);
-    }
-  });
-  
-  store.on(StoreEvents.Updated, () => {
-    // вызываем обновление компонента, передав данные из хранилища
-    let newProps = store.getState();
-    console.log(!!newProps.user.avatar, "ЕСТЬ ЛИ АВАТАР");
-    let avatar: string;
-    if(!newProps.user.avatar) {
-      avatar = defaulAvatar;
-    } else {
-      avatar = `${filePrefix}${newProps.user.avatar}`;
-    }
-
-    let name = newProps.user.display_name
-    ? newProps.user.display_name
-    : `${newProps.user.first_name} ${newProps.user.second_name}`;
-    this.setProps({
-      avatar: avatar,
-      name: name
+    const getUserInfo = new UserAuthController();
+    getUserInfo.getUser().then((response) => {
+      if (response.status == 200) {
+        let adata = JSON.parse(response.response);
+        store.set("user", adata);
+      } else {
+        console.log(response.status, response.response);
+      }
     });
 
-    });
+    store.on(StoreEvents.Updated, () => {
+      let newProps: UserProps = store.getState().user as UserProps;
+      let avatar: string;
+      if (!newProps.avatar) {
+        avatar = defaulAvatar;
+      } else {
+        avatar = `${filePrefix}${newProps.avatar}`;
+      }
 
-    
+      let name = newProps.display_name
+        ? newProps.display_name
+        : `${newProps.first_name} ${newProps.second_name}`;
+      this.setProps({
+        avatar: avatar,
+        name: name,
+      });
+    });
   }
 
   public render() {

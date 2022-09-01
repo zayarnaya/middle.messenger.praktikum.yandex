@@ -11,22 +11,29 @@ export class ChatsRemoveUser extends Block<ChatsModalProps, ChatsRemoveUser>{
       submit: function (e: Event) {
         e.preventDefault();
         const deleteUser = new ChatsController;
-        const chatID = Number(chatIDfromLocation());
+        const chatID = chatIDfromLocation();
         let users = [];
         let usersForDeletion = document.getElementsByClassName("forDelete");
 
         for (let i = 0; i < usersForDeletion.length;  i++) {
           users.push(Number(usersForDeletion[i].id));
         };
-        console.log(users, chatID);
-        let sendData = JSON.stringify({
+
+        let resultField: HTMLElement = document.querySelector(".result") as HTMLElement;
+
+
+        let sendData = {
           users: users,
           chatId: chatID
-        });
+        }
         deleteUser.deleteChatUsers(sendData)
-        .then(response => console.log(response));
-
-
+        .then(response => {
+          if(response.status == 200) {
+            resultField.textContent = "Успешно!";
+          } else {
+            resultField.textContent = "Не удалось! Сервер говорит " + `${response.response}`;
+          }
+        });
         }        
       };
 

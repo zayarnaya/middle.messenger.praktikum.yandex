@@ -45,6 +45,6 @@ messages.forEach(message => {
 
 });
 //console.log(fragment);
-chat.textContent = "";
-chat.appendChild(fragment);
+//chat.textContent = "";
+chat.append(fragment);
 }

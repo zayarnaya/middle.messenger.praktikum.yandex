@@ -4,16 +4,19 @@ import { Block } from "../../../utils/block";
 import { ButtonProps, Events } from "../../../types";
 
 export class Button extends Block<ButtonProps, Button> {
-  public constructor(props: ButtonProps, events?: Events, eventTarget?: string) {
+  public constructor(
+    props: ButtonProps,
+    events?: Events,
+    eventTarget?: string
+  ) {
     super("div", props, false);
-    if(!!events) {
+    if (!!events) {
       this.events = events;
-    };
-
-    if(!!eventTarget) {
-      this.eventTarget = eventTarget;
     }
 
+    if (!!eventTarget) {
+      this.eventTarget = eventTarget;
+    }
   }
 
   public render() {

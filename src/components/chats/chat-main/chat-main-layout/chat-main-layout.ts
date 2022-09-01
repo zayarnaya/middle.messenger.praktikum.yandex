@@ -1,7 +1,7 @@
 import { Block } from "../../../../utils/block";
 import chatMainLayout from "./chat-main-layout.hbs";
 import { ChatRightPanelLayoutProps } from "../../../../types";
-import { gotoChat } from "../../../../utils/gotoChat";
+
 import { isEmpty } from "../../../../utils/minor-functions/isEmpty";
 import { pageRouter } from "../../../../utils/render";
 

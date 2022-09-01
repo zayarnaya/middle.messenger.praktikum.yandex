@@ -3,9 +3,10 @@ import { loadChat } from "./loadChat";
 import { HTTPTransport } from "./http-transport";
 import { makeMessage } from "./makeMessage";
 import store, { StoreEvents } from "./store";
+import { getToken } from "./getToken";
 
 export function getOldMessages(chatID: number, token: string) {
-    console.log("getOldMessages");
+    console.log("----------------getOldMessages==============================");
     let state = store.getState();
     //console.log(state, "STATE GETOLDMSG");
     //let userID = state.user.id;
@@ -24,6 +25,7 @@ export function getOldMessages(chatID: number, token: string) {
         Object.assign(chatUsersById, {[user.id]: user.display_name});
     });
     let messages = [];
+    console.log(`${userID}/${chatID}/${token}`, "ЧТО В СОКЕТ УХОДИТ В ГЕТОЛД");
     const socket = new WebSocket
     (`wss://ya-praktikum.tech/ws/chats/${userID}/${chatID}/${token}`);
 
@@ -48,9 +50,11 @@ export function getOldMessages(chatID: number, token: string) {
 
       socket.addEventListener('message', event => {
         console.log('Получены данные', event.data);
-        if(event.data.includes("WS token is not valid")) {
-            loadChat(chatID);
-        }
+        // if(event.data.includes("WS token is not valid")) {
+        //    return;
+        // } else if(JSON.parse(event.data).type != "message") {
+        //     return;
+        // }
         let cdata = JSON.parse(event.data);
         console.log(cdata, "CDATA");
         //store.set(`chat_${chatID}_data`, cdata);
@@ -74,6 +78,9 @@ export function getOldMessages(chatID: number, token: string) {
         console.log(messages, "MESSAGES");
         //makeMessage(messages, userID, chatUsersById);
         makeMessage(messages);
+
+        //store.set("chat", messages);
+
         
 
         // if(userID == thatID) {
@@ -96,6 +103,7 @@ export function getOldMessages(chatID: number, token: string) {
         
         
       });
+      return;
       //console.log(messages, "MESSAGES FROM OUT");
 
 

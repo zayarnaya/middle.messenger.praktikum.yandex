@@ -5,6 +5,7 @@ import { EventBus } from './event-bus';
 
 export enum StoreEvents {
     Updated = 'updated',
+    GotToken = 'got token'
 }
 
 class Store extends EventBus {
