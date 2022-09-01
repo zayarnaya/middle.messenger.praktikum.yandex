@@ -10,7 +10,7 @@ import { render } from "../../../utils/renderDOM";
 import { InputField } from "../../input/input-field";
 import { userSearchModal } from "./chat-main-modals/search";
 import { createChatModal } from "./chat-main-modals/create";
-import { loadChat } from "../../../utils/gotoChat";
+import { loadChat } from "../../../utils/loadChat";
 import { HTTPTransport } from "../../../utils/http-transport";
 import chatMessageOut from "./chat-message/chat-message-out/chat-message-out.hbs";
 import { MenuItem } from "./chat-main-menu/menu-items/menu-item";
@@ -27,26 +27,20 @@ import { logOut } from "../../../utils/logout";
 
 export function buildRightPanel() {
   const getChats = new ChatsController;
-  console.log("ФУНКЦИЯ ПОШЛА ЗАНОВО")
-
   const chatID = chatIDfromLocation(); //оно тут нужно?
 
-  console.log("чат ид");
+  // getChats.getChatUsers(chatID)
+  // .then(response => {
+  //   if(response.status == 200) {
+  //     let adata = JSON.parse(response.response);
+  //     store.set(`chat${chatID}_users`, adata);
 
-  getChats.getChatUsers(chatID)
-  .then(response => {
-    if(response.status == 200) {
-      let adata = JSON.parse(response.response);
-      store.set(`chat${chatID}_users`, adata);
+  //   } else {
+  //     alert("что-то пошло не так");
+  //   }
+  // });
 
-    } else {
-      alert("что-то пошло не так");
-    }
-  });
-
-  loadChat(chatID);
-
-
+  //loadChat(chatID);
   getChats.getChats(0, 10)
           .then(response => {
             if(response.status == 200) {
@@ -57,7 +51,7 @@ export function buildRightPanel() {
                 Object.assign(bdata, data);
               }
             });
-            store.set("thischat", bdata);
+            store.set("chat", bdata);
             console.log(response.response, response.status);
             } else {
               console.log(response.response, response.status);
@@ -66,15 +60,21 @@ export function buildRightPanel() {
 
   
   store.on(StoreEvents.Updated, () => {
-    let chat = store.getState().thischat;
+    let chat = store.getState().chat;
     mainmenu.setProps({
       chatavatar: chat.avatar
       ? `${filePrefix}${chat.avatar}`
       : defaultChatAvatar,
       chatname: chat.title as string,
-    })
+    });
+
+
 
      });
+  
+    //  if(document.location.pathname.includes("/chats/")) {
+    //   loadChat(chatID);
+    // }
 
   const createChat = new MenuItem({
     text: "Создать чат",

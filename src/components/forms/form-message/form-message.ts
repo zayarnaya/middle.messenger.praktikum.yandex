@@ -1,9 +1,10 @@
 import { Form } from "../form";
 import { FormProps } from "../../../types";
 import sendMessageForm from "./form-message.hbs";
-import { sendMessage } from "../../../utils/gotoChat";
+
 import store from "../../../utils/store";
 import { chatIDfromLocation } from "../../../consts";
+import { sendMessage } from "../../../utils/sendMessage";
 
 export class FormMessage extends Form {
   public constructor(props: FormProps, classname?: string) {
@@ -18,7 +19,7 @@ export class FormMessage extends Form {
         ) as HTMLInputElement;
         let errorMessage: HTMLElement = document.querySelector(
           "#message + span.errormessage"
-        );
+        ) as HTMLInputElement;
         if (!input.value) {
           errorMessage.textContent = "Сообщение не должно быть пустым!";
           return;

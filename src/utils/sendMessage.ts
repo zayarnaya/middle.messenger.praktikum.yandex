@@ -1,39 +1,4 @@
-import { makeIncomingMessage } from "../components/chats/chat-main/chat-message/chat-message-in";
-import { makeOutgoingMessage } from "../components/chats/chat-main/chat-message/chat-message-out";
-import { router } from "../consts";
-import { getOldMessages, makeMessage } from "./getOldMessages";
-import { HTTPTransport } from "./http-transport";
-import store from "./store";
-
-export function loadChat(id: number) {
-  console.log("LOADCHAT---------------------");
-
-    const request = new HTTPTransport;
-    request.post(`https://ya-praktikum.tech/api/v2/chats/token/${id}`, {})
-    .then(response => {
-        console.log(response.response);
-        let adata = JSON.parse(response.response);
-        console.log(adata);
-        console.log(id, "АЙДИ?");
-        getOldMessages(id, adata.token);
-        store.set("chat", {
-                id: id,
-                token: adata.token
-            });
-
-    });
-
-
-    //.then(data => {
-    //console.log('token', data.token); // Получаем строку
-    // store.set("chat", {
-    //     id: id,
-    //     token: data.token
-    // });
-    //}); 
-    
-
-}
+import { makeMessage } from "./makeMessage";
 
 export function sendMessage(chatID: number, userID: number, token: string, message: string) {
 
@@ -101,7 +66,7 @@ export function sendMessage(chatID: number, userID: number, token: string, messa
         makeMessage([{
           No: cdata.id,
           user_id: cdata.user_id,
-          time: time,
+          time: correctTime,
           text: cdata.content,
           file: cdata.file
         }]);
