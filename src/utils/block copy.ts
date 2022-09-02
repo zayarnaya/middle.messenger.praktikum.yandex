@@ -2,9 +2,7 @@ import { EventBus } from "./event-bus";
 import { v4 as makeUUID } from "uuid";
 import { Events } from "../types";
 
-type BlockProps = Record<string, any>;
-
-export class Block<Children extends Block<Children>> {
+export class Block<Props extends {}, Children extends Block<Props, Children>> {
   public static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -15,7 +13,7 @@ export class Block<Children extends Block<Children>> {
   private _element: HTMLElement;
   private _meta: Record<any, any> = {};
   public _id: string;
-  public props: BlockProps;
+  public props: Props;
   public eventBus: Function;
   public children: Children | {};
   public withInternalID: boolean = false;
@@ -31,7 +29,7 @@ export class Block<Children extends Block<Children>> {
 
   public constructor(
     tagName: string = "div",
-    propsAndChildren: BlockProps,
+    propsAndChildren: Props,
     withInternalID?: boolean,
     classname?: string
   ) {
@@ -56,7 +54,7 @@ export class Block<Children extends Block<Children>> {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  private _getChildren(propsAndChildren: BlockProps) {
+  private _getChildren(propsAndChildren: Props) {
     const children: Record<string, typeof this.children> = {};
     const props: Record<string, any> = {};
 
@@ -112,7 +110,7 @@ export class Block<Children extends Block<Children>> {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  private _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
+  private _componentDidUpdate(oldProps: Props, newProps: Props) {
     const response = this.componentDidUpdate(oldProps, newProps);
 
     if (!response) {
@@ -121,11 +119,11 @@ export class Block<Children extends Block<Children>> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  public componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
+  public componentDidUpdate(oldProps: Props, newProps: Props) {
     return oldProps !== newProps;
   }
 
-  public setProps = (nextProps: BlockProps) => {
+  public setProps = (nextProps: Props) => {
     if (!nextProps) {
       return;
     }
@@ -200,15 +198,15 @@ export class Block<Children extends Block<Children>> {
     }
   }
 
-  private _makePropsProxy(propsAndChildren: BlockProps) {
+  private _makePropsProxy(propsAndChildren: Props) {
     const self = this;
     let theProxy = new Proxy(propsAndChildren, {
-      get(target: BlockProps, prop: keyof BlockProps) {
+      get(target: Props, prop: keyof Props) {
         const value = target[prop];
         return typeof value === "function" ? value.bind(target) : value;
       },
 
-      set(target: BlockProps, prop: keyof BlockProps, value: any) {
+      set(target: Props, prop: keyof Props, value: any) {
         target[prop] = value;
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
         return true;
@@ -230,7 +228,7 @@ export class Block<Children extends Block<Children>> {
     return element;
   }
 
-  public compile(template: Function, props: BlockProps) {
+  public compile(template: Function, props: Props) {
     const propsAndStubs: Record<string, string> = { ...props } as Record<string, string>;
 
     Object.entries(this.children).forEach(([key, child]) => {

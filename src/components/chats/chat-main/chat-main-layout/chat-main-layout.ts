@@ -2,9 +2,6 @@ import { Block } from "../../../../utils/block";
 import chatMainLayout from "./chat-main-layout.hbs";
 import { ChatRightPanelLayoutProps } from "../../../../types";
 
-import { isEmpty } from "../../../../utils/minor-functions/isEmpty";
-import { pageRouter } from "../../../../utils/render";
-
 export class ChatRightPanelLayout extends Block<
   ChatRightPanelLayoutProps,
   ChatRightPanelLayout
@@ -15,7 +12,6 @@ export class ChatRightPanelLayout extends Block<
     classname?: string
   ) {
     super(tag, props, false, classname);
-
   }
 
   public render() {

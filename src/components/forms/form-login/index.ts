@@ -13,8 +13,8 @@ export function loginForm() {
 
   theChildren = inputs.reduce((theChildren, item, i) => {
     theChildren[`input${i}`] = new InputField(item);
-      return theChildren;
-   }, {});
+    return theChildren;
+  }, {});
 
   const form = new loginFormAll({
     button: new Button(data.button.loginSubmit),

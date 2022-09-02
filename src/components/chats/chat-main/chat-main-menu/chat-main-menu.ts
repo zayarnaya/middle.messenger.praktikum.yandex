@@ -7,7 +7,10 @@ export class ChatsMenu extends Block<ChatsMenuProps, ChatsMenu> {
     super("nav", props, false, classname);
     this.events = {
       click: function () {
-        document.querySelector("#open-menu").classList.toggle("hidden");
+        let menu: HTMLElement = document.querySelector(
+          "#open-menu"
+        ) as HTMLElement;
+        menu.classList.toggle("hidden");
       },
     };
 

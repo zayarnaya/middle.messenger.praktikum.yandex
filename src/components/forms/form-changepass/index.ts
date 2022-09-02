@@ -2,7 +2,6 @@ import { data } from "../../../data";
 import { formChangePass } from "./form-changepass";
 import { Button } from "../../buttons/button-submit/button";
 import { InputField } from "../../input/input-field";
-import { AvatarChange } from "../../avatars/change-avatar/change-avatar";
 import { layoutWideForm } from "../../../layouts/wide-form/wide-form";
 import { render } from "../../../utils/renderDOM";
 import { MultiList } from "../../multi-list/multi-list";

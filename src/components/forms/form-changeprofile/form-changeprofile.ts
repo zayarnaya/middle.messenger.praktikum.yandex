@@ -4,6 +4,7 @@ import changeProfile from "./form-changeprofile.hbs";
 import "./form-changeprofile.scss";
 import { UserProfileController } from "../../../utils/controllers/userProfileController";
 import store from "../../../utils/store";
+import { UserProps } from "../../../APItypes";
 
 export class ChangeUserProfile extends Form {
   public constructor(propsAndChildren: FormProps) {
@@ -15,40 +16,38 @@ export class ChangeUserProfile extends Form {
     this.events = {
       submit: (e: Event) => {
         e.preventDefault();
-        const form: HTMLFormElement = document.querySelector("form.form-changeprofile") as HTMLFormElement;
-        const inputs: NodeList = form.querySelectorAll("input") as NodeList;
-        console.log(form.querySelectorAll("input"));
-        let submitData: {
-          first_name: string,
-          second_name: string,
-          display_name: string,
-          login: string,
-          email: string,
-          phone: string
-        } = {};
-        inputs.forEach(input => {
-          let name = input.attributes.id.value;
+        const submitMessage: HTMLElement = document.querySelector(
+          ".submit-message"
+        ) as HTMLElement;
+        const form: HTMLFormElement = document.querySelector(
+          "form.form-changeprofile"
+        ) as HTMLFormElement;
+        const inputsRaw: HTMLCollectionOf<HTMLInputElement> =
+          form.getElementsByTagName("input");
+        let inputs: HTMLInputElement[] = Array.from(inputsRaw);
+
+        let submitData: UserProps | {} = {};
+        inputs.forEach((input) => {
+          let name = input.id;
           let val = input.value;
           submitData[name] = val;
         });
-        console.log(JSON.stringify(submitData));
-        const submitChange = new UserProfileController;
-        submitChange.changeProfile(JSON.stringify(submitData))
-        .then(response => {
-          if(response.status == 200) {
-            let adata = JSON.parse(response.response);
-            console.log(adata);
-            store.set("user", adata);
-            Object.entries(adata).forEach(entry => {
 
-              localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
-            });
-          } else {
-            console.log(response.status, response.response);
-          }
-        });
-
-      }
+        const submitChange = new UserProfileController();
+        submitChange
+          .changeProfile(JSON.stringify(submitData))
+          .then((response) => {
+            if (response.status == 200) {
+              let adata = JSON.parse(response.response);
+              store.set("user", adata);
+              Object.entries(adata).forEach((entry) => {
+                localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
+              });
+            } else {
+              submitMessage.textContent = "Что-то не так!" + response.responseж;
+            }
+          });
+      },
     };
 
     this.eventTarget = "form.form-changeprofile";

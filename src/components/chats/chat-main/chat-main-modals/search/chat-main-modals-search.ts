@@ -1,3 +1,4 @@
+import { UserProps } from "../../../../../APItypes";
 import { chatIDfromLocation } from "../../../../../consts";
 import { ChatsModalProps } from "../../../../../types";
 import { Block } from "../../../../../utils/block";
@@ -12,7 +13,6 @@ export class ChatsUserSearch extends Block<ChatsModalProps, ChatsUserSearch> {
     this.events = {
       submit: function (e: Event) {
         e.preventDefault();
-
         const input: HTMLInputElement = document.getElementById(
           "userSearchModalInput"
         ) as HTMLInputElement;
@@ -28,15 +28,15 @@ export class ChatsUserSearch extends Block<ChatsModalProps, ChatsUserSearch> {
           if (response.status != 200) {
             resultField.textContent = "Что-то случилось: " + response.response;
           }
-          const names = [];
-          const responseData = JSON.parse(response.response);
+          const names: Record<string, string>[] = [];
+          const responseData: UserProps[] = JSON.parse(response.response);
 
           if (!!isEmpty(responseData)) {
             resultField.textContent = "Никого не нашли :(";
           } else {
             responseData.forEach((user) => {
               names.push({
-                [user.id]: `${user.first_name} ${user.second_name} id:${user.id}`,
+                [`${user.id}`]: `${user.first_name} ${user.second_name} id:${user.id}`,
               });
             });
             let list = new DocumentFragment();
@@ -60,14 +60,17 @@ export class ChatsUserSearch extends Block<ChatsModalProps, ChatsUserSearch> {
                 put.put(`https://ya-praktikum.tech/api/v2/chats/users`, {
                     data: json,
                   })
-                  .then(response => {
-                    if( response.status == 200) {
-                    const resultField = document.getElementById("result") as HTMLElement;
-                    resultField.textContent = "Друг теперь участвует в чате! " + response.response;
+                  .then((response) => {
+                    if (response.status == 200) {
+                      const resultField = document.getElementById(
+                        "result"
+                      ) as HTMLElement;
+                      resultField.textContent =
+                        "Друг теперь участвует в чате! " + response.response;
                     } else {
-                      resultField.textContent = "Что-то не получилось! " + response.response;
+                      resultField.textContent =
+                        "Что-то не получилось! " + response.response;
                     }
-                    
                   });
               });
               ul.append(li);

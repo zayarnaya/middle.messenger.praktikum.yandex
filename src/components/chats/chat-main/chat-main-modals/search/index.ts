@@ -22,7 +22,14 @@ export function userSearchModal() {
     });
 
     render(".modal-place", searchModal);
-    document.getElementById("close-button").addEventListener("click", function() {document.getElementById("modal-place").textContent = "";});
-
+    const button: HTMLElement = document.getElementById(
+        "close-button"
+      ) as HTMLElement;
+      const modalPlace: HTMLElement = document.getElementById(
+        "modal-place"
+      ) as HTMLElement;
+      button.addEventListener("click", function () {
+        modalPlace.textContent = "";
+      });
 }
 
