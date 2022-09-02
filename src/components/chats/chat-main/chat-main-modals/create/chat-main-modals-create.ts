@@ -3,7 +3,7 @@ import { Block } from "../../../../../utils/block";
 import { ChatSettingsController } from "../../../../../utils/controllers/chatSettingsController";
 import chatMainModalCreate from "./chat-main-modal-create.hbs";
 
-export class ChatsCreateChat extends Block<ChatsModalProps, ChatsCreateChat> {
+export class ChatsCreateChat extends Block<ChatsCreateChat> {
   public constructor(props: ChatsModalProps, classname?: string) {
     super("div", props, false, (classname = "modal"));
     this.events = {

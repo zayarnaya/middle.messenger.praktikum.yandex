@@ -6,10 +6,7 @@ import { UserAuthController } from "../../../../utils/controllers/userAuthContro
 import { defaulAvatar, filePrefix } from "../../../../consts";
 import { UserProps } from "../../../../APItypes";
 
-export class ChatlistUserprofile extends Block<
-  ChatlistUserprofileProps,
-  ChatlistUserprofile
-> {
+export class ChatlistUserprofile extends Block<ChatlistUserprofile> {
   public constructor(
     tag: string,
     props: ChatlistUserprofileProps,

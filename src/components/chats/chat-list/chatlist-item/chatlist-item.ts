@@ -2,7 +2,7 @@ import { Block } from "../../../../utils/block";
 import chatListItem from "./chatlist-item.hbs";
 import { ChatListItemProps } from "../../../../types";
 
-export class ChatListItem extends Block<ChatListItemProps, ChatListItem> {
+export class ChatListItem extends Block<ChatListItem> {
   public constructor(propsAndChildren: ChatListItemProps) {
     super("li", propsAndChildren);
     if (!!propsAndChildren.chatID) {

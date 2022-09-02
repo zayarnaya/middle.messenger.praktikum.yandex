@@ -2,10 +2,7 @@ import { Block } from "../../../../utils/block";
 import chatListLayout from "./chat-list-layout.hbs";
 import { ChatListLeftPanelProps } from "../../../../types";
 
-export class ChatListLeftPanel extends Block<
-  ChatListLeftPanelProps,
-  ChatListLeftPanel
-> {
+export class ChatListLeftPanel extends Block<ChatListLeftPanel> {
   public constructor(
     tag: string,
     propsAndChildren: ChatListLeftPanelProps,

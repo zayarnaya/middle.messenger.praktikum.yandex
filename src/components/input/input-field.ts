@@ -5,7 +5,7 @@ import { InputFieldProps, Validity } from "../../types";
 import "./input-field.scss";
 import { checkPassMatch } from "../../utils/validator/check-pass-match";
 
-export class InputField extends Block<InputFieldProps, InputField> {
+export class InputField extends Block<InputField> {
   public isValid: Validity = "empty";
 
   public constructor(props: InputFieldProps) {

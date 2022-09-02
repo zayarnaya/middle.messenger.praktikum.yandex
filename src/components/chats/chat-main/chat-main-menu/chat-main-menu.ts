@@ -2,7 +2,7 @@ import { Block } from "../../../../utils/block";
 import chatMainMenu from "./chat-main-menu.hbs";
 import { ChatsMenuProps } from "../../../../types";
 
-export class ChatsMenu extends Block<ChatsMenuProps, ChatsMenu> {
+export class ChatsMenu extends Block<ChatsMenu> {
   public constructor(props: ChatsMenuProps, classname?: string) {
     super("nav", props, false, classname);
     this.events = {

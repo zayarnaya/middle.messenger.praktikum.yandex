@@ -3,7 +3,7 @@ import changeAvatar from "./change-avatar.hbs";
 import "./change-avatar.scss";
 import { AvatarProps } from "../../../types";
 
-export class AvatarChange extends Block<AvatarProps, AvatarChange> {
+export class AvatarChange extends Block<AvatarChange> {
   public constructor(props: AvatarProps) {
     super("div", props, false);
   }

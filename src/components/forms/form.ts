@@ -3,7 +3,7 @@ import { FormProps } from "../../types";
 import { InputField } from "../input/input-field";
 import { getData } from "../../utils/form-actions/get-data";
 
-export class Form extends Block<FormProps, Form> {
+export class Form extends Block<Form> {
   public isValid: boolean = false;
   public inputs: InputField[];
 

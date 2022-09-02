@@ -3,7 +3,7 @@ import buttonSubmit from "./button-submit.hbs";
 import { Block } from "../../../utils/block";
 import { ButtonProps, Events } from "../../../types";
 
-export class Button extends Block<ButtonProps, Button> {
+export class Button extends Block<Button> {
   public constructor(
     props: ButtonProps,
     events?: Events,

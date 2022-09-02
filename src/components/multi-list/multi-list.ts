@@ -3,7 +3,7 @@ import multiList from "./multi-list.hbs";
 import { Block } from "../../utils/block";
 import { MultiListProps } from "../../types";
 
-export class MultiList extends Block<MultiListProps, MultiList> {
+export class MultiList extends Block<MultiList> {
   public constructor(children: MultiListProps, tag: string, classname: string) {
     super(tag, children, false, classname);
   }

@@ -7,7 +7,7 @@ import { HTTPTransport } from "../../../../../utils/http-transport";
 import { isEmpty } from "../../../../../utils/minor-functions/isEmpty";
 import chatMainModalSearch from "./chat-main-modal-search.hbs";
 
-export class ChatsUserSearch extends Block<ChatsModalProps, ChatsUserSearch> {
+export class ChatsUserSearch extends Block<ChatsUserSearch> {
   public constructor(props: ChatsModalProps, classname?: string) {
     super("div", props, false, (classname = "modal"));
     this.events = {

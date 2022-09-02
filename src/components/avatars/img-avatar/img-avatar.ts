@@ -6,7 +6,7 @@ type ImageAvatarProps = {
     name: string
 }
 
-export class ImageAvatar extends Block<ImageAvatarProps, ImageAvatar> {
+export class ImageAvatar extends Block<ImageAvatar> {
     public constructor(props: ImageAvatarProps) {
         super("div", props, false, "profile__avatar");
     }

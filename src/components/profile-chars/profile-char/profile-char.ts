@@ -3,7 +3,7 @@ import profileChar from "./profile-char.hbs";
 import { ProfCharProps } from "../../../types";
 import "./profile-char.scss";
 
-export class ProfChar extends Block<ProfCharProps, ProfChar> {
+export class ProfChar extends Block<ProfChar> {
   public constructor(props: ProfCharProps) {
     super("div", props, false, "profile__char");
   }

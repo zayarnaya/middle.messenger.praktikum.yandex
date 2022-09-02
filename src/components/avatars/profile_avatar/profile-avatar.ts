@@ -3,7 +3,7 @@ import profileAvatar from "./profile-avatar.hbs";
 import "./profile-avatar.scss";
 import { AvatarProps } from "../../../types";
 
-export class ProfAvatar extends Block<AvatarProps, ProfAvatar> {
+export class ProfAvatar extends Block<ProfAvatar> {
   public constructor(props: AvatarProps) {
     super("div", props, false);
   }

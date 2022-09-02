@@ -2,7 +2,7 @@ import { MenuItemProps } from "../../../../../types";
 import { Block } from "../../../../../utils/block";
 import menuItem from "./menu-item.hbs";
 
-export class MenuItem extends Block<MenuItemProps, MenuItem> {
+export class MenuItem extends Block<MenuItem> {
   public constructor(props: MenuItemProps) {
     super("li", props, false, props.classname);
     if (!!props.events) {

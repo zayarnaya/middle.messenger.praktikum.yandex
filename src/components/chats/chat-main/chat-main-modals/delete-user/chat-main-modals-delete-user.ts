@@ -4,7 +4,7 @@ import { Block } from "../../../../../utils/block";
 import { ChatsController } from "../../../../../utils/controllers/chatsController";
 import chatMainModalDeleteUser from "./chat-main-modal-delete-user.hbs";
 
-export class ChatsRemoveUser extends Block<ChatsModalProps, ChatsRemoveUser> {
+export class ChatsRemoveUser extends Block<ChatsRemoveUser> {
   public constructor(props: ChatsModalProps) {
     super("div", props, false, "modal");
     this.events = {
