@@ -8,7 +8,6 @@ export class ChatListItem extends Block<ChatListItem> {
     if (!!propsAndChildren.chatID) {
       this.events = {
         click: function () {
-          console.log(this);
           let id = this.id;
           let active = document.querySelector(".highlight");
 

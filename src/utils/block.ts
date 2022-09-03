@@ -69,8 +69,6 @@ export class Block<Children extends Block<Children>> {
       }
     });
 
-    //console.log({ children, props }, "ИЗ ГЕТЧИЛДРЕН");
-
     return { children, props };
   }
 

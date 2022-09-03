@@ -11,7 +11,6 @@ export class HTTPTransport {
   };
 
   put = (url: string, options: Options) => {
-    console.log("PUT");
     return this.request(
       url,
       {
@@ -24,12 +23,10 @@ export class HTTPTransport {
   };
 
   file = (url: string, options: Options) => {
-    console.log("FILE");
     return this.request(
       url,
       {
         ...options,
-        //headers: { "Content-Type": "multipart/form-data" },
         method: Methods.PUT,
       },
       10000
@@ -37,7 +34,6 @@ export class HTTPTransport {
   };
 
   post = (url: string, options: Options) => {
-//console.log("POST");
     return this.request(
       url,
       {
@@ -62,7 +58,6 @@ export class HTTPTransport {
   request = (url: string, options: Options, timeout: number = 1000) => {
 
     const { headers = {}, method, data } = options;
-    //console.log(options, "OPTIONS");
     return new Promise((resolve, reject) => {
       if (!method) {
         reject("no method!");
@@ -91,17 +86,6 @@ export class HTTPTransport {
       } else {
         xhr.send(data);
       }
-
-      /*
-      if (xhr.status != 200) {
-        // обработать ошибку
-        console.log( xhr.status, xhr.statusText ); // пример вывода: 404: Not Found
-      } else {
-        // вывести результат
-        console.log( xhr.responseText ); // responseText -- текст ответа.
-      }
-      */
-
     });
   };
 }

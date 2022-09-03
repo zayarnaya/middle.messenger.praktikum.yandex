@@ -1,13 +1,11 @@
-import { filePrefix } from "../../../consts";
-import { APIurls, Methods } from "../../../types";
-import { AvatarController } from "../../../utils/controllers/avatarController";
-import { HTTPTransport } from "../../../utils/http-transport";
+import { chatIDfromLocation, filePrefix } from "../../../consts";
+import { ChatsController } from "../../../utils/controllers/chatsController";
 import store, { StoreEvents } from "../../../utils/store";
 import { ImageAvatar } from "../../avatars/img-avatar/img-avatar";
 import { Button } from "../../buttons/button-submit/button";
 import { InputField } from "../../input/input-field";
 import { Form } from "../form";
-import changeAvatar from "./form-changeavatar.hbs";
+import changeAvatar from "./form-changechatavatar.hbs";
 
 type FormChangeAvatarProps = {
   avatar: ImageAvatar;
@@ -21,20 +19,25 @@ export class FormChangeAvatar extends Form {
     this.events = {
       submit: async (e: Event) => {
         e.preventDefault();
+        const chatID: string = `${chatIDfromLocation()}`;
         const submitMessage: HTMLElement = document.querySelector(
           ".submit-message"
         ) as HTMLElement;
-        const form: HTMLFormElement = document.querySelector(
-          "form.form__changeAvatar"
-        ) as HTMLFormElement;
-        const submitChange = new AvatarController();
-        let formdata = new FormData(form);
+        const input: HTMLInputElement = document.querySelector(
+          "#changeChatAvatar"
+        ) as HTMLInputElement;
+        const file = input.files ? input.files[0] : null;
+        const submitChange = new ChatsController();
+        let formdata = new FormData();
+        formdata.append("chatId", chatID);
+        if (!!file) {
+          formdata.append("avatar", file);
+        }
 
-        submitChange.change(formdata).then((response) => {
+        submitChange.changeChatAvatar(formdata).then((response) => {
           if (response.status == 200) {
             let adata = JSON.parse(response.response);
-            store.set("user", adata);
-            localStorage.setItem("user_avatar", adata.avatar as string);
+            store.set("chat", adata);
           } else {
             submitMessage.textContent =
               "Ой! Что-то не так! Сервер пишет " +
@@ -44,11 +47,11 @@ export class FormChangeAvatar extends Form {
       },
     };
 
-    this.eventTarget = "form.form__changeAvatar";
+    this.eventTarget = "form.form__chat__changeAvatar";
 
     store.on(StoreEvents.Updated, () => {
       this.children.avatar.setProps({
-        avatar: `${filePrefix}${store.getState().user.avatar}`,
+        avatar: `${filePrefix}${store.getState().chat.avatar}`,
       });
     });
   }

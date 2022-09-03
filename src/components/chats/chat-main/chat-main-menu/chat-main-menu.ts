@@ -1,6 +1,6 @@
 import { Block } from "../../../../utils/block";
 import chatMainMenu from "./chat-main-menu.hbs";
-import { ChatsMenuProps } from "../../../../types";
+import { ChatsMenuProps, Events } from "../../../../types";
 
 export class ChatsMenu extends Block<ChatsMenu> {
   public constructor(props: ChatsMenuProps, classname?: string) {

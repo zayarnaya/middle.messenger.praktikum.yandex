@@ -20,18 +20,18 @@ export class ChatlistUserprofile extends Block<ChatlistUserprofile> {
         let adata = JSON.parse(response.response);
         store.set("user", adata);
       } else {
-        console.log(response.status, response.response);
+        return;
       }
     });
 
     store.on(StoreEvents.Updated, () => {
       let newProps: UserProps = store.getState().user as UserProps;
-      let avatar: string;
-      if (!newProps.avatar) {
-        avatar = defaulAvatar;
-      } else {
-        avatar = `${filePrefix}${newProps.avatar}`;
+      if (!newProps) {
+        return;
       }
+      let avatar: string = newProps.avatar
+        ? `${filePrefix}${newProps.avatar}`
+        : defaulAvatar;
 
       let name = newProps.display_name
         ? newProps.display_name

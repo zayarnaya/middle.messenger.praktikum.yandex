@@ -1,14 +1,14 @@
+import { UserProps } from "../APItypes";
 import { chatIDfromLocation } from "../consts";
 import store from "./store";
 
-export function makeMessage(messages) {
+export function makeMessage(messages: any[]) {
     let state = store.getState();
     let chatID = chatIDfromLocation();
-    let chatusersRaw = state[`chat${chatID}_users`];
-    //console.log(chatusersRaw);
-    let users = {};
+    let chatusersRaw: UserProps[] = state[`chat${chatID}_users`] as UserProps[];
+    let users: Record<string, any> = {};
     chatusersRaw.forEach(user => {
-        Object.assign(users, {[user.id]: user.display_name});
+        Object.assign(users, {[`${user.id}`]: user.display_name});
     });
     let thisUserId = localStorage.getItem("user_id");
 
@@ -25,7 +25,12 @@ messages.forEach(message => {
     let inner = document.createElement("div");
     let time = document.createElement("time");
     let name = document.createElement("div");
-    let correctHour = Number(message.time.slice(0, 2)) - correction;//ой нет, коррекцию надо по-другому делать
+    let correctHour = Number(message.time.slice(0, 2)) - correction;
+    if(correctHour >= 24) {
+        correctHour = correctHour - 24;
+      } else if(correctHour < 0) {
+        correctHour = Math.abs(correctHour);
+      }
     let correctTime = correctHour + message.time.slice(2);
     if(message.user_id == thisUserId) {
         outer.classList.add("outer-out");
@@ -37,14 +42,11 @@ messages.forEach(message => {
     }
     inner.textContent = message.text;
     time.textContent = correctTime;
-    //name.textContent = message.username;
     outer.append(inner);
     outer.append(time);
     outer.append(name);
     fragment.appendChild(outer);
 
 });
-//console.log(fragment);
-//chat.textContent = "";
 chat.append(fragment);
 }

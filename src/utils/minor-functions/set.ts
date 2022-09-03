@@ -6,7 +6,6 @@ export function set(
   path: string,
   value: unknown
 ): Indexed | unknown {
-  console.log("STORE.SET");
   if (!isPlainObject(object)) return object;
   
   if (typeof path != "string") {

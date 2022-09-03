@@ -4,7 +4,7 @@ import { Block } from "../../../../utils/block";
 import profileLink from "./profile-link.hbs";
 
 
-export class ProfileLink extends Block<MenuItemProps, ProfileLink> {
+export class ProfileLink extends Block<ProfileLink> {
   public constructor(props: MenuItemProps) {
     super("div", props);
     if(!!props.events) {

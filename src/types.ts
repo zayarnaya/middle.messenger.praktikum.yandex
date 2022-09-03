@@ -15,6 +15,8 @@ import { ChatListItem } from "./components/chats/chat-list/chatlist-item/chatlis
 import { MenuItem } from "./components/chats/chat-main/chat-main-menu/menu-items/menu-item";
 import { AvatarChangeImg } from "./components/avatars/change-avatar/avatar-img/avatar-img";
 import { ProfileLink } from "./components/forms/my-profile/profile-links/profile-link";
+import { ImageAvatar } from "./components/avatars/img-avatar/img-avatar";
+import { ChatAvatar } from "./components/avatars/chat-avatar/chat-avatar";
 
 export enum Methods {
   GET = "GET",
@@ -164,11 +166,12 @@ export type ChatRightPanelLayoutProps = {
 
 export type ChatsModalProps = {
   input?: InputField,
-  button?: Button
+  button?: Button,
+  avatar?: ImageAvatar
 };
 
 export type ChatsMenuProps = {
-  chatavatar: string;
+  chatavatar: ChatAvatar;
   chatname: string;
   chatMenu: MultiList;
   actionsMenu: MultiList;

@@ -22,6 +22,7 @@ import { getChatUsers } from "../../../utils/getChatUsers";
 import { getToken } from "../../../utils/getToken";
 import { getOldMessages } from "../../../utils/getOldMessages";
 import { ChatsProps } from "../../../APItypes";
+import { changeChatAvatarModal } from "./chat-main-modals/avatar";
 
 export function buildRightPanel() {
   const chatID = chatIDfromLocation();
@@ -32,38 +33,19 @@ export function buildRightPanel() {
   }
   let oldMsgCounter: number = 0;
 
-  store.on(StoreEvents.Updated, () => {
-    //добавляем название чата и аватарку в меню
-
-    let chat: ChatsProps = store.getState().chat as ChatsProps;
-    let this_chat: {
-      id: number;
-      token: string;
-    } = store.getState().this_chat as {
-      id: number;
-      token: string;
-    };
-    mainmenu.setProps({
-      chatavatar: chat.avatar
-        ? `${filePrefix}${chat.avatar}`
-        : defaultChatAvatar,
-      chatname: chat.title as string,
-    });
-
-    //формируем список старых сообщений
-    if (this_chat.id == chatID && !!this_chat.token) {
-      if (oldMsgCounter == 0) {
-        getOldMessages(chatID, this_chat.token);
-        oldMsgCounter += 1;
-      }
-    }
-  });
-
   const createChat = new MenuItem({
     text: "Создать чат",
     id: "new-chat",
     events: {
       click: () => createChatModal(),
+    },
+  });
+
+  const changeAvatar = new MenuItem({
+    text: "Поменять аватарку",
+    id: "change-avatar",
+    events: {
+      click: () => changeChatAvatarModal(),
     },
   });
 
@@ -94,6 +76,7 @@ export function buildRightPanel() {
 
   const chatMenuItems: MenuItem[] = [
     createChat,
+    changeAvatar,
     inviteUser,
     deleteUser,
     deleteChat,
@@ -156,4 +139,37 @@ export function buildRightPanel() {
   );
 
   render(".chat-main-wrapper", panel);
+
+  store.on(StoreEvents.Updated, () => {
+    //добавляем название чата и аватарку в меню
+    let chat: ChatsProps = store.getState().chat as ChatsProps;
+    let this_chat: {
+      id: number;
+      token: string;
+    } = store.getState().this_chat as {
+      id: number;
+      token: string;
+    };
+    let avatar: string = "";
+    if (!!chat && !!chat.avatar && chat.avatar != "null") {
+      avatar = `${filePrefix}${chat.avatar}`;
+    } else {
+      avatar = defaultChatAvatar;
+    }
+    mainmenu.setProps({
+      chatavatar: avatar,
+      chatname: chat ? (chat.title as string) : "Чат",
+    });
+
+    //формируем список старых сообщений
+    if (!this_chat) {
+      return;
+    }
+    if (this_chat.id == chatID && !!this_chat.token) {
+      if (oldMsgCounter == 0) {
+        getOldMessages(chatID, this_chat.token);
+        oldMsgCounter += 1;
+      }
+    }
+  });
 }

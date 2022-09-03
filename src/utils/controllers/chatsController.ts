@@ -10,9 +10,8 @@ export class ChatsController {
     request.post(APIurls.CREATECHAT, { data: data }).then((response) => {
       if (response.status == 200) {
         store.set("chat", data);
-        console.log("чат сделали");
       } else if (response.status != 200) {
-        console.log(response.status, response.response);
+        return;
       }
     });
   }
@@ -20,23 +19,15 @@ export class ChatsController {
   public async delete(data: { id: number }) {
     request.delete(APIurls.CHATS, { data: data }).then((response) => {
       if (response.status == 200) {
-        console.log("чат удалили");
-        console.log(response.response);
         router.go("/chats");
       } else if (response.status != 200) {
-        console.log(response.status, response.response);
+        return;
       }
     });
   }
 
   public async invite(data: { users: number[]; chatId: number }) {
-    request.put(APIurls.CHATUSERS, { data: data }).then((response) => {
-      if (response.status == 200) {
-        console.log("позвали юзера");
-      } else if (response.status != 200) {
-        console.log(response.status, response.response);
-      }
-    });
+    request.put(APIurls.CHATUSERS, { data: data });
   }
 
   public async getToken(id: string | number) {
@@ -72,5 +63,9 @@ export class ChatsController {
 
   public async deleteChatUsers(data: { users: number[]; chatId: number }) {
     request.delete(APIurls.CHATUSERS, { data: JSON.stringify(data) });
+  }
+
+  public async changeChatAvatar(data: FormData) {
+    return request.file(APIurls.CHATAVATAR, { data: data });
   }
 }

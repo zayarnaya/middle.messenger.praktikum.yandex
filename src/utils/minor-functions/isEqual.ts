@@ -18,7 +18,6 @@ export function isEqual(a: Record<string, any>, b: Record<string, any>): boolean
     if(!!isObject(a[key])) {
       if(!isEqual(a[key], b[key])) return false;
     } else if (a[key] != b[key]) {
-        console.log("НЕ РАВНО");
         return false; 
       } 
     }

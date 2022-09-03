@@ -1,9 +1,18 @@
+
 import { isEmpty } from "./isEmpty";
 
-import { expect } from "chai";
+import { assert } from "chai";
 
 describe("isEmpty", function() {
+    it("даем null и проверяем - пустой ли", function() {
+        assert.equal(isEmpty(null), true);
+    });
+
+    it("даем массив и проверяем - пустой ли", function() {
+        assert.equal(isEmpty([]), true);
+    });
+
     it("даем объект и проверяем - пустой ли", function() {
-        chai.assert.equal(isEmpty(null), true);
-    })
-})
+        assert.equal(isEmpty({}), true);
+    });
+});

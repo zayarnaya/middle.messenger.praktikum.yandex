@@ -6,12 +6,9 @@ export function isEmpty(data: any): boolean {
             return false;
         }
     } else if (data instanceof Object) {
-        console.log("ISEMOTY _____ OBJECT");
         if(Object.keys(data).length === 0) {
-            console.log("NE KEYS");
             return true;
         } else if (data == null) {
-            console.log("DATA NULL");
             return true;
         
         } else if (Object.keys(data).length != 0 && data != undefined && data != null) {

@@ -14,7 +14,6 @@ export class FormMessage extends Form {
     this.events = {
       submit: function (e: Event) {
         e.preventDefault();
-        console.log("__________________СООБЩЕНИЕ_____________");
         let input: HTMLInputElement = document.getElementById(
           "message"
         ) as HTMLInputElement;
@@ -25,14 +24,10 @@ export class FormMessage extends Form {
           errorMessage.textContent = "Сообщение не должно быть пустым!";
           return;
         }
-        //let result: Record<string, string> = { message: input.value };
         let message = input.value;
 
-        //console.log(result);
         input.value = "";
         errorMessage.textContent = " ";
-        console.log( store.getState(), "STATTE");
-        //let chatID = store.getState().chat.id;
         let chatID = chatIDfromLocation();
         let userID = store.getState().user.id;
         let token = store.getState().this_chat.token;

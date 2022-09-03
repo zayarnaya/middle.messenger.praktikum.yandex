@@ -12,8 +12,8 @@ export function signinForm() {
 
   theChildren = inputs.reduce((theChildren, item, i) => {
     theChildren[`input${i}`] = new InputField(item);
-      return theChildren;
-   }, {});
+    return theChildren;
+  }, {});
 
   const form = new signinFormAll({
     button: new Button(data.button.signinSubmit),
