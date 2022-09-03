@@ -32,7 +32,8 @@ export function getOldMessages(chatID: number, token: string) {
     let cdata = JSON.parse(event.data);
     cdata.forEach((data) => {
       let time = data.time.slice(11, 16);
-      let correctHour = Number(time.slice(0, 2)) - correction; 
+      let correctHour = Number(time.slice(0, 2)); 
+
       if(correctHour >= 24) {
         correctHour = correctHour - 24;
       } else if(correctHour < 0) {
