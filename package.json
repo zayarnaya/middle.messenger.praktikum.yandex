@@ -21,7 +21,7 @@
     ]
   },
   "name": "messenger_v",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Messenger by Veronika Zayarnaya",
   "source": "src/index.html",
   "scripts": {
@@ -38,6 +38,8 @@
     ".cache"
   ],
   "dependencies": {
+    "@babel/preset-typescript": "^7.18.6",
+    "@babel/register": "^7.18.9",
     "@inventory/parcel-plugin-handlebars": "1.0.0",
     "babel-register": "^6.26.0",
     "express": "4.18.1",
@@ -47,6 +49,9 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/register": "^7.18.9",
     "@parcel/transformer-sass": "2.6.2",
     "@types/chai": "^4.3.3",
     "@types/mocha": "^9.1.1",
