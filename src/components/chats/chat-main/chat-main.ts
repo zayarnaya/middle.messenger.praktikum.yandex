@@ -19,24 +19,13 @@ import store, { StoreEvents } from "../../../utils/store";
 import { modalUserRemove } from "./chat-main-modals/delete-user";
 import { logOut } from "../../../utils/logout";
 import { getChatList } from "../../../utils/getChatList";
-import { getChatUsers } from "../../../utils/getChatUsers";
-import { getToken } from "../../../utils/getToken";
 import { getOldMessages } from "../../../utils/getOldMessages";
-import { ChatsProps, UserProps } from "../../../APItypes";
+import { ChatsProps } from "../../../APItypes";
 import { changeChatAvatarModal } from "./chat-main-modals/avatar";
-import { isEqualArrays } from "../../../utils/minor-functions/isEqualArrays";
-import { makeMessage } from "../../../utils/makeMessage";
 
 export function buildRightPanel() {
   const loc = document.location.pathname;
-  const chatID = chatIDfromLocation();
   getChatList();
-  // if(!!chatID) {
-  // getChatList();
-  // getChatUsers(chatID);
-  // getToken(chatID);
-  // }
-
 
   let oldMsgCounter: number = 0;
 
@@ -144,36 +133,56 @@ export function buildRightPanel() {
     },
     "chat-main"
   );
-  if(!!document.querySelector(".chat-main-wrapper")){
+  if (!!document.querySelector(".chat-main-wrapper")) {
     render(".chat-main-wrapper", panel);
   }
 
   store.on(StoreEvents.Updated, () => {
-
-    console.log("STORE поймал обновление UPDATED");
     const newID = chatIDfromLocation();
     //Если не указан конкретный чат, сбрасываем аватарку и название
-    if(!newID) {
+    if (!newID) {
       mainmenu.setProps({
-      chatavatar: defaultChatAvatar,
-      chatname: "Выберите чат"
-    });
-  };
+        chatavatar: defaultChatAvatar,
+        chatname: "Выберите чат",
+      });
+    }
 
     const chatList: any[] = store.getState().chatlist as any[];
     //Проверка на существование вызванного чата в списке чатов
-    if(!!chatList){
+    if (!!chatList) {
       let chatIDlist: number[] = [];
-    chatList.forEach(chat => {
-      chatIDlist.push(Number(chat.id));
-    });
-    if(loc.includes("/messenger/") && !chatIDlist.includes(newID) && !!document.querySelector(".chat-main__inner")) {
-      document.querySelector(".chat-main__inner").textContent = "Такого чата нет!";
+      chatList.forEach((chat) => {
+        chatIDlist.push(Number(chat.id));
+      });
+      if (
+        loc.includes("/messenger/") &&
+        !chatIDlist.includes(newID) &&
+        !!document.querySelector(".chat-main__inner")
+      ) {
+        document.querySelector(".chat-main__inner").textContent =
+          "Такого чата нет!";
+      }
     }
-  }
 
     const chat: ChatsProps = store.getState().chat as ChatsProps;
-    console.log(store.getState(), "ЭТО В СТОРЕ");
+
+    if (!!chat && chat.id == newID) {
+      // добавляем название чата и аватарку в меню
+      let avatar: string = "";
+      if (!!chat && !!chat.avatar && chat.avatar != "null") {
+        avatar = `${filePrefix}${chat.avatar}`;
+      } else {
+        avatar = defaultChatAvatar;
+      }
+      mainmenu.setProps({
+        chatavatar: newID ? avatar : defaultChatAvatar,
+        chatname: chat ? (chat.title as string) : "Выберите чат",
+      });
+    }
+  });
+
+  store.on(StoreEvents.ThisChatSet, () => {
+    const newID = chatIDfromLocation();
     const thisChat: {
       id: number;
       token: string;
@@ -181,81 +190,29 @@ export function buildRightPanel() {
       id: number;
       token: string;
     };
-    const usersIndex = `chat${newID}_users`;
-    const thisChatUsers: UserProps[] = store.getState()[usersIndex] as UserProps[];
-
-    // if (!chat || !thisChat) {
-    //   console.log("РАНО");
-    //   return;
-
-    // } else if(thisChat.id != newID) {
-    //   console.log("ВСЕ ЕЩЕ РАНО");
-    // } else { console.log("ПОРА");
-
-    if(!!chat && chat.id == newID) {
-
-
-
-     // добавляем название чата и аватарку в меню
-     console.log(chat.id, chat, newID, "ПАРАМЕТРЫ");
-    //  if(mainmenu.props.chatname != "Выберите чат") {
-    //   console.log("УЖЕ ПОМЕНЯЛИ");
-    //   return;
-    //  }
-
-    let avatar: string = "";
-    if (!!chat && !!chat.avatar && chat.avatar != "null") {
-      avatar = `${filePrefix}${chat.avatar}`;
-    } else {
-      avatar = defaultChatAvatar;
-    }
-    mainmenu.setProps({
-      chatavatar: newID
-      ? avatar
-      : defaultChatAvatar,
-      chatname: chat ? (chat.title as string) : "Выберите чат",
-    });
-  }
-});
-
-    store.on(StoreEvents.ThisChatSet, () => {
-      console.log("TOKEN UPDATED");
-      const newID = chatIDfromLocation();
-      const thisChat: {
-        id: number;
-        token: string;
-      } = store.getState().thisChat as {
-        id: number;
-        token: string;
-      };
 
     //формируем список старых сообщений
-    if(thisChat.id != newID) {
-      const innerField: HTMLElement = document.querySelector(".chat-main__inner") as HTMLElement;
+    if (thisChat.id != newID) {
+      const innerField: HTMLElement = document.querySelector(
+        ".chat-main__inner"
+      ) as HTMLElement;
       innerField.textContent = ""; //сбрасываем сообщения
     }
-    // const chatsmsg = `chat${newID}_messages`;
-    // const oldMsg = store.getState()[chatsmsg];
-    // console.log(oldMsg, "ОЛДОВЫЕ");
-    console.log(thisChat.id, newID, thisChat);
-    console.log(document.querySelector(".chat-main__inner").innerHTML.includes("</div>"));
-    let isFull = document.querySelector(".chat-main__inner").innerHTML.includes("</div>");
 
-    if (thisChat.id == newID && !!thisChat.token && !!localStorage.getItem("user_id") 
-    && !isFull
-) {
-      if(oldMsgCounter == 0) {
-        console.log("ТУТ ОТПРАВЛЯЕТ НА ПОЛУЧЕНИЕ СООБЩЕНИЙ");
+    let isFull = document
+      .querySelector(".chat-main__inner")
+      .innerHTML.includes("</div>");
+
+    if (
+      thisChat.id == newID &&
+      !!thisChat.token &&
+      !!localStorage.getItem("user_id") &&
+      !isFull
+    ) {
+      if (oldMsgCounter == 0) {
         getOldMessages(thisChat.id, thisChat.token);
-        oldMsgCounter ++;
-      }  
-
+        oldMsgCounter++;
+      }
     }
-
-
-    });
-
-
-
-
+  });
 }

@@ -2,7 +2,6 @@ import { Block } from "../../../../utils/block";
 import chatListItem from "./chatlist-item.hbs";
 import { ChatListItemProps } from "../../../../types";
 import { router } from "../../../../consts";
-import { buildRightPanel } from "../../chat-main/chat-main";
 import store from "../../../../utils/store";
 import { getChatList } from "../../../../utils/getChatList";
 import { getChatUsers } from "../../../../utils/getChatUsers";
@@ -19,28 +18,23 @@ export class ChatListItem extends Block<ChatListItem> {
           let id = this.id;
           let active = document.querySelector(".highlight");
 
-          if(!active) {
+          if (!active) {
             this.classList.add("highlight");
-            router
-            .use(`/messenger/#${id}`, chatsPage)
-            .go(`/messenger/#${id}`);
+            router.use(`/messenger/#${id}`, chatsPage).go(`/messenger/#${id}`);
             getChatList();
             getChatUsers(id);
             getToken(id);
 
-            store.set("initChat", {id: id});
-
+            store.set("initChat", { id: id });
           } else if (!!active && this != active) {
             active.classList.remove("highlight");
             this.classList.add("highlight");
-            router
-            .use(`/messenger/#${id}`, chatsPage)
-            .go(`/messenger/#${id}`);
+            router.use(`/messenger/#${id}`, chatsPage).go(`/messenger/#${id}`);
             getChatList();
             getChatUsers(id);
             getToken(id);
 
-            store.set("initChat", {id: id});
+            store.set("initChat", { id: id });
           } else if (this == active) {
             return;
           }

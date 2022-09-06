@@ -13,7 +13,6 @@ import { ChatsProps } from "../../../APItypes";
 import { isEqualArrays } from "../../../utils/minor-functions/isEqualArrays";
 
 export function buildLeftPanel() {
-  console.log("BUILDLEFTPANEL");
   const getChats = new ChatsController();
   let storedChatList: ChatsProps[] = store.getState().chatlist as ChatsProps[];
   getChats.getChats().then((response) => {
@@ -52,7 +51,6 @@ export function buildLeftPanel() {
 
   //store.on(StoreEvents.Updated, () => {
     store.on(StoreEvents.ChatListSet, () => {
-      console.log("CHATLIST поймал обновление CHATLIST SET");
     setTimeout(() => {
       let chats: ChatsProps[] = store.getState().chatlist as ChatsProps[];
       if (!!isEmpty(chats)) {

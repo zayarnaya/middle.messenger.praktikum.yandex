@@ -26,8 +26,10 @@ export function signinForm() {
     ),
   });
   render(".messenger-wrapper", form);
-  const a: HTMLLinkElement = document.getElementById("login-link") as HTMLLinkElement;
-  a.addEventListener("click", function(e: Event) {
+  const a: HTMLLinkElement = document.getElementById(
+    "login-link"
+  ) as HTMLLinkElement;
+  a.addEventListener("click", function (e: Event) {
     e.preventDefault();
     router.go(this.href);
     store.setNewLoc("newLoc", this.href);

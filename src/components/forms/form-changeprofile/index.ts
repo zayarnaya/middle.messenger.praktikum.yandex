@@ -49,9 +49,10 @@ export function changeProfilePage() {
 
   const avatar = new FormChangeAvatar({
     avatar: new ImageAvatar({
-      avatar: localStorage.getItem("user_avatar") == "null"
-      ? defaulAvatar
-      : `${filePrefix}${localStorage.getItem("user_avatar")}`,
+      avatar:
+        localStorage.getItem("user_avatar") == "null"
+          ? defaulAvatar
+          : `${filePrefix}${localStorage.getItem("user_avatar")}`,
       name: "Мой_аватар",
     }),
     input: new InputField({

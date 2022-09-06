@@ -15,11 +15,11 @@ export class ChatlistUserprofile extends Block<ChatlistUserprofile> {
     super(tag, props, false, classname);
 
     this.events = {
-      click: (e:Event) => {
+      click: (e: Event) => {
         e.preventDefault();
         router.go("/profile");
-      }
-    }
+      },
+    };
 
     this.eventTarget = "a";
 

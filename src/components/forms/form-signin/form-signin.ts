@@ -5,7 +5,6 @@ import { FormProps } from "../../../types";
 import { UserAuthController } from "../../../utils/controllers/userAuthController";
 import { UserProps } from "../../../APItypes";
 import { router } from "../../../consts";
-import store from "../../../utils/store";
 
 export class signinFormAll extends Form {
   public constructor(propsAndChildren: FormProps) {
@@ -31,13 +30,11 @@ export class signinFormAll extends Form {
             data[key] = value;
           });
 
-          signUp.signUp(data)
-          .then(response => {
-            if(response.status == 200) {
-                router.go("/messenger");
-                //store.set("newLoc", "/messenger");
-            } 
-        });
+          signUp.signUp(data).then((response) => {
+            if (response.status == 200) {
+              router.go("/messenger");
+            }
+          });
         }
       },
     };

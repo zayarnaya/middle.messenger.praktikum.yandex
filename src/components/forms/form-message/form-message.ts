@@ -1,7 +1,6 @@
 import { Form } from "../form";
 import { FormProps } from "../../../types";
 import sendMessageForm from "./form-message.hbs";
-
 import store from "../../../utils/store";
 import { chatIDfromLocation } from "../../../consts";
 import { sendMessage } from "../../../utils/sendMessage";

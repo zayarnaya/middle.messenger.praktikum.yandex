@@ -34,19 +34,17 @@ export class ChangeUserProfile extends Form {
         });
 
         const submitChange = new UserProfileController();
-        submitChange
-          .changeProfile(submitData)
-          .then((response) => {
-            if (response.status == 200) {
-              let adata = JSON.parse(response.response);
-              store.set("user", adata);
-              Object.entries(adata).forEach((entry) => {
-                localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
-              });
-            } else {
-              submitMessage.textContent = "Что-то не так!" + response.response;
-            }
-          });
+        submitChange.changeProfile(submitData).then((response) => {
+          if (response.status == 200) {
+            let adata = JSON.parse(response.response);
+            store.set("user", adata);
+            Object.entries(adata).forEach((entry) => {
+              localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
+            });
+          } else {
+            submitMessage.textContent = "Что-то не так!" + response.response;
+          }
+        });
       },
     };
 

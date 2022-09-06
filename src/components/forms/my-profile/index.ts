@@ -38,8 +38,8 @@ export function profilePage() {
         click: (e: Event) => {
           e.preventDefault();
           router.go("/settings");
-        }
-      }
+        },
+      },
     }),
     linkChangePassword: new ProfileLink({
       text: "Изменить пароль",
@@ -48,8 +48,8 @@ export function profilePage() {
         click: (e: Event) => {
           e.preventDefault();
           router.go("/changepass");
-        }
-      }
+        },
+      },
     }),
     linkLogout: new ProfileLink({
       text: "Выйти",
@@ -59,8 +59,8 @@ export function profilePage() {
         click: (e: Event) => {
           e.preventDefault();
           logOut();
-        }
-      }
+        },
+      },
     }),
   });
 
@@ -70,27 +70,22 @@ export function profilePage() {
   getuser.getUser().then((response) => {
     if (response.status == 200) {
       let adata = JSON.parse(response.response);
-      console.log("ПОЛУЧИЛИ ДАННЫЕ");
       store.set("user", adata);
     } else {
       return;
     }
   });
   store.on(StoreEvents.Updated, () => {
-    console.log("ОТКРЫЛСЯ СТОР");
     // вызываем обновление компонента, передав данные из хранилища
     const user: UserProps = store.getState().user as UserProps;
     if (!user) {
-      console.log("NO USER");
       return;
-    } 
-    let newAvatar = user.avatar
-    ? `${filePrefix}${user.avatar}`
-    : defaulAvatar;
+    }
+    let newAvatar = user.avatar ? `${filePrefix}${user.avatar}` : defaulAvatar;
 
     let nickname = user.display_name
-    ? user.display_name
-    : `${user.first_name} ${user.second_name}`;
+      ? user.display_name
+      : `${user.first_name} ${user.second_name}`;
 
     form.children.avatar.setProps({
       avatar: newAvatar,
@@ -104,25 +99,5 @@ export function profilePage() {
       let newval = user[`${id}`];
       value.setProps({ value: newval });
     });
-
-
-
-
-    // form.setProps(store.getState().user);
-    // let displayName = form.props.user.display_name
-    // ? form.props.user.display_name
-    // : "null";
-    // let name: string;
-    // if (!displayName || displayName == "null") {
-    //   name = `${form.props.user.first_name} ${form.props.user.second_name}`;
-    // } else {
-    //   name = displayName;
-    // }
-    // let propsAvatar = form.props.user.avatar;
-    // let avatar: string = propsAvatar
-    //   ? `${filePrefix}${propsAvatar}`
-    //   : defaulAvatar;
-    // this.children.avatar.setProps({ name: name, avatar: avatar });
-    
   });
 }
