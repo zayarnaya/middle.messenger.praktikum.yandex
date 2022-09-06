@@ -12,7 +12,7 @@ export class UserProfileController {
     email: string;
     phone: string;
   }) {
-    return request.put(APIurls.CHANGEPROFILE, { data: data });
+    return request.put(APIurls.CHANGEPROFILE, { data: JSON.stringify(data) });
   }
 
   public async changePass(data: { oldPassword: string; newPassword: string }) {

@@ -8,23 +8,11 @@ import { loggingOut } from "../static_pages/logout";
 import { chatsPage } from "../components/chats";
 import { chatIDfromLocation, router } from "../consts";
 import { UserAuthController } from "./controllers/userAuthController";
+import store, { StoreEvents } from "./store";
 
 export function pageRouter() {
-  let loc = document.location.pathname;
-  let regexp: RegExp = new RegExp("^\\/chats\\/\\d*$");
-  if (
-    loc != "/" &&
-    loc != "/sign-up" &&
-    loc != "/settings" &&
-    loc != "/profile" &&
-    loc != "/changepass" &&
-    loc != "/logout" &&
-    loc != "/chats" &&
-    loc != "/notFound" &&
-    !loc.match(regexp)
-  ) {
-    document.location.pathname = "/notFound";
-  }
+  const loc = document.location.pathname;
+  const hash = document.location.hash;  
 
   const wrap: HTMLElement = document.querySelector(
     ".messenger-wrapper"
@@ -37,39 +25,62 @@ export function pageRouter() {
         localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
       });
       if (loc == "/") {
-        router.go("/chats");
+        router.go("/messenger");
       }
-    } else if (response.status != 200) {
+    } else if (!response || response.status != 200) {
       if (loc != "/") {
         if (loc != "/sign-up") {
           wrap.textContent =
             "Ой! Что-то разлогинились, перебрасываем на страницу входа";
           setTimeout(() => router.go("/"), 2000);
+          localStorage.clear();
         }
       }
-    } else if (!response) {
-      return;
-    }
+    } 
+  })
+  .catch(() => {
+    localStorage.clear();
+    throw new Error("Сервер отдает ошибку");
   });
 
-  let chatID = chatIDfromLocation();
+  const userID = localStorage.getItem("user_id");
+store.on(StoreEvents.Updated, () => {
+
+  const newloc = store.getState().newLoc;
+if (!!newloc && loc != newloc ) {
+    pageRouter();
+  }
+
+});
+
+  
   if (!document.getElementById("theList")) {
     addList();
   }
+
+  const chatID = chatIDfromLocation();
+
 
   router
     .use("/", loginForm)
     .use("/sign-up", signinForm)
     .use("/settings", changeProfilePage)
-    .use("/chats", chatsPage)
-    .use(`/chats/${chatID}`, chatsPage)
+    .use("/messenger", chatsPage)
+    .use("/messenger/", chatsPage)
+    .use(`/messenger/#${chatID}`, chatsPage)
     .use("/profile", profilePage)
     .use("/changepass", changePassPage)
     .use("/logout", loggingOut)
-    .use("/notFound", error404)
+    .use(loc, error404)
 
     .start();
+    
+    if (!userID && loc != "/" && loc != "/sign-up") {
+      router.go("/");
+    }
 }
+
+
 
 function addList(): void {
   let fragment: DocumentFragment = document.createDocumentFragment();
@@ -78,14 +89,14 @@ function addList(): void {
   let list: HTMLElement = document.createElement("ul");
   const listed = {
     "sign-up": "Регистрация",
-    forgotpass: "Забыли пароль",
+    "forgotpass": "Забыли пароль",
     "": "Логин",
-    profile: "Профиль",
-    settings: "Настройки профиля",
-    changepass: "Изменить пароль",
-    chats: "Чаты",
-    logout: "Разлогинились",
-    notFound: "404",
+    "profile": "Профиль",
+    "settings": "Настройки профиля",
+    "changepass": "Изменить пароль",
+    "messenger": "Чаты",
+    "logout": "Разлогинились",
+    "notFound": "404",
   };
 
   for (let i = 0; i < Object.keys(listed).length; i++) {

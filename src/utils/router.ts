@@ -1,4 +1,5 @@
 import { Route } from "./route";
+import store from "./store";
 
 export class Router {
   public routes: Route[] = [];
@@ -16,6 +17,7 @@ export class Router {
   }
 
   use(pathname: string, block: Function) {
+
     const route = new Route(pathname, block);
     this.routes.push(route);
     return this;
@@ -34,6 +36,7 @@ export class Router {
     const route = this.getRoute(pathname);
 
     if (!route) {
+      console.log("NO ROUTE");
       return;
     }
 
@@ -45,6 +48,9 @@ export class Router {
   }
 
   go(pathname: string) {
+    if(!!this._currentRoute) {
+    this._currentRoute.leave();
+    }
     this.history.pushState({}, "", pathname);
     this._onRoute(pathname);
   }

@@ -59,11 +59,12 @@ export const PATTERNS: Record<string, string> = {
   export const locationPrefix = document.location.pathname;
 
   export const chatIDfromLocation = (): number => {
-    let loc = document.location.pathname;
+    const loc = document.location.pathname;
+    const hash = document.location.hash;
     let data = null;
-    let regexp: RegExp = new RegExp("^\\/chats\\/\\d*$");
-    if(loc.includes("chats") && loc.match(regexp)) {
-      data = loc.slice(loc.indexOf("chats") + 6);
+    let regexp: RegExp = new RegExp("^\\/messenger\\/$");
+    if(loc.includes("messenger") && loc.match(regexp) && !!hash) {
+      data = hash.slice(1);
     }
     let chatID: string = !!data
     ? data
@@ -73,6 +74,8 @@ export const PATTERNS: Record<string, string> = {
   }
 
   export const filePrefix = "https://ya-praktikum.tech/api/v2/resources";
+
+  export const wssPrefix = "wss://ya-praktikum.tech/ws/chats";
 
   export const defaulAvatar = "https://ya-praktikum.tech/api/v2/resources/885442f2-9e8d-45f8-899f-40ba391a136a/0ba78315-e102-4a90-bc89-7a5243cf1c22_user-secret-solid-gray.png";
 

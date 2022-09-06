@@ -6,6 +6,7 @@ import { render } from "../../../utils/renderDOM";
 import { InputField } from "../../input/input-field";
 import { userSearchModal } from "./chat-main-modals/search";
 import { createChatModal } from "./chat-main-modals/create";
+import { deleteChatModal } from "./chat-main-modals/delete";
 import { MenuItem } from "./chat-main-menu/menu-items/menu-item";
 import { MultiListProps } from "../../../types";
 import { MultiList } from "../../multi-list/multi-list";
@@ -23,14 +24,18 @@ import { getToken } from "../../../utils/getToken";
 import { getOldMessages } from "../../../utils/getOldMessages";
 import { ChatsProps } from "../../../APItypes";
 import { changeChatAvatarModal } from "./chat-main-modals/avatar";
+import { isEqualArrays } from "../../../utils/minor-functions/isEqualArrays";
 
 export function buildRightPanel() {
+  const loc = document.location.pathname;
   const chatID = chatIDfromLocation();
-  getChatList();
-  if (document.location.pathname.includes("/chats/")) {
-    getChatUsers(chatID);
-    getToken(chatID);
-  }
+  // if(!!chatID) {
+  // getChatList();
+  // getChatUsers(chatID);
+  // getToken(chatID);
+  // }
+
+
   let oldMsgCounter: number = 0;
 
   const createChat = new MenuItem({
@@ -70,7 +75,7 @@ export function buildRightPanel() {
     id: "delete-chat",
     classname: "color-red",
     events: {
-      click: () => alert("ПОКА НЕ МОЖЕМ"),
+      click: () => deleteChatModal(),
     },
   });
 
@@ -107,8 +112,8 @@ export function buildRightPanel() {
 
   const mainmenu = new ChatsMenu(
     {
-      chatavatar: "",
-      chatname: "",
+      chatavatar: defaultChatAvatar,
+      chatname: "Выберите чат",
       chatMenu: new MultiList(chatMenuChildren, "ul", ""),
       actionsMenu: new MultiList(actionsMenuChildren, "ul", ""),
     },
@@ -141,12 +146,34 @@ export function buildRightPanel() {
   render(".chat-main-wrapper", panel);
 
   store.on(StoreEvents.Updated, () => {
-    //добавляем название чата и аватарку в меню
+    const newID = chatIDfromLocation();
+    const chatList: any[] = store.getState().chatlist as any[];
+    if(!!chatList) {
+    let chatIDlist: number[] = [];
+    chatList.forEach(chat => {
+      chatIDlist.push(Number(chat.id));
+    });
+    if(loc.includes("/messenger/") && !chatIDlist.includes(newID)) {
+      document.querySelector(".chat-main__inner").textContent = "Такого чата нет!";
+    }
+  }
+    if(!newID) {
+      mainmenu.setProps({
+      chatavatar: defaultChatAvatar,
+      chatname: "Выберите чат"
+    });
+    } else {
+      const state = store.getState();
+      if(!state.chat || !state.thisChat) {
+        return;
+      }
+
+     // добавляем название чата и аватарку в меню
     let chat: ChatsProps = store.getState().chat as ChatsProps;
-    let this_chat: {
+    let thisChat: {
       id: number;
       token: string;
-    } = store.getState().this_chat as {
+    } = store.getState().thisChat as {
       id: number;
       token: string;
     };
@@ -157,19 +184,90 @@ export function buildRightPanel() {
       avatar = defaultChatAvatar;
     }
     mainmenu.setProps({
-      chatavatar: avatar,
-      chatname: chat ? (chat.title as string) : "Чат",
+      chatavatar: newID
+      ? avatar
+      : defaultChatAvatar,
+      chatname: chat ? (chat.title as string) : "Выберите чат",
     });
 
     //формируем список старых сообщений
-    if (!this_chat) {
-      return;
+    if(thisChat.id != newID) {
+      const innerField: HTMLElement = document.querySelector(".chat-main__inner") as HTMLElement;
+      innerField.textContent = ""; //сбрасываем сообщения
     }
-    if (this_chat.id == chatID && !!this_chat.token) {
-      if (oldMsgCounter == 0) {
-        getOldMessages(chatID, this_chat.token);
-        oldMsgCounter += 1;
-      }
+    const chatsmsg = `chat${newID}_messages`;
+    const oldMsg = store.getState()[chatsmsg];
+    console.log(oldMsg, "ОЛДОВЫЕ");
+
+    if (thisChat.id == newID && !!thisChat.token && !!localStorage.getItem("user_id")) {
+        getOldMessages(thisChat.id, thisChat.token);
+          }
+    // if (thisChat.id == newID && !!thisChat.token && !!localStorage.getItem("user_id") 
+    // && !store.getState().gotOld) {
+    //     getOldMessages(thisChat.id, thisChat.token);
+    //     store.set("gotOld", {
+    //       id: thisChat.id,
+    //       gotOld: true
+    //     });
+
+    // }
+
+
     }
   });
+
+  // store.on(StoreEvents.Updated, () => {
+  //   const initChat: {
+  //     id: number | string
+  //   } | undefined = store.getState().initChat
+  //   ? store.getState().initChat
+  //   : undefined;
+  //   const newID = chatIDfromLocation();
+  //   if(!!initChat && initChat.id == chatIDfromLocation()) {
+  //     console.log("чатинит и локейшн одинаковые");
+  //     getChatUsers(newID);
+  //     getToken(newID);
+  //     buildRightPanel();
+  //     store.set("initChat", undefined);
+  //   } else if (!initChat){
+  //   //добавляем название чата и аватарку в меню
+  //   let chat: ChatsProps = store.getState().chat as ChatsProps;
+  //   let thisChat: {
+  //     id: number;
+  //     token: string;
+  //   } = store.getState().thisChat as {
+  //     id: number;
+  //     token: string;
+  //   };
+  //   let avatar: string = "";
+  //   if (!!chat && !!chat.avatar && chat.avatar != null) {
+  //     avatar = `${filePrefix}${chat.avatar}`;
+  //   } else {
+  //     avatar = defaultChatAvatar;
+  //   }
+  //   mainmenu.setProps({
+  //     chatavatar: newID
+  //     ? avatar
+  //     : defaultChatAvatar,
+  //     chatname: chat ? (chat.title as string) : "Выберите чат",
+  //   });
+
+  //   //формируем список старых сообщений
+  //   if (!thisChat) {
+  //     return;
+  //   }
+  //   if(chatID != newID) {
+  //     console.log("РАЗНЫЕ");
+  //     const innerField: HTMLElement = document.querySelector(".chat-main__inner") as HTMLElement;
+  //     innerField.textContent = "Выберите чат и начинайте общаться!";
+  //   }
+  //   if (thisChat.id == newID && !!thisChat.token) {
+  //     if (oldMsgCounter == 0) {
+  //       getOldMessages(newID, thisChat.token);
+  //       oldMsgCounter += 1;
+  //     }
+  //   }
+  // }
+  // });
+
 }

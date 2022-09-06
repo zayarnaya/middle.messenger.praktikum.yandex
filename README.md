@@ -8,7 +8,7 @@
 
 Express: npm run start
 
-Тестирование; npm run test
+Тестирование: npm run test
 
 Netlify: https://grand-vacherin-ee2965.netlify.app/
 

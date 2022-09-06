@@ -2,8 +2,8 @@ import { UserProps } from "../../../../../APItypes";
 import { chatIDfromLocation } from "../../../../../consts";
 import { ChatsModalProps } from "../../../../../types";
 import { Block } from "../../../../../utils/block";
-import { ChatSettingsController } from "../../../../../utils/controllers/chatSettingsController";
-import { HTTPTransport } from "../../../../../utils/http-transport";
+import { ChatsController } from "../../../../../utils/controllers/chatsController";
+import { OtherUsersController } from "../../../../../utils/controllers/otherUsersController";
 import { isEmpty } from "../../../../../utils/minor-functions/isEmpty";
 import chatMainModalSearch from "./chat-main-modal-search.hbs";
 
@@ -13,14 +13,14 @@ export class ChatsUserSearch extends Block<ChatsUserSearch> {
     this.events = {
       submit: function (e: Event) {
         e.preventDefault();
+        const seek = new OtherUsersController;
+        const invite = new ChatsController;
         const input: HTMLInputElement = document.getElementById(
           "userSearchModalInput"
         ) as HTMLInputElement;
         const inputData = { login: input.value };
-        const requestData = JSON.stringify(inputData);
 
-        const seek = new ChatSettingsController();
-        seek.seek(requestData).then((response) => {
+        seek.seek(inputData).then((response) => {
           const resultField: HTMLElement = document.getElementById(
             "result"
           ) as HTMLElement;
@@ -46,20 +46,16 @@ export class ChatsUserSearch extends Block<ChatsUserSearch> {
               li.textContent = Object.values(name)[0] as string;
               let userID = Object.keys(name)[0];
               li.setAttribute("data-user-id", userID);
+
               li.addEventListener("click", function () {
-                let put = new HTTPTransport();
                 let theID = this.getAttribute("data-user-id");
                 let chatID = chatIDfromLocation();
                 let requestData = {
-                  users: [theID],
+                  users: [ Number(theID) ],
                   chatId: chatID,
                 };
 
-                let json = JSON.stringify(requestData);
-
-                put.put(`https://ya-praktikum.tech/api/v2/chats/users`, {
-                    data: json,
-                  })
+                invite.invite(requestData)
                   .then((response) => {
                     if (response.status == 200) {
                       const resultField = document.getElementById(
@@ -78,7 +74,7 @@ export class ChatsUserSearch extends Block<ChatsUserSearch> {
             list.appendChild(ul);
 
             resultField.textContent = "";
-            resultField?.appendChild(list);
+            resultField.appendChild(list);
           }
         });
       },

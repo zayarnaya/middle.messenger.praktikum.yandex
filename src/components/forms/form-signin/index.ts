@@ -5,6 +5,8 @@ import { signinFormAll } from "./form-signin";
 import { MultiList } from "../../multi-list/multi-list";
 import "./form-signin.scss";
 import { render } from "../../../utils/renderDOM";
+import { router } from "../../../consts";
+import store from "../../../utils/store";
 
 export function signinForm() {
   let inputs: HTMLInputElement[] = Object.values(data.input.signin);
@@ -24,4 +26,10 @@ export function signinForm() {
     ),
   });
   render(".messenger-wrapper", form);
+  const a: HTMLLinkElement = document.getElementById("login-link") as HTMLLinkElement;
+  a.addEventListener("click", function(e: Event) {
+    e.preventDefault();
+    router.go(this.href);
+    store.set("newLoc", this.href);
+  });
 }

@@ -4,9 +4,8 @@ import store from "./store";
 
 export function getChatList() {
 const chats = new ChatsController;
-const chatID = chatIDfromLocation(); //оно тут нужно?
-
-chats.getChats(0, 10)
+const chatID = chatIDfromLocation();
+chats.getChats()
         .then(response => {
           if(response.status == 200) {
           let adata = JSON.parse(response.response);

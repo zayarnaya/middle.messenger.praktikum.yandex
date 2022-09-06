@@ -1,5 +1,5 @@
 import { set } from './minor-functions/set';
-import { Indexed } from '../types';
+import { PlainObject } from '../types';
 import { EventBus } from './event-bus';
 
 
@@ -8,7 +8,7 @@ export enum StoreEvents {
 }
 
 class Store extends EventBus {
-    private state: Indexed = {};
+    private state: PlainObject = {};
       
     public getState() {
       return this.state;

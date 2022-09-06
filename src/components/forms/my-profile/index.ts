@@ -8,6 +8,8 @@ import { MultiList } from "../../multi-list/multi-list";
 import "./my-profile.scss";
 import { ProfCharProps } from "../../../types";
 import { ProfileLink } from "./profile-links/profile-link";
+import { defaulAvatar, router } from "../../../consts";
+import { logOut } from "../../../utils/logout";
 
 export function profilePage() {
   let chars: ProfCharProps[] = Object.values(data.profile_char);
@@ -22,21 +24,40 @@ export function profilePage() {
   layoutWideForm();
   const form = new MyUserProfile({
     avatar: new ProfAvatar({
-      avatar: data.user.avatar,
-      name: data.user.profile.display_name.value,
+      avatar: defaulAvatar,
+      name: "Me",
     }),
     charList: new MultiList(theChildren, "div", "profile__chars col"),
     linkChangeProfile: new ProfileLink({
       text: "Изменить данные профиля",
       link: "/settings",
+      events: {
+        click: (e: Event) => {
+          e.preventDefault();
+          router.go("/settings");
+        }
+      }
     }),
     linkChangePassword: new ProfileLink({
       text: "Изменить пароль",
       link: "/changepass",
+      events: {
+        click: (e: Event) => {
+          e.preventDefault();
+          router.go("/changepass");
+        }
+      }
     }),
     linkLogout: new ProfileLink({
       text: "Выйти",
+      link: "/logout",
       classname: "color-red",
+      events: {
+        click: (e: Event) => {
+          e.preventDefault();
+          logOut();
+        }
+      }
     }),
   });
 

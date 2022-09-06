@@ -19,34 +19,22 @@ export class UserAuthController {
         login: string,
         password: string
     }) {
-        request.post(APIurls.LOGIN, {
+        return request.post(APIurls.LOGIN, {
             headers: undefined,
             method: undefined,
-            data: data
-        })
-        .then(response => {
-            if(response.status == 200) {
-                router.go("/chats");
-            } else if (response.status != 200) {
-                return;
-            }
-        })
+            data: JSON.stringify(data)
+        });
+
     }
 
 
     public async signUp(data: UserProps) {
-        request.post(APIurls.SIGNUP, {
+        return request.post(APIurls.SIGNUP, {
             headers: undefined,
             method: undefined,
-            data: data
-        })
-        .then(response => {
-            if(response.status == 200) {
-                router.go('/profile');
-            } else if (response.status != 200) {
-                return;
-            }
-        })
+            data: JSON.stringify(data)
+        });
+
     }
 
 

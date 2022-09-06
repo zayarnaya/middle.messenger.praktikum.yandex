@@ -30,3 +30,14 @@ export type ChatsProps = {
     }
 }
 
+
+export type getChatsData = {
+  offset?: number, 
+  limit?: number, 
+  title?: string
+}
+
+export type Login = {
+  login: string
+}
+

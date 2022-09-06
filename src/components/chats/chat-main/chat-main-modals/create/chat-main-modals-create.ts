@@ -1,6 +1,9 @@
+import { router } from "../../../../../consts";
 import { ChatsModalProps } from "../../../../../types";
 import { Block } from "../../../../../utils/block";
-import { ChatSettingsController } from "../../../../../utils/controllers/chatSettingsController";
+import { ChatsController } from "../../../../../utils/controllers/chatsController";
+import store from "../../../../../utils/store";
+import { buildLeftPanel } from "../../../chat-list/chat-list";
 import chatMainModalCreate from "./chat-main-modal-create.hbs";
 
 export class ChatsCreateChat extends Block<ChatsCreateChat> {
@@ -13,16 +16,22 @@ export class ChatsCreateChat extends Block<ChatsCreateChat> {
           "createChatModalInput"
         ) as HTMLInputElement;
         const inputData = { title: input.value };
-        const requestData = JSON.stringify(inputData);
+        //const requestData = JSON.stringify(inputData);
 
-        const seek = new ChatSettingsController();
-        seek.create(requestData).then((response) => {
+        const seek = new ChatsController();
+
+        /////!!!!!ПРОВЕРИТЬ!!!!
+        seek.create(inputData).then((response) => {
           const resultField: HTMLElement = document.getElementById(
             "result"
           ) as HTMLElement;
           if (response.status == 200) {
             resultField.textContent =
               "Чат успешно создан! " + response.response;
+              const id = JSON.parse(response.response).id;
+              router.go(`/messenger/#${id}`);
+              buildLeftPanel();
+              store.set("chat", inputData);
           } else {
             resultField.textContent =
               "Что-то не получилось! " + response.response;

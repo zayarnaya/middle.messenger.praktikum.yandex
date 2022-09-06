@@ -24,18 +24,18 @@ export function changeProfilePage() {
     entry[1].value = newvalue;
   });
 
-  let profileAvatar: string;
-  let avatarRaw: string | null = localStorage.getItem(`user_avatar`)
-    ? localStorage.getItem(`user_avatar`)
-    : "";
+  // let profileAvatar: string;
+  // let avatarRaw: string | null = localStorage.getItem(`user_avatar`)
+  //   ? localStorage.getItem(`user_avatar`)
+  //   : "";
 
-  if (avatarRaw == "null") {
-    profileAvatar = defaulAvatar;
-  } else if (avatarRaw != "null") {
-    profileAvatar = `${filePrefix}${avatarRaw}`;
-  } else if (avatarRaw.length == 0) {
-    profileAvatar = defaulAvatar;
-  }
+  // if (avatarRaw == "null") {
+  //   profileAvatar = defaulAvatar;
+  // } else if (avatarRaw != "null") {
+  //   profileAvatar = `${filePrefix}${avatarRaw}`;
+  // } else if (avatarRaw.length == 0) {
+  //   profileAvatar = defaulAvatar;
+  // }
 
   let inputs: HTMLInputElement[] = Object.values(inputDummy);
   let theChildren: MultiListProps = {};
@@ -49,7 +49,9 @@ export function changeProfilePage() {
 
   const avatar = new FormChangeAvatar({
     avatar: new ImageAvatar({
-      avatar: profileAvatar,
+      avatar: localStorage.getItem(`user_avatar`) == "null"
+      ? defaulAvatar
+      : localStorage.getItem(`user_avatar`),
       name: "Мой аватар",
     }),
     input: new InputField({

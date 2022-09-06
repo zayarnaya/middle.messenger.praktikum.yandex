@@ -3,7 +3,7 @@ import userProfile from "./chatlist-userprofile.hbs";
 import { ChatlistUserprofileProps } from "../../../../types";
 import store, { StoreEvents } from "../../../../utils/store";
 import { UserAuthController } from "../../../../utils/controllers/userAuthController";
-import { defaulAvatar, filePrefix } from "../../../../consts";
+import { defaulAvatar, filePrefix, router } from "../../../../consts";
 import { UserProps } from "../../../../APItypes";
 
 export class ChatlistUserprofile extends Block<ChatlistUserprofile> {
@@ -14,10 +14,22 @@ export class ChatlistUserprofile extends Block<ChatlistUserprofile> {
   ) {
     super(tag, props, false, classname);
 
+    this.events = {
+      click: (e:Event) => {
+        e.preventDefault();
+        router.go("/profile");
+      }
+    }
+
+    this.eventTarget = "a";
+
     const getUserInfo = new UserAuthController();
     getUserInfo.getUser().then((response) => {
       if (response.status == 200) {
         let adata = JSON.parse(response.response);
+        Object.entries(adata).forEach((entry) => {
+          localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
+        });
         store.set("user", adata);
       } else {
         return;

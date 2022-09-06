@@ -1,11 +1,11 @@
 import { isPlainObject } from "./isPlainObject";
-import { Indexed } from "../../types";
+import { PlainObject } from "../../types";
 
 export function set(
-  object: Indexed | unknown,
+  object: PlainObject | unknown,
   path: string,
   value: unknown
-): Indexed | unknown {
+): PlainObject | unknown {
   if (!isPlainObject(object)) return object;
   
   if (typeof path != "string") {

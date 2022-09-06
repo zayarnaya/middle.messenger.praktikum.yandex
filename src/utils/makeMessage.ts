@@ -8,7 +8,10 @@ export function makeMessage(messages: any[]) {
     let chatusersRaw: UserProps[] = state[`chat${chatID}_users`] as UserProps[];
     let users: Record<string, any> = {};
     chatusersRaw.forEach(user => {
-        Object.assign(users, {[`${user.id}`]: user.display_name});
+        const nickname = user.display_name
+        ? user.display_name
+        : `${user.first_name} ${user.second_name}`;
+        Object.assign(users, {[`${user.id}`]: nickname});
     });
     let thisUserId = localStorage.getItem("user_id");
 
@@ -20,7 +23,9 @@ export function makeMessage(messages: any[]) {
 
 let chat: HTMLElement = document.querySelector(".chat-main__inner") as HTMLElement;
 let fragment = new DocumentFragment;
+console.log(!!messages, "БУДЕМ ДЕЛАТЬ");
 messages.forEach(message => {
+    console.log("ДЕЛАЕМ МЕССАГи");
     let outer = document.createElement("div");
     let inner = document.createElement("div");
     let time = document.createElement("time");
@@ -48,5 +53,8 @@ messages.forEach(message => {
     fragment.appendChild(outer);
 
 });
+if(chat.textContent == "Выберите чат и начинайте общаться!") {
+    chat.textContent = "";
+}
 chat.append(fragment);
 }

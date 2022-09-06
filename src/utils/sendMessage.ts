@@ -1,9 +1,10 @@
+import { wssPrefix } from "../consts";
 import { makeMessage } from "./makeMessage";
 
 export function sendMessage(chatID: number, userID: number, token: string, message: string) {
 
     const socket = new WebSocket
-    (`wss://ya-praktikum.tech/ws/chats/${userID}/${chatID}/${token}`);
+    (`${wssPrefix}/${userID}/${chatID}/${token}`);
     
     socket.addEventListener('open', () => {
       

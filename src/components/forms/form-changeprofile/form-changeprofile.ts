@@ -35,7 +35,7 @@ export class ChangeUserProfile extends Form {
 
         const submitChange = new UserProfileController();
         submitChange
-          .changeProfile(JSON.stringify(submitData))
+          .changeProfile(submitData)
           .then((response) => {
             if (response.status == 200) {
               let adata = JSON.parse(response.response);
@@ -44,7 +44,7 @@ export class ChangeUserProfile extends Form {
                 localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
               });
             } else {
-              submitMessage.textContent = "Что-то не так!" + response.responseж;
+              submitMessage.textContent = "Что-то не так!" + response.response;
             }
           });
       },

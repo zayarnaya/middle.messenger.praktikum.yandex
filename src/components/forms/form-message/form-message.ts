@@ -30,7 +30,7 @@ export class FormMessage extends Form {
         errorMessage.textContent = " ";
         let chatID = chatIDfromLocation();
         let userID = store.getState().user.id;
-        let token = store.getState().this_chat.token;
+        let token = store.getState().thisChat.token;
 
         sendMessage(chatID, userID, token, message);
       },

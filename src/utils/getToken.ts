@@ -7,7 +7,7 @@ export function getToken(id: number) {
     chatInfo.getToken(id)
     .then(response => {
         let adata = JSON.parse(response.response);
-        store.set("this_chat", {
+        store.set("thisChat", {
                 id: id,
                 token: adata.token
             });

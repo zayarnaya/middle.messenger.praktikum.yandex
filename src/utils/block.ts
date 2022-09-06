@@ -144,7 +144,7 @@ export class Block<Children extends Block<Children>> {
   }
 
   private _render() {
-    const block = this.render() as Node;
+    const block = this.render();
     this._removeEvents();
     if (typeof block == "string") {
       if (!!this._element) {
@@ -183,6 +183,7 @@ export class Block<Children extends Block<Children>> {
   private _removeEvents() {
     if (!!this.events) {
       let elem: HTMLElement;
+
       Object.entries(this.events).forEach((entry) => {
         if (!!this._element) {
           elem = this._element.querySelector(this.eventTarget) as HTMLElement;
