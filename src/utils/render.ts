@@ -17,6 +17,8 @@ export function pageRouter() {
   const wrap: HTMLElement = document.querySelector(
     ".messenger-wrapper"
   ) as HTMLElement;
+
+  //Проверка на залогиненного юзера
   const check = new UserAuthController();
   check.getUser().then((response) => {
     if (response.status == 200) {
@@ -44,11 +46,12 @@ export function pageRouter() {
   });
 
   const userID = localStorage.getItem("user_id");
-store.on(StoreEvents.Updated, () => {
+store.on(StoreEvents.NewLocSet, () => {
 
   const newloc = store.getState().newLoc;
 if (!!newloc && loc != newloc ) {
     pageRouter();
+    store.setNewLoc("newLoc", null);
   }
 
 });
@@ -75,6 +78,7 @@ if (!!newloc && loc != newloc ) {
 
     .start();
     
+    //проверка на отсутствие данных о юзере, если гетЮзер выдает ошибку
     if (!userID && loc != "/" && loc != "/sign-up") {
       router.go("/");
     }

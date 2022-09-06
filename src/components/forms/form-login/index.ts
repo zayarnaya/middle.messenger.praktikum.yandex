@@ -32,6 +32,6 @@ export function loginForm() {
   a.addEventListener("click", function(e: Event) {
     e.preventDefault();
     router.go(this.href);
-    store.set("newLoc", this.href);
+    store.setNewLoc("newLoc", this.href);
   });
 }

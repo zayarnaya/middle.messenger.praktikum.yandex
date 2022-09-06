@@ -30,6 +30,7 @@ export class signinFormAll extends Form {
           formData.forEach((value, key) => {
             data[key] = value;
           });
+
           signUp.signUp(data)
           .then(response => {
             if(response.status == 200) {

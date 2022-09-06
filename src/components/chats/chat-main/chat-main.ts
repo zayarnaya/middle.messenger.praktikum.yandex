@@ -30,6 +30,7 @@ import { makeMessage } from "../../../utils/makeMessage";
 export function buildRightPanel() {
   const loc = document.location.pathname;
   const chatID = chatIDfromLocation();
+  getChatList();
   // if(!!chatID) {
   // getChatList();
   // getChatUsers(chatID);
@@ -148,15 +149,19 @@ export function buildRightPanel() {
   }
 
   store.on(StoreEvents.Updated, () => {
-    console.log("STORE поймал обновление");
+
+    console.log("STORE поймал обновление UPDATED");
     const newID = chatIDfromLocation();
+    //Если не указан конкретный чат, сбрасываем аватарку и название
     if(!newID) {
       mainmenu.setProps({
       chatavatar: defaultChatAvatar,
       chatname: "Выберите чат"
     });
-  }
+  };
+
     const chatList: any[] = store.getState().chatlist as any[];
+    //Проверка на существование вызванного чата в списке чатов
     if(!!chatList){
       let chatIDlist: number[] = [];
     chatList.forEach(chat => {
@@ -168,6 +173,7 @@ export function buildRightPanel() {
   }
 
     const chat: ChatsProps = store.getState().chat as ChatsProps;
+    console.log(store.getState(), "ЭТО В СТОРЕ");
     const thisChat: {
       id: number;
       token: string;
@@ -178,18 +184,24 @@ export function buildRightPanel() {
     const usersIndex = `chat${newID}_users`;
     const thisChatUsers: UserProps[] = store.getState()[usersIndex] as UserProps[];
 
-    if (!chat || !thisChat || !thisChatUsers) {
-      console.log("РАНО");
-      return;
+    // if (!chat || !thisChat) {
+    //   console.log("РАНО");
+    //   return;
 
-    } else if(thisChat.id != newID) {
-      console.log("ВСЕ ЕЩЕ РАНО");
-    } else { console.log("ПОРА");
+    // } else if(thisChat.id != newID) {
+    //   console.log("ВСЕ ЕЩЕ РАНО");
+    // } else { console.log("ПОРА");
+
+    if(!!chat && chat.id == newID) {
 
 
 
      // добавляем название чата и аватарку в меню
-     console.log(chat, thisChat, thisChatUsers);
+     console.log(chat.id, chat, newID, "ПАРАМЕТРЫ");
+    //  if(mainmenu.props.chatname != "Выберите чат") {
+    //   console.log("УЖЕ ПОМЕНЯЛИ");
+    //   return;
+    //  }
 
     let avatar: string = "";
     if (!!chat && !!chat.avatar && chat.avatar != "null") {
@@ -203,6 +215,19 @@ export function buildRightPanel() {
       : defaultChatAvatar,
       chatname: chat ? (chat.title as string) : "Выберите чат",
     });
+  }
+});
+
+    store.on(StoreEvents.ThisChatSet, () => {
+      console.log("TOKEN UPDATED");
+      const newID = chatIDfromLocation();
+      const thisChat: {
+        id: number;
+        token: string;
+      } = store.getState().thisChat as {
+        id: number;
+        token: string;
+      };
 
     //формируем список старых сообщений
     if(thisChat.id != newID) {
@@ -228,8 +253,8 @@ export function buildRightPanel() {
     }
 
 
-    }
-  });
+    });
+
 
 
 

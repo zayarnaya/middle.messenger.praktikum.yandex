@@ -7,10 +7,14 @@ export function getToken(id: number) {
     chatInfo.getToken(id)
     .then(response => {
         let adata = JSON.parse(response.response);
-        store.set("thisChat", {
-                id: id,
-                token: adata.token
-            });
+        store.setThisChat("thisChat", {
+                  id: id,
+                  token: adata.token
+              });
+        // store.set("thisChat", {
+        //         id: id,
+        //         token: adata.token
+        //     });
 
     });
 

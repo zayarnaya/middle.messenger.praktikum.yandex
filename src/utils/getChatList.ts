@@ -16,6 +16,7 @@ chats.getChats()
             }
           });
           store.set("chat", bdata);
+          //store.setChatList("chat", bdata);
           } else {
             return;
           }

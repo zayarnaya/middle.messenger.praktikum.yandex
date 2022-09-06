@@ -13,12 +13,13 @@ import { ChatsProps } from "../../../APItypes";
 import { isEqualArrays } from "../../../utils/minor-functions/isEqualArrays";
 
 export function buildLeftPanel() {
+  console.log("BUILDLEFTPANEL");
   const getChats = new ChatsController();
   let storedChatList: ChatsProps[] = store.getState().chatlist as ChatsProps[];
   getChats.getChats().then((response) => {
     if (response.status == 200) {
       let adata = JSON.parse(response.response);
-      store.set("chatlist", adata);
+      store.setChatList("chatlist", adata);
     }
   });
 
@@ -49,7 +50,9 @@ export function buildLeftPanel() {
   }
 
 
-  store.on(StoreEvents.Updated, () => {
+  //store.on(StoreEvents.Updated, () => {
+    store.on(StoreEvents.ChatListSet, () => {
+      console.log("CHATLIST поймал обновление CHATLIST SET");
     setTimeout(() => {
       let chats: ChatsProps[] = store.getState().chatlist as ChatsProps[];
       if (!!isEmpty(chats)) {
@@ -94,15 +97,15 @@ export function buildLeftPanel() {
           render(".chat-list__list", newList);
         }
 
-        const active = store.getState().initChat
-          ? store.getState().initChat.id
-          : null;
-        if (!!active) {
-          const activeItem: HTMLElement = document.getElementById(active) as HTMLElement;
-          if(!!activeItem) { 
-            activeItem.classList.add("highlight");
-          }
-        }
+        // const active = store.getState().initChat
+        //   ? store.getState().initChat.id
+        //   : null;
+        // if (!!active) {
+        //   const activeItem: HTMLElement = document.getElementById(active) as HTMLElement;
+        //   if(!!activeItem) { 
+        //     activeItem.classList.add("highlight");
+        //   }
+        // }
       }
     }, 0);
   });

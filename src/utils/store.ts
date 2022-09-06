@@ -7,9 +7,8 @@ export enum StoreEvents {
     Updated = 'updated',
     UserSet = 'userSet',
     ChatListSet = 'chatListSet',
-    ThisChatSet = 'thisChatSet'
-
-
+    ThisChatSet = 'thisChatSet',
+    NewLocSet = 'newLocSet',
 }
 
 class Store extends EventBus {
@@ -37,6 +36,11 @@ class Store extends EventBus {
     public setThisChat(path: string, value: unknown) {
       set(this.state, path, value);
       this.emit(StoreEvents.ThisChatSet); 
+    }
+
+    public setNewLoc(path: string, value: unknown) {
+      set(this.state, path, value);
+      this.emit(StoreEvents.NewLocSet); 
     }
 
     public clear() {

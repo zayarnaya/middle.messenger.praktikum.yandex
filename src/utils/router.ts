@@ -48,9 +48,9 @@ export class Router {
   }
 
   go(pathname: string) {
-    if(!!this._currentRoute) {
-    this._currentRoute.leave();
-    }
+    // if(!!this._currentRoute) {
+    // this._currentRoute.leave();
+    // }
     this.history.pushState({}, "", pathname);
     this._onRoute(pathname);
   }
