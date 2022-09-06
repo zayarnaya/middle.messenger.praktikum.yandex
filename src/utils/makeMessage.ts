@@ -1,5 +1,6 @@
 import { UserProps } from "../APItypes";
 import { chatIDfromLocation } from "../consts";
+import { isEqualArrays } from "./minor-functions/isEqualArrays";
 import store from "./store";
 
 export function makeMessage(messages: any[]) {
@@ -23,7 +24,13 @@ export function makeMessage(messages: any[]) {
 
 let chat: HTMLElement = document.querySelector(".chat-main__inner") as HTMLElement;
 let fragment = new DocumentFragment;
-console.log(!!messages, "БУДЕМ ДЕЛАТЬ");
+
+// const oldMsg = `chat${chatID}_messages`;
+// const oldMsgList = store.getState()[oldMsg];
+// if(!!isEqualArrays(oldMsgList, messages)) {
+//     console.log("УЖЕ ЕСТЬ");
+// }
+console.log(!!messages, "БУДЕМ ДЕЛАТЬ", Array.isArray(messages), messages.length);
 messages.forEach(message => {
     console.log("ДЕЛАЕМ МЕССАГи");
     let outer = document.createElement("div");

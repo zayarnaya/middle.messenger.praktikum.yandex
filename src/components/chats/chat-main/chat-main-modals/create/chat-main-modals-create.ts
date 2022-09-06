@@ -1,3 +1,4 @@
+import { chatsPage } from "../../..";
 import { router } from "../../../../../consts";
 import { ChatsModalProps } from "../../../../../types";
 import { Block } from "../../../../../utils/block";
@@ -30,7 +31,8 @@ export class ChatsCreateChat extends Block<ChatsCreateChat> {
               "Чат успешно создан! " + response.response;
               const id = JSON.parse(response.response).id;
               router.go(`/messenger/#${id}`);
-              buildLeftPanel();
+              //buildLeftPanel();
+              chatsPage();
               store.set("chat", inputData);
           } else {
             resultField.textContent =

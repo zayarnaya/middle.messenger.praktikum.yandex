@@ -44,8 +44,10 @@ export function buildLeftPanel() {
     },
     "chat-list"
   );
+  if(!!document.querySelector(".chat-list-wrapper")){
+    render(".chat-list-wrapper", panel);
+  }
 
-  render(".chat-list-wrapper", panel);
 
   store.on(StoreEvents.Updated, () => {
     setTimeout(() => {
@@ -88,7 +90,7 @@ export function buildLeftPanel() {
           "ul",
           "chat-list__list_unmarked"
         );
-        if (document.location.pathname.includes("messenger")) {
+        if (document.location.pathname.includes("messenger") && !!document.querySelector(".chat-list__list")) {
           render(".chat-list__list", newList);
         }
 
@@ -97,7 +99,9 @@ export function buildLeftPanel() {
           : null;
         if (!!active) {
           const activeItem: HTMLElement = document.getElementById(active) as HTMLElement;
-          activeItem.classList.add("highlight");
+          if(!!activeItem) { 
+            activeItem.classList.add("highlight");
+          }
         }
       }
     }, 0);

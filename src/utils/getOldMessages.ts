@@ -43,6 +43,7 @@ export function getOldMessages(chatID: number, token: string) {
       console.log("ТОКЕН НЕПРАВИИЛЬНЫЙ");
       return;
     }
+    console.log("МЕССАДЖ ПОШОООООЛ");
     let cdata = JSON.parse(event.data);
     cdata.forEach((data) => {
       let time = data.time.slice(11, 16);
@@ -62,11 +63,15 @@ export function getOldMessages(chatID: number, token: string) {
         file: data.file,
       });
     });
-  });
     let orderedMessages: any[] = messages.reverse();
     console.log(orderedMessages, "ORDERED"); //то есть двоится не здесь
     console.log("НАДО БРАТЬ!");
+    document.querySelector(".chat-main__inner").textContent = "";
     makeMessage(orderedMessages);
+  });
+
+    //makeMessage(orderedMessages);
+    
     // const chatsmsg = `chat${chatID}_messages`;
     // const oldMsg = store.getState()[chatsmsg];
     // if(!oldMsg || !isEqualArrays(oldMsg, orderedMessages)) {

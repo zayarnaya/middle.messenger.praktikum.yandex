@@ -22,9 +22,10 @@ import { getChatList } from "../../../utils/getChatList";
 import { getChatUsers } from "../../../utils/getChatUsers";
 import { getToken } from "../../../utils/getToken";
 import { getOldMessages } from "../../../utils/getOldMessages";
-import { ChatsProps } from "../../../APItypes";
+import { ChatsProps, UserProps } from "../../../APItypes";
 import { changeChatAvatarModal } from "./chat-main-modals/avatar";
 import { isEqualArrays } from "../../../utils/minor-functions/isEqualArrays";
+import { makeMessage } from "../../../utils/makeMessage";
 
 export function buildRightPanel() {
   const loc = document.location.pathname;
@@ -142,41 +143,54 @@ export function buildRightPanel() {
     },
     "chat-main"
   );
-
-  render(".chat-main-wrapper", panel);
+  if(!!document.querySelector(".chat-main-wrapper")){
+    render(".chat-main-wrapper", panel);
+  }
 
   store.on(StoreEvents.Updated, () => {
+    console.log("STORE поймал обновление");
     const newID = chatIDfromLocation();
-    const chatList: any[] = store.getState().chatlist as any[];
-    if(!!chatList) {
-    let chatIDlist: number[] = [];
-    chatList.forEach(chat => {
-      chatIDlist.push(Number(chat.id));
-    });
-    if(loc.includes("/messenger/") && !chatIDlist.includes(newID)) {
-      document.querySelector(".chat-main__inner").textContent = "Такого чата нет!";
-    }
-  }
     if(!newID) {
       mainmenu.setProps({
       chatavatar: defaultChatAvatar,
       chatname: "Выберите чат"
     });
-    } else {
-      const state = store.getState();
-      if(!state.chat || !state.thisChat) {
-        return;
-      }
+  }
+    const chatList: any[] = store.getState().chatlist as any[];
+    if(!!chatList){
+      let chatIDlist: number[] = [];
+    chatList.forEach(chat => {
+      chatIDlist.push(Number(chat.id));
+    });
+    if(loc.includes("/messenger/") && !chatIDlist.includes(newID) && !!document.querySelector(".chat-main__inner")) {
+      document.querySelector(".chat-main__inner").textContent = "Такого чата нет!";
+    }
+  }
 
-     // добавляем название чата и аватарку в меню
-    let chat: ChatsProps = store.getState().chat as ChatsProps;
-    let thisChat: {
+    const chat: ChatsProps = store.getState().chat as ChatsProps;
+    const thisChat: {
       id: number;
       token: string;
     } = store.getState().thisChat as {
       id: number;
       token: string;
     };
+    const usersIndex = `chat${newID}_users`;
+    const thisChatUsers: UserProps[] = store.getState()[usersIndex] as UserProps[];
+
+    if (!chat || !thisChat || !thisChatUsers) {
+      console.log("РАНО");
+      return;
+
+    } else if(thisChat.id != newID) {
+      console.log("ВСЕ ЕЩЕ РАНО");
+    } else { console.log("ПОРА");
+
+
+
+     // добавляем название чата и аватарку в меню
+     console.log(chat, thisChat, thisChatUsers);
+
     let avatar: string = "";
     if (!!chat && !!chat.avatar && chat.avatar != "null") {
       avatar = `${filePrefix}${chat.avatar}`;
@@ -195,79 +209,28 @@ export function buildRightPanel() {
       const innerField: HTMLElement = document.querySelector(".chat-main__inner") as HTMLElement;
       innerField.textContent = ""; //сбрасываем сообщения
     }
-    const chatsmsg = `chat${newID}_messages`;
-    const oldMsg = store.getState()[chatsmsg];
-    console.log(oldMsg, "ОЛДОВЫЕ");
+    // const chatsmsg = `chat${newID}_messages`;
+    // const oldMsg = store.getState()[chatsmsg];
+    // console.log(oldMsg, "ОЛДОВЫЕ");
+    console.log(thisChat.id, newID, thisChat);
+    console.log(document.querySelector(".chat-main__inner").innerHTML.includes("</div>"));
+    let isFull = document.querySelector(".chat-main__inner").innerHTML.includes("</div>");
 
-    if (thisChat.id == newID && !!thisChat.token && !!localStorage.getItem("user_id")) {
+    if (thisChat.id == newID && !!thisChat.token && !!localStorage.getItem("user_id") 
+    && !isFull
+) {
+      if(oldMsgCounter == 0) {
+        console.log("ТУТ ОТПРАВЛЯЕТ НА ПОЛУЧЕНИЕ СООБЩЕНИЙ");
         getOldMessages(thisChat.id, thisChat.token);
-          }
-    // if (thisChat.id == newID && !!thisChat.token && !!localStorage.getItem("user_id") 
-    // && !store.getState().gotOld) {
-    //     getOldMessages(thisChat.id, thisChat.token);
-    //     store.set("gotOld", {
-    //       id: thisChat.id,
-    //       gotOld: true
-    //     });
+        oldMsgCounter ++;
+      }  
 
-    // }
+    }
 
 
     }
   });
 
-  // store.on(StoreEvents.Updated, () => {
-  //   const initChat: {
-  //     id: number | string
-  //   } | undefined = store.getState().initChat
-  //   ? store.getState().initChat
-  //   : undefined;
-  //   const newID = chatIDfromLocation();
-  //   if(!!initChat && initChat.id == chatIDfromLocation()) {
-  //     console.log("чатинит и локейшн одинаковые");
-  //     getChatUsers(newID);
-  //     getToken(newID);
-  //     buildRightPanel();
-  //     store.set("initChat", undefined);
-  //   } else if (!initChat){
-  //   //добавляем название чата и аватарку в меню
-  //   let chat: ChatsProps = store.getState().chat as ChatsProps;
-  //   let thisChat: {
-  //     id: number;
-  //     token: string;
-  //   } = store.getState().thisChat as {
-  //     id: number;
-  //     token: string;
-  //   };
-  //   let avatar: string = "";
-  //   if (!!chat && !!chat.avatar && chat.avatar != null) {
-  //     avatar = `${filePrefix}${chat.avatar}`;
-  //   } else {
-  //     avatar = defaultChatAvatar;
-  //   }
-  //   mainmenu.setProps({
-  //     chatavatar: newID
-  //     ? avatar
-  //     : defaultChatAvatar,
-  //     chatname: chat ? (chat.title as string) : "Выберите чат",
-  //   });
 
-  //   //формируем список старых сообщений
-  //   if (!thisChat) {
-  //     return;
-  //   }
-  //   if(chatID != newID) {
-  //     console.log("РАЗНЫЕ");
-  //     const innerField: HTMLElement = document.querySelector(".chat-main__inner") as HTMLElement;
-  //     innerField.textContent = "Выберите чат и начинайте общаться!";
-  //   }
-  //   if (thisChat.id == newID && !!thisChat.token) {
-  //     if (oldMsgCounter == 0) {
-  //       getOldMessages(newID, thisChat.token);
-  //       oldMsgCounter += 1;
-  //     }
-  //   }
-  // }
-  // });
 
 }
