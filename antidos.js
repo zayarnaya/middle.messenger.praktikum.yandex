@@ -1,9 +1,9 @@
 module.exports = function (options) {
-  var ipTables = {}; // массив IP адресов зергов
-  var maxTime = options.maxTime || 3000; // 30000 = 3 sec  время проверки
-  var maxCount = options.maxCount || 50; // макс кол-во запросов после 1 обращения за maxTime время
-  var hardMode = options.hardMode || 5; // устанавливаем бан еще  на maxTime если достигнуто maxCount*hardMode
-  var consoleDebug = options.consoleDebug || false; // отладка в консоли
+  const ipTables = {}; // массив IP адресов зергов
+  const maxTime = options.maxTime || 3000; // 30000 = 3 sec  время проверки
+  const maxCount = options.maxCount || 50; // макс кол-во запросов после 1 обращения за maxTime время
+  const hardMode = options.hardMode || 5; // устанавливаем бан еще  на maxTime если достигнуто maxCount*hardMode
+  const consoleDebug = options.consoleDebug || false; // отладка в консоли
 
   function _log(str) {
     if (consoleDebug) {
@@ -12,8 +12,8 @@ module.exports = function (options) {
   }
 
   return function (req, res, next) {
-    var ip = req.ip;
-    var time = Date.now();
+    const ip = req.ip;
+    const time = Date.now();
     _log(
       `________ ${req.method} url:: ${req.url} ip:: ${req.ip} time:: ${time}`
     );
@@ -38,12 +38,12 @@ module.exports = function (options) {
         ipTables[ip].time = ipTables[ip].time + ipTables[ip].count;
 
         _log(`SERIOUS ATTACK DETECTED:: ${req.ip}`);
-        var unban = maxTime / 1000 - (time - ipTables[ip].time) / 1000;
+        const unban = maxTime / 1000 - (time - ipTables[ip].time) / 1000;
         _log(`ENEMY BANNED:: ${req.ip} unban in ${unban} seconds`);
         return;
       }
       if (ipTables[ip].count > maxCount) {
-        var unban = maxTime / 1000 - (time - ipTables[ip].time) / 1000;
+        const unban = maxTime / 1000 - (time - ipTables[ip].time) / 1000;
         _log(`ENEMY BANNED:: ${req.ip} unban in ${unban} seconds`);
         return;
       }
