@@ -1,4 +1,3 @@
-import XMLHttpRequest from "xhr2";
 import { Methods, Options } from "./../types";
 import { queryStringify } from "./query-stringify";
 
