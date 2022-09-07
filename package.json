@@ -27,7 +27,7 @@
   "scripts": {
     "dev": "parcel src/index.html --port 3000",
     "build": "parcel build src/index.html --no-cache",
-    "start": "parcel build src/index.html --no-cache && node server.js",
+    "start": "node server.js",
     "test": "mocha"
   },
   "keywords": [],
