@@ -1,22 +1,17 @@
-module.exports = function (options: {
-    maxTime?: number;
-    maxCount?: number;
-    hardMode?: number;
-    consoleDebug?: boolean;
-  }) {
-  const ipTables: Record<string, any> = {}; // массив IP адресов зергов
-  const maxTime = options.maxTime || 3000; // время проверки
-  const maxCount = options.maxCount || 50; // макс кол-во запросов после 1 обращения за maxTime время
-  const hardMode = options.hardMode || 5; // устанавливаем бан еще  на maxTime если достигнуто maxCount*hardMode
-  const consoleDebug = options.consoleDebug || false; // отладка в консоли
+module.exports = function (options) {
+  var ipTables = {}; // массив IP адресов зергов
+  var maxTime = options.maxTime || 3000; // 30000 = 3 sec  время проверки
+  var maxCount = options.maxCount || 50; // макс кол-во запросов после 1 обращения за maxTime время
+  var hardMode = options.hardMode || 5; // устанавливаем бан еще  на maxTime если достигнуто maxCount*hardMode
+  var consoleDebug = options.consoleDebug || false; // отладка в консоли
 
-  function _log(str: string) {
+  function _log(str) {
     if (consoleDebug) {
       console.log(str);
     }
   }
 
-  return function (req: any, res: any, next: any) {
+  return function (req, res, next) {
     var ip = req.ip;
     var time = Date.now();
     _log(
@@ -38,6 +33,7 @@ module.exports = function (options: {
           maxCount * hardMode
         }) reached`
       );
+
       if (ipTables[ip].count > hardMode * maxCount) {
         ipTables[ip].time = ipTables[ip].time + ipTables[ip].count;
 
@@ -46,8 +42,6 @@ module.exports = function (options: {
         _log(`ENEMY BANNED:: ${req.ip} unban in ${unban} seconds`);
         return;
       }
-
-      // маленький дос
       if (ipTables[ip].count > maxCount) {
         var unban = maxTime / 1000 - (time - ipTables[ip].time) / 1000;
         _log(`ENEMY BANNED:: ${req.ip} unban in ${unban} seconds`);
@@ -60,7 +54,6 @@ module.exports = function (options: {
         time,
       };
     }
-
     next();
   };
-}
+};

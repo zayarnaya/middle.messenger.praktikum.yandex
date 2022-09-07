@@ -95,15 +95,15 @@ export function buildLeftPanel() {
           render(".chat-list__list", newList);
         }
 
-        // const active = store.getState().initChat
-        //   ? store.getState().initChat.id
-        //   : null;
-        // if (!!active) {
-        //   const activeItem: HTMLElement = document.getElementById(active) as HTMLElement;
-        //   if(!!activeItem) { 
-        //     activeItem.classList.add("highlight");
-        //   }
-        // }
+        const active = store.getState().initChat
+          ? store.getState().initChat.id
+          : null;
+        if (!!active) {
+          const activeItem: HTMLElement = document.getElementById(active) as HTMLElement;
+          if(!!activeItem) { 
+            activeItem.classList.add("highlight");
+          }
+        }
       }
     }, 0);
   });
