@@ -4,7 +4,6 @@ import { ChatsModalProps } from "../../../../../types";
 import { Block } from "../../../../../utils/block";
 import { ChatsController } from "../../../../../utils/controllers/chatsController";
 import store from "../../../../../utils/store";
-import { buildLeftPanel } from "../../../chat-list/chat-list";
 import chatMainModalCreate from "./chat-main-modal-create.hbs";
 
 export class ChatsCreateChat extends Block<ChatsCreateChat> {
@@ -17,11 +16,8 @@ export class ChatsCreateChat extends Block<ChatsCreateChat> {
           "createChatModalInput"
         ) as HTMLInputElement;
         const inputData = { title: input.value };
-        //const requestData = JSON.stringify(inputData);
 
         const seek = new ChatsController();
-
-        /////!!!!!ПРОВЕРИТЬ!!!!
         seek.create(inputData).then((response) => {
           const resultField: HTMLElement = document.getElementById(
             "result"
@@ -30,9 +26,10 @@ export class ChatsCreateChat extends Block<ChatsCreateChat> {
             resultField.textContent =
               "Чат успешно создан! " + response.response;
               const id = JSON.parse(response.response).id;
-              router.go(`/messenger/#${id}`);
-              //buildLeftPanel();
-              chatsPage();
+              router.use(`/messenger/#${id}`, chatsPage)
+              .go(`/messenger/#${id}`);
+              //router.go(`/messenger/#${id}`);
+              //chatsPage();
               store.set("chat", inputData);
           } else {
             resultField.textContent =

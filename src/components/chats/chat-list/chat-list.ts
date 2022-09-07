@@ -33,7 +33,7 @@ export function buildLeftPanel() {
             {
               avatar: defaulAvatar,
               name: "Me",
-              link: "/profile",
+              link: "/settings",
             },
             "chat-list__profile"
           ),
@@ -47,7 +47,6 @@ export function buildLeftPanel() {
   if(!!document.querySelector(".chat-list-wrapper")){
     render(".chat-list-wrapper", panel);
   }
-
 
   //store.on(StoreEvents.Updated, () => {
     store.on(StoreEvents.ChatListSet, () => {

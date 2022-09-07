@@ -49,7 +49,10 @@ export function getOldMessages(chatID: number, token: string) {
       });
     });
     let orderedMessages: any[] = messages.reverse();
-    document.querySelector(".chat-main__inner").textContent = "";
+    const chatField: HTMLElement = document.querySelector(
+      ".chat-main__inner"
+    ) as HTMLElement;
+    chatField.textContent = "";
     makeMessage(orderedMessages);
   });
   return;

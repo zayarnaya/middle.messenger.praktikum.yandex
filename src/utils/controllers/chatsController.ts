@@ -18,10 +18,7 @@ export class ChatsController {
   }
 
   public async getToken(id: string | number) {
-    return request.post(
-      `https://ya-praktikum.tech/api/v2/chats/token/${id}`,
-      {}
-    );
+    return request.post(`${APIurls.GETTOKEN}${id}`, {});
   }
 
   public async getChats(data?: getChatsData) {    

@@ -61,7 +61,6 @@ export class Block<Children extends Block<Children>> {
     const props: Record<string, any> = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
-
       if (value instanceof Block) {
         children[key] = value;
       } else {
@@ -129,7 +128,6 @@ export class Block<Children extends Block<Children>> {
     }
     const { children, props } = this._getChildren(nextProps);
 
-
     if (!!Object.entries(children).length) {
       Object.assign(this.children, children);
     }
@@ -193,7 +191,6 @@ export class Block<Children extends Block<Children>> {
           entry[1] as EventListenerOrEventListenerObject
         );
       });
-      
     } else if (!this.events) {
       return;
     }
@@ -230,7 +227,10 @@ export class Block<Children extends Block<Children>> {
   }
 
   public compile(template: Function, props: BlockProps) {
-    const propsAndStubs: Record<string, string> = { ...props } as Record<string, string>;
+    const propsAndStubs: Record<string, string> = { ...props } as Record<
+      string,
+      string
+    >;
 
     Object.entries(this.children).forEach(([key, child]) => {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
@@ -243,7 +243,7 @@ export class Block<Children extends Block<Children>> {
     fragment.innerHTML = template(propsAndStubs);
     Object.values(this.children).forEach((child) => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-      if(!!stub) stub.replaceWith(child.getContent());
+      if (!!stub) stub.replaceWith(child.getContent());
     });
 
     return fragment.content;

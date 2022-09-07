@@ -27,13 +27,13 @@ export class ChatsRemoveUser extends Block<ChatsRemoveUser> {
           users: users,
           chatId: chatID,
         };
-        deleteUser.deleteChatUsers(sendData).then((response) => {
-          if (response.status == 200) {
-            resultField.textContent = "Успешно!";
-          } else {
-            resultField.textContent =
-              "Не удалось! Сервер говорит " + `${response.response}`;
-          }
+        deleteUser.deleteChatUsers(sendData)
+        .then(() => {
+          resultField.textContent = "Успешно!";   
+        })
+        .catch((response) => {
+          resultField.textContent =
+          "Не удалось! Сервер говорит " + `${response.response}`;
         });
       },
     };

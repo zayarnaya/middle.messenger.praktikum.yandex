@@ -160,9 +160,9 @@ export type ChatRightPanelLayoutProps = {
 };
 
 export type ChatsModalProps = {
-  input?: InputField,
-  button?: Button,
-  avatar?: ImageAvatar
+  input?: InputField;
+  button?: Button;
+  avatar?: ImageAvatar;
 };
 
 export type ChatsMenuProps = {

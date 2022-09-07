@@ -33,21 +33,21 @@ export function profilePage() {
     charList: new MultiList(theChildren, "div", "profile__chars col"),
     linkChangeProfile: new ProfileLink({
       text: "Изменить данные профиля",
-      link: "/settings",
+      link: "/settings#change",
       events: {
         click: (e: Event) => {
           e.preventDefault();
-          router.go("/settings");
+          router.go("/settings#change");
         },
       },
     }),
     linkChangePassword: new ProfileLink({
       text: "Изменить пароль",
-      link: "/changepass",
+      link: "/settings#pass",
       events: {
         click: (e: Event) => {
           e.preventDefault();
-          router.go("/changepass");
+          router.go("/settings#pass");
         },
       },
     }),

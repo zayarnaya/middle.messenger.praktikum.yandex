@@ -149,6 +149,7 @@ export function buildRightPanel() {
 
     const chatList: any[] = store.getState().chatlist as any[];
     //Проверка на существование вызванного чата в списке чатов
+    const chatField: HTMLElement = document.querySelector(".chat-main__inner") as HTMLElement;
     if (!!chatList) {
       let chatIDlist: number[] = [];
       chatList.forEach((chat) => {
@@ -156,12 +157,13 @@ export function buildRightPanel() {
       });
       if (
         loc.includes("/messenger/") &&
+        !!chatIDlist &&
         !chatIDlist.includes(newID) &&
-        !!document.querySelector(".chat-main__inner")
+        !!chatField
       ) {
-        document.querySelector(".chat-main__inner").textContent =
-          "Такого чата нет!";
-      }
+        chatField.textContent =
+          "";
+      } 
     }
 
     const chat: ChatsProps = store.getState().chat as ChatsProps;

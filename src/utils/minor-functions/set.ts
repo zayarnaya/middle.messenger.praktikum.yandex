@@ -7,7 +7,7 @@ export function set(
   value: unknown
 ): PlainObject | unknown {
   if (!isPlainObject(object)) return object;
-  
+
   if (typeof path != "string") {
     throw new Error("path must be string");
   }

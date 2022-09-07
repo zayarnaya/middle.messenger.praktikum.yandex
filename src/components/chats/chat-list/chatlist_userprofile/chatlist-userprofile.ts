@@ -17,7 +17,8 @@ export class ChatlistUserprofile extends Block<ChatlistUserprofile> {
     this.events = {
       click: (e: Event) => {
         e.preventDefault();
-        router.go("/profile");
+        router.go("/settings");
+        store.set("initChat", null);
       },
     };
 

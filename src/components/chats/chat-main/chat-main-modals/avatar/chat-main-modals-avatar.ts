@@ -3,6 +3,7 @@ import { ChatsModalProps } from "../../../../../types";
 import { Block } from "../../../../../utils/block";
 import { ChatsController } from "../../../../../utils/controllers/chatsController";
 import store from "../../../../../utils/store";
+import { buildLeftPanel } from "../../../chat-list/chat-list";
 import chatMainModalCreate from "./chat-main-modal-avatar.hbs";
 
 export class ChatsChangeAvatar extends Block<ChatsChangeAvatar> {
@@ -29,6 +30,7 @@ export class ChatsChangeAvatar extends Block<ChatsChangeAvatar> {
         submit.changeChatAvatar(formdata).then((response) => {
           if (response.status == 200) {
             let adata = JSON.parse(response.response);
+            buildLeftPanel();
             store.set("chat", adata);
           } else {
             submitMessage.textContent =

@@ -19,6 +19,7 @@ export class ChangeUserProfile extends Form {
         const submitMessage: HTMLElement = document.querySelector(
           ".submit-message"
         ) as HTMLElement;
+        submitMessage.textContent = "";
         const form: HTMLFormElement = document.querySelector(
           "form.form-changeprofile"
         ) as HTMLFormElement;
@@ -35,8 +36,10 @@ export class ChangeUserProfile extends Form {
 
         const submitChange = new UserProfileController();
         submitChange.changeProfile(submitData).then((response) => {
+
           if (response.status == 200) {
             let adata = JSON.parse(response.response);
+            submitMessage.textContent = "Изменения сохранены";
             store.set("user", adata);
             Object.entries(adata).forEach((entry) => {
               localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
