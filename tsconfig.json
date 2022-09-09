@@ -11,17 +11,19 @@
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "esModuleInterop": true,
-    "types": ["handlebars"],
+    "types": ["handlebars", "mocha", "node"],
     "allowSyntheticDefaultImports": true,
     "lib": [
         "ES2021",
-        "DOM",
+        "DOM"
         ],
 
    },
-   "include": ["./src/**/*/"],
+   "include": ["./src/**/*/", "server.js"],
    "exclude": [
     "node_modules", 
-    ".vscode"
+    ".vscode",
+    "babel.config.js",
+    "antiDOS.ts",
    ]
 } 

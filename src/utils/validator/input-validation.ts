@@ -1,7 +1,7 @@
 import { PATTERNS } from "../../consts";
 import { Validity } from "../../types";
 
-export function inputValidation(field: HTMLInputElement, checkEmpty?: boolean): Validity {
+export function inputValidation(field: HTMLInputElement, checkEmpty?: boolean): string {
   let pattern: RegExp = new RegExp(PATTERNS[field.name]);
 
   if (!!checkEmpty && field.value == "") {
@@ -14,4 +14,7 @@ export function inputValidation(field: HTMLInputElement, checkEmpty?: boolean): 
     return "true";
   }
 
+  return "wrong";
+
 }
+ 

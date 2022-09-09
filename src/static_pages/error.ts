@@ -3,7 +3,7 @@ import "./error.scss";
 import { Block } from "../utils/block";
 import { ErrorProps } from "../types";
 
-export class Error extends Block<ErrorProps, Error> {
+export class Error extends Block<Error> {
   public constructor(props: ErrorProps) {
     super("div", props, false, "error center-center");
   }

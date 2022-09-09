@@ -56,7 +56,15 @@
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
+
   }
+
+  .chat-list__avatar img,
+  .chat-list-item__avatar img,
+  .chat-main__chat-avatar img {
+    width: 100%;
+  }
+
 
   .chat-list__profile-block {
     display: flex;
@@ -223,17 +231,13 @@
   }
 
   .chat-main__inner {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    display: block;
     padding-left: 60px;
     padding-right: 40px;
     width: 100%;
     height: 560px;
-
-
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
     box-sizing: border-box;
   }
 
@@ -401,4 +405,54 @@
   .input-row label {
     display: none;
   }
+
+  .forDelete {
+    background-color: #999999;
+  }
+
+  .forDeletion {
+    list-style-type: none;
+  }
+  .forDeletion .users {
+    cursor: pointer;
+  }
+
+  .outer-out {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .inner-out {
+    display: flex;
+    max-width: 70%;
+    justify-content: flex-start;
+    background-color: #999;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+
+  }
+
+  .outer-in {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    margin-bottom: 10px;
+
+  }
+
+  .inner-in {
+    display: flex;
+    max-width: 70%;
+    justify-content: flex-end;
+    background-color: lightcyan;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
+
 }

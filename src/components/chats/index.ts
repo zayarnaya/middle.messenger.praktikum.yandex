@@ -6,4 +6,5 @@ export function chatsPage() {
   chatsPageLayout();
   buildLeftPanel();
   buildRightPanel();
+
 }

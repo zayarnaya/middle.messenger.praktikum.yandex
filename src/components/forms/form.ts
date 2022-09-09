@@ -1,49 +1,25 @@
 import { Block } from "../../utils/block";
 import { FormProps } from "../../types";
 import { InputField } from "../input/input-field";
-import { getData } from "../../utils/form-actions/get-data";
 
-export class Form extends Block<FormProps, Form> {
+export class Form extends Block<Form> {
   public isValid: boolean = false;
   public inputs: InputField[];
 
-  public constructor(
-    props: FormProps,
-    tag?: string,
-    classname?: string
-  ) {
+  public constructor(props: FormProps, tag?: string, classname?: string) {
     super(tag, props, false, classname);
 
     this.events = {
       submit: (e: Event) => {
         e.preventDefault();
         this.isValid = this.checkInputsValidity(this.inputs);
-        let submitMessage: HTMLElement =
-          document.querySelector(".submit-message");
+        let submitMessage: HTMLElement = document.querySelector(
+          ".submit-message"
+        ) as HTMLElement;
         if (!this.isValid) {
           submitMessage.textContent = "Заполните все нужные поля";
         } else if (!!this.isValid) {
-          switch (location.hash) {
-            case "#login":
-              submitMessage.textContent = "Успешно! Сейчас загрузим чаты";
-              break;
-            case "#signin":
-              submitMessage.textContent =
-                "Вы успешно зарегистрировались, переходим на страницу входа";
-              break;
-            case "#changepass":
-              submitMessage.textContent =
-                "Вы поменяли пароль. Возвращаемся в профиль";
-              break;
-            case "#forgotpass":
-              submitMessage.textContent =
-                "Пароль будет отправлен на вашу почту";
-              break;
-            default:
-              submitMessage.textContent = "Успешно! Сейчас загрузим чаты";
-              break;
-          }
-          getData();
+          submitMessage.textContent = "Успешно!";
         }
       },
     };
@@ -77,5 +53,6 @@ export class Form extends Block<FormProps, Form> {
     } else if (!result.includes(false)) {
       return true;
     }
+    return false;
   }
 }
