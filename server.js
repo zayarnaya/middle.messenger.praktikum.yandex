@@ -6,7 +6,7 @@ const antidos = require("./antidos.js");
 app.use(
   antidos({
     maxTime: 1000,
-    maxCount: 200,
+    maxCount: 50,
     //     hardMode: 5
     consoleDebug: false,
   })
