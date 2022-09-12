@@ -1,7 +1,7 @@
 {
   "engines": {
-    "npm": "8.14.0",
-    "node": "v16.16.0"
+    "npm": "8.15.0",
+    "node": "v16.17.0"
   },
   "targets": {
     "default": {
@@ -44,34 +44,35 @@
     "@parcel/babel-preset-env": "2.7.0",
     "express": "4.18.1",
     "express-handlebars": "6.0.6",
+    "glob-parent": "6.0.2",
     "handlebars": "4.7.7",
     "lodash": "4.17.21",
     "stylelint-config-standard": "28.0.0",
     "stylelint-csstree-validator": "2.0.0",
-    "uuid": "8.3.2",
+    "uuid": "9.0.0",
     "xhr2": "0.2.1"
   },
   "devDependencies": {
-    "@babel/core": "7.18.13",
+    "@babel/core": "7.19.0",
     "@babel/register": "7.18.9",
-    "@parcel/transformer-sass": "2.6.2",
+    "@parcel/transformer-sass": "2.7.0",
     "@types/chai": "4.3.3",
     "@types/mocha": "9.1.1",
-    "@types/node": "18.7.15",
+    "@types/node": "18.7.16",
     "@types/uuid": "8.3.4",
-    "@typescript-eslint/eslint-plugin": "5.32.0",
-    "@typescript-eslint/parser": "5.32.0",
+    "@typescript-eslint/eslint-plugin": "5.36.2",
+    "@typescript-eslint/parser": "5.36.2",
     "chai": "4.3.6",
-    "eslint": "8.21.0",
+    "eslint": "8.23.1",
     "eslint-config-airbnb": "19.0.4",
     "mocha": "10.0.0",
-    "parcel": "2.6.2",
+    "parcel": "2.7.0",
     "parcel-plugin-clean-easy": "1.0.2",
     "parcel-plugin-static-files-copy": "2.6.0",
     "parcel-transformer-hbs": "1.0.4",
     "stylelint": "14.11.0",
     "stylelint-scss": "4.3.0",
     "ts-node": "10.9.1",
-    "typescript": "4.7.4"
+    "typescript": "4.8.3"
   }
 }

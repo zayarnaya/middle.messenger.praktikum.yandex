@@ -64,6 +64,7 @@ export function changeProfilePage() {
       name: "submit-avatar",
       label: "Отправить",
       type: "submit",
+      class: "submit-button small"
     }),
   });
 
