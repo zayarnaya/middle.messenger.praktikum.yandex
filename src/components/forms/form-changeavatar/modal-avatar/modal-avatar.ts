@@ -4,7 +4,7 @@ import { Block } from "../../../../../utils/block";
 import { ChatsController } from "../../../../../utils/controllers/chatsController";
 import store from "../../../../../utils/store";
 import { buildLeftPanel } from "../../../chat-list/chat-list";
-import chatMainModalAvatar from "./chat-main-modal-avatar.hbs";
+import chatMainModalCreate from "./chat-main-modal-avatar.hbs";
 
 export class ChatsChangeAvatar extends Block<ChatsChangeAvatar> {
   public constructor(props: ChatsModalProps, classname?: string) {
@@ -45,6 +45,6 @@ export class ChatsChangeAvatar extends Block<ChatsChangeAvatar> {
   }
 
   public render() {
-    return this.compile(chatMainModalAvatar, this.props);
+    return this.compile(chatMainModalCreate, this.props);
   }
 }

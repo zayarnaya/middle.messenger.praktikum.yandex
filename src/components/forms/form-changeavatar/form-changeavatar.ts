@@ -1,13 +1,12 @@
 import { filePrefix } from "../../../consts";
-import { APIurls, Methods } from "../../../types";
 import { AvatarController } from "../../../utils/controllers/avatarController";
-import { HTTPTransport } from "../../../utils/http-transport";
 import store, { StoreEvents } from "../../../utils/store";
 import { ImageAvatar } from "../../avatars/img-avatar/img-avatar";
 import { Button } from "../../buttons/button-submit/button";
 import { InputField } from "../../input/input-field";
 import { Form } from "../form";
 import changeAvatar from "./form-changeavatar.hbs";
+import "./form-changeavatar.scss";
 
 type FormChangeAvatarProps = {
   avatar: ImageAvatar;
