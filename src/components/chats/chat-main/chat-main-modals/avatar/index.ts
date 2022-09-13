@@ -27,6 +27,7 @@ export function changeChatAvatarModal() {
       name: "avatarChatSubmit",
       label: "Отправить",
       type: "submit",
+      class: "submit-button small"
     }),
     avatar: new ImageAvatar({
       avatar: avatar,

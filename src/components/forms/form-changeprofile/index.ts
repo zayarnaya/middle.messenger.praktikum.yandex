@@ -54,6 +54,7 @@ export function changeProfilePage() {
           ? defaulAvatar
           : `${filePrefix}${localStorage.getItem("user_avatar")}`,
       name: "Мой_аватар",
+      text: "Поменять аватар",
     }),
     input: new InputField({
       name: "avatar",

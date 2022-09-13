@@ -10,7 +10,7 @@ export function modalUserRemove() {
     button: new Button({
       name: "removeUser",
       label: "удалить выбранных пользователей",
-      class: "removeButton",
+      class: "removeButton submit-button",
       type: "button",
     }),
   });

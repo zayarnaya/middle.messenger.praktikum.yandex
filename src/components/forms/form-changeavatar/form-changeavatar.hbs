@@ -1,6 +1,10 @@
-<form class="form__changeAvatar col center-center" id="changeAvatar" novalidate method="post" enctype="multipart/form-data">
+<form class="form__changeAvatar" id="changeAvatar" novalidate method="post" enctype="multipart/form-data">
     {{{avatar}}}
-    {{{input}}}
-    {{{button}}}
+    <div class="form__changeAvatar__hidden-input center-center hidden" id="changeAvatarHiddenInput">
+        <label class="image-file" for="avatar" title="Выберите файл"></label>
+        <input type="file" class="hidden-input" id="avatar" title="Выберите файл" />
+        {{!-- {{{input}}} --}}
+        {{{button}}}
+    </div>
     <div class="submit-message"></div>
 </form>

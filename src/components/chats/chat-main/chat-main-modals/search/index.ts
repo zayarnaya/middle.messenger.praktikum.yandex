@@ -17,6 +17,7 @@ export function userSearchModal() {
             name: "userSearchSubmit",
             label: "Искать",
             type: "submit",
+            class: "submit-button small",
 
         })
     });

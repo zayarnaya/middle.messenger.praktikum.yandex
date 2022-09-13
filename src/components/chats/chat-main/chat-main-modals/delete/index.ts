@@ -9,8 +9,18 @@ export function deleteChatModal() {
       name: "deleteChat",
       label: "Удалить чат",
       type: "submit",
+      class: "submit-button small",
     }),
   });
 
   render(".modal-place", deleteModal);
+  const button: HTMLElement = document.getElementById(
+    "close-button"
+  ) as HTMLElement;
+  const modalPlace: HTMLElement = document.getElementById(
+    "modal-place"
+  ) as HTMLElement;
+  button.addEventListener("click", function () {
+    modalPlace.textContent = "";
+  });
 }
