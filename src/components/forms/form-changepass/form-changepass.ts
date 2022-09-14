@@ -30,7 +30,7 @@ export class formChangePass extends Form {
           };
           let outData = JSON.stringify(sendData);
 
-          changepass.changePass(outData).then((response) => {
+          changepass.changePass(outData).then((response: XMLHttpRequest) => {
             if (response.status == 200) {
               submitMessage.textContent = "Успешно!";
             } else {

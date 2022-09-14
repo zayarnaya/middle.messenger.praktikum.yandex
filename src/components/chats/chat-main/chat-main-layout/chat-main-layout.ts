@@ -1,6 +1,7 @@
 import { Block } from "../../../../utils/block";
 import chatMainLayout from "./chat-main-layout.hbs";
 import { ChatRightPanelLayoutProps } from "../../../../types";
+import "./chat-main-layout.scss";
 
 export class ChatRightPanelLayout extends Block<ChatRightPanelLayout> {
   public constructor(

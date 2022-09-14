@@ -27,7 +27,7 @@ export class ChatsChangeAvatar extends Block<ChatsChangeAvatar> {
         }
 
         const submit = new ChatsController();
-        submit.changeChatAvatar(formdata).then((response) => {
+        submit.changeChatAvatar(formdata).then((response: XMLHttpRequest) => {
           if (response.status == 200) {
             let adata = JSON.parse(response.response);
             buildLeftPanel();

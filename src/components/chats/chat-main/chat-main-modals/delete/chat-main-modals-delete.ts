@@ -19,7 +19,7 @@ export class ChatsDeleteChat extends Block<ChatsDeleteChat> {
         deleteChat.delete({
           chatId: Number(chatID)
         })
-        .then((response) => {
+        .then((response: XMLHttpRequest) => {
           if (response.status == 200) {
             resultField.textContent = "Удалили чат!";
             router.go("/messenger");

@@ -30,7 +30,7 @@ export class loginFormAll extends Form {
           formData.forEach((value, key) => {
             data[key] = value;
           });
-          login.login(data).then((response) => {
+          login.login(data).then((response: XMLHttpRequest) => {
             if (response.status == 200) {
               router.go("/messenger");
             }

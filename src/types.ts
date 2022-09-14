@@ -17,6 +17,7 @@ import { AvatarChangeImg } from "./components/avatars/change-avatar/avatar-img/a
 import { ProfileLink } from "./components/forms/my-profile/profile-links/profile-link";
 import { ImageAvatar } from "./components/avatars/img-avatar/img-avatar";
 import { ChatAvatar } from "./components/avatars/chat-avatar/chat-avatar";
+import { SearchForm } from "./components/forms/form-search/form-search";
 
 export enum Methods {
   GET = "GET",
@@ -123,6 +124,7 @@ export type MultiListProps = Record<
 
 export type ChatListMenuProps = {
   chatuserprofile: ChatlistUserprofile;
+  formsearch: SearchForm;
 };
 
 export type ChatListLeftPanelProps = {
@@ -192,6 +194,7 @@ export type FormProps = {
   inputList?: MultiList;
   button?: Button;
   input?: InputField;
+  classname?: string;
 };
 
 export type MyUserProfileProps = {

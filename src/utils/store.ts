@@ -1,6 +1,7 @@
 import { set } from "./minor-functions/set";
 import { PlainObject } from "../types";
 import { EventBus } from "./event-bus";
+import { ChatsProps, UserProps } from "./../APItypes";
 
 export enum StoreEvents {
   Updated = "updated",
@@ -10,8 +11,20 @@ export enum StoreEvents {
   NewLocSet = "newLocSet",
 }
 
+type StoreState = {
+  chatlist?: ChatsProps[],
+  initChat?: {
+    id: number
+  },
+  user?: UserProps,
+  chat?: ChatsProps,
+  someAction?: boolean,
+  newLoc?: string,
+}
+
 class Store extends EventBus {
-  private state: PlainObject = {};
+  //private state: PlainObject = {};
+  private state: PlainObject | StoreState = {};
 
   public getState() {
     return this.state;

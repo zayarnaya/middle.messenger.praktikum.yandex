@@ -30,7 +30,7 @@ export class signinFormAll extends Form {
             data[key] = value;
           });
 
-          signUp.signUp(data).then((response) => {
+          signUp.signUp(data).then((response: XMLHttpRequest) => {
             if (response.status == 200) {
               router.go("/messenger");
             }

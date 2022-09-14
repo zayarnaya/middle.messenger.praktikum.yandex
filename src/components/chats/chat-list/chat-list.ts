@@ -11,11 +11,14 @@ import { ChatsController } from "../../../utils/controllers/chatsController";
 import { defaulAvatar, filePrefix } from "../../../consts";
 import { ChatsProps } from "../../../APItypes";
 import { isEqualArrays } from "../../../utils/minor-functions/isEqualArrays";
+import { SearchForm } from "../../forms/form-search/form-search";
+import { InputField } from "../../input/input-field";
+import { Button } from "../../buttons/button-submit/button";
 
 export function buildLeftPanel() {
   const getChats = new ChatsController();
   let storedChatList: ChatsProps[] = store.getState().chatlist as ChatsProps[];
-  getChats.getChats().then((response) => {
+  getChats.getChats().then((response: XMLHttpRequest) => {
     if (response.status == 200) {
       let adata = JSON.parse(response.response);
       store.setChatList("chatlist", adata);
@@ -37,6 +40,19 @@ export function buildLeftPanel() {
             },
             "chat-list__profile"
           ),
+          formsearch: new SearchForm({
+            input: new InputField({
+              name: "search",
+              type: "search",
+              label: "Искать чат",
+              placeholder: "Поиск"
+            }),
+            button: new Button({
+              class: "search-submit-button",
+
+            }),
+            classname: "chat-list__search",
+          })
         },
         "chat-list__menu"
       ),

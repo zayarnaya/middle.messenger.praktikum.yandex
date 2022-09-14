@@ -34,7 +34,7 @@ export class FormChangeAvatar extends Form {
           formdata.append("avatar", file);
         }
 
-        submitChange.changeChatAvatar(formdata).then((response) => {
+        submitChange.changeChatAvatar(formdata).then((response: XMLHttpRequest) => {
           if (response.status == 200) {
             let adata = JSON.parse(response.response);
             store.set("chat", adata);

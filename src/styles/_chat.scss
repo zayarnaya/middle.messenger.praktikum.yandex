@@ -98,6 +98,8 @@
   .chat-list__search {
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
   }
 
   .chat-list__searchform {
@@ -142,6 +144,14 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
+  }
+
+  .chat-list__list {
+    padding: 10px;
+  }
+
+  .chat-list__list li{
+    list-style-type: none;
   }
 
   .chat-list__list_unmarked {

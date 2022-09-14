@@ -5,7 +5,7 @@ import store from "./store";
 export function getChatList() {
   const chats = new ChatsController();
   const chatID = chatIDfromLocation();
-  chats.getChats().then((response) => {
+  chats.getChats().then((response: XMLHttpRequest) => {
     if (response.status == 200) {
       let adata = JSON.parse(response.response);
       let bdata = {};

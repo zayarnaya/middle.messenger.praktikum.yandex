@@ -20,7 +20,7 @@ export class ChatsUserSearch extends Block<ChatsUserSearch> {
         ) as HTMLInputElement;
         const inputData = { login: input.value };
 
-        seek.seek(inputData).then((response) => {
+        seek.seek(inputData).then((response: XMLHttpRequest) => {
           const resultField: HTMLElement = document.getElementById(
             "result"
           ) as HTMLElement;

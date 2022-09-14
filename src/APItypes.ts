@@ -25,7 +25,7 @@ export type ChatsProps = {
     user: UserProps;
     time: string;
     content: string;
-    id: number;
+    id?: number;
   };
 };
 

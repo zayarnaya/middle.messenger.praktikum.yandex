@@ -18,7 +18,7 @@ export class ChatsCreateChat extends Block<ChatsCreateChat> {
         const inputData = { title: input.value };
 
         const seek = new ChatsController();
-        seek.create(inputData).then((response) => {
+        seek.create(inputData).then((response: XMLHttpRequest) => {
           const resultField: HTMLElement = document.getElementById(
             "result"
           ) as HTMLElement;

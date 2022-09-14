@@ -29,7 +29,7 @@ export class FormChangeAvatar extends Form {
         const submitChange = new AvatarController();
         let formdata = new FormData(form);
 
-        submitChange.change(formdata).then((response) => {
+        submitChange.change(formdata).then((response: XMLHttpRequest) => {
           if (response.status == 200) {
             let adata = JSON.parse(response.response);
             store.set("user", adata);

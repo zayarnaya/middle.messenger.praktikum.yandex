@@ -20,7 +20,7 @@ export function pageRouter() {
   // const check = new UserAuthController();
   // check
   //   .getUser()
-  //   .then((response) => {
+  //   .then((response: XMLHttpRequest) => {
   //     if (response.status == 200) {
   //       let adata = JSON.parse(response.response);
   //       Object.entries(adata).forEach((entry) => {
