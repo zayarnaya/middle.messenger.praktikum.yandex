@@ -13,7 +13,7 @@ export class SearchForm extends Block<SearchForm> {
         e.preventDefault();
 
         const search = new ChatsController;
-        let form: HTMLFormElement = document.querySelector("form.chat-list__searchform") as HTMLFormElement;
+        //let form: HTMLFormElement = document.querySelector("form.chat-list__searchform") as HTMLFormElement;
         let input: HTMLInputElement = document.getElementById("search") as HTMLInputElement;
         let message: HTMLElement = document.getElementById("search-res") as HTMLElement;
         message.classList.remove("color-red");
@@ -22,7 +22,7 @@ export class SearchForm extends Block<SearchForm> {
           search.seekChats({
             title: input.value
           })
-          .then(response => {
+          .then((response: XMLHttpRequest) => {
             if(response.status == 200) {
               let adata = JSON.parse(response.response);
               store.set("chatlist", adata);

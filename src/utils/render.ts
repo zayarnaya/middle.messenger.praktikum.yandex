@@ -17,42 +17,43 @@ export function pageRouter() {
   ) as HTMLElement;
 
   //Проверка на залогиненного юзера
-  // const check = new UserAuthController();
-  // check
-  //   .getUser()
-  //   .then((response: XMLHttpRequest) => {
-  //     if (response.status == 200) {
-  //       let adata = JSON.parse(response.response);
-  //       Object.entries(adata).forEach((entry) => {
-  //         localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
-  //       });
-  //       if (loc == "/") {
-  //         router.go("/messenger");
-  //       }
-  //     } else if (!response || response.status != 200) {
-  //       if (loc != "/") {
-  //         if (loc != "/sign-up") {
-  //           wrap.textContent =
-  //             "Ой! Что-то разлогинились, перебрасываем на страницу входа";
-  //           setTimeout(() => router.go("/"), 2000);
-  //           localStorage.clear();
-  //         }
-  //       }
-  //     }
-  //   })
-  //   .catch(() => {
-  //     localStorage.clear();
-  //     throw new Error("Сервер отдает ошибку");
-  //   });
+  const check = new UserAuthController();
+  check
+    .getUser()
+    .then((response: XMLHttpRequest) => {
+      if (response.status == 200) {
+        let adata = JSON.parse(response.response);
+        Object.entries(adata).forEach((entry) => {
+          localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
+        });
+        if (loc == "/") {
+          router.go("/messenger");
+        }
+      } else if (!response || response.status != 200) {
+        if (loc != "/") {
+          if (loc != "/sign-up") {
+            wrap.textContent =
+              "Ой! Что-то разлогинились, перебрасываем на страницу входа";
+            setTimeout(() => router.go("/"), 2000);
+            localStorage.clear();
+          }
+        }
+      }
+    })
+    .catch(() => {
+      localStorage.clear();
+      throw new Error("Сервер отдает ошибку");
+    });
 
-  // const userID = localStorage.getItem("user_id");
-  // store.on(StoreEvents.NewLocSet, () => {
-  //   const newloc = store.getState().newLoc;
-  //   if (!!newloc && loc != newloc) {
-  //     pageRouter();
-  //     store.setNewLoc("newLoc", null);
-  //   }
-  // });
+  const userID = localStorage.getItem("user_id");
+  console.log(userID);
+  store.on(StoreEvents.NewLocSet, () => {
+    const newloc = store.getState().newLoc;
+    if (!!newloc && loc != newloc) {
+      pageRouter();
+      store.setNewLoc("newLoc", null);
+    }
+  });
 
   const chatID = chatIDfromLocation();
 

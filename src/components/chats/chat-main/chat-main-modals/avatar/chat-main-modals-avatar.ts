@@ -8,7 +8,7 @@ import chatMainModalAvatar from "./chat-main-modal-avatar.hbs";
 
 export class ChatsChangeAvatar extends Block<ChatsChangeAvatar> {
   public constructor(props: ChatsModalProps, classname?: string) {
-    super("div", props, false, (classname = "modal"));
+    super("div", props, false, classname? classname : "modal");
     this.events = {
       submit: function (e: Event) {
         e.preventDefault();

@@ -5,7 +5,7 @@ import { render } from "../../../utils/renderDOM";
 import { ChatListItem } from "./chatlist-item/chatlist-item";
 import { MultiList } from "../../multi-list/multi-list";
 import "./../../../style.scss";
-import store, { StoreEvents } from "../../../utils/store";
+import store, { StoreEvents, StoreState } from "../../../utils/store";
 import { isEmpty } from "../../../utils/minor-functions/isEmpty";
 import { ChatsController } from "../../../utils/controllers/chatsController";
 import { defaulAvatar, filePrefix } from "../../../consts";
@@ -94,7 +94,9 @@ export function buildLeftPanel() {
             });
           } else if (!!isEmpty(chat.last_message)) {
             theChildren[index] = new ChatListItem({
-              avatar: chat.avatar,
+              avatar: chat.avatar
+                ? `${filePrefix}${chat.avatar}`
+                : defaulAvatar,
               title: chat.title,
               unread: 0,
               chatID: chat.id,
@@ -110,11 +112,13 @@ export function buildLeftPanel() {
           render(".chat-list__list", newList);
         }
 
-        const active = store.getState().initChat
-          ? store.getState().initChat.id
+        const state: StoreState = store.getState();
+
+        const active: number = state.initChat
+          ? state.initChat.id
           : null;
         if (!!active) {
-          const activeItem: HTMLElement = document.getElementById(active) as HTMLElement;
+          const activeItem: HTMLElement = document.getElementById(`${active}`) as HTMLElement;
           if(!!activeItem) { 
             activeItem.classList.add("highlight");
           }

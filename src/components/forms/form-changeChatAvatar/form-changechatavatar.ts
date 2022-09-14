@@ -1,3 +1,4 @@
+import { ChatsProps } from "../../../APItypes";
 import { chatIDfromLocation, filePrefix } from "../../../consts";
 import { ChatsController } from "../../../utils/controllers/chatsController";
 import store, { StoreEvents } from "../../../utils/store";
@@ -50,8 +51,18 @@ export class FormChangeAvatar extends Form {
     this.eventTarget = "form.form__chat__changeAvatar";
 
     store.on(StoreEvents.Updated, () => {
-      this.children.avatar.setProps({
-        avatar: `${filePrefix}${store.getState().chat.avatar}`,
+      const chat: ChatsProps = store.getState().chat as ChatsProps;
+      const children: {
+        avatar: ImageAvatar,
+        input: InputField,
+        button: Button,
+      } = this.children as {
+        avatar: ImageAvatar,
+        input: InputField,
+        button: Button,
+      };
+      children.avatar.setProps({
+        avatar: `${filePrefix}${chat.avatar}`,
       });
     });
   }

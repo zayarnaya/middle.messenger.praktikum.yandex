@@ -23,14 +23,18 @@ export class loginFormAll extends Form {
             ".form-login"
           ) as HTMLFormElement;
           const formData = new FormData(form);
-          let data: {
-            login: string;
-            password: string;
-          } = {};
+          let data: any = {};
           formData.forEach((value, key) => {
             data[key] = value;
           });
-          login.login(data).then((response: XMLHttpRequest) => {
+          let sendData: {
+            login: string;
+            password: string;
+          } = data as {
+            login: string;
+            password: string;
+          };
+          login.login(sendData).then((response: XMLHttpRequest) => {
             if (response.status == 200) {
               router.go("/messenger");
             }

@@ -4,6 +4,7 @@ import sendMessageForm from "./form-message.hbs";
 import store from "../../../utils/store";
 import { chatIDfromLocation } from "../../../consts";
 import { sendMessage } from "../../../utils/sendMessage";
+import { UserProps } from "../../../APItypes";
 
 export class FormMessage extends Form {
   public constructor(props: FormProps, classname?: string) {
@@ -27,9 +28,17 @@ export class FormMessage extends Form {
 
         input.value = "";
         errorMessage.textContent = " ";
-        let chatID = chatIDfromLocation();
-        let userID = store.getState().user.id;
-        let token = store.getState().thisChat.token;
+        const chatID = chatIDfromLocation();
+        const user: UserProps = store.getState().user as UserProps;
+        const thisChat: {
+          id: number,
+          token: string
+        } = store.getState().thisChat as {
+          id: number,
+          token: string
+        };
+        let userID = user.id;
+        let token = thisChat.token;
 
         sendMessage(chatID, userID, token, message);
       },

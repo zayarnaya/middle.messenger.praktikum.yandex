@@ -33,5 +33,6 @@ export function loginForm() {
     e.preventDefault();
     router.go(this.href);
     store.setNewLoc("newLoc", this.href);
+    //store.set("newLoc", this.href);
   });
 }

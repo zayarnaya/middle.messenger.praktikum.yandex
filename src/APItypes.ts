@@ -29,6 +29,10 @@ export type ChatsProps = {
   };
 };
 
+export type InitChatProps = {
+  id: number,
+}
+
 export type getChatsData = {
   offset?: number;
   limit?: number;

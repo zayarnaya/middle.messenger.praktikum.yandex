@@ -24,6 +24,6 @@ app.get("/", (req, res) => {
 
 app.listen(3000, () => {
   console.log(
-    "Application listening on port 3000 opent url http://127.0.0.1:3000 "
+    "Application listening on port 3000 open url http://127.0.0.1:3000 "
   );
 });

@@ -12,7 +12,14 @@ import { ImageAvatar } from "../../avatars/img-avatar/img-avatar";
 import { defaulAvatar, filePrefix } from "../../../consts";
 
 export function changeProfilePage() {
-  let inputDummy = data.input.change_profile;
+  type Inputs = {
+    name: string,
+    type: string,
+    label: string,
+    required: boolean,
+    value: string,
+  };
+  let inputDummy: Record<string, Inputs> = data.input.change_profile;
   Object.entries(inputDummy).forEach((entry) => {
     let newvalue = localStorage.getItem(`user_${entry[0]}`);
     if (entry[0] == "display_name" && newvalue == "null") {
@@ -20,8 +27,9 @@ export function changeProfilePage() {
       let surname = localStorage.getItem("user_second_name");
       newvalue = `${name} ${surname}`;
     }
-
-    entry[1].value = newvalue;
+    if(!!entry[1].value) {
+      entry[1].value = newvalue;
+    }
   });
 
   // let profileAvatar: string;
@@ -37,7 +45,7 @@ export function changeProfilePage() {
   //   profileAvatar = defaulAvatar;
   // }
 
-  let inputs: HTMLInputElement[] = Object.values(inputDummy);
+  let inputs: Inputs[] = Object.values(inputDummy);
   let theChildren: MultiListProps = {};
 
   theChildren = inputs.reduce((theChildren, item, i) => {

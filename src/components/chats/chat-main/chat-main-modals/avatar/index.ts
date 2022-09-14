@@ -1,4 +1,4 @@
-import { ChatsProps } from "../../../../../APItypes";
+import { ChatsProps,  } from "../../../../../APItypes";
 import { defaultChatAvatar, filePrefix } from "../../../../../consts";
 import { render } from "../../../../../utils/renderDOM";
 import store, { StoreEvents } from "../../../../../utils/store";
@@ -48,7 +48,16 @@ export function changeChatAvatarModal() {
 
   store.on(StoreEvents.Updated, function () {
     const newchat: ChatsProps = store.getState().chat as ChatsProps;
-    createModal.children.avatar.setProps({
+    const children: {
+      input: InputField,
+      button: Button,
+      avatar: ImageAvatar
+    } = createModal.children as {
+      input: InputField,
+      button: Button,
+      avatar: ImageAvatar
+    };
+    children.avatar.setProps({
       avatar: `${filePrefix}${newchat.avatar}`,
     });
   });

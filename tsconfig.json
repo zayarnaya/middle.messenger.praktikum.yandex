@@ -1,15 +1,19 @@
 {
     "compilerOptions": {
+
+    "useUnknownInCatchVariables": false, 
+     "suppressExcessPropertyErrors": true, 
+
     "outDir": "./dist",
     "allowJs": true,
     "target": "es2016",
     "declaration": false,
     "module": "commonjs",
     "sourceMap": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "esModuleInterop": true,
     "types": ["handlebars", "mocha", "node"],
     "allowSyntheticDefaultImports": true,

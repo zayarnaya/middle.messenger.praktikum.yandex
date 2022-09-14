@@ -1,5 +1,6 @@
 import XMLHttpRequest from "xhr2";
-import { Methods } from "../types";
+import { Methods, Options } from "../types";
+import { queryStringify } from "./query-stringify";
 
 class HTTPTransport {
   get = (url: string, options: Options) => {

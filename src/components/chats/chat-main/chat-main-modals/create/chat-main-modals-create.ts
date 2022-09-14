@@ -8,7 +8,7 @@ import chatMainModalCreate from "./chat-main-modal-create.hbs";
 
 export class ChatsCreateChat extends Block<ChatsCreateChat> {
   public constructor(props: ChatsModalProps, classname?: string) {
-    super("div", props, false, (classname = "modal"));
+    super("div", props, false,  classname? classname : "modal");
     this.events = {
       submit: function (e: Event) {
         e.preventDefault();

@@ -1,3 +1,4 @@
+import { UserProps } from "../../../APItypes";
 import { filePrefix } from "../../../consts";
 import { AvatarController } from "../../../utils/controllers/avatarController";
 import store, { StoreEvents } from "../../../utils/store";
@@ -46,8 +47,18 @@ export class FormChangeAvatar extends Form {
     this.eventTarget = "form.form__changeAvatar";
 
     store.on(StoreEvents.Updated, () => {
-      this.children.avatar.setProps({
-        avatar: `${filePrefix}${store.getState().user.avatar}`,
+      const user: UserProps = store.getState().user as UserProps;
+      const children: {
+        avatar: ImageAvatar,
+        input: InputField,
+        button: Button,
+      } = this.children as {
+        avatar: ImageAvatar,
+        input: InputField,
+        button: Button,
+      };
+      children.avatar.setProps({
+        avatar: `${filePrefix}${user.avatar}`,
       });
     });
   }
