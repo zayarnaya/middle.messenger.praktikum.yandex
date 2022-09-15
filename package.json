@@ -1,7 +1,7 @@
 {
   "engines": {
-    "npm": "8.15.0",
-    "node": "v16.17.0"
+    "npm": ">=8.15.0",
+    "node": ">=16.17.0"
   },
   "targets": {
     "default": {
@@ -21,16 +21,21 @@
     ]
   },
   "name": "messenger_v",
-  "version": "3.3.0",
+  "version": "3.3.3",
   "description": "Messenger by Veronika Zayarnaya",
   "source": "src/index.html",
   "private": true,
   "scripts": {
     "dev": "npx webpack serve --server-type http",
+    "add-bundles": "git add dist/*",
     "build": "npx webpack",
     "start": "npx webpack && node server.js",
     "test": "mocha"
   },
+  "pre-commit": [
+    "build",
+    "test"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -64,7 +69,10 @@
     "eslint": "8.21.0",
     "eslint-config-airbnb": "19.0.4",
     "handlebars-loader": "1.7.2",
+    "jsdom": "20.0.0",
+    "jsdom-global": "3.0.2",
     "mocha": "10.0.0",
+    "pre-commit": "1.2.2",
     "sass": "1.54.9",
     "sass-loader": "13.0.2",
     "style-loader": "3.3.1",

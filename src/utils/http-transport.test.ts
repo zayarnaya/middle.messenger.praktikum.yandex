@@ -101,9 +101,9 @@ describe("HTTPTransport", () => {
       .get(
         `${prefix}/1`,
         {},
-      )//проверить работает ли или надо response.response
+      )
       .then((response: XMLHttpRequest) => {
-        let id = JSON.parse(response).id || null;
+        let id = JSON.parse(response.response).id || null;
         if (id === 1) {
           done();
         } else {
@@ -125,7 +125,7 @@ describe("HTTPTransport", () => {
         })},
       )
       .then((response: XMLHttpRequest) => {
-        let id = JSON.parse(response).userId || null;
+        let id = JSON.parse(response.response).userId || null;
         if (id === 100) {
           done();
         } else {
@@ -147,7 +147,7 @@ describe("HTTPTransport", () => {
         })},
       )
       .then((response: XMLHttpRequest) => {
-        let id = JSON.parse(response).userId || null;
+        let id = JSON.parse(response.response).userId || null;
         if (id === 102) {
           done();
         } else {
