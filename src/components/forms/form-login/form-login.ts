@@ -4,6 +4,7 @@ import { FormProps } from "../../../types";
 import "./form-login.scss";
 import { UserAuthController } from "../../../utils/controllers/userAuthController";
 import { router } from "../../../consts";
+import { inputValidation } from "../../../utils/validator/input-validation";
 
 export class loginFormAll extends Form {
   public constructor(propsAndChildren: FormProps) {
@@ -16,8 +17,23 @@ export class loginFormAll extends Form {
           ".submit-message"
         ) as HTMLElement;
         if (!this.isValid) {
-          submitMessage.textContent = "Заполните все нужные поля";
-        } else if (!!this.isValid) {
+          const inputlist = document.querySelectorAll("input");
+          console.log(inputlist.length);
+          let truecounts = 0;
+          for(let i = 0; i < inputlist.length; i++) {
+            if(inputValidation(inputlist[i], true) == "true") {
+              truecounts += 1;
+            }
+          };
+          if(truecounts == inputlist.length) {
+            this.isValid = true;
+          } else if(truecounts < inputlist.length) {
+            submitMessage.textContent = "Заполните все нужные поля";
+            return;
+          }          
+        }; 
+        
+        if (!!this.isValid) {
           const login = new UserAuthController();
           const form: HTMLFormElement = document.querySelector(
             ".form-login"

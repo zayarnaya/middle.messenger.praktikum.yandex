@@ -45,14 +45,23 @@ module.exports = {
           filename: "index.html",
         },
       },
+     {
+       test: /favicon\.ico/,
+       type: 'asset/resource',
+       generator: {
+         filename: 'favicon.ico'
+       }
+     },
+
+
     ],
   },
   resolve: {
     extensions: [".ts", ".js"],
 
-    // fallback: {
-    //   fs: false,
-    // },
+    //  fallback: {
+    //    fs: false,
+    //  },
   },
 
   output: {

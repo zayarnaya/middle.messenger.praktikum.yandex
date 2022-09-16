@@ -4,6 +4,7 @@ import { Block } from "../../../utils/block";
 import "./form-search.scss";
 import { ChatsController } from "../../../utils/controllers/chatsController";
 import store from "../../../utils/store";
+import { isEmpty } from "../../../utils/minor-functions/isEmpty";
 
 export class SearchForm extends Block<SearchForm> {
   public constructor(props: FormProps) {
@@ -29,6 +30,9 @@ export class SearchForm extends Block<SearchForm> {
             .then((response: XMLHttpRequest) => {
               if (response.status == 200) {
                 let adata = JSON.parse(response.response);
+                if(!!isEmpty(adata)) {
+                  message.textContent = "По этому запросу ничего не нашлось!";
+                }
                 store.setChatList("chatlist", adata);
               } else {
                 message.textContent =

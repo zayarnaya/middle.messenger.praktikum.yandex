@@ -12,6 +12,7 @@ import { ChatListItem } from "./components/chats/chat-list/chatlist-item/chatlis
 import { MenuItem } from "./components/chats/chat-main/chat-main-menu/menu-items/menu-item";
 import { ProfileLink } from "./components/forms/my-profile/profile-links/profile-link";
 import { ImageAvatar } from "./components/avatars/img-avatar/img-avatar";
+import { SearchForm } from "./components/forms/form-search/form-search";
 
 
 export enum Methods {
@@ -121,6 +122,7 @@ export type MultiListProps = Record<
 
 export type ChatListMenuProps = {
   chatuserprofile: ChatlistUserprofile;
+  formsearch: SearchForm;
 };
 
 export type ChatListLeftPanelProps = {
