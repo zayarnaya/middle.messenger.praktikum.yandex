@@ -102,7 +102,7 @@ export type ProfCharProps = {
 
 export type ChatMessageProps = {
   avatar?: string;
-  name?: string;
+  nickname?: string;
   message?: string | HTMLElement;
   time?: string;
   date?: string;

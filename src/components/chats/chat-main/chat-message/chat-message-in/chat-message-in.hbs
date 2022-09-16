@@ -1,19 +1,17 @@
-{{!-- <div class="message-in-outer col"> --}}
-    <div class="message-in-wrapper row">
-        <div class="avatar-in">
-            {{{avatar}}}            
+<div class="message-in-wrapper row">
+    <div class="avatar-in">
+        <img src="{{avatar}}">
+    </div>
+    <div class="message-inner col">
+        <div class="message-text">
+            {{{message}}}
         </div>
-        <div class="message-inner col">
-            <div class="message-text">
-                {{{message}}}
-            </div>
-            <div class="date-time">
-                <date>{{{date}}}</date>
-                <time>{{{time}}}</time>
-            </div>
+        <div class="date-time">
+            <time>{{{date}}}</time>
+            <time>{{{time}}}</time>
         </div>
     </div>
-    <div class="nickname">
-        {{{name}}}
-    </div>
-{{!-- </div> --}}
+</div>
+<div class="nickname">
+    {{{nickname}}}
+</div>

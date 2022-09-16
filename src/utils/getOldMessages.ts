@@ -40,10 +40,13 @@ export function getOldMessages(chatID: number, token: string) {
     let cdata = JSON.parse(event.data);
     cdata.forEach((data) => {
       let time = data.time.slice(11, 16);
+      let date = data.time.slice(0, 10);
+      date = date.split("-").join("&nbsp;");
       messages.push({
         No: data.id,
         user_id: data.user_id,
         time: time,
+        date: date,
         text: data.content,
         file: data.file,
       });

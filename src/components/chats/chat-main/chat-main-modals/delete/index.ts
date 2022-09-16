@@ -7,9 +7,9 @@ export function deleteChatModal() {
   const deleteModal = new ChatsDeleteChat({
     button: new Button({
       name: "deleteChat",
-      label: "Удалить чат",
+      label: "Удалить навсегда!",
       type: "submit",
-      class: "submit-button small",
+      class: "submit-button",
     }),
   });
 

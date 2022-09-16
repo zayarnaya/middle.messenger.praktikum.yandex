@@ -34,7 +34,6 @@ export function buildRightPanel() {
     id: "new-chat",
     events: {
       click: () => createChatModal(),
-      //click: () => alert("НУ КЛИК"),
     },
   });
 
