@@ -41,7 +41,7 @@ export class ChatsChangeAvatar extends Block<ChatsChangeAvatar> {
       },
     };
 
-    this.eventTarget = "form";
+    this.eventTarget = "form#changeChatAvatarForm";
   }
 
   public render() {

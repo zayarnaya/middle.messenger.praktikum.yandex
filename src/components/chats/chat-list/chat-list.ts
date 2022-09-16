@@ -81,7 +81,7 @@ export function buildLeftPanel() {
                 ? `${filePrefix}${chat.avatar}`
                 : defaulAvatar,
               name: `${chat.last_message.user.first_name} ${chat.last_message.user.second_name}`,
-              lastMessage: chat.last_message.content,
+              lastMessage: chat.last_message.content.replace(/(<([^>]+)>)/gm, " "),
               timestamp: timestamp.slice(11, 16),
               unread: chat.unread_count,
               title: chat.title,
