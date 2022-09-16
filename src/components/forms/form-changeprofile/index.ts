@@ -13,11 +13,11 @@ import { defaulAvatar, filePrefix } from "../../../consts";
 
 export function changeProfilePage() {
   type Inputs = {
-    name: string,
-    type: string,
-    label: string,
-    required: boolean,
-    value: string,
+    name: string;
+    type: string;
+    label: string;
+    required: boolean;
+    value: string;
   };
   let inputDummy: Record<string, Inputs> = data.input.change_profile;
   Object.entries(inputDummy).forEach((entry) => {
@@ -27,22 +27,8 @@ export function changeProfilePage() {
       let surname = localStorage.getItem("user_second_name");
       newvalue = `${name} ${surname}`;
     }
-      entry[1].value = newvalue;
-
+    entry[1].value = newvalue;
   });
-
-  // let profileAvatar: string;
-  // let avatarRaw: string | null = localStorage.getItem(`user_avatar`)
-  //   ? localStorage.getItem(`user_avatar`)
-  //   : "";
-
-  // if (avatarRaw == "null") {
-  //   profileAvatar = defaulAvatar;
-  // } else if (avatarRaw != "null") {
-  //   profileAvatar = `${filePrefix}${avatarRaw}`;
-  // } else if (avatarRaw.length == 0) {
-  //   profileAvatar = defaulAvatar;
-  // }
 
   let inputs: Inputs[] = Object.values(inputDummy);
   let theChildren: MultiListProps = {};
@@ -72,7 +58,7 @@ export function changeProfilePage() {
       name: "submit-avatar",
       label: "Отправить",
       type: "submit",
-      class: "submit-button small"
+      class: "submit-button small",
     }),
   });
 

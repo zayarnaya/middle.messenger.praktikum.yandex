@@ -45,14 +45,13 @@ export function buildLeftPanel() {
               name: "search",
               type: "search",
               label: "Искать чат",
-              placeholder: "Поиск"
+              placeholder: "Поиск",
             }),
             button: new Button({
               class: "search-submit-button",
-
             }),
             classname: "chat-list__search",
-          })
+          }),
         },
         "chat-list__menu"
       ),
@@ -60,20 +59,16 @@ export function buildLeftPanel() {
     },
     "chat-list"
   );
-  if(!!document.querySelector(".chat-list-wrapper")){
+  if (!!document.querySelector(".chat-list-wrapper")) {
     render(".chat-list-wrapper", panel);
   }
 
-  //store.on(StoreEvents.Updated, () => {
-    store.on(StoreEvents.ChatListSet, () => {
+  store.on(StoreEvents.ChatListSet, () => {
     setTimeout(() => {
       let chats: ChatsProps[] = store.getState().chatlist as ChatsProps[];
       if (!!isEmpty(chats)) {
         return;
-      } else if (
-        !!storedChatList &&
-        !!isEqualArrays(chats, storedChatList)
-      ) {
+      } else if (!!storedChatList && !!isEqualArrays(chats, storedChatList)) {
         return;
       } else {
         let theChildren: Record<string, ChatListItem> = {};
@@ -108,18 +103,21 @@ export function buildLeftPanel() {
           "ul",
           "chat-list__list_unmarked"
         );
-        if (document.location.pathname.includes("messenger") && !!document.querySelector(".chat-list__list")) {
+        if (
+          document.location.pathname.includes("messenger") &&
+          !!document.querySelector(".chat-list__list")
+        ) {
           render(".chat-list__list", newList);
         }
 
         const state: StoreState = store.getState();
 
-        const active: number = state.initChat
-          ? state.initChat.id
-          : null;
+        const active: number = state.initChat ? state.initChat.id : null;
         if (!!active) {
-          const activeItem: HTMLElement = document.getElementById(`${active}`) as HTMLElement;
-          if(!!activeItem) { 
+          const activeItem: HTMLElement = document.getElementById(
+            `${active}`
+          ) as HTMLElement;
+          if (!!activeItem) {
             activeItem.classList.add("highlight");
           }
         }

@@ -25,7 +25,6 @@ export type StoreState = {
 }
 
 class Store extends EventBus {
-  //private state: PlainObject = {};
   private state: PlainObject | StoreState = {};
 
   public getState() {

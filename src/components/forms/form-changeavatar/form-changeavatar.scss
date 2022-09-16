@@ -1,66 +1,24 @@
-// .profile__change-avatar {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     width: 130px;
-//     height: 130px;
-//     background-color: rgba(0, 0, 0, 0);
-//     color: rgba(0, 0, 0, 0);
-//     cursor: pointer;
-//     position: absolute;
-//     z-index: 1010;
-//     border-radius: 50%;
-// }
-
-// .profile__change-avatar:hover {
-//     display: flex;
-//     cursor: pointer;
-//     background-color: rgba(0, 0, 0, 0.5);
-//     color: white;
-// }
-
-// label[for="avatar"] {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     width: 130px;
-//     height: 130px;
-//     background-color: rgba(0, 0, 0, 0);
-//     color: rgba(0, 0, 0, 0);
-//     cursor: pointer;
-//     position: absolute;
-//     z-index: 1010;
-//     border-radius: 50%;
-// }
-
-// #changeAvatar .input-row label:hover {
-//     display: flex;
-//     cursor: pointer;
-//     background-color: rgba(0, 0, 0, 0.5);
-//     color: white;
-// }
-
 #changeAvatar {
-    height: 250px;
+  height: 250px;
 }
 
 .hidden-input {
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    position: absolute;
-    z-index: -10;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  position: absolute;
+  z-index: -10;
 }
 
 label.image-file {
-    width: 37px;
-    height: 37px;
-    cursor: pointer;
-    background-image: url("../../../files/file-image-solid-gray.png");
-    background-repeat: no-repeat;
-    background-position-x: center;
-    background-position-y: center;
-    background-size: contain;
-    margin-top: 20px;
-margin-bottom: 10px;
+  width: 37px;
+  height: 37px;
+  cursor: pointer;
+  background-image: url("../../../files/file-image-solid-gray.png");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-size: contain;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }

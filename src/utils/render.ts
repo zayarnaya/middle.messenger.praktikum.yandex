@@ -47,7 +47,6 @@ export function pageRouter() {
     });
 
   const userID = localStorage.getItem("user_id");
-  console.log(userID);
   store.on(StoreEvents.NewLocSet, () => {
     const newloc = store.getState().newLoc;
     if (!!newloc && loc != newloc) {
@@ -70,12 +69,12 @@ export function pageRouter() {
     .use("/logout", loggingOut)
     .use("/500", error500)
     .use("/404", error404)
-    //.use(loc, error404)
+    .use(loc, error404)
 
     .start();
 
   //проверка на отсутствие данных о юзере, если гетЮзер выдает ошибку
-  // if (!userID && loc != "/" && loc != "/sign-up") {
-  //   router.go("/");
-  // }
+  if (!userID && loc != "/" && loc != "/sign-up") {
+    router.go("/");
+  }
 }

@@ -8,7 +8,7 @@ import chatMainModalCreate from "./chat-main-modal-create.hbs";
 
 export class ChatsCreateChat extends Block<ChatsCreateChat> {
   public constructor(props: ChatsModalProps, classname?: string) {
-    super("div", props, false,  classname? classname : "modal");
+    super("div", props, false, classname ? classname : "modal");
     this.events = {
       submit: function (e: Event) {
         e.preventDefault();
@@ -25,12 +25,9 @@ export class ChatsCreateChat extends Block<ChatsCreateChat> {
           if (response.status == 200) {
             resultField.textContent =
               "Чат успешно создан! " + response.response;
-              const id = JSON.parse(response.response).id;
-              router.use(`/messenger/#${id}`, chatsPage)
-              .go(`/messenger/#${id}`);
-              //router.go(`/messenger/#${id}`);
-              //chatsPage();
-              store.set("chat", inputData);
+            const id = JSON.parse(response.response).id;
+            router.use(`/messenger/#${id}`, chatsPage).go(`/messenger/#${id}`);
+            store.set("chat", inputData);
           } else {
             resultField.textContent =
               "Что-то не получилось! " + response.response;

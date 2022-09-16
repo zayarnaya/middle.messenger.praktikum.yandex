@@ -1,12 +1,6 @@
 import { assert } from "chai";
 import { Block } from "./block";
 
-// const { JSDOM } = require("jsdom");
-
-// const dom = new JSDOM('<div class="messenger-wrapper"><div>', { url: 'http://localhost' });
-// global.window = dom.window;
-// global.document = dom.window.document;
-
 require("jsdom-global")('<div class="messenger-wrapper"><div>', { url: 'http://localhost' });
 
 describe("Block", () => {

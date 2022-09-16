@@ -57,7 +57,4 @@ export function sendMessage(
     ]);
   });
 
-  // socket.addEventListener("error", (event) => {
-  //   console.log("Ошибка", event.message);
-  // });
 }
