@@ -22,13 +22,17 @@ export class FormChangeAvatar extends Form {
       submit: async (e: Event) => {
         e.preventDefault();
         const submitMessage: HTMLElement = document.querySelector(
-          ".submit-message"
+          ".result-message"
         ) as HTMLElement;
-        const form: HTMLFormElement = document.querySelector(
-          "form.form__changeAvatar"
-        ) as HTMLFormElement;
+        const input: HTMLInputElement = document.querySelector(
+          "#avatar"
+        ) as HTMLInputElement;
         const submitChange = new AvatarController();
-        let formdata = new FormData(form);
+        const file = input.files ? input.files[0] : null;
+        let formdata = new FormData();
+        if (!!file) {
+          formdata.append("avatar", file);
+        }
 
         submitChange.change(formdata).then((response: XMLHttpRequest) => {
           if (response.status == 200) {
@@ -49,13 +53,13 @@ export class FormChangeAvatar extends Form {
     store.on(StoreEvents.Updated, () => {
       const user: UserProps = store.getState().user as UserProps;
       const children: {
-        avatar: ImageAvatar,
-        input: InputField,
-        button: Button,
+        avatar: ImageAvatar;
+        input: InputField;
+        button: Button;
       } = this.children as {
-        avatar: ImageAvatar,
-        input: InputField,
-        button: Button,
+        avatar: ImageAvatar;
+        input: InputField;
+        button: Button;
       };
       children.avatar.setProps({
         avatar: `${filePrefix}${user.avatar}`,

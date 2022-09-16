@@ -9,6 +9,7 @@ import { chatsPage } from "../components/chats";
 import { chatIDfromLocation, router } from "../consts";
 import { UserAuthController } from "./controllers/userAuthController";
 import store, { StoreEvents } from "./store";
+import { error500 } from "../static_pages/page500";
 
 export function pageRouter() {
   const loc = document.location.pathname;
@@ -67,7 +68,9 @@ export function pageRouter() {
     .use("/settings#change", changeProfilePage)
     .use("/settings#pass", changePassPage)
     .use("/logout", loggingOut)
-    .use(loc, error404)
+    .use("/500", error500)
+    .use("/404", error404)
+    //.use(loc, error404)
 
     .start();
 

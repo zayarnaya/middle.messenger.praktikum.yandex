@@ -28,7 +28,7 @@ export class ChatsController {
   public async seekChats(data: {
     title: string,
   }) {
-    return request.get(APIurls.CHATS, {data: JSON.stringify(data)});
+    return request.get(APIurls.CHATS, { data: data });
   }
 
   public async getChatUsers(chatID: number) {

@@ -25,7 +25,7 @@ export class FormChangeAvatar extends Form {
           ".submit-message"
         ) as HTMLElement;
         const input: HTMLInputElement = document.querySelector(
-          "#changeChatAvatar"
+          "#avatar"
         ) as HTMLInputElement;
         const file = input.files ? input.files[0] : null;
         const submitChange = new ChatsController();
@@ -33,7 +33,7 @@ export class FormChangeAvatar extends Form {
         formdata.append("chatId", chatID);
         if (!!file) {
           formdata.append("avatar", file);
-        }
+        };
 
         submitChange.changeChatAvatar(formdata).then((response: XMLHttpRequest) => {
           if (response.status == 200) {
@@ -48,7 +48,7 @@ export class FormChangeAvatar extends Form {
       },
     };
 
-    this.eventTarget = "form.form__chat__changeAvatar";
+    this.eventTarget = "changeChatAvatar";
 
     store.on(StoreEvents.Updated, () => {
       const chat: ChatsProps = store.getState().chat as ChatsProps;

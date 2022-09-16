@@ -54,14 +54,14 @@ export class ChangeUserProfile extends Form {
         submitChange.changeProfile(sendData).then((response: XMLHttpRequest) => {
 
           if (response.status == 200) {
-            let adata = JSON.parse(response.response);
             submitMessage.textContent = "Изменения сохранены";
+            let adata = JSON.parse(response.response);
             store.set("user", adata);
             Object.entries(adata).forEach((entry) => {
               localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
             });
           } else {
-            submitMessage.textContent = "Что-то не так!" + response.response;
+            submitMessage.textContent = "Что-то не так! Сервер говорит " + response.response;
           }
         });
       },

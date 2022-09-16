@@ -1,4 +1,4 @@
-import Handlebars from "handlebars";
+import Handlebars from "handlebars/dist/cjs/handlebars";
 import multiList from "./multi-list.hbs";
 import { Block } from "../../utils/block";
 import { MultiListProps } from "../../types";

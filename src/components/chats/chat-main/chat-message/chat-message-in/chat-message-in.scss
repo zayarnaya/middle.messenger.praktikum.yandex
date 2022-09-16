@@ -1,0 +1,36 @@
+@import "./../../../../../variables";
+
+.message-in-outer {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-left: 50px;
+}
+
+.message-in-wrapper {
+    display: flex;
+    max-width: 50%;
+
+    .avatar-in{
+        display: flex;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+    }
+
+    .message-inner {
+        display: flex;
+        align-items: flex-end;
+        background-color: $color-messages-in-back;
+        border-radius: 10px;
+        border-top-left-radius: 0;
+    }
+
+    .date-time time {
+        color: $color-midgray;
+        margin-left: 20px;
+    }
+
+
+}

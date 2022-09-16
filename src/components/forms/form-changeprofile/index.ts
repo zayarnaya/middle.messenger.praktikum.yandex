@@ -27,9 +27,8 @@ export function changeProfilePage() {
       let surname = localStorage.getItem("user_second_name");
       newvalue = `${name} ${surname}`;
     }
-    if(!!entry[1].value) {
       entry[1].value = newvalue;
-    }
+
   });
 
   // let profileAvatar: string;

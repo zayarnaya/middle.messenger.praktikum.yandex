@@ -1,13 +1,20 @@
 const path = require("path");
 
 module.exports = {
+  mode: "production",
   entry: "./src/index.ts",
 
   devServer: {
     static: {
       directory: path.join(__dirname, "dist"),
     },
+
+    client: {
+      overlay: false,
+    },
+
     port: 3000,
+    historyApiFallback: true,
   },
 
   module: {
@@ -43,13 +50,14 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".js"],
 
-    fallback: {
-      fs: false,
-    },
+    // fallback: {
+    //   fs: false,
+    // },
   },
 
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
 };
