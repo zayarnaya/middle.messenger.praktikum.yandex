@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   entry: "./src/index.ts",
 
   devServer: {
@@ -56,9 +56,12 @@ module.exports = {
 
     ],
   },
-
   resolve: {
     extensions: [".ts", ".js"],
+
+    //  fallback: {
+    //    fs: false,
+    //  },
   },
 
   output: {
