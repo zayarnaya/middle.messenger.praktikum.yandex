@@ -17,14 +17,12 @@ export class loginFormAll extends Form {
           ".submit-message"
         ) as HTMLElement;
         if (!this.isValid) {
-          const inputlist = document.querySelectorAll("input");
-          console.log(inputlist.length);
-          let truecounts = 0;
-          for(let i = 0; i < inputlist.length; i++) {
-            if(inputValidation(inputlist[i], true) == "true") {
-              truecounts += 1;
-            }
-          };
+          const inputlist = Array.from(document.querySelectorAll("input"));
+
+          const truecounts = inputlist
+            .map(input => inputValidation(input, true))
+            .filter(result => result === "true").length;
+
           if(truecounts == inputlist.length) {
             this.isValid = true;
           } else if(truecounts < inputlist.length) {

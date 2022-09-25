@@ -7,9 +7,6 @@ const myport =  process.env.PORT || 3000;
 const antidos = require("./antidos.js");
 app.use(
   antidos({
-    //maxTime: 100,
-    //maxCount: 10,
-    //     hardMode: 5
     consoleDebug: false,
   })
 );

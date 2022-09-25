@@ -14,7 +14,7 @@ import { defaulAvatar, filePrefix } from "../../../consts";
 export function changeProfilePage() {
   type Inputs = {
     name: string;
-    type: string;
+    type: "text" | "email" | "tel" | "file" | "password" | "search";
     label: string;
     required: boolean;
     value: string;
