@@ -28,7 +28,7 @@
   "scripts": {
     "dev": "npx webpack serve --server-type http  --config webpack.dev.config.js",
     "build": "npx webpack --config webpack.prod.config.js",
-    "start": "npx webpack && node server.js",
+    "start": "npx webpack && node server.js  --config webpack.prod.config.js",
     "test": "mocha"
   },
   "pre-commit": [
