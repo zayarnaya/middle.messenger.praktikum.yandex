@@ -1,10 +1,10 @@
 import { UserProps } from "../APItypes";
 import { wssPrefix } from "../consts";
 import { makeMessage } from "./makeMessage";
-import store from "./store";
+import store, { StoreState } from "./store";
 
 export function getOldMessages(chatID: number, token: string) {
-  let state = store.getState();
+  let state: StoreState = store.getState() as StoreState;
   let userID = localStorage.getItem("user_id");
 
   let chatusersRaw: UserProps[] = state[`chat${chatID}_users`] as UserProps[];
@@ -40,10 +40,13 @@ export function getOldMessages(chatID: number, token: string) {
     let cdata = JSON.parse(event.data);
     cdata.forEach((data) => {
       let time = data.time.slice(11, 16);
+      let date = data.time.slice(0, 10);
+      date = date.split("-").join("&nbsp;");
       messages.push({
         No: data.id,
         user_id: data.user_id,
         time: time,
+        date: date,
         text: data.content,
         file: data.file,
       });

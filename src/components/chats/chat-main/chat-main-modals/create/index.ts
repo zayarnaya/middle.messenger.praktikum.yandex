@@ -15,6 +15,7 @@ export function createChatModal() {
       name: "createChatSubmit",
       label: "Создать",
       type: "submit",
+      class: "submit-button",
     }),
   });
 

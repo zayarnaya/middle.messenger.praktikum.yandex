@@ -9,7 +9,7 @@ export class Button extends Block<Button> {
     events?: Events,
     eventTarget?: string
   ) {
-    super("div", props, false);
+    super("div", props, false, "center-center");
     if (!!events) {
       this.events = events;
     }

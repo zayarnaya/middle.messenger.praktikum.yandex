@@ -28,7 +28,7 @@ export class UserAuthController {
   }
 
   public async logOut() {
-    request.post(APIurls.LOGOUT, {}).then((response) => {
+    request.post(APIurls.LOGOUT, {}).then((response: XMLHttpRequest) => {
       if (response.status == 200) {
         localStorage.clear();
         store.clear();

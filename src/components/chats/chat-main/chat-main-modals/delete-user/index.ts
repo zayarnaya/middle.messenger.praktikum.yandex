@@ -10,7 +10,7 @@ export function modalUserRemove() {
     button: new Button({
       name: "removeUser",
       label: "удалить выбранных пользователей",
-      class: "removeButton",
+      class: "removeButton submit-button",
       type: "button",
     }),
   });
@@ -28,7 +28,7 @@ export function modalUserRemove() {
 
   const getUsers = new ChatsController();
   let id = chatIDfromLocation();
-  getUsers.getChatUsers(id).then((response) => {
+  getUsers.getChatUsers(id).then((response: XMLHttpRequest) => {
     if (response.status == 200) {
       let adata: UserProps[] = JSON.parse(response.response);
       let ul = document.createElement("ul");

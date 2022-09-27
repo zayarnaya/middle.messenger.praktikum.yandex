@@ -1,0 +1,63 @@
+@import "./../../../../../variables";
+
+.message-in-outer {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-bottom: 50px;
+
+    .nickname {
+        font-weight: bolder;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+}
+
+.message-in-wrapper {
+    display: flex;
+    max-width: 50%;
+    align-items: flex-end;
+
+    .avatar-in{
+        display: flex;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .message-inner {
+        display: flex;
+        align-items: flex-end;
+        background-color: $color-messages-in-back;
+        border-radius: 10px;
+        border-top-left-radius: 0;
+        width: fit-content;
+        max-width: calc(100% - 65px);
+        padding: 5px;
+        margin-left: 5px;
+    }
+
+    .message-text {
+        padding: 5px;
+    }
+
+    .date-time {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .date-time time {
+        color: $color-midgray;
+        padding-left: 20px;
+        font-size: 9px;
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+}

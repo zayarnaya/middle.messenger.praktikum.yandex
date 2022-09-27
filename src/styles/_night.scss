@@ -1,0 +1,14 @@
+.night {
+    background-color: black;
+    color: $color-midgray;
+
+    div {
+        background-color: black !important;
+        color: $color-midgray !important;
+    }
+
+    li,
+    button {
+        color: $color-midgray !important;
+    }
+}

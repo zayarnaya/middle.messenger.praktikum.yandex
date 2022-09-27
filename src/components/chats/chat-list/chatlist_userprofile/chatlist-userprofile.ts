@@ -25,7 +25,7 @@ export class ChatlistUserprofile extends Block<ChatlistUserprofile> {
     this.eventTarget = "a";
 
     const getUserInfo = new UserAuthController();
-    getUserInfo.getUser().then((response) => {
+    getUserInfo.getUser().then((response: XMLHttpRequest) => {
       if (response.status == 200) {
         let adata = JSON.parse(response.response);
         Object.entries(adata).forEach((entry) => {

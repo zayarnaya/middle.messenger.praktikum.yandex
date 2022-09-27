@@ -28,24 +28,40 @@ export class ChangeUserProfile extends Form {
         let inputs: HTMLInputElement[] = Array.from(inputsRaw);
 
         let submitData: UserProps | {} = {};
-        inputs.forEach((input) => {
+        inputs.forEach((input: HTMLInputElement) => {
           let name = input.id;
           let val = input.value;
           submitData[name] = val;
         });
 
+        let sendData: {
+          first_name: string;
+          second_name: string;
+          display_name: string;
+          login: string;
+          email: string;
+          phone: string;
+        } = submitData as {
+          first_name: string;
+          second_name: string;
+          display_name: string;
+          login: string;
+          email: string;
+          phone: string;
+        };
+
         const submitChange = new UserProfileController();
-        submitChange.changeProfile(submitData).then((response) => {
+        submitChange.changeProfile(sendData).then((response: XMLHttpRequest) => {
 
           if (response.status == 200) {
-            let adata = JSON.parse(response.response);
             submitMessage.textContent = "Изменения сохранены";
+            let adata = JSON.parse(response.response);
             store.set("user", adata);
             Object.entries(adata).forEach((entry) => {
               localStorage.setItem(`user_${entry[0]}`, entry[1] as string);
             });
           } else {
-            submitMessage.textContent = "Что-то не так!" + response.response;
+            submitMessage.textContent = "Что-то не так! Сервер говорит " + response.response;
           }
         });
       },

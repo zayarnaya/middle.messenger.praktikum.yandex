@@ -137,6 +137,10 @@ export function buildRightPanel() {
     render(".chat-main-wrapper", panel);
   }
 
+  let isNew = document
+    .querySelector(".chat-main__inner")
+    .innerHTML.includes("chat-placeholder");
+
   store.on(StoreEvents.Updated, () => {
     const newID = chatIDfromLocation();
     //Если не указан конкретный чат, сбрасываем аватарку и название
@@ -149,7 +153,9 @@ export function buildRightPanel() {
 
     const chatList: any[] = store.getState().chatlist as any[];
     //Проверка на существование вызванного чата в списке чатов
-    const chatField: HTMLElement = document.querySelector(".chat-main__inner") as HTMLElement;
+    const chatField: HTMLElement = document.querySelector(
+      ".chat-main__inner"
+    ) as HTMLElement;
     if (!!chatList) {
       let chatIDlist: number[] = [];
       chatList.forEach((chat) => {
@@ -161,9 +167,17 @@ export function buildRightPanel() {
         !chatIDlist.includes(newID) &&
         !!chatField
       ) {
-        chatField.textContent =
-          "";
-      } 
+        chatField.textContent = "";
+      }
+    }
+
+    if (!!newID) {
+      const active: HTMLElement = document.getElementById(
+        `${newID}`
+      ) as HTMLElement;
+      if (!!isNew && !!active) {
+        active.click();
+      }
     }
 
     const chat: ChatsProps = store.getState().chat as ChatsProps;
@@ -201,15 +215,11 @@ export function buildRightPanel() {
       innerField.textContent = ""; //сбрасываем сообщения
     }
 
-    let isFull = document
-      .querySelector(".chat-main__inner")
-      .innerHTML.includes("</div>");
-
     if (
       thisChat.id == newID &&
       !!thisChat.token &&
       !!localStorage.getItem("user_id") &&
-      !isFull
+      !!isNew
     ) {
       if (oldMsgCounter == 0) {
         getOldMessages(thisChat.id, thisChat.token);

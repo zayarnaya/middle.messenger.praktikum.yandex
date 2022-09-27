@@ -1,6 +1,8 @@
 import { assert } from "chai";
 import { Router } from "./router";
 
+require("jsdom-global")('<div class="messenger-wrapper"><div>', { url: 'http://localhost' });
+
 const router = new Router();
 
 function firstPage() {

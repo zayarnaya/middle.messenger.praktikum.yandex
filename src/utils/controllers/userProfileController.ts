@@ -16,6 +16,6 @@ export class UserProfileController {
   }
 
   public async changePass(data: { oldPassword: string; newPassword: string }) {
-    return request.put(APIurls.CHANGEPASS, { data: data });
+    return request.put(APIurls.CHANGEPASS, { data: JSON.stringify(data) });
   }
 }

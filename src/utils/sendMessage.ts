@@ -35,7 +35,8 @@ export function sendMessage(
     let correction = offset / 60;
 
     let time = cdata.time.slice(11, 16);
-
+    let date = cdata.time.slice(0, 10);
+    date = date.split("-").join("&nbsp;");
     let correctHour = Number(time.slice(0, 2)) - correction;
     if (correctHour >= 24) {
       correctHour = correctHour - 24;
@@ -49,13 +50,11 @@ export function sendMessage(
         No: cdata.id,
         user_id: cdata.user_id,
         time: correctTime,
+        date: date,
         text: cdata.content,
         file: cdata.file,
       },
     ]);
   });
 
-  socket.addEventListener("error", (event) => {
-    console.log("Ошибка", event.message);
-  });
 }

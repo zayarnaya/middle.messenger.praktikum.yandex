@@ -1,6 +1,8 @@
 import { assert } from "chai";
 import { Block } from "./block";
 
+require("jsdom-global")('<div class="messenger-wrapper"><div>', { url: 'http://localhost' });
+
 describe("Block", () => {
   type Props = {
     id: string;

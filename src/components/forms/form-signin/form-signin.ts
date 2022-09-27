@@ -25,12 +25,13 @@ export class signinFormAll extends Form {
             ".form-signin"
           ) as HTMLFormElement;
           const formData = new FormData(form);
-          let data: UserProps = {};
+          let data: any = {};
           formData.forEach((value, key) => {
             data[key] = value;
           });
+          const sendData: UserProps = data as UserProps;
 
-          signUp.signUp(data).then((response) => {
+          signUp.signUp(sendData).then((response: XMLHttpRequest) => {
             if (response.status == 200) {
               router.go("/messenger");
             }

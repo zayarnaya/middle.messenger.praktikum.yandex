@@ -4,6 +4,7 @@ import { FormProps } from "../../../types";
 import "./form-login.scss";
 import { UserAuthController } from "../../../utils/controllers/userAuthController";
 import { router } from "../../../consts";
+import { inputValidation } from "../../../utils/validator/input-validation";
 
 export class loginFormAll extends Form {
   public constructor(propsAndChildren: FormProps) {
@@ -16,21 +17,38 @@ export class loginFormAll extends Form {
           ".submit-message"
         ) as HTMLElement;
         if (!this.isValid) {
-          submitMessage.textContent = "Заполните все нужные поля";
-        } else if (!!this.isValid) {
+          const inputlist = Array.from(document.querySelectorAll("input"));
+
+          const truecounts = inputlist
+            .map(input => inputValidation(input, true))
+            .filter(result => result === "true").length;
+
+          if(truecounts == inputlist.length) {
+            this.isValid = true;
+          } else if(truecounts < inputlist.length) {
+            submitMessage.textContent = "Заполните все нужные поля";
+            return;
+          }          
+        }; 
+        
+        if (!!this.isValid) {
           const login = new UserAuthController();
           const form: HTMLFormElement = document.querySelector(
             ".form-login"
           ) as HTMLFormElement;
           const formData = new FormData(form);
-          let data: {
-            login: string;
-            password: string;
-          } = {};
+          let data: any = {};
           formData.forEach((value, key) => {
             data[key] = value;
           });
-          login.login(data).then((response) => {
+          let sendData: {
+            login: string;
+            password: string;
+          } = data as {
+            login: string;
+            password: string;
+          };
+          login.login(sendData).then((response: XMLHttpRequest) => {
             if (response.status == 200) {
               router.go("/messenger");
             }

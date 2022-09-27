@@ -1,5 +1,6 @@
 import XMLHttpRequest from "xhr2";
-import { Methods } from "../types";
+import { Methods, Options } from "../types";
+import { queryStringify } from "./query-stringify";
 
 class HTTPTransport {
   get = (url: string, options: Options) => {
@@ -101,8 +102,8 @@ describe("HTTPTransport", () => {
         `${prefix}/1`,
         {},
       )
-      .then(({ response }) => {
-        let id = JSON.parse(response).id || null;
+      .then((response: XMLHttpRequest) => {
+        let id = JSON.parse(response.response).id || null;
         if (id === 1) {
           done();
         } else {
@@ -123,8 +124,8 @@ describe("HTTPTransport", () => {
           id: 101
         })},
       )
-      .then(({ response }) => {
-        let id = JSON.parse(response).userId || null;
+      .then((response: XMLHttpRequest) => {
+        let id = JSON.parse(response.response).userId || null;
         if (id === 100) {
           done();
         } else {
@@ -145,8 +146,8 @@ describe("HTTPTransport", () => {
           userId: 102,
         })},
       )
-      .then(({ response }) => {
-        let id = JSON.parse(response).userId || null;
+      .then((response: XMLHttpRequest) => {
+        let id = JSON.parse(response.response).userId || null;
         if (id === 102) {
           done();
         } else {
@@ -162,7 +163,7 @@ describe("HTTPTransport", () => {
         `${prefix}/1`,
         {},
       )
-      .then(({ response }) => {
+      .then((response: XMLHttpRequest) => {
         if(!!response) {
           done();
         } else {

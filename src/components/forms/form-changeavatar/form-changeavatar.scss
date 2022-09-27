@@ -1,0 +1,24 @@
+#changeAvatar {
+  height: 250px;
+}
+
+.hidden-input {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  position: absolute;
+  z-index: -10;
+}
+
+label.image-file {
+  width: 37px;
+  height: 37px;
+  cursor: pointer;
+  background-image: url("../../../files/file-image-solid-gray.png");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-size: contain;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}

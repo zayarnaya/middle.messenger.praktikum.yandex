@@ -28,9 +28,8 @@ export class formChangePass extends Form {
             oldPassword: oldPassField.value,
             newPassword: newPassField.value,
           };
-          let outData = JSON.stringify(sendData);
 
-          changepass.changePass(outData).then((response) => {
+          changepass.changePass(sendData).then((response: XMLHttpRequest) => {
             if (response.status == 200) {
               submitMessage.textContent = "Успешно!";
             } else {

@@ -16,7 +16,7 @@
     height: 720px;
     overflow-x: hidden;
     overflow-y: auto;
-    border-right: 1px solid #eaeaea;
+    border-right: 1px solid $color-moregrey;
     background-color: #fbfbfb;
   }
 
@@ -43,7 +43,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 5px 10px 0px 10px;
     height: 50px;
   }
 
@@ -56,7 +56,6 @@
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
-
   }
 
   .chat-list__avatar img,
@@ -64,7 +63,6 @@
   .chat-main__chat-avatar img {
     width: 100%;
   }
-
 
   .chat-list__profile-block {
     display: flex;
@@ -86,18 +84,20 @@
 
   .chat-list__profile-link {
     display: flex;
-    color: #999;
+    color: $color-midgray;
     text-align: end;
   }
 
   .chat-list__profile-link a {
-    color: #999;
+    color: $color-midgray;
     text-decoration: none;
   }
 
   .chat-list__search {
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
+    padding: 3px 10px 0px 10px;
   }
 
   .chat-list__searchform {
@@ -108,16 +108,15 @@
   .chat-list__searchform input[type="search"] {
     -webkit-appearance: none;
     appearance: none;
-    background-color: #efefef;
+    background-color: $color-lightergrey;
     border-radius: 5px;
-    border-color: #efefef;
+    border-color: $color-lightergrey;
     width: 290px;
     height: 32px;
     font-family: inherit;
     font-size: inherit;
     border: 0;
     padding-left: 5px;
-    margin-bottom: 10px;
   }
 
   .chat-list__searchform-button {
@@ -138,10 +137,18 @@
   .chat-list__hr {
     width: 290px;
     height: 1px;
-    background-color: #eaeaea;
+    background-color: $color-moregrey;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
+  }
+
+  .chat-list__list {
+    padding: 10px;
+  }
+
+  .chat-list__list li {
+    list-style-type: none;
   }
 
   .chat-list__list_unmarked {
@@ -167,7 +174,6 @@
     box-shadow: 0px 0px 2px lightgray;
   }
 
-
   .chat-list-item__main-info {
     display: flex;
     flex-direction: column;
@@ -179,7 +185,7 @@
 
   .chat-list-item__last-message {
     display: flex;
-    color: #999;
+    color: $color-midgray;
     font-size: 12px;
     overflow: hidden;
     white-space: nowrap;
@@ -205,7 +211,7 @@
   }
 
   .chat-list-item__timestamp {
-    color: #999;
+    color: $color-midgray;
     font-size: 9px;
   }
 
@@ -227,13 +233,10 @@
     justify-content: space-between;
     height: 720px;
     width: 100%;
-
   }
 
   .chat-main__inner {
     display: block;
-    padding-left: 60px;
-    padding-right: 40px;
     width: 100%;
     height: 560px;
     overflow-x: hidden;
@@ -266,52 +269,12 @@
     cursor: pointer;
   }
 
-  .chat-main__date {
-    color: #999999;
-    font-size: 12px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .chat-main__daily-messages {
-    list-style-type: none;
-    padding-left: 5px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .chat-main__message {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .chat-main__message-wrap {
-    display: flex;
-    border-radius: 5px;
-    width: 100%;
-    padding: 5px;
-  }
-
-  .message-incoming {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .message-outgoing {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-
-
   .chat-main__hr {
     width: 700px;
     margin-left: auto;
     margin-right: auto;
     height: 1px;
-    background-color: #eaeaea;
+    background-color: $color-moregrey;
     margin-top: 10px;
     margin-bottom: 20px;
   }
@@ -328,7 +291,7 @@
   }
 
   .chat-main__message-form input[type="text"] {
-    width: 600px;
+    width: 640px;
   }
 
   .chat-main__message-form input[type="file"],
@@ -356,7 +319,7 @@
     -webkit-appearance: none;
     appearance: none;
     display: flex;
-    background-color: #efefef;
+    background-color: $color-lightergrey;
     border: 0;
     border-radius: 5px;
   }
@@ -367,10 +330,10 @@
     width: max-content;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0px 0px 5px 0px #999;
+    box-shadow: 0px 0px 5px 0px $color-midgray;
     position: absolute;
     top: 100px;
-    right: 150px;
+    left: 940px;
     z-index: 1010;
     background-color: white;
   }
@@ -407,7 +370,7 @@
   }
 
   .forDelete {
-    background-color: #999999;
+    background-color: $color-midgray;
   }
 
   .forDeletion {
@@ -416,43 +379,4 @@
   .forDeletion .users {
     cursor: pointer;
   }
-
-  .outer-out {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-end;
-    margin-bottom: 10px;
-  }
-
-  .inner-out {
-    display: flex;
-    max-width: 70%;
-    justify-content: flex-start;
-    background-color: #999;
-    padding: 10px;
-    border: 1px solid gray;
-    border-radius: 10px;
-
-  }
-
-  .outer-in {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
-    margin-bottom: 10px;
-
-  }
-
-  .inner-in {
-    display: flex;
-    max-width: 70%;
-    justify-content: flex-end;
-    background-color: lightcyan;
-    padding: 10px;
-    border: 1px solid gray;
-    border-radius: 10px;
-  }
-
 }

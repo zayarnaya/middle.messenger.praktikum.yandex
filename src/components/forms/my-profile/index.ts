@@ -6,7 +6,7 @@ import { ProfChar } from "../../profile-chars/profile-char/profile-char";
 import { layoutWideForm } from "../../../layouts/wide-form/wide-form";
 import { MultiList } from "../../multi-list/multi-list";
 import "./my-profile.scss";
-import { ProfCharProps } from "../../../types";
+import { ProfCharProps, MyUserProfileProps } from "../../../types";
 import { ProfileLink } from "./profile-links/profile-link";
 import { defaulAvatar, filePrefix, router } from "../../../consts";
 import { logOut } from "../../../utils/logout";
@@ -67,7 +67,7 @@ export function profilePage() {
   render(".wrapper-all-center", form);
 
   let getuser = new UserAuthController();
-  getuser.getUser().then((response) => {
+  getuser.getUser().then((response: XMLHttpRequest) => {
     if (response.status == 200) {
       let adata = JSON.parse(response.response);
       store.set("user", adata);
@@ -87,12 +87,13 @@ export function profilePage() {
       ? user.display_name
       : `${user.first_name} ${user.second_name}`;
 
-    form.children.avatar.setProps({
+    const children: MyUserProfileProps = form.children as MyUserProfileProps;
+      children.avatar.setProps({
       avatar: newAvatar,
       name: nickname,
     });
 
-    let fields = form.children.charList.children;
+    let fields = children.charList.children;
 
     Object.values(fields).forEach((value) => {
       let id = value.props.id;

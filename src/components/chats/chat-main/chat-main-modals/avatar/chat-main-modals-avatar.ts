@@ -4,11 +4,11 @@ import { Block } from "../../../../../utils/block";
 import { ChatsController } from "../../../../../utils/controllers/chatsController";
 import store from "../../../../../utils/store";
 import { buildLeftPanel } from "../../../chat-list/chat-list";
-import chatMainModalCreate from "./chat-main-modal-avatar.hbs";
+import chatMainModalAvatar from "./chat-main-modal-avatar.hbs";
 
 export class ChatsChangeAvatar extends Block<ChatsChangeAvatar> {
   public constructor(props: ChatsModalProps, classname?: string) {
-    super("div", props, false, (classname = "modal"));
+    super("div", props, false, classname? classname : "modal");
     this.events = {
       submit: function (e: Event) {
         e.preventDefault();
@@ -27,7 +27,7 @@ export class ChatsChangeAvatar extends Block<ChatsChangeAvatar> {
         }
 
         const submit = new ChatsController();
-        submit.changeChatAvatar(formdata).then((response) => {
+        submit.changeChatAvatar(formdata).then((response: XMLHttpRequest) => {
           if (response.status == 200) {
             let adata = JSON.parse(response.response);
             buildLeftPanel();
@@ -41,10 +41,10 @@ export class ChatsChangeAvatar extends Block<ChatsChangeAvatar> {
       },
     };
 
-    this.eventTarget = "form";
+    this.eventTarget = "form#changeChatAvatarForm";
   }
 
   public render() {
-    return this.compile(chatMainModalCreate, this.props);
+    return this.compile(chatMainModalAvatar, this.props);
   }
 }

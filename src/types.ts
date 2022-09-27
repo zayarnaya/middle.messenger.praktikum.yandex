@@ -2,10 +2,7 @@ import { Button } from "./components/buttons/button-submit/button";
 import { MultiList } from "./components/multi-list/multi-list";
 import { ChatListMenu } from "./components/chats/chat-list/chat-list-menu/chat-list-menu";
 import { ChatlistUserprofile } from "./components/chats/chat-list/chatlist_userprofile/chatlist-userprofile";
-import { ChatMessageIn } from "./components/chats/chat-main/chat-message/chat-message-in/chat-message-in";
-import { ChatMessageOut } from "./components/chats/chat-main/chat-message/chat-message-out/chat-message-out";
 import { ChatsMenu } from "./components/chats/chat-main/chat-main-menu/chat-main-menu";
-import { ChatsInnerField } from "./components/chats/chat-main/chat-main-inner/chat-main-inner";
 import { FormMessage } from "./components/forms/form-message/form-message";
 import { InputField } from "./components/input/input-field";
 import { AvatarChange } from "./components/avatars/change-avatar/change-avatar";
@@ -13,10 +10,10 @@ import { ProfAvatar } from "./components/avatars/profile_avatar/profile-avatar";
 import { ProfChar } from "./components/profile-chars/profile-char/profile-char";
 import { ChatListItem } from "./components/chats/chat-list/chatlist-item/chatlist-item";
 import { MenuItem } from "./components/chats/chat-main/chat-main-menu/menu-items/menu-item";
-import { AvatarChangeImg } from "./components/avatars/change-avatar/avatar-img/avatar-img";
 import { ProfileLink } from "./components/forms/my-profile/profile-links/profile-link";
 import { ImageAvatar } from "./components/avatars/img-avatar/img-avatar";
-import { ChatAvatar } from "./components/avatars/chat-avatar/chat-avatar";
+import { SearchForm } from "./components/forms/form-search/form-search";
+
 
 export enum Methods {
   GET = "GET",
@@ -68,11 +65,12 @@ export type AvatarProps = {
   name?: string;
 };
 
+
 export type ChangeAvatarProps = {
-  avatar: AvatarChangeImg;
   input?: InputField;
   button?: Button;
 };
+
 
 export type AvatarImgProps = {
   avatar: string;
@@ -104,10 +102,11 @@ export type ProfCharProps = {
 };
 
 export type ChatMessageProps = {
-  avatar: string;
-  name: string;
-  message: string | HTMLElement;
-  time: string;
+  avatar?: string;
+  nickname?: string;
+  message?: string | HTMLElement;
+  time?: string;
+  date?: string;
 };
 
 export type ErrorProps = {
@@ -123,6 +122,7 @@ export type MultiListProps = Record<
 
 export type ChatListMenuProps = {
   chatuserprofile: ChatlistUserprofile;
+  formsearch: SearchForm;
 };
 
 export type ChatListLeftPanelProps = {
@@ -147,15 +147,8 @@ export type ChatListItemProps = {
   chatID?: number;
 };
 
-export type ChatsInnerFieldProps = {
-  date: string;
-  incoming: ChatMessageIn;
-  outgoing: ChatMessageOut;
-};
-
 export type ChatRightPanelLayoutProps = {
   mainmenu: ChatsMenu;
-  maininner?: ChatsInnerField;
   messagefield: FormMessage;
 };
 
@@ -166,7 +159,6 @@ export type ChatsModalProps = {
 };
 
 export type ChatsMenuProps = {
-  chatavatar: ChatAvatar;
   chatname: string;
   chatMenu: MultiList;
   actionsMenu: MultiList;
@@ -187,11 +179,12 @@ export type formChangePassProps = {
 };
 
 export type FormProps = {
-  avatar?: AvatarChange | ProfAvatar | AvatarChangeImg;
+  avatar?: AvatarChange | ProfAvatar;
   avatarForm?: AvatarChange;
   inputList?: MultiList;
   button?: Button;
   input?: InputField;
+  classname?: string;
 };
 
 export type MyUserProfileProps = {

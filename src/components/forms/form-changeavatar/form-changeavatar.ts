@@ -1,13 +1,13 @@
+import { UserProps } from "../../../APItypes";
 import { filePrefix } from "../../../consts";
-import { APIurls, Methods } from "../../../types";
 import { AvatarController } from "../../../utils/controllers/avatarController";
-import { HTTPTransport } from "../../../utils/http-transport";
 import store, { StoreEvents } from "../../../utils/store";
 import { ImageAvatar } from "../../avatars/img-avatar/img-avatar";
 import { Button } from "../../buttons/button-submit/button";
 import { InputField } from "../../input/input-field";
 import { Form } from "../form";
 import changeAvatar from "./form-changeavatar.hbs";
+import "./form-changeavatar.scss";
 
 type FormChangeAvatarProps = {
   avatar: ImageAvatar;
@@ -22,15 +22,19 @@ export class FormChangeAvatar extends Form {
       submit: async (e: Event) => {
         e.preventDefault();
         const submitMessage: HTMLElement = document.querySelector(
-          ".submit-message"
+          ".result-message"
         ) as HTMLElement;
-        const form: HTMLFormElement = document.querySelector(
-          "form.form__changeAvatar"
-        ) as HTMLFormElement;
+        const input: HTMLInputElement = document.querySelector(
+          "#avatar"
+        ) as HTMLInputElement;
         const submitChange = new AvatarController();
-        let formdata = new FormData(form);
+        const file = input.files ? input.files[0] : null;
+        let formdata = new FormData();
+        if (!!file) {
+          formdata.append("avatar", file);
+        }
 
-        submitChange.change(formdata).then((response) => {
+        submitChange.change(formdata).then((response: XMLHttpRequest) => {
           if (response.status == 200) {
             let adata = JSON.parse(response.response);
             store.set("user", adata);
@@ -47,8 +51,18 @@ export class FormChangeAvatar extends Form {
     this.eventTarget = "form.form__changeAvatar";
 
     store.on(StoreEvents.Updated, () => {
-      this.children.avatar.setProps({
-        avatar: `${filePrefix}${store.getState().user.avatar}`,
+      const user: UserProps = store.getState().user as UserProps;
+      const children: {
+        avatar: ImageAvatar;
+        input: InputField;
+        button: Button;
+      } = this.children as {
+        avatar: ImageAvatar;
+        input: InputField;
+        button: Button;
+      };
+      children.avatar.setProps({
+        avatar: `${filePrefix}${user.avatar}`,
       });
     });
   }

@@ -10,13 +10,14 @@ export function userSearchModal() {
     const searchModal = new ChatsUserSearch ({
         input: new InputField({
             type: "search",
-            placeholder: "Поиск по логину",
+            placeholder: "Напишите логин",
             name: "userSearchModalInput"
         }),
         button: new Button({
             name: "userSearchSubmit",
             label: "Искать",
             type: "submit",
+            class: "submit-button",
 
         })
     });

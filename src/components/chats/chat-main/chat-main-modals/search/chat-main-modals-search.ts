@@ -9,7 +9,7 @@ import chatMainModalSearch from "./chat-main-modal-search.hbs";
 
 export class ChatsUserSearch extends Block<ChatsUserSearch> {
   public constructor(props: ChatsModalProps, classname?: string) {
-    super("div", props, false, (classname = "modal"));
+    super("div", props, false,  classname? classname : "modal");
     this.events = {
       submit: function (e: Event) {
         e.preventDefault();
@@ -20,7 +20,7 @@ export class ChatsUserSearch extends Block<ChatsUserSearch> {
         ) as HTMLInputElement;
         const inputData = { login: input.value };
 
-        seek.seek(inputData).then((response) => {
+        seek.seek(inputData).then((response: XMLHttpRequest) => {
           const resultField: HTMLElement = document.getElementById(
             "result"
           ) as HTMLElement;
@@ -56,7 +56,7 @@ export class ChatsUserSearch extends Block<ChatsUserSearch> {
                 };
 
                 invite.invite(requestData)
-                  .then((response) => {
+                  .then((response: XMLHttpRequest) => {
                     if (response.status == 200) {
                       const resultField = document.getElementById(
                         "result"

@@ -27,6 +27,7 @@ export function changeChatAvatarModal() {
       name: "avatarChatSubmit",
       label: "Отправить",
       type: "submit",
+      class: "submit-button small",
     }),
     avatar: new ImageAvatar({
       avatar: avatar,
@@ -47,7 +48,14 @@ export function changeChatAvatarModal() {
 
   store.on(StoreEvents.Updated, function () {
     const newchat: ChatsProps = store.getState().chat as ChatsProps;
-    createModal.children.avatar.setProps({
+    const children: {
+      button: Button;
+      avatar: ImageAvatar;
+    } = createModal.children as {
+      button: Button;
+      avatar: ImageAvatar;
+    };
+    children.avatar.setProps({
       avatar: `${filePrefix}${newchat.avatar}`,
     });
   });

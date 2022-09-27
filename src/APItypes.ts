@@ -25,9 +25,13 @@ export type ChatsProps = {
     user: UserProps;
     time: string;
     content: string;
-    id: number;
+    id?: number;
   };
 };
+
+export type InitChatProps = {
+  id: number,
+}
 
 export type getChatsData = {
   offset?: number;

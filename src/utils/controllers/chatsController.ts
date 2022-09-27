@@ -25,6 +25,12 @@ export class ChatsController {
     return request.get(APIurls.CHATS, { data: data });
   }
 
+  public async seekChats(data: {
+    title: string,
+  }) {
+    return request.get(APIurls.CHATS, { data: data });
+  }
+
   public async getChatUsers(chatID: number) {
     return request.get(`${APIurls.CHATS}/${chatID}/users`, {});
   }

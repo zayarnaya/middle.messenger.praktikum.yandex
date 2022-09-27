@@ -11,8 +11,23 @@
       enctype="multipart/form-data"
     >
       {{{avatar}}}
-      {{{input}}}
-      {{{button}}}
+      <div
+        class="form__changeAvatar__hidden-input center-center hidden"
+        id="changeAvatarHiddenInput"
+      >
+        <label
+          class="image-file"
+          for="changeChatAvatarModalInput"
+          title="загрузите картинку"
+        ></label>
+        <input
+          type="file"
+          class="hidden-input"
+          id="changeChatAvatarModalInput"
+          title="загрузите картинку"
+        />
+        {{{button}}}
+      </div>
     </form>
     <div class="result" id="result">
     </div>
