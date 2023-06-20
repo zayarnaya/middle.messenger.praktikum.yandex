@@ -12,7 +12,7 @@ Build-режим: npm run build
 
 Тестирование: npm run test
 
-Проект на Heroku: https://yachatdev.herokuapp.com/
+Проект на Heroku: https://yachatdev.herokuapp.com/ - слетел, увы. RIP
 
 В server.js встроена защита от DOS-атак (временный бан по айпи)
 
